@@ -4,7 +4,7 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **You will need**
 
-* [Node.js][node] 8+
+* [Node.js][node] 10+
 * [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 **Recommended reading**
@@ -117,18 +117,18 @@ But with Cordova, you can also access **device hardware** like the **camera** or
 
 <!-- slide-column -->
 
-> "Free and open source, Ionic offers a **library of mobile-optimized HTML, CSS and JS components**, gestures, and tools for building highly interactive apps.
-
-> Ionic utilizes **Angular** in order to create a framework most suited to develop rich and robust applications."
+> "Ionic Framework is the free, open source **mobile UI toolkit** for developing high-quality cross-platform apps for native iOS, Android, and the web—all from a single codebase."
 
 <!-- slide-container -->
 
-Ionic is basically **Cordova** and **Angular** plugged together:
+Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
 
 <div class='center'>
   <img src='images/cordova.png' height=200 />
   <img src='images/ng-js-ts-html.png' height=200 />
 </div>
+
+> Please note that we will be using **Angular** as the underlying framework in this course.
 
 #### What can I do with it?
 
@@ -148,36 +148,31 @@ Ionic lets you build web apps that **look like native apps** with HTML, CSS and 
 
 ### Install Ionic
 
-Cordova and Ionic are both **npm packages**.
-Install them globally with the following command:
+Ionic provides you with **CLI tool** that you should install globally with the following command:
 
 ```bash
-$> npm install -g cordova ionic
+$> npm install -g ionic
 ```
 
 You're now ready to use Ionic.
-Let's generate an app called `ionic-demo` with the `tabs` starter template:
+Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template:
 
 ```bash
 $> cd /path/to/projects
 $> ionic start ionic-tabs-demo tabs
-✔ Creating directory ./ionic-tabs-demo - done!
+✔ Preparing directory ./ionic-tabs-demo - done!
 ✔ Downloading and extracting tabs starter - done!
-? Would you like to integrate your new app with Cordova
-  to target native iOS and Android? Yes
+Installing dependencies may take several minutes.
 ...
-? Install the free Ionic Pro SDK and connect your app? No
-...
+[INFO] Next Steps:
+  `- Go to your newly created project: 'cd ./ionic-tabs-demo`
+  `- Run 'ionic serve' within the app directory to see your app`
+  - Build features and components: `https://ion.link/scaffolding-docs`
+  - Get Ionic DevApp for easy device testing: https://ion.link/devapp
 ```
+> Follow the first two infos to see your app in your browser.
 
-Once that's done, run these commands to open the app in your browser:
-
-```bash
-$> cd ionic-tabs-demo
-$> ionic serve
-```
-
-
+> You're also advised to take a look at [the third info's link](https://ion.link/scaffolding-docs)
 
 ### Starter templates
 
@@ -200,13 +195,9 @@ $> ionic start ionic-blank-demo blank
 
 You will find many Ionic app templates shared by the community in the [Ionic market][ionic-market].
 
-
-
 ## Basics of Ionic
 
 <!-- slide-front-matter class: center, middle -->
-
-
 
 ### Components
 
@@ -215,10 +206,10 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 <!-- slide-column 65 -->
 
 ```html
-<button `ion-button`>Default</button>
-<button `ion-button color='secondary'`>
+<`ion-button`>Default</ion-button>
+<ion-button `color="secondary"`>
   Secondary
-</button>
+</ion-button>
 ```
 
 <!-- slide-column -->
@@ -232,8 +223,10 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 ```html
 <`ion-card`>
   <`ion-card-header`>
-    Header
+    <`ion-card-title`>Header</`ion-card-title`>
+    <`ion-card-subtitle`>Sub</`ion-card-subtitle`>
   </`ion-card-header`>
+
   <`ion-card-content`>
     The British use the term "header",
     but the American term "head-shot"
@@ -252,8 +245,8 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 
 ```html
 <`ion-range`>
-  <`ion-icon` range-left small name="sunny" />
-  <`ion-icon` range-right name="sunny" />
+  <`ion-icon` slot="start" name="remove"></`ion-icon`>
+  <`ion-icon` slot="end" name="add"></`ion-icon`>
 </`ion-range`>
 ```
 
@@ -271,23 +264,20 @@ Here's a code example for an Ionic list:
 
 ```html
 <ion-list>
-  <ion-item-sliding `ng-repeat='let person of people'`>
+  <ion-item-sliding `*ngFor='let person of people'`>
     <ion-item>
-      <ion-avatar item-start>
-        <img `[src]='person.avatarUrl'`>
+      <ion-avatar slot="start">
+        <img `[src]="person.avatarUrl"`>
       </ion-avatar>
-      <h2>`{{ person.name }}`</h2>
-      <p>`{{ person.description }}`</p>
+      <ion-label>
+        <h2>`{{ person.name }}`</h2>
+        <h3>`{{ person.description }}`</h3>
+        <p>`{{ person.lastMessage }}`</p>
+      </ion-label>
     </ion-item>
-    <ion-item-options side="left">
-      <button ion-button color="primary">
-        <ion-icon name="text"></ion-icon>
-        Text
-      </button>
-      <button ion-button color="secondary">
-        <ion-icon name="call"></ion-icon>
-        Call
-      </button>
+    <ion-item-options>
+      <ion-item-option>Favorite</ion-item-option>
+      <ion-item-option color="danger">Share</ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
 </ion-list>
@@ -295,24 +285,24 @@ Here's a code example for an Ionic list:
 
 #### List component functionality
 
-For example, the list component automatically enables you to [slide in][ionic-sliding-list] controls from the side as most mobile applications do:
+For example, the `ion-item-sliding` component automatically enables you to [slide in][ionic-sliding-list] controls from the side as most mobile applications do:
 
 <!-- slide-column 65 -->
 
 ```html
 <ion-item-options>
-  <button ion-button color="primary">
+  <ion-item-option color="primary">
     <ion-icon name="text"></ion-icon>
     Text
-  </button>
-  <button ion-button color="secondary">
+  </ion-item-option>
+  <ion-item-option color="secondary">
     <ion-icon name="call"></ion-icon>
     Call
-  </button>
-  <button ion-button color="primary">
+  </ion-item-option>
+  <ion-item-option color="primary">
     <ion-icon name="mail"></ion-icon>
     Email
-  </button>
+  </ion-item-option>
 </ion-item-options>
 ```
 
@@ -327,28 +317,38 @@ For example, the list component automatically enables you to [slide in][ionic-sl
 There are several ways to run your Ionic application on a mobile device.
 This section will describe some of them:
 
-* Run on an iOS device (requires a paid Apple developer certificate)
-* Run on an Android device
-* Run with the Ionic Dev App (Android & iOS)
+* Run with the **Ionic Dev App** (Android & iOS)
+* Run on an **iOS device** (Mac users only)
+* Run on an **Android device**
 
-Follow the setup instructions appropriate for your operating system:
+Whatever's the method, you'll need to **install Cordova** and **configure your project to use it** with the following commands:
 
-* [macOS setup][ionic-macos-setup]
-* [Windows setup][ionic-windows-setup]
+```bash
+$> cd /path/to/projects/my-app
+$> npm i -g cordova
+```
 
-Then follow the [deployment instructions][ionic-deploy] (Android & iOS).
+If you want to deploy your app on an Android device
 
+```bash
+$> ionic cordova prepare android
+```
 
+If you want to deploy your app on an iOS device
+
+```bash
+$> ionic cordova prepare ios
+```
 
 ### Ionic Dev App
 
 The [Ionic Dev App][ionic-dev-app] is an Android and iOS application in which your own app can run without having to be built and installed on your physically connected device.
 
-To use it, you must serve your app with the `-c` option:
+To use it, you must serve your app with the `--devapp` option:
 
 ```bash
 $> cd /path/to/projects/my-app
-$> ionic serve -c
+$> ionic serve `--devapp`
 ```
 
 If your phone is on the **same network as your computer**,
@@ -356,7 +356,31 @@ the Dev App can connect to the mobile application running on your machine.
 
 It may find it automatically, or you may have to manually enter your computer's IP address on some networks.
 
+### iOS device
 
+> You can only run on an iOS device from a Mac, since you'll need to install and use Xcode, which is a Mac-only software.
+>
+> If you don't have a Mac, you'll have to try using the **Ionic Dev App**
+
+First, you'll need to prepare your Mac for deploying to a real or simulated iOS device, by following this instructions page:
+
+[iOS setup][ionic-ios-setup]
+
+Once you're done with those install and setup, you should be able to follow those insctructions:
+
+[Running on iOS][ionic-ios-run]
+
+### Android device
+
+> You can run your app on an Android device from either a Mac or a PC
+
+First, you'll need to prepare your computer for deploying to a real or simulated Android device, by following this instructions page:
+
+[Android setup][ionic-android-setup]
+
+Once you're done with those install and setup, you should be able to follow those insctructions:
+
+[Running on Android][ionic-android-run]
 
 ## Resources
 
@@ -367,8 +391,6 @@ It may find it automatically, or you may have to manually enter your computer's 
   * [Components][ionic-components]
   * [API Documentation][ionic-api-docs]
   * [Developer Resources][ionic-resources]
-
-
 
 [angular]: https://angular.io
 [angular-components]: https://angular.io/guide/architecture#components
@@ -381,11 +403,13 @@ It may find it automatically, or you may have to manually enter your computer's 
 [ionic-api-docs]: https://ionicframework.com/docs/api/
 [ionic-components]: https://ionicframework.com/docs/components/
 [ionic-deploy]: https://ionicframework.com/docs/intro/deploying/
-[ionic-dev-app]: https://ionicframework.com/docs/pro/devapp/
+[ionic-dev-app]: https://ionicframework.com/docs/appflow/devapp/
 [ionic-docs]: https://ionicframework.com/docs/
-[ionic-macos-setup]: https://ionicframework.com/docs/developer-resources/platform-setup/mac-setup.html
+[ionic-ios-setup]: https://ionicframework.com/docs/installation/ios
+[ionic-ios-run]: https://ionicframework.com/docs/building/ios
 [ionic-market]: https://market.ionicframework.com/
 [ionic-resources]: https://ionicframework.com/docs/developer-resources/
-[ionic-sliding-list]: https://ionicframework.com/docs/components/#sliding-list
-[ionic-windows-setup]: https://ionicframework.com/docs/developer-resources/platform-setup/windows-setup.html
+[ionic-sliding-list]: https://ionicframework.com/docs/api/item-sliding
 [node]: https://nodejs.org/en/
+[ionic-android-setup]: https://ionicframework.com/docs/installation/android
+[ionic-android-run]: https://ionicframework.com/docs/building/android
