@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>COMEM+ Web Development</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400i,700i);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400i);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+
+      h1, h2, h3, h4 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+
+      li ul {
+        margin-bottom: 1em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+<h1 id="comem-mobile-development-course">COMEM+ Mobile Development Course</h1>
+<p>The goal of this course is to teach how to develop hybrid mobile applications,
+i.e. web apps embedded into native apps on multiple platforms.
+You will:</p>
+<ul>
+<li>Learn about hybrid mobile application development with <a href="http://ionicframework.com">Ionic</a> and <a href="https://cordova.apache.org">Cordova</a>.</li>
+<li>Learn the basics of <a href="https://angularjs.org">Angular</a>.</li>
+<li>Design and develop a <strong>mobile application</strong> optionally based on the API developed in the <a href="https://github.com/MediaComem/comem-webserv">previous course</a>.</li>
+<li>Run the mobile application on your <strong>phone</strong>.</li>
+</ul>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<ul>
+<li><a href="#plan">Plan</a></li>
+<li><a href="#what-you-will-need">What you will need</a></li>
+<li><a href="#evaluation">Evaluation</a></li>
+<li><a href="#useful-links">Useful links</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<h2 id="plan">Plan</h2>
+<ul>
+<li><p>Going further with JavaScript</p>
+<ul>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-prototypes?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript prototypes</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-classes?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript classes</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-modules?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript modules</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-promises?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript promises</a></li>
+</ul>
+</li>
+<li><p>Ionic</p>
+<ul>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme">Introduction</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme">TypeScript</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme">Angular</a></li>
+</ul>
+</li>
+<li><p>Setup</p>
+<ul>
+<li>Mockups</li>
+<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Live setup</a></li>
+</ul>
+</li>
+<li><p>Additional JavaScript concepts</p>
+<ul>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript closures</a></li>
+</ul>
+</li>
+<li><p>Ionic</p>
+<ul>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme">Working with Angular in Ionic</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme">Ionic extras (geolocation, leaflet &amp; camera)</a></li>
+<li><a href="IMAGE-UPLOAD.md">Image upload</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="what-you-will-need">What you will need</h2>
+<ul>
+<li>A Unix CLI (Git Bash is included with Git on Windows)</li>
+<li><a href="https://git-scm.com/downloads">Git</a></li>
+<li>A free <a href="https://github.com">GitHub</a> account</li>
+<li><a href="https://www.google.com/chrome/">Google Chrome</a> (recommended, any browser with developer tools will do)</li>
+<li><a href="https://nodejs.org/">Node.js</a> 8+</li>
+<li><a href="http://ionicframework.com/getting-started/">Ionic</a></li>
+</ul>
+<h2 id="evaluation">Evaluation</h2>
+<p><strong>Features</strong></p>
+<ul>
+<li>A user must be able to register and/or log in (depending on the API&#39;s capabilities).</li>
+<li>A user must be able to manage the main resources of the API&#39;s domain model:<ul>
+<li>A user must be able to create new instances of all the main resources of the domain model (e.g. create Trips and Places in the Travel Log).</li>
+<li>A user must be able to modify at least one of the resources of the domain model (e.g. update a Trip&#39;s title and description in the Travel Log).</li>
+<li>A user must be able to delete at least one of the resources of the domain model (e.g. delete a Place in the Travel Log).</li>
+</ul>
+</li>
+<li>At least two mobile-oriented features must be used, for example:<ul>
+<li>Geolocation of the user (e.g. to center a map on the user&#39;s location, or to determine a Place&#39;s location in the Travel log).</li>
+<li>Pictures taken with the phone&#39;s camera (works only on physical devices).</li>
+</ul>
+</li>
+<li>There must be a map showing geolocated resources (with more than one item on the same map).</li>
+<li>There must be a resource list with filters or search parameters.</li>
+</ul>
+<p><strong>Implementation</strong></p>
+<ul>
+<li>The app must follow Angular and Ionic best practices.</li>
+<li>The app must use an approved API.</li>
+<li>Asynchronous code must be correct (e.g. callbacks, promises &amp; observables).</li>
+<li>The app must provide clear feedback when errors are likely:<ul>
+<li>When submitting a form (input might be invalid or the API call might fail).</li>
+<li>When geolocating the user (it might fail).</li>
+</ul>
+</li>
+<li>Secrets (passwords &amp; keys) <strong>must not</strong> be committed to the Git repository.</li>
+</ul>
+<p><strong>Presentation</strong></p>
+<p>You must provide a presentation for your app.
+This can be <strong>either</strong> in the form of a <strong>user guide</strong> or in the form of a <strong>pitch</strong> as if it were a real app that you were going to sell.
+You can choose from the following options (one is enough):</p>
+<ul>
+<li>You can present the app in the README of the GitHub repository for the app.</li>
+<li>You can upload your app to a store (e.g. Google Play), and write the store page as you would for a real app.</li>
+<li>You can make a webcast demonstrating or selling your app.</li>
+<li>You can provide a tutorial inside the app.</li>
+<li>You can use any other presentation tool (subject to approval) but your user guide or pitch must be available online.</li>
+</ul>
+<h3 id="delivery">Delivery</h3>
+<p>Each group must send an e-mail <strong>no later than (TO BE DEFINED)</strong> to Mathias Oberson with:</p>
+<ul>
+<li>The link to your source code repository on GitHub.</li>
+<li>The link to your webcast, presentation page or user guide (if it&#39;s not in the repository).</li>
+</ul>
+<h2 id="useful-links">Useful links</h2>
+<ul>
+<li><a href="https://comem-travel-log-api.herokuapp.com">Travel Log API documentation</a></li>
+<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Ionic setup</a> (<a href="https://github.com/MediaComem/comem-travel-log-ionic-starter">completed starter project</a>)</li>
+<li><a href="https://mediacomem.github.io/comem-qimg/">qimg API</a></li>
+<li><a href="ATOM-TYPESCRIPT.md">TypeScript support in Atom</a></li>
+</ul>
+
+    </div>
+    
+  </body>
+</html>
