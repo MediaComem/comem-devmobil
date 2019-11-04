@@ -33,16 +33,16 @@ You will:
   * [Introduction](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme)
   * [TypeScript](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [Working with Angular in Ionic](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
 
-* Setup
+* App Development
   * Mockups
-  * [Live setup][setup-project]
+  * [Live setup][setup-project] (Tailored for the Travel Log subject, but it can help you kickstart your own app)
 
 * Additional JavaScript concepts
   * [JavaScript closures](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme)
 
-* Ionic
-  * [Working with Angular in Ionic](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
+* Ionic (advanced)
   * [Ionic extras (geolocation, leaflet & camera)](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Image upload](IMAGE-UPLOAD.md)
 
@@ -54,7 +54,7 @@ You will:
 * [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 * [Node.js][node] 10+
 * [Ionic][ionic-getting-started]
-* An IDE or code editor of your choice (although I strongly recommend using VS Code when working with Typescript)
+* An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript)
 
 ## Evaluation
 
@@ -122,6 +122,7 @@ Each group must send an e-mail **no later than 26th of january 2020** to [Mathia
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://comem-travel-log-api.herokuapp.com
+[vs-code]: https://code.visualstudio.com/
 
 <!-- Unused links -->
 [angular-leaflet-directive]: https://github.com/tombatossals/angular-leaflet-directive
