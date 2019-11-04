@@ -227,7 +227,10 @@ You should **not** use `any` unless there's a very good reason to, as it makes y
 #### Type assertions
 
 Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any`.
-There are two forms of type assertion:
+
+In those cases, you'll want to tell Typescript what is the type of the variable.
+
+That's called **Type assertion** and there are two ways to achieve it:
 
 ```ts
 let value: any = 'foo';
@@ -235,13 +238,11 @@ let value: any = 'foo';
 // "Angle-bracket" syntax
 let upper: string = (<string>value).toUpperCase();
 
-// "As" syntax
+// "As" syntax, which is the recommanded syntax
 let length: number = (value as string).length;
 ```
 
 Again, you should **not** have to use this in most of your TypeScript code.
-
-
 
 ### Union types
 
