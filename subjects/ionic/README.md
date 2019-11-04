@@ -107,8 +107,6 @@ Since you are writing a **web app**, you can access **web APIs** like the [geolo
 
 But with Cordova, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**.
 
-
-
 ### What about Ionic?
 
 <!-- slide-column 35 -->
@@ -130,13 +128,23 @@ Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) an
 
 > Please note that we will be using **Angular** as the underlying framework in this course.
 
-#### What can I do with it?
+#### A small word about Capacitor
+
+<p class='center'><img src='images/capacitor.png' class='w30'/></p>
+
+At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications, in the long run.
+
+Currently, both Cordova and Capacitor are supported by the Ionic framework, but **Cordova is still the default bridge** used.
+
+> We will keep using Cordova for this course as Capacitor is still in its infancy.
+
+> Whenever the choice between Capacitor and Cordova is given to you in tutorials or documentations, **follow instructions for Cordova**.
+
+#### What can I do with Ionic?
 
 Ionic lets you build web apps that **look like native apps** with HTML, CSS and JavaScript:
 
 <p class='center'><img src='images/ionic-app.jpg' class='w80' /></p>
-
-
 
 ## Demo
 
@@ -144,11 +152,9 @@ Ionic lets you build web apps that **look like native apps** with HTML, CSS and 
 
 <p class='center'><img src='images/demo.jpg' /></p>
 
-
-
 ### Install Ionic
 
-Ionic provides you with **CLI tool** that you should install globally with the following command:
+Ionic provides you a **CLI tool** that you should install globally with the following command:
 
 ```bash
 $> npm install -g ionic
@@ -360,7 +366,7 @@ It may find it automatically, or you may have to manually enter your computer's 
 
 > You can only run on an iOS device from a Mac, since you'll need to install and use Xcode, which is a Mac-only software.
 >
-> If you don't have a Mac, you'll have to try using the **Ionic Dev App**
+> If you don't have a Mac but want to run your app on an iOS anyway, you'll have to try using the **Ionic Dev App**
 
 First, you'll need to prepare your Mac for deploying to a real or simulated iOS device, by following this instructions page:
 
@@ -378,9 +384,37 @@ First, you'll need to prepare your computer for deploying to a real or simulated
 
 [Android setup][ionic-android-setup]
 
+> You'll need to create an Oracle account before being able to download the Java Development Kit (JDK) 8.
+
+> If you don't want to, you can download the JDK from open sources like [AdoptOpenJDK][adoptopenjdk]
+
 Once you're done with those install and setup, you should be able to follow those insctructions:
 
 [Running on Android][ionic-android-run]
+
+> After installing Android Studio, go to the next slide
+
+#### Android SDK
+
+Now that you installed and finished configuring Android Studio, you should have installed the latest SDK version of Android (at the time of writing, that should be Android 10).
+
+This SDK version **might not be the same** as the device on which you plan to run your app.
+
+Check the Android version of your device by going to the **Settings**. There should be something like **About phone** then **Android version**, and keep track of the number.
+
+<!-- slide-column -->
+
+Go to Android Studio and click on the **Configure** button, then select **SDK Manager**.
+
+In the **SDK Platforms** tab, tick the box next to the SDK matching your device version, and click on **Apply** to download and install it.
+
+<!-- slide-column 30 -->
+
+<img src='images/android-studio-configure.png' />
+
+<!-- slide-container -->
+
+> You can now go back to the **Android Setup** for [Configuring Command Line Tools][configure-cli-tools]
 
 ## Resources
 
@@ -390,25 +424,24 @@ Once you're done with those install and setup, you should be able to follow thos
 * [Ionic][ionic-docs]
   * [Components][ionic-components]
   * [API Documentation][ionic-api-docs]
-  * [Developer Resources][ionic-resources]
 
+[adoptopenjdk]: https://adoptopenjdk.net/index.html
 [angular]: https://angular.io
 [angular-components]: https://angular.io/guide/architecture#components
+[capacitor]: https://capacitor.ionicframework.com/
 [chrome]: https://www.google.com/chrome/
+[configure-cli-tools]: https://ionicframework.com/docs/installation/android#configuring-command-line-tools
 [cordova]: https://cordova.apache.org
 [cordova-requirements]: http://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html
 [geolocation-api]: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation
 [ionic]: http://ionicframework.com
-[ionic-account]: https://apps.ionic.io/
 [ionic-api-docs]: https://ionicframework.com/docs/api/
 [ionic-components]: https://ionicframework.com/docs/components/
-[ionic-deploy]: https://ionicframework.com/docs/intro/deploying/
 [ionic-dev-app]: https://ionicframework.com/docs/appflow/devapp/
 [ionic-docs]: https://ionicframework.com/docs/
 [ionic-ios-setup]: https://ionicframework.com/docs/installation/ios
 [ionic-ios-run]: https://ionicframework.com/docs/building/ios
 [ionic-market]: https://market.ionicframework.com/
-[ionic-resources]: https://ionicframework.com/docs/developer-resources/
 [ionic-sliding-list]: https://ionicframework.com/docs/api/item-sliding
 [node]: https://nodejs.org/en/
 [ionic-android-setup]: https://ionicframework.com/docs/installation/android
