@@ -3,7 +3,7 @@
   <head>
     <title>TypeScript (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:false}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/79ddf06b568efa00c9d133246a3b448b1b38a0d0/subjects/ts/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:false}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/ff34f2c008386962c6611b434ae7c6863c520a3d/subjects/ts/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -228,7 +228,10 @@ You should **not** use `any` unless there's a very good reason to, as it makes y
 .breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a> > <a href="#8">Any</a>]
 
 Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any`.
-There are two forms of type assertion:
+
+In those cases, you'll want to tell Typescript what is the type of the variable.
+
+That's called **Type assertion** and there are two ways to achieve it:
 
 ```ts
 let value: any = 'foo';
@@ -236,13 +239,11 @@ let value: any = 'foo';
 // "Angle-bracket" syntax
 let upper: string = (<string>value).toUpperCase();
 
-// "As" syntax
+// "As" syntax, which is the recommanded syntax
 let length: number = (value as string).length;
 ```
 
 Again, you should **not** have to use this in most of your TypeScript code.
-
-
 
 ---
 ### Union types

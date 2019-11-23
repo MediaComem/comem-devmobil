@@ -36,13 +36,15 @@
   <body>
     <div class="container">
 <h1 id="comem-mobile-development-course">COMEM+ Mobile Development Course</h1>
-<p>The goal of this course is to teach how to develop hybrid mobile applications,
+<p>The goal of this course is to learn how to develop hybrid mobile applications,
 i.e. web apps embedded into native apps on multiple platforms.
 You will:</p>
 <ul>
 <li>Learn about hybrid mobile application development with <a href="http://ionicframework.com">Ionic</a> and <a href="https://cordova.apache.org">Cordova</a>.</li>
-<li>Learn the basics of <a href="https://angularjs.org">Angular</a>.</li>
-<li>Design and develop a <strong>mobile application</strong> optionally based on the API developed in the <a href="https://github.com/MediaComem/comem-webserv">previous course</a>.</li>
+<li>Learn the <strong>core principles</strong> of <a href="https://angular.io">Angular</a>.</li>
+<li>Design and develop a <strong>mobile application</strong> optionally based on the API developed in the <a href="https://github.com/MediaComem/comem-archioweb">previous course</a>.</li>
+<li>Learn the <strong>basics of Unit Testing</strong> with Angular.</li>
+<li>Add a <strong>real-time</strong> component to your hybrid mobile application.</li>
 <li>Run the mobile application on your <strong>phone</strong>.</li>
 </ul>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -69,12 +71,13 @@ You will:</p>
 <li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme">Introduction</a></li>
 <li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme">TypeScript</a></li>
 <li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme">Angular</a></li>
+<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme">Working with Angular in Ionic</a></li>
 </ul>
 </li>
-<li><p>Setup</p>
+<li><p>App Development</p>
 <ul>
 <li>Mockups</li>
-<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Live setup</a></li>
+<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Live setup</a> (Tailored for the Travel Log subject, but it can help you kickstart your own app)</li>
 </ul>
 </li>
 <li><p>Additional JavaScript concepts</p>
@@ -82,9 +85,8 @@ You will:</p>
 <li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme">JavaScript closures</a></li>
 </ul>
 </li>
-<li><p>Ionic</p>
+<li><p>Ionic (advanced)</p>
 <ul>
-<li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme">Working with Angular in Ionic</a></li>
 <li><a href="https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme">Ionic extras (geolocation, leaflet &amp; camera)</a></li>
 <li><a href="IMAGE-UPLOAD.md">Image upload</a></li>
 </ul>
@@ -92,12 +94,13 @@ You will:</p>
 </ul>
 <h2 id="what-you-will-need">What you will need</h2>
 <ul>
-<li>A Unix CLI (Git Bash is included with Git on Windows)</li>
+<li>A Unix CLI like Terminal on Mac, Git Bash or equivalent on Windows (avoid WSL as it does not work well with Ionic for now)</li>
 <li><a href="https://git-scm.com/downloads">Git</a></li>
 <li>A free <a href="https://github.com">GitHub</a> account</li>
 <li><a href="https://www.google.com/chrome/">Google Chrome</a> (recommended, any browser with developer tools will do)</li>
-<li><a href="https://nodejs.org/">Node.js</a> 8+</li>
+<li><a href="https://nodejs.org/">Node.js</a> 10+</li>
 <li><a href="http://ionicframework.com/getting-started/">Ionic</a></li>
+<li>An IDE or code editor of your choice (although I strongly recommend using <a href="https://code.visualstudio.com/">VS Code</a> when working with Typescript)</li>
 </ul>
 <h2 id="evaluation">Evaluation</h2>
 <p><strong>Features</strong></p>
@@ -111,7 +114,10 @@ You will:</p>
 </li>
 <li>At least two mobile-oriented features must be used, for example:<ul>
 <li>Geolocation of the user (e.g. to center a map on the user&#39;s location, or to determine a Place&#39;s location in the Travel log).</li>
-<li>Pictures taken with the phone&#39;s camera (works only on physical devices).</li>
+<li>Pictures taken with the phone&#39;s camera (works only on physical devices).<blockquote>
+<p>You are not required to exclusively implement those two ; you can choose others depending on your subject</p>
+</blockquote>
+</li>
 </ul>
 </li>
 <li>There must be a map showing geolocated resources (with more than one item on the same map).</li>
@@ -121,8 +127,8 @@ You will:</p>
 <ul>
 <li>The app must follow Angular and Ionic best practices.</li>
 <li>The app must use an approved API.</li>
-<li>Asynchronous code must be correct (e.g. callbacks, promises &amp; observables).</li>
-<li>The app must provide clear feedback when errors are likely:<ul>
+<li>Asynchronous code must be correctly handled (e.g. callbacks, promises and/or observables).</li>
+<li>The app must provide clear feedback when errors are likely to occur:<ul>
 <li>When submitting a form (input might be invalid or the API call might fail).</li>
 <li>When geolocating the user (it might fail).</li>
 </ul>
@@ -134,15 +140,19 @@ You will:</p>
 This can be <strong>either</strong> in the form of a <strong>user guide</strong> or in the form of a <strong>pitch</strong> as if it were a real app that you were going to sell.
 You can choose from the following options (one is enough):</p>
 <ul>
-<li>You can present the app in the README of the GitHub repository for the app.</li>
-<li>You can upload your app to a store (e.g. Google Play), and write the store page as you would for a real app.</li>
-<li>You can make a webcast demonstrating or selling your app.</li>
-<li>You can provide a tutorial inside the app.</li>
+<li>You can present the app in the README or the Wiki of the GitHub repository for the app.</li>
+<li>You can make a <strong>webcast/video</strong> demonstrating or selling your app.</li>
+<li>You can provide a tutorial <strong>inside</strong> the app.</li>
 <li>You can use any other presentation tool (subject to approval) but your user guide or pitch must be available online.</li>
+<li>You can upload your app to a store (e.g. Google Play), and write the store page as you would for a real app.<blockquote>
+<p>This last one is kind of tough, you&#39;ve been warned</p>
+</blockquote>
+</li>
 </ul>
 <h3 id="delivery">Delivery</h3>
-<p>Each group must send an e-mail <strong>no later than (TO BE DEFINED)</strong> to Mathias Oberson with:</p>
+<p>Each group must send an e-mail <strong>no later than 26th of january 2020</strong> to <a href="mathias.oberson@heig-vd.ch">Mathias Oberson</a> with:</p>
 <ul>
+<li>The list of group members.</li>
 <li>The link to your source code repository on GitHub.</li>
 <li>The link to your webcast, presentation page or user guide (if it&#39;s not in the repository).</li>
 </ul>
@@ -153,6 +163,7 @@ You can choose from the following options (one is enough):</p>
 <li><a href="https://mediacomem.github.io/comem-qimg/">qimg API</a></li>
 <li><a href="ATOM-TYPESCRIPT.md">TypeScript support in Atom</a></li>
 </ul>
+<!-- Unused links -->
 
     </div>
     
