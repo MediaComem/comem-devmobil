@@ -3,7 +3,7 @@
   <head>
     <title>JavaScript Closures (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:false}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/ff34f2c008386962c6611b434ae7c6863c520a3d/subjects/js-closures/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:false}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/c2c0e3a45272d3768e62b9987b61949f6cae83d4/subjects/js-closures/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -29,6 +29,8 @@ This material is part of the [mobile development course](https://github.com/Medi
 ## THIS!.. IS!.. CLOSURE!
 
 .breadcrumbs[<a href="#1">JavaScript Closures</a>]
+
+<runkit></runkit>
 
 Consider this example:
 
@@ -56,14 +58,14 @@ Thus, when the `yell()` function is executed on the last line, it will get the l
 
 If you were to create another instance of `yell()`, say by adding this code:
 
-```javascript
+```js
 var gerard = makeYeller(); // Store a new yell() function
 ```
 
 This new instance would also keep a reference to `city` (and print `"Sparta"` when called), but it would be a different `yell()` function than the one stored in the `leonidas` variable.
 To be sure of that, do:
 
-```javascript
+```js
 console.log(gerard === leonidas); // false
 ```
 
@@ -73,6 +75,8 @@ console.log(gerard === leonidas); // false
 ### This is not...
 
 .breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#2">THIS!.. IS!.. CLOSURE!</a>]
+
+<runkit></runkit>
 
 For illustration purposes, let's rewrite the previous example like this.
 
@@ -114,6 +118,8 @@ Here, `leonidas` and `gerard` store the same `yell()` function.
 
 .breadcrumbs[<a href="#1">JavaScript Closures</a>]
 
+<runkit></runkit>
+
 Using closures inside a loop can result in a well-know bug _(and laptops being tossed out of windows, too)_.
 Consider the following code:
 
@@ -137,7 +143,7 @@ spartan.forEach(function(soldierFunc) {
   soldierFunc();
 });
 ```
-> What will be the output of this code, [once executed][closure-loop-bug-codepen]?
+> What will be the output of this code, once executed (use the `RunKit` button)?
 
 ???
 
@@ -179,6 +185,8 @@ The `rank` functions will only retrieve the value of `nb` when they are executed
 ### Doing it right
 
 .breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a>]
+
+<runkit></runkit>
 
 To solve this problem, we have to find a way to capture not a *reference* to `nb`, but **its value at the time each function is created**. Here is the correct code:
 
@@ -231,7 +239,7 @@ for (var nb = 1; nb < 11; nb++) {
 }
 ```
 
-When you pass a primitive value to a function in JavaScript, its **value** is passed, *not a reference* to the variable.
+When you pass a primitive value to a function in JavaScript, its **value** is passed, *not a reference* to the variable holding it.
 
 So each `rank()` function will keep a reference to its own `nbValue` variable, which had a different value at every iteration of the `for` loop.
 
