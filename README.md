@@ -33,7 +33,7 @@ You will:
   * [Introduction](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme)
   * [TypeScript](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [Working with Angular in Ionic](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [Ionic navigation with Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
 
 * App Development
   * Mockups
@@ -44,7 +44,7 @@ You will:
 
 * Ionic (advanced)
   * [Ionic extras (geolocation, leaflet & camera)](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [Image upload](IMAGE-UPLOAD.md)
+  * [Image upload](./IMAGE-UPLOAD.md)
 
 ## What you will need
 

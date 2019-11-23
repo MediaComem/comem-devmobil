@@ -3,8 +3,6 @@
 You can use any image upload service you like.
 The [qimg API][qimg] is a limited service provided for this course.
 
-
-
 ## Limitations
 
 * Images cannot be larger than 2MB
@@ -12,8 +10,6 @@ The [qimg API][qimg] is a limited service provided for this course.
 
   The quota is 10 by default.
   When you start uploading more than 10 images, older images will be deleted.
-
-
 
 ## Configuration
 
@@ -37,8 +33,6 @@ export const config = {
 
 Do not forget to also update `src/app/config.sample.ts` to provide appropriate examples for other developers who might work on the project.
 
-
-
 ## Model
 
 Here's model you might need.
@@ -53,8 +47,6 @@ export class QimgImage {
   createdAt: string;
 }
 ```
-
-
 
 ## Provider
 
@@ -190,8 +182,6 @@ export class PictureProvider {
 }
 ```
 
-
-
 ## Usage
 
 Here's an example of how to use the new provider in a sample `ExamplePage` component:
@@ -241,7 +231,5 @@ Update the component's template and make sure you have:
 <button ion-button (click)='takePicture()'>Take picture</button>
 <img *ngIf='picture' [src]='picture.url' />
 ```
-
-
 
 [qimg]: https://mediacomem.github.io/comem-qimg/

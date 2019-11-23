@@ -30,6 +30,8 @@ Learn what's a JavaScript closure, how to use them, and common pitfalls.
 
 ## THIS!.. IS!.. CLOSURE!
 
+<runkit></runkit>
+
 Consider this example:
 
 ```javascript
@@ -56,20 +58,22 @@ Thus, when the `yell()` function is executed on the last line, it will get the l
 
 If you were to create another instance of `yell()`, say by adding this code:
 
-```javascript
+```js
 var gerard = makeYeller(); // Store a new yell() function
 ```
 
 This new instance would also keep a reference to `city` (and print `"Sparta"` when called), but it would be a different `yell()` function than the one stored in the `leonidas` variable.
 To be sure of that, do:
 
-```javascript
+```js
 console.log(gerard === leonidas); // false
 ```
 
 
 
 ### This is not...
+
+<runkit></runkit>
 
 For illustration purposes, let's rewrite the previous example like this.
 
@@ -108,6 +112,8 @@ Here, `leonidas` and `gerard` store the same `yell()` function.
 
 ## Closures in loops
 
+<runkit></runkit>
+
 Using closures inside a loop can result in a well-know bug _(and laptops being tossed out of windows, too)_.
 Consider the following code:
 
@@ -131,7 +137,7 @@ spartan.forEach(function(soldierFunc) {
   soldierFunc();
 });
 ```
-> What will be the output of this code, [once executed][closure-loop-bug-codepen]?
+> What will be the output of this code, once executed (use the `RunKit` button)?
 
 <!-- slide-notes -->
 
@@ -167,6 +173,8 @@ The `rank` functions will only retrieve the value of `nb` when they are executed
 
 
 ### Doing it right
+
+<runkit></runkit>
 
 To solve this problem, we have to find a way to capture not a *reference* to `nb`, but **its value at the time each function is created**. Here is the correct code:
 
@@ -216,7 +224,7 @@ for (var nb = 1; nb < 11; nb++) {
 }
 ```
 
-When you pass a primitive value to a function in JavaScript, its **value** is passed, *not a reference* to the variable.
+When you pass a primitive value to a function in JavaScript, its **value** is passed, *not a reference* to the variable holding it.
 
 So each `rank()` function will keep a reference to its own `nbValue` variable, which had a different value at every iteration of the `for` loop.
 

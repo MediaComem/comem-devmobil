@@ -1,4 +1,4 @@
-# Working with Angular in Ionic
+# Ionic navigation with Angular
 
 Learn to work with [Angular][angular] in an [Ionic][ionic] project.
 
@@ -76,7 +76,7 @@ Here is what executing the command did in our project:
 * Created a `hello.page.html` file to write your page's **HTML template** into,
 * Created a `hello.page.scss` file to write your page's **style** into,
 * Created a `hello.page.ts` file containing your page **class definition**, and referecing the previous `.html` and `.scss` files as your new page's template and style, respectively,
-* Created a `hello.page.spec.ts` file to write your page's tests into (forget this for now, we'll see what tests in Angular are about later on this course),
+* Created a `hello.page.spec.ts` file to write your page's tests into (forget this for now, we'll see what tests in Angular are all about later on this course),
 * Created a `hello.module.ts` file containing **a module that declares your new page** and how to navigate to it (more on this later),
 * Finally, updated the `app-routing.module.ts` file to **add your new page to your app's navigation**.
 
@@ -86,7 +86,9 @@ Here is what executing the command did in our project:
 
 **Mobile applications** developed with [Ionic][ionic] and [Angular][angular] uses the [Angular router][angular-router] for navigation.
 
-This router is a **URL based system**, meaning that your app will display pages depending on the current URL state.
+This router uses a **URL based system**, meaning that your app will display pages depending on the current URL state.
+
+> Even though Ionic apps on mobile devices **don't show any address bars**, they do use URLs internally.
 
 From the [Angular Router documentation][angular-router]:
 
@@ -94,8 +96,6 @@ From the [Angular Router documentation][angular-router]:
 > * Enter a URL in the address bar and the browser navigates to a corresponding page.
 > * Click links on the page and the browser navigates to a new page.
 > * Click the browser's back and forward buttons and the browser navigates backward and forward through the history of pages you've seen.
-
-Even though Ionic apps on mobile devices **don't show any address bars**, they do use URLs internally.
 
 With Ionic starter templates, base navigation is defined in the `app-routing.module.ts` file.
 
@@ -140,7 +140,7 @@ const routes: Routes = [
 ```
 * `path` defines the URL path that, if matched, will trigger this route. A `path` of `''` means that this route is the default route, and is matched when there is no path in the URL (like with `https://example.com`).
   > _The path of the URL is the part that comes right after the domain name ; in a URL like `https://example.com/foo`, the path would be `foo`._
-* `redirectTo` makes a route to redirect to another path. Here, the URL `https://example.com` will redirect to `https://example.com/home`, as if the user directly accessed it.
+* `redirectTo` makes a route redirecting to another path. Here, the URL `https://example.com` will redirect to `https://example.com/home`, as if the user directly accessed it.
 * `pathMatch: full` is required with `redirectTo` and means that only URLs with the exact same path as the one defined for this route will match.
 
 ### Route definition (2/2)
@@ -156,7 +156,7 @@ const routes: Routes = [
   }
 ];
 ```
-`loadChildren` is used to **Lazy Load** modules, meaning that modules will only be loaded when they are requested by the user's action, instead of at the app's startup. This is a _Good Practice_, as it **speeds up** the start of your app (with the downside of minor loads when first accessing the Lazy Loaded module).
+`loadChildren` is used to **Lazy Load** modules, meaning that modules will only be loaded when they are requested by the user's action, instead of at the app's startup. This is a _Good Practice™_, as it **speeds up** the start of your app (with the downside of minor loads when first accessing the Lazy Loaded module).
 
 Here, any URL with a path that starts with `home` will make Angular loads the `HomePageModule`. This module **MUST** have its own routes array so that the Router can keep searching for a match with what remains of the initial path.
 
@@ -239,7 +239,7 @@ const routes: Routes = [
 * { path: 'user', loadChildren: './user/user.module#UserPageModule' },
 ];
 ```
-> **Note** how the `loadChildren` value for the `user` route is a simple string instead of a function. This is a **deprecated** notation (equivalent to the other) that you should **not** use yourself.
+> **Notice** how the `loadChildren` value for the `user` route is a simple string instead of a function. This is a **deprecated** notation (**strictly** equivalent to the other) that you should **not** use yourself.
 
 > Unfortunately, the Ionic CLI `generate` command still use it, at least with the `5.2.7` version. Future versions might fix it.
 
@@ -295,7 +295,7 @@ To do so, we can add a path before the name of our page when executing the `gene
 ```bash
 $> ionic generate page `user/`Profile --dry-run
 ```
-> Note that the path added before our page's name is relative to the `src/app` folder.
+> Notice that the path added before our page's name is relative to the `src/app` folder.
 
 The result of this command is:
 
@@ -319,7 +319,7 @@ Remember we want this new page to be reachable with the `https://example.com/use
 
 With our current configuration, when the router encouters an URL that starts with `user`, it will search a match for the remaining path, `profile` in this case, in the child routes of the `UserPageModule`.
 
-This is where we want the new route to be added.
+Thus, this is where we should add our new route.
 
 We need to use the `--module` parameter and pass it **the path, relative to `src/app`, that points to the file containing the module in which we want to add the new route**:
 
@@ -385,7 +385,7 @@ const routes: Routes = [
 ```
 This way, URLs that don't start with `/home` or `/user` wil display the `ErrorPage`.
 
-> Remember that the order in which the routes are declared is important. If that highlighted route was in **first position**, all URLs would match its `path`, and nothing beside the `ErrorPage` would ever be displayed.
+> Remember that the order in which the routes are declared is important. If the highlighted route was in **first position**, all URLs would match its `path`, and nothing beside the `ErrorPage` would ever be displayed.
 
 ## Path placeholder
 
@@ -413,7 +413,7 @@ To access this `:id` path parameter from your code, you'll need to inject the [`
 ```ts
 // imports omitted for brevity
 @Component({ /* ... */ })
-export class ProductPage implements OnInit {
+export class ProductPage  {
 
   productId: any;
 
@@ -474,7 +474,7 @@ Method              | Called when
 
 Angular also provides you with a mean of preventing unauthorized accesses to routes by using services called `Guard`.
 
-This is usefull if your app implements **authentication** and you want to prevent unauthenticated access to restricted pages.
+This is usefull for example if your app implements **authentication** and you want to prevent unauthenticated access to restricted pages.
 
 A Guard is simply an Angular service implementing the [`CanActivate` interface][angular-can-activate]:
 
