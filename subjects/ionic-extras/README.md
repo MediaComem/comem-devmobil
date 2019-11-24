@@ -4,17 +4,16 @@ Useful tools to add to an Ionic application.
 
 **You will need**
 
-* [Cordova][cordova]
-* A running [Ionic][ionic] application
+- [Cordova][cordova]
+- A running [Ionic][ionic] application
 
 **Recommended reading**
 
-* [Ionic](../ionic/)
-* [Angular](../angular/)
+- [Ionic](../ionic/)
+- [Angular](../angular/)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Geolocation](#geolocation)
   - [Registering the Geolocation service with Angular](#registering-the-geolocation-service-with-angular)
@@ -37,15 +36,13 @@ Useful tools to add to an Ionic application.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-
 ## Geolocation
 
 The [HTML Geolocation API][html-geolocation] allows the user to provide their geographical location to web applications.
 Since an Ionic app is a web app, you can use it directly.
 
-However, you can also use the [Cordova geolocation plugin][cordova-geolocation] and the [Ionic native geolocation][ionic-native-geolocation] plugin.
-The latter is already ready for Angular and the former gives you the added benefit of working even on platforms where the HTML Geolocation API might not be available in the browser.
+However, you can also use the [Cordova geolocation plugin][cordova-geolocation] in conjonction with the [Ionic native geolocation][ionic-native-geolocation] plugin.
+The Cordova plugin provides a JavaScript API to use native geolocation capabilities, when the HTML Geolocation API is not available ; the Ionic Native plugin wraps this JavaScript API in an Angular Service for usage in an Ionic/Angular app.
 
 Install both:
 
@@ -57,8 +54,6 @@ $> ionic cordova plugin add \
 $> npm install @ionic-native/geolocation
 ```
 
-
-
 ### Registering the Geolocation service with Angular
 
 The `@ionic-native/geolocation` plugin provides an **Angular service** named `Geolocation` that you can use to locate the user.
@@ -66,9 +61,13 @@ To be able to **inject** it in your application's components or services, you mu
 
 For example, you may add it to `AppModule` in `src/app/app.module.ts` in a standard starter project:
 
+> **Be extra sure to check that the import path ends with `/ngx`**, since we are using Angular in our case.
+>
+> See https://ionicframework.com/docs/native/overview#angular
+
 ```ts
 // Other imports...
-*import { Geolocation } from '@ionic-native/geolocation';
+*import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   // ...
@@ -80,8 +79,6 @@ For example, you may add it to `AppModule` in `src/app/app.module.ts` in a stand
 export class AppModule {}
 ```
 
-
-
 ### Injecting the Geolocation service
 
 Now that the `Geolocation` service is registered, you can inject it in one of your components or services.
@@ -90,7 +87,7 @@ Here's an example of how you would inject it in a sample `ExamplePage` component
 
 ```ts
 // Other imports...
-*import { Geolocation } from '@ionic-native/geolocation';
+*import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'page-example',
@@ -106,21 +103,20 @@ export class ExamplePage {
 }
 ```
 
-
-
 ### Getting the user's location
 
-Once that's done, obtaining the user's current geographic coordinates is as simple as calling the service's `getCurrentPosition()` method:
+Once that's done, obtaining the user's current geographic coordinates once is as simple as calling the service's `getCurrentPosition()` method:
 
 ```ts
 // ...
-export class ExamplePage {
-  // ...
-  ionViewDidLoad() {
-    // ...
+import { Geoposition } from '@ionic-native/geolocation/ngx';
 
-*   const geolocationPromise = this.geolocation.getCurrentPosition();
-*   geolocationPromise.then(position => {
+export class ExamplePage implements OnInit {
+  // ...
+  ngOnInit() {
+    // ...
+    // Geoposition is an interface that describes the position object
+*   this.geolocation.getCurrentPosition().then((position: Geoposition) => {
 *     const coords = position.coords;
 *     console.log(\`User is at ${coords.longitude}, ${coords.latitude}`);
 *   }).catch(err => {
@@ -131,12 +127,36 @@ export class ExamplePage {
 }
 ```
 
-It's an **asynchronous** operation which returns a promise,
-so you have to call `.then()` to be notified when the location is available.
-You should also call `.catch()` to be notified if there's a problem retrieving the location
-(e.g. the position cannot be determined because the user is indoors).
+The `getCurrentPosition()` methid is an **asynchronous** operation which returns a promise, so you have to call `.then()` to be notified when the location is available.
+You should also call `.catch()` to be notified if there's a problem retrieving the location.
 
+### Tracking the user's location
 
+If you want to periodically be notified of the user's current geographic location, you should the `watchPosition()` method of the `Geolocation` service.
+
+Note that this method returns an **observable** instead of a **promise**. Hence you needing to `subscribe()` to it to get notified of the change:
+
+```ts
+// ...
+
+export class ExamplePage implements OnInit {
+  // ...
+  ngOnInit() {
+    // ...
+
+*   const trackingSubscription = this.geolocation.watchPosition().subscribe({
+*     next: (position: Geoposition) => {
+*       const coords = position.coords;
+*       console.log(\`User is at ${coords.longitude}, ${coords.latitude}`);
+*     },
+*     error: err => {
+*       console.warn(`Could not retrieve user position because: ${err.message}`);
+*     }
+*   });
+  }
+  // ...
+}
+```
 
 ### Allowing the brower to retrieve the user's location
 
@@ -144,8 +164,6 @@ When developing locally with `ionic serve`, the browser will ask for permission 
 Click **Allow**:
 
 <p class='center'><img src='images/browser-allow-geolocation.png' class='w50' /></p>
-
-
 
 ### Geolocation on insecure origins
 
@@ -167,8 +185,6 @@ You should run your Ionic app on localhost to solve this issue:
 $> ionic serve --address localhost
 ```
 
-
-
 ## Leaflet
 
 There are many JavaScript map libraries, each with their own advantages.
@@ -188,79 +204,49 @@ you'll also need to install its [type definitions][definitely-typed]:
 $> npm install --save-dev @types/leaflet
 ```
 
-
-
 ### Importing Leaflet styles
 
-It's easy to use Leaflet's JavaScript components, as we just have to `import` them,
-but it's a little bit harder to include Leaflet's CSS, as the Ionic build chain doesn't include it by default.
+For the map to display correctly, you need to add Leaflet CSS to your project.
 
-You need to add a new `copy.config.js` file to your project.
-This file configures Ionic to copy Leaflet's stylesheet and images to its build directory (`www`):
-
-```js
-module.exports = {
-  copyLeaflet: {
-    src: ['{{ROOT}}/node_modules/leaflet/dist/leaflet.css'],
-    dest: '{{WWW}}/assets/leaflet/'
-  },
-  copyLeafletAssets: {
-    src: ['{{ROOT}}/node_modules/leaflet/dist/images/**/*'],
-    dest: '{{WWW}}/assets/leaflet/images/'
-  }
-};
-```
-
-#### Adding a copy configuration file to Ionic
-
-You must tell Ionic to use this configuration file by adding this to your `package.json` file:
+To do so, open your `angular.json` file that should sit at the root of your project's files, and add the path to the leaflet css file to the `projects.app.architect.build.options.styles` array, like so:
 
 ```json
 {
-  "...": "...",
-* "config": {
-*   "ionic_copy": "copy.config.js"
-* },
-  "...": "..."
+  // ...
+  "styles": [
+    // Previous styles
+*   "node_modules/leaflet/dist/leaflet.css"
+  ],
+  // ...
 }
 ```
 
-Once that's done, start (or restart) your `ionic serve` command.
+### Importing Leaflet assets
 
-You should see that Leaflet's stylesheet and images have been copied under the `www/assets/leaflet` directory:
+Along with the styles, you'll also need to import the Leaflet's assets (e.g. the marker icon).
 
-```bash
-$> ls www/assets/leaflet
-images   leaflet.css
+This is also done in `angular.json`.
+
+Add the following object to the `projects.app.architect.build.options.assets` array:
+
+```json
+{
+  // ...
+  "assets": [
+    // Previous assets definition
+    {
+*     "glob": "**/*",
+*     "input": "node_modules/leaflet/dist/images",
+*     "output": "leaflet/"
+    }
+  ],
+  // ...
+}
 ```
-
-#### Adding the Leaflet stylesheet
-
-Now that the stylesheet is available in your project's build directory,
-you can add it to `src/index.html` with a new `<link>` tag:
-
-```html
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-  <!-- ... -->
-* <link href='assets/leaflet/leaflet.css' rel='stylesheet'>
-  <link href='build/main.css' rel='stylesheet'>
-</head>
-<body>
-  <!-- ... -->
-&lt;/body&gt;
-</html>
-```
-
-Leaflet's styles are now loaded.
-
-
 
 ### Registering the Leaflet module with Angular
 
-To use the [ngx-leaflet][ngx-leaflet] library,
-you must add its `LeafletModule` to your application's module in `src/app/app.module.ts`:
+To use the [ngx-leaflet][ngx-leaflet] library, you must add its `LeafletModule` to your application's module in `src/app/app.module.ts`:
 
 ```ts
 // Other imports...
@@ -277,7 +263,22 @@ you must add its `LeafletModule` to your application's module in `src/app/app.mo
 export class AppModule {}
 ```
 
+And also import it in the module that declares the page displaying your map:
 
+```ts
+// Other imports...
+*import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+@NgModule({
+  // ...
+  imports: [
+    // Other imports...
+*   LeafletModule
+  ]
+  // ...
+})
+export class ExamplePageModule {}
+```
 
 ### Displaying a map
 
@@ -288,20 +289,18 @@ Here's how you could add them to a sample `ExamplePage` component:
 // Other imports...
 *import { latLng, MapOptions, tileLayer } from 'leaflet';
 
-@Component({
-  selector: 'page-example',
-  templateUrl: 'example.html',
-})
+@Component(/* ... */)
 export class ExamplePage {
 * mapOptions: MapOptions;
 
   constructor(/* ... */) {
     // ...
-*   const tileLayerUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-*   const tileLayerOptions = { maxZoom: 18 };
 *   this.mapOptions = {
 *     layers: [
-*       tileLayer(tileLayerUrl, tileLayerOptions)
+*       tileLayer(
+*         'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+*         { maxZoom: 18 }
+*       )
 *     ],
 *     zoom: 13,
 *     center: latLng(46.778186, 6.641524)
@@ -312,12 +311,10 @@ export class ExamplePage {
 
 #### Adding the map to the component's template
 
-You can now add the map to the component's HTML template.
-Assuming you want the map to fill the entire page,
-you can replace the entire contents of the template with this:
+To display the map in your page's template, you need to add the `leaflet` directive to a `<div>` on the page.
 
 ```html
-<div class='map' leaflet [leafletOptions]='mapOptions'></div>
+<div class="map" leaflet [leafletOptions]="mapOptions"></div>
 ```
 
 <!-- slide-column -->
@@ -329,10 +326,8 @@ The map will have no height by default,
 so add the following to the component's stylesheet to make it visible:
 
 ```scss
-page-example {
-  .map {
-    height: 100%;
-  }
+.map {
+  height: 100%;
 }
 ```
 
@@ -342,17 +337,68 @@ You should now have a working Leaflet map!
 
 <img src='images/leaflet-map.png' class='w100' />
 
+#### Troubleshooting
 
+If you do **not** have a working Leaflet map, but instead have some kind of broken map like the one below, then you'll need to add a little bit of code to fix this issue.
+
+<!--slide-column 30 -->
+
+<img src='images/leaflet-display-bug.png' class='w100' />
+
+<!-- slide-column 70 -->
+
+> Note that this "issue" is [well](https://stackoverflow.com/questions/38832273/leafletjs-not-loading-all-tiles-until-moving-map) [known](https://github.com/Asymmetrik/ngx-leaflet/issues/104), but it's very hard to pinpoint what causes it in your app.
+
+In your page's class, add the following method:
+
+```ts
+onMapReady(map: Map) {
+  setTimeout(() => map.invalidateSize(), 0);
+}
+```
+
+And in your page's template, trigger this new method with the `leafletMapReady` event:
+
+```html
+<div class="leaflet-map"
+  leaflet
+  [leafletOptions]="options"
+  (leafletMapReady)="onMapReady($event)">
+</div>
+```
 
 ### Markers
 
-Adding markers to the map is quite simple.
+Adding markers to the map is not very hard.
 
-First, you need to create some markers.
-Let's add them to the component:
+First, you need to create an icon configuration for the markers.
+
+Do that by creating a file that exports this marker configuration. Let's call it, for example, `default-marker.ts` and add it this content:
+
+```ts
+import { Icon, IconOptions, icon } from 'leaflet';
+
+export const defaultIcon: Icon<IconOptions> = icon({
+  // This define the displayed icon size, in pixel
+  iconSize: [ 25, 41 ],
+  // This defines the pixel that should be placed right above the location
+  // If not provided, the image center will be used, and that could be awkward
+  iconAnchor: [ 13, 41 ],
+  // The path to the image to display. In this case, it's a Leaflet asset
+  iconUrl: 'leaflet/marker-icon.png',
+  // The path to the image's shadow to display. Also a leaflet asset
+  shadowUrl: 'leaflet/marker-shadow.png'
+});
+```
+
+#### Define
+
+Then, let's create some markers and add them to the component:
 
 ```ts
 // Other imports...
+// Import the file with the default icon configuration
+import { `defaultIcon` } from 'path/to/default/icon/file';
 import { latLng, MapOptions, `marker, Marker`, tileLayer } from 'leaflet';
 
 // ...
@@ -363,9 +409,9 @@ export class ExamplePage {
   constructor(/* ... */) {
     // ...
 *   this.mapMarkers = [
-*     marker([ 46.778186, 6.641524 ]),
-*     marker([ 46.780796, 6.647395 ]),
-*     marker([ 46.784992, 6.652267 ])
+*     marker([ 46.778186, 6.641524 ], { icon: defaultIcon }),
+*     marker([ 46.780796, 6.647395 ], { icon: defaultIcon }),
+*     marker([ 46.784992, 6.652267 ], { icon: defaultIcon })
 *   ];
   }
 }
@@ -378,9 +424,11 @@ export class ExamplePage {
 Now all you need to do is bind the array of markers you just defined to the `leaflet` directive in the component's template with `[leafletLayers]`:
 
 ```html
-<div class='map' leaflet
-     [leafletOptions]='mapOptions'
-     `[leafletLayers]='mapMarkers'`>
+<div
+  class="map"
+  leaflet
+  [leafletOptions]="mapOptions"
+  `[leafletLayers]="mapMarkers"`>
 </div>
 ```
 
@@ -406,13 +454,11 @@ For example, you could add a [Tooltip][leaflet-tooltip]:
 
 ```ts
 this.mapMarkers = [
-  marker([ 46.778186, 6.641524 ])`.bindTooltip('Hello')`,
-  marker([ 46.780796, 6.647395 ]),
-  marker([ 46.784992, 6.652267 ])
+  marker([46.778186, 6.641524])`.bindTooltip('Hello')`,
+  marker([46.780796, 6.647395]),
+  marker([46.784992, 6.652267])
 ];
 ```
-
-
 
 ### Getting a reference to the map
 
@@ -421,10 +467,13 @@ The `leaflet` directive will emit a `leafletMapReady` event when it's done initi
 You can bind to this event to retrieve the map object created by Leaflet:
 
 ```html
-<div class='map' leaflet
-     [leafletOptions]='mapOptions' [leafletLayers]='mapMarkers'
-     `(leafletMapReady)='onMapReady($event)'`>
-</div>
+<div
+  class="map"
+  leaflet
+  [leafletOptions]="mapOptions"
+  [leafletLayers]="mapMarkers"
+  `(leafletMapReady)="onMapReady($event)"`
+></div>
 ```
 
 Now all you need to do is retrieve the map in your component:
@@ -442,8 +491,6 @@ export class ExamplePage {
 * }
 }
 ```
-
-
 
 ### Listening to map events
 
@@ -466,8 +513,6 @@ export class ExamplePage {
 }
 ```
 
-
-
 ## Using your mobile device's camera
 
 The camera is part of your mobile device's hardware,
@@ -484,7 +529,7 @@ typically in `src/app/app.module.ts` in a starter project:
 
 ```ts
 // Other imports...
-*import { Camera } from '@ionic-native/camera';
+*import { Camera } from '@ionic-native/camera/ngx';
 
 @NgModule({
   // ...
@@ -496,8 +541,6 @@ typically in `src/app/app.module.ts` in a starter project:
 export class AppModule {}
 ```
 
-
-
 ### Injecting the camera service
 
 Now that you have registered the `Camera` service,
@@ -507,7 +550,7 @@ Here's how you would do it in a sample `ExamplePage` component:
 
 ```ts
 // Other imports...
-*import { Camera } from '@ionic-native/camera';
+*import { Camera } from '@ionic-native/camera/ngx';
 
 // ...
 export class ExamplePage {
@@ -522,8 +565,6 @@ export class ExamplePage {
 }
 ```
 
-
-
 ### Taking a picture
 
 Time to use that `Camera` service to take a picture.
@@ -532,7 +573,7 @@ along with the `pictureData` field to store the data:
 
 ```ts
 // Other imports...
-import { Camera, `CameraOptions` } from '@ionic-native/camera';
+import { Camera, `CameraOptions` } from '@ionic-native/camera/ngx';
 
 // ...
 export class ExamplePage {
@@ -556,8 +597,6 @@ export class ExamplePage {
 }
 ```
 
-
-
 ### Displaying the picture in the template
 
 Add a `<button>` tag in the component's template to call our `takePicture()` method,
@@ -566,8 +605,8 @@ and an `<img>` tag to display the picture once it's taken:
 ```html
 <ion-content padding>
   <!-- ... -->
-* <button ion-button (click)='takePicture()'>Take picture</button>
-* <img *ngIf='pictureData' src='data:image/jpeg;base64,{{ pictureData }}' />
+  * <button ion-button (click)="takePicture()">Take picture</button> *
+  <img *ngIf="pictureData" src="data:image/jpeg;base64,{{ pictureData }}" />
 </ion-content>
 ```
 
@@ -580,18 +619,14 @@ the `pictureData` variable we get back contains the picture's base64-encoded raw
 but you can also save it to a file or customize other camera parameters.
 Read the documentation of the [Ionic native camera plugin][ionic-native-camera] for more information.
 
-
-
 ## Resources
 
 **Documentation**
 
-* [Ionic documentation][ionic-docs]
-* [Ionic native geolocation plugin][ionic-native-geolocation] & [Cordova geolocation plugin][cordova-geolocation]
-* [Leaflet][leaflet] & [ngx-leaflet][ngx-leaflet]
-* [Ionic native camera plugin][ionic-native-camera] & [Cordova camera plugin][cordova-camera]
-
-
+- [Ionic documentation][ionic-docs]
+- [Ionic native geolocation plugin][ionic-native-geolocation] & [Cordova geolocation plugin][cordova-geolocation]
+- [Leaflet][leaflet] & [ngx-leaflet][ngx-leaflet]
+- [Ionic native camera plugin][ionic-native-camera] & [Cordova camera plugin][cordova-camera]
 
 [cordova]: https://cordova.apache.org
 [cordova-camera]: https://github.com/apache/cordova-plugin-camera
