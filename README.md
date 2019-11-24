@@ -44,7 +44,7 @@ You will:
 
 * Ionic (advanced)
   * [Ionic extras (geolocation, leaflet & camera)](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [Image upload](./IMAGE-UPLOAD.md)
+  * [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 ## What you will need
 
