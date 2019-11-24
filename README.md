@@ -68,7 +68,7 @@ You will:
 * At least two mobile-oriented features must be used, for example:
   * Geolocation of the user (e.g. to center a map on the user's location, or to determine a Place's location in the Travel log).
   * Pictures taken with the phone's camera (works only on physical devices).
-  > You are not required to exclusively implement those two ; you can choose others depending on your subject
+    **You are not required to exclusively implement those two ; you can choose others depending on your subject**
 * There must be a map showing geolocated resources (with more than one item on the same map).
 * There must be a resource list with filters or search parameters.
 
@@ -93,11 +93,11 @@ You can choose from the following options (one is enough):
 * You can provide a tutorial **inside** the app.
 * You can use any other presentation tool (subject to approval) but your user guide or pitch must be available online.
 * You can upload your app to a store (e.g. Google Play), and write the store page as you would for a real app.
-  > This last one is kind of tough, you've been warned
+  _This last one is kind of tough, and doing it will not get you a better grade. You've been warned_
 
 ### Delivery
 
-Each group must send an e-mail **no later than 26th of january 2020** to [Mathias Oberson](mathias.oberson@heig-vd.ch) with:
+Each group must send an e-mail **no later than 21th of january 2020** to [Mathias Oberson](mathias.oberson@heig-vd.ch) with:
 
 * The list of group members.
 * The link to your source code repository on GitHub.
