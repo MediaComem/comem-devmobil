@@ -97,7 +97,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than 21th of january 2020** to [Mathias Oberson](mathias.oberson@heig-vd.ch) with:
+Each group must send an e-mail **no later than 21th of january 2020** to [Mathias Oberson](mailto:mathias.oberson@heig-vd.ch) with:
 
 * The list of group members.
 * The link to your source code repository on GitHub.
