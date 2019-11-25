@@ -20,23 +20,24 @@ There are two new configuration properties your app needs to have:
 * The URL to the qimg API.
 * The qimg API authentication token.
 
-You should add those to your `src/app/config.ts` file:
+You should add those to your `src/environments/environment.ts` file:
 
 ```ts
-export const config = {
-  apiUrl: 'https://comem-citizen-engagement.herokuapp.com/api',
+export const environment = {
+  production: false,
+  apiUrl: '<your-api-url>',
   // TODO: add the qimg URL and secret token to the configuration
   qimgUrl: 'https://comem-qimg.herokuapp.com/api',
-  qimgSecret: 'changeme'
-}
+  qimgSecret: '<change-with-your-token>'
+};
 ```
 
-Do not forget to also update `src/app/config.sample.ts` to provide appropriate examples for other developers who might work on the project.
+Do not forget to also update `src/environments/environment.sample.ts` to provide appropriate examples for other developers who might work on the project.
 
 ## Model
 
-Here's model you might need.
-Save it, for example to `src/models/qimg-image.ts`.
+Here's a model you might need.
+Save it, for example to `src/app/models/qimg-image.ts`.
 It represents the response from the qimg API when creating an image:
 
 ```ts
@@ -50,7 +51,7 @@ export class QimgImage {
 
 ## Provider
 
-Let's create a new provider that will be responsible for:
+Let's create a new service that will be responsible for:
 
 * Taking pictures.
 * Uploading them to the qimg API.
@@ -58,51 +59,30 @@ Let's create a new provider that will be responsible for:
 You can generate it with this command:
 
 ```bash
-$> ionic generate provider Picture
+$> ionic generate service sercices/picture/Picture
 ```
+> This will generate the service and its test suite in `src/app/services/picture`. Change the path at will.
 
-The following changes *should* have been made automatically to `src/app/app.module.ts`,
-but make sure that's actually the case, or make the changes yourself if need be:
-
-```ts
-// Other imports...
-// TODO: make sure the new provider has been imported
-import { PictureProvider } from '../providers/picture/picture';
-
-@NgModule({
-  declarations: [ /* ... */ ],
-  imports: [ /* ... */ ],
-  bootstrap: [ /* ... */ ],
-  entryComponents: [ /* ... */ ],
-  providers: [
-    // Other providers...
-    // TODO: make sure the new provider has been added to the module's providers array
-    PictureProvider
-  ]
-})
-export class AppModule {}
-```
-
-**Replace the entire contents of `src/providers/picture/picture.ts`** with the following code:
+**Replace the entire contents of `src/app/services/picture/picture.ts`** with the following code:
 
 ```ts
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Camera, CameraOptions } from '@ionic-native/camera';
-import { Observable } from 'rxjs/Observable';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { Observable, from } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 
-import { config } from '../../app/config';
+import { environment } from '../../../environments/environment';
 import { QimgImage } from '../../models/qimg-image';
 
 /**
  * Service to take pictures and upload them to the qimg API.
  */
-@Injectable()
-export class PictureProvider {
+@Injectable({ providedIn: 'root' })
+export class PictureService {
 
   constructor(private camera: Camera, private http: HttpClient) {
-    console.log('Hello PictureProvider Provider');
+    console.log('Hello PictureService Provider');
     console.log('@@@ http client', !!this.http);
   }
 
@@ -121,7 +101,7 @@ export class PictureProvider {
 
     // Once the picture has been taken, upload it to the qimg API.
     // This returns a new observable of the resulting QimgImage object.
-    const uploadedImage$ = pictureData$.pipe(switchMap(data => this.uploadPicture(data)))
+    const uploadedImage$ = pictureData$.pipe(switchMap(data => this.uploadPicture(data)));
 
     // Once the picture has been uploaded, log a message to the console
     // indicating that all went well.
@@ -155,7 +135,7 @@ export class PictureProvider {
     const pictureDataPromise = this.camera.getPicture(options);
 
     // Convert the promise to an observable and return it.
-    return Observable.fromPromise(pictureDataPromise);
+    return from(pictureDataPromise);
   }
 
   /**
@@ -172,11 +152,11 @@ export class PictureProvider {
 
     const requestOptions = {
       headers: {
-        Authorization: `Bearer ${config.qimgSecret}`
+        Authorization: `Bearer ${environment.qimgSecret}`
       }
     };
 
-    return this.http.post<QimgImage>(`${config.qimgUrl}/images`, requestBody, requestOptions);
+    return this.http.post<QimgImage>(`${environment.qimgUrl}/images`, requestBody, requestOptions);
   }
 
 }
@@ -188,7 +168,7 @@ Here's an example of how to use the new provider in a sample `ExamplePage` compo
 
 ```ts
 // Other imports...
-// TODO: import the model and provider
+// TODO: import the model and provider. The path should be changed depending on where you import them.
 import { QimgImage } from '../../models/qimg-image';
 import { PictureProvider } from '../../providers/picture/picture';
 
@@ -228,7 +208,7 @@ Update the component's template and make sure you have:
 * An `<img>` tag that displays the uploaded picture's URL once available (replace the existing one if you already have it).
 
 ```html
-<button ion-button (click)='takePicture()'>Take picture</button>
+<ion-button (click)='takePicture()'>Take picture</ion-button>
 <img *ngIf='picture' [src]='picture.url' />
 ```
 
