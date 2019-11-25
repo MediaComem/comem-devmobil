@@ -3,7 +3,7 @@
   <head>
     <title>Ionic (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6bc469c37719cfd213486de93679e4fa1ce7c01a/subjects/ionic/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/f96f68dbd68b1d84f9617c4a1b4341516b54e0e3/subjects/ionic/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -50,9 +50,7 @@ class: center, middle, image-header
 
 .breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a>]
 
-<p class='center'><img src='images/fragmentation.jpg' class='w80' /></p>
-
-
+<p class='center'><img src='images/fragmentation.png' class='w80' /></p>
 
 ---
 ### Cordova
@@ -132,6 +130,62 @@ But with Cordova, you can also access **device hardware** like the **camera** or
 
 ]
 ---
+#### Hybrid VS Native
+
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#5">Cordova</a>]
+
+There's a lot of talk around mobile application development and wether or not you should go the hybdrid way, or stick to the native development.
+
+_[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%20Native.pdf?utm_source=hs_automation&utm_medium=email&utm_content=60041551&_hsenc=p2ANqtz-8mI1bbQO8sbWgiIUWfi1RRmnzzqBAJm5p6pHYTW0-t1e6UMRbQAjFTlW77qlLCZkxParmZq0DfrkbiW9qEuTEpmKWFDk_Ns7RyfGVeXtMqnp8VxMM&_hsmi=60041551) [More](https://medium.com/@zwacky/hybrid-apps-are-slow-f3367d22e868) on the subject_
+
+.grid-50[
+
+<h4>Native Development</h4>
+
+**Pros**
+
+* Highest performances
+* No dependencies to third-parties (access all of the features offered by the native SDK)
+
+**Cons**
+
+* One codebase/release cycle/team per platform
+* Requires more resources, time and knowledge
+
+
+]
+.grid-50[
+
+<h4>Hybrid Development</h4>
+
+**Pros**
+
+* One codebase for all platforms (mobile and desktop alike)
+* Widely used and known technologies
+
+**Cons**
+
+* (Little) Less performant than native apps
+* Access to native device capabilities limited by plugins
+
+
+]
+---
+#### Other options
+
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#5">Cordova</a>]
+
+Cordova is not the only system that allows developing hybrid (or hybrid-like) mobile applications.
+
+Here's a list of other technologies and why they were not chosen for this course:
+
+* [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
+* [Adobe PhoneGap](https://phonegap.com/) - This is a fork of Cordova
+* [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
+* [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
+* And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
+
+---
 ### What about Ionic?
 
 .breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a>]
@@ -150,7 +204,7 @@ But with Cordova, you can also access **device hardware** like the **camera** or
 ]
 .container[
 
-Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
+Ionic is basically **Cordova**, a JavaScript framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
 
 <div class='center'>
   <img src='images/cordova.png' height=200 />
@@ -164,22 +218,22 @@ Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) an
 ---
 #### A small word about Capacitor
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#7">What about Ionic?</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#9">What about Ionic?</a>]
 
 <p class='center'><img src='images/capacitor.png' class='w30'/></p>
 
-At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications, in the long run.
+At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications (or any hybrid app, for that matter), in the long run.
 
 Currently, both Cordova and Capacitor are supported by the Ionic framework, but **Cordova is still the default bridge** used.
 
-> We will keep using Cordova for this course as Capacitor is still in its infancy.
+**We will keep using Cordova for this course as Capacitor is still in its infancy.**
 
 > Whenever the choice between Capacitor and Cordova is given to you in tutorials or documentations, **follow instructions for Cordova**.
 
 ---
 #### What can I do with Ionic?
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#7">What about Ionic?</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#2">What is Ionic?</a> > <a href="#9">What about Ionic?</a>]
 
 Ionic lets you build web apps that **look like native apps** with HTML, CSS and JavaScript:
 
@@ -198,7 +252,7 @@ class: center, middle, image-header
 ---
 ### Install Ionic
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#10">Demo</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#12">Demo</a>]
 
 Ionic provides you a **CLI tool** that you should install globally with the following command:
 
@@ -229,7 +283,7 @@ Installing dependencies may take several minutes.
 ---
 ### Starter templates
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#10">Demo</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#12">Demo</a>]
 
 There are other templates than `tabs`.
 For example, this will generate an application with a sliding side menu:
@@ -261,7 +315,7 @@ class: center, middle
 ---
 ### Components
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#13">Basics of Ionic</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#15">Basics of Ionic</a>]
 
 Ionic has many [UI components][ionic-components] you can use out of the box:
 
@@ -337,7 +391,7 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 ---
 ### Angular components
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#13">Basics of Ionic</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#15">Basics of Ionic</a>]
 
 Many of these components are actually [**Angular components**][angular-components].
 They not only look pretty, but they also bring **functionality**.
@@ -367,7 +421,7 @@ Here's a code example for an Ionic list:
 ---
 #### List component functionality
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#13">Basics of Ionic</a> > <a href="#15">Angular components</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#15">Basics of Ionic</a> > <a href="#17">Angular components</a>]
 
 For example, the `ion-item-sliding` component automatically enables you to [slide in][ionic-sliding-list] controls from the side as most mobile applications do:
 
@@ -434,7 +488,7 @@ $> ionic cordova prepare ios
 ---
 ### Ionic Dev App
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#17">Running apps on your mobile device</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#19">Running apps on your mobile device</a>]
 
 The [Ionic Dev App][ionic-dev-app] is an Android and iOS application in which your own app can run without having to be built and installed on your physically connected device.
 
@@ -453,7 +507,7 @@ It may find it automatically, or you may have to manually enter your computer's 
 ---
 ### iOS device
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#17">Running apps on your mobile device</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#19">Running apps on your mobile device</a>]
 
 > You can only run on an iOS device from a Mac, since you'll need to install and use Xcode, which is a Mac-only software.
 >
@@ -470,7 +524,7 @@ Once you're done with those install and setup, you should be able to follow thos
 ---
 ### Android device
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#17">Running apps on your mobile device</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#19">Running apps on your mobile device</a>]
 
 > You can run your app on an Android device from either a Mac or a PC
 
@@ -491,7 +545,7 @@ Once you're done with those install and setup, you should be able to follow thos
 ---
 #### Android SDK
 
-.breadcrumbs[<a href="#1">Ionic</a> > <a href="#17">Running apps on your mobile device</a> > <a href="#20">Android device</a>]
+.breadcrumbs[<a href="#1">Ionic</a> > <a href="#19">Running apps on your mobile device</a> > <a href="#22">Android device</a>]
 
 Now that you installed and finished configuring Android Studio, you should have installed the latest SDK version of Android (at the time of writing, that should be Android 10).
 
