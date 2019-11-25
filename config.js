@@ -12,7 +12,7 @@ const config = {
     navigation: {
       click: false,
       scroll: false,
-      touch: false
+      touch: true
     }
   },
   publish: {
