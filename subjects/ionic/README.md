@@ -50,9 +50,7 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 ### How can you deal with OS fragmentation?
 
-<p class='center'><img src='images/fragmentation.jpg' class='w80' /></p>
-
-
+<p class='center'><img src='images/fragmentation.png' class='w80' /></p>
 
 ### Cordova
 
@@ -107,6 +105,52 @@ Since you are writing a **web app**, you can access **web APIs** like the [geolo
 
 But with Cordova, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**.
 
+#### Hybrid VS Native
+
+There's a lot of talk around mobile application development and wether or not you should go the hybdrid way, or stick to the native development.
+
+_[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%20Native.pdf?utm_source=hs_automation&utm_medium=email&utm_content=60041551&_hsenc=p2ANqtz-8mI1bbQO8sbWgiIUWfi1RRmnzzqBAJm5p6pHYTW0-t1e6UMRbQAjFTlW77qlLCZkxParmZq0DfrkbiW9qEuTEpmKWFDk_Ns7RyfGVeXtMqnp8VxMM&_hsmi=60041551) [More](https://medium.com/@zwacky/hybrid-apps-are-slow-f3367d22e868) on the subject_
+
+<!-- slide-column -->
+
+<h4>Native Development</h4>
+
+**Pros**
+
+* Highest performances
+* No dependencies to third-parties (access all of the features offered by the native SDK)
+
+**Cons**
+
+* One codebase/release cycle/team per platform
+* Requires more resources, time and knowledge
+
+<!-- slide-column -->
+
+<h4>Hybrid Development</h4>
+
+**Pros**
+
+* One codebase for all platforms (mobile and desktop alike)
+* Widely used and known technologies
+
+**Cons**
+
+* (Little) Less performant than native apps
+* Access to native device capabilities limited by plugins
+
+#### Other options
+
+Cordova is not the only system that allows developing hybrid (or hybrid-like) mobile applications.
+
+Here's a list of other technologies and why they were not chosen for this course:
+
+* [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
+* [Adobe PhoneGap](https://phonegap.com/) - This is a fork of Cordova
+* [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
+* [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
+* And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
+
 ### What about Ionic?
 
 <!-- slide-column 35 -->
@@ -119,7 +163,7 @@ But with Cordova, you can also access **device hardware** like the **camera** or
 
 <!-- slide-container -->
 
-Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
+Ionic is basically **Cordova**, a JavaScript framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
 
 <div class='center'>
   <img src='images/cordova.png' height=200 />
@@ -132,11 +176,11 @@ Ionic is basically **Cordova**, a framework (**Angular**, **Vue**, **React**) an
 
 <p class='center'><img src='images/capacitor.png' class='w30'/></p>
 
-At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications, in the long run.
+At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications (or any hybrid app, for that matter), in the long run.
 
 Currently, both Cordova and Capacitor are supported by the Ionic framework, but **Cordova is still the default bridge** used.
 
-> We will keep using Cordova for this course as Capacitor is still in its infancy.
+**We will keep using Cordova for this course as Capacitor is still in its infancy.**
 
 > Whenever the choice between Capacitor and Cordova is given to you in tutorials or documentations, **follow instructions for Cordova**.
 

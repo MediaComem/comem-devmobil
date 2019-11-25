@@ -23,6 +23,8 @@ You will:
 
 ## Plan
 
+* [Introduction](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme)
+
 * Going further with JavaScript
   * [JavaScript prototypes](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-prototypes?home=MediaComem%2Fcomem-devmobil%23readme)
   * [JavaScript classes](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-classes?home=MediaComem%2Fcomem-devmobil%23readme)
@@ -30,7 +32,6 @@ You will:
   * [JavaScript promises](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-promises?home=MediaComem%2Fcomem-devmobil%23readme)
 
 * Ionic
-  * [Introduction](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme)
   * [TypeScript](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Ionic navigation with Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
