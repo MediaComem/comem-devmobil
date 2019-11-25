@@ -1,4 +1,4 @@
-# Ionic
+# Introduction
 
 Learn about [Ionic][ionic], an open source framework to build hybrid mobile applications based on [Cordova][cordova] and [Angular][angular].
 
@@ -33,43 +33,11 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 
-
-## What is Ionic?
-
-<!-- slide-front-matter class: center, middle, image-header -->
-
-<p class='center'><img src='images/ionic.png' class='w70' /></p>
-
-
-
-### Which OS should you support?
-
-<p class='center'><img src='images/mobile-platforms.jpg' class='w80' /></p>
-
-
-
-### How can you deal with OS fragmentation?
+## Which OS (and version) should your app support?
 
 <p class='center'><img src='images/fragmentation.png' class='w80' /></p>
 
-### Cordova
-
-<!-- slide-column 30 -->
-
-<p class='center'><img src='images/cordova.png' class='w100' /></p>
-
-<!-- slide-column -->
-
-> "[Cordova][cordova] wraps your **HTML/JavaScript app** into a **native container** which can **access the device functions** of several platforms.
-> These functions are exposed via a unified JavaScript API,
-> allowing you to easily write one set of code to target nearly every phone or tablet on the market today and publish to their app stores."
-
-<!-- slide-container -->
-
-<p class='center'><img src='images/wait-what.jpg' width=200 /></p>
-<p class='center'>Wait... what?</p>
-
-#### Hybrid mobile applications
+## Hybrid mobile applications
 
 <!-- slide-column -->
 
@@ -103,9 +71,9 @@ Embed it into a **native application**:
 
 Since you are writing a **web app**, you can access **web APIs** like the [geolocation API][geolocation-api].
 
-But with Cordova, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**.
+You can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**, with the help of dedicated plugins.
 
-#### Hybrid VS Native
+### Hybrid VS Native
 
 There's a lot of talk around mobile application development and wether or not you should go the hybdrid way, or stick to the native development.
 
@@ -138,6 +106,14 @@ _[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%2
 
 * (Little) Less performant than native apps
 * Access to native device capabilities limited by plugins
+
+### Apache Cordova
+
+<p class='center'><img src='images/cordova.png' class='w35' /></p>
+
+> "[Cordova][cordova] wraps your **HTML/JavaScript app** into a **native container** which can **access the device functions** of several platforms.
+> These functions are exposed via a unified JavaScript API,
+> allowing you to easily write one set of code to target nearly every phone or tablet on the market today and publish to their app stores."
 
 #### Other options
 
