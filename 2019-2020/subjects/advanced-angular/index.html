@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Advanced Angular (Media Engineering Mobile Development)</title>
+    <meta charset='utf-8'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/03da6e080cf5def32425fc58a3bc5d53047c09eb/subjects/advanced-angular/README.md&quot;}'>
+  </head>
+  <body>
+    <textarea id='source'>
+# Advanced Angular
+
+Learn about more advanced [Angular][angular] concept.
+
+This material is part of the [mobile development course](https://github.com/MediaComem/comem-devmobil) for [Media Engineering](https://heig-vd.ch/formations/bachelor/filieres/ingenierie-des-medias).
+
+**You will need**
+
+* [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+
+**Recommended reading**
+
+* [Angular][angular-subject]
+
+
+
+---
+## Custom attribute directives
+
+.breadcrumbs[<a href="#1">Advanced Angular</a>]
+
+An **attribute** directive changes the **appearance or behavior of a DOM element**.
+
+Create a `src/app/highlight.directive.ts` file with the following contents:
+
+```ts
+import { Directive } from '@angular/core';
+
+`@Directive`({
+  selector: '[appHighlight]'
+})
+export `class HighlightDirective` {
+  constructor() {
+    console.log('the highlight directive was used');
+  }
+}
+```
+
+Similarly to a component, a directive is a JavaScript class, this time annotated with the [`@Directive`][angular-docs-directive] decorator.
+
+The selector, `[appHighlight]` is an [attribute selector][css-attribute-selector].
+Also note that it is good practice to prefix the selector with your application name ("app" for this example) to avoid **naming collisions** with other directives.
+
+---
+### Using an attribute directive
+
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#2">Custom attribute directives</a>]
+
+To use your new attribute directive, you must **declare** it in your module's `declarations` array in `src/app/app.module.ts`:
+
+```ts
+*import { HighlightDirective } from './highlight.directive';
+// Other imports...
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    `HighlightDirective`
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+Now all you need to do is add the attribute to an element in `src/app/app.component.html`.
+Let's add it to the greeting.
+
+```html
+<h1 [title]='titleComment' (click)='onTitleClicked($event)' `appHighlight`>
+  Welcome to {{ title }}!
+</h1>
+```
+
+You should see the directive being used in the console after entering some text in the input field.
+
+---
+### Modifying the DOM
+
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#2">Custom attribute directives</a>]
+
+Now add an `ElementRef` argument to the directive's constructor in `src/app/highlight.directive.ts`:
+
+```ts
+import { Directive, `ElementRef` } from '@angular/core';
+
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(`el: ElementRef`) {
+    `el.nativeElement.style.backgroundColor = 'yellow';`
+  }
+}
+```
+
+Doing this **injects** a reference to the host DOM element, the element to which you applied the `appHighlight` attribute.
+
+`ElementRef` grants direct access to the host DOM element through its `nativeElement` property.
+In this example we set the background color to yellow.
+
+---
+## Custom pipes
+
+.breadcrumbs[<a href="#1">Advanced Angular</a>]
+
+Let's implement an (amazing) pipe that adds an exclamation point to the end of a string:
+
+```bash
+$> ng generate pipe --spec false pipes/exclamation
+```
+
+Implement the transformation in the generated file (`src/app/pipes/exclamation.pipe.ts`):
+
+```ts
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'exclamation'
+})
+export class ExclamationPipe implements PipeTransform {
+  transform(value: any, args?: any): any {
+*   return \`${value}!`;
+  }
+}
+```
+
+---
+### Using a pipe
+
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#5">Custom pipes</a>]
+
+Note that Angular automatically registered our pipe in the module's `declarations` array in `src/app/app.module.ts`.
+This is necessary to be able to use it in a template:
+
+```ts
+// Other imports...
+*import { ExclamationPipe } from './pipes/exclamation.pipe';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    `ExclamationPipe`
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+Using the pipe is as simple as "piping" an interpolated value into it with the pipe (`|`) character in a template.
+You can do that in `src/app/app.component.html`, then type some text in the input field to see it:
+
+```html
+<p>
+  {{ hello(greeting)` | exclamation` }}
+</p>
+```
+
+---
+### Pipe parameters
+
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#5">Custom pipes</a>]
+
+Pipe can also take **parameters**.
+Let's add a number parameter to allow customizing the number of exclamation points in `src/app/pipes/exclamation.pipe.ts`:
+
+```ts
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'exclamation'
+})
+export class ExclamationPipe implements PipeTransform {
+  transform(value: any`, strength: number = 1`): any {
+*   const exclamation = '!'.repeat(strength);
+*   return \`${value}${exclamation}`;
+  }
+}
+```
+
+Parameters are passed to pipes by appending `:value` to them in the template in `src/app/app.component.html`:
+
+```html
+<p>
+  {{ hello(greeting) | exclamation`:3` }}
+</p>
+```
+
+
+---
+## Resources
+
+.breadcrumbs[<a href="#1">Advanced Angular</a>]
+
+**Documentation**
+
+* [Angular Tour of Heroes Tutorial][angular-tour-of-heroes]
+* [Angular Developer Guide][angular-guide]
+* [Angular API reference][angular-api]
+
+
+[angular-subject]: '../angular'
+
+[a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
+[ajax]: https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+[angular]: https://angular.io
+[angular-api]: https://angular.io/api
+[angular-component-interaction]: https://angular.io/guide/component-interaction
+[angular-component-styles]: https://angular.io/guide/component-styles
+[angular-custom-validators]: https://angular.io/guide/form-validation#custom-validators
+[angular-docs-async-validator-fn]: https://angular.io/api/forms/AsyncValidatorFn
+[angular-docs-component]: https://angular.io/api/core/Component
+[angular-docs-currency-pipe]: https://angular.io/api/common/CurrencyPipe
+[angular-docs-date-pipe]: https://angular.io/api/common/DatePipe
+[angular-docs-decimal-pipe]: https://angular.io/api/common/DecimalPipe
+[angular-docs-directive]: https://angular.io/api/core/Directive
+[angular-docs-email-validator]: https://angular.io/api/forms/EmailValidator
+[angular-docs-event-emitter]: https://angular.io/api/core/EventEmitter
+[angular-docs-http-client]: https://angular.io/guide/http
+[angular-docs-http-response]: https://angular.io/api/common/http/HttpResponse
+[angular-docs-injectable]: https://angular.io/api/core/Injectable
+[angular-docs-input]: https://angular.io/api/core/Input
+[angular-docs-lowercase-pipe]: https://angular.io/api/common/LowerCasePipe
+[angular-docs-max-length-validator]: https://angular.io/api/forms/MaxLengthValidator
+[angular-docs-min-length-validator]: https://angular.io/api/forms/MinLengthValidator
+[angular-docs-max-validator]: https://angular.io/api/forms/Validators#max
+[angular-docs-min-validator]: https://angular.io/api/forms/Validators#min
+[angular-docs-ng-class]: https://angular.io/api/common/NgClass
+[angular-docs-ng-for]: https://angular.io/api/common/NgForOf
+[angular-docs-ng-if]: https://angular.io/api/common/NgIf
+[angular-docs-ng-form]: https://angular.io/api/forms/NgForm
+[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
+[angular-docs-ng-module]: https://angular.io/api/core/NgModule
+[angular-docs-ng-plural]: https://angular.io/api/common/NgPlural
+[angular-docs-ng-style]: https://angular.io/api/common/NgStyle
+[angular-docs-ng-switch]: https://angular.io/api/common/NgSwitch
+[angular-docs-output]: https://angular.io/api/core/Output
+[angular-docs-pattern-validator]: https://angular.io/api/forms/PatternValidator
+[angular-docs-percent-pipe]: https://angular.io/api/common/PercentPipe
+[angular-docs-pipes]: https://angular.io/api?type=pipe
+[angular-docs-reactive-forms-module]: https://angular.io/api/forms/ReactiveFormsModule
+[angular-docs-required-validator]: https://angular.io/api/forms/RequiredValidator
+[angular-docs-titlecase-pipe]: https://angular.io/api/common/TitleCasePipe
+[angular-docs-uppercase-pipe]: https://angular.io/api/common/UpperCasePipe
+[angular-docs-validator-fn]: https://angular.io/api/forms/ValidatorFn
+[angular-form-control-status-classes]: https://angular.io/guide/form-validation#control-status-css-classes
+[angular-forms]: https://angular.io/guide/forms
+[angular-guide]: https://angular.io/guide/architecture
+[angular-pipes]: https://angular.io/guide/pipes
+[angular-reactive-forms]: https://angular.io/guide/reactive-forms
+[angular-starter]: https://github.com/MediaComem/comem-angular-starter#readme
+[angular-structural-directives]: https://angular.io/guide/structural-directives
+[angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
+[angular-testing]: https://angular.io/guide/testing
+[angular-tour-of-heroes]: https://angular.io/tutorial
+[angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
+[blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
+[chrome]: https://www.google.com/chrome/
+[chrome-dev]: https://developers.google.com/web/tools/chrome-devtools/console/
+[css-attribute-selector]: https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+[di]: https://en.wikipedia.org/wiki/Dependency_injection
+[dom-event]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[html-history-api]: https://developer.mozilla.org/en-US/docs/Web/API/History_API
+[html-input]: https://www.w3schools.com/tags/tag_input.asp
+[intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+[jquery]: http://jquery.com
+[js]: ../js/
+[js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+[js-classes]: ../js-classes/
+[js-closures]: ../js-closures/
+[js-modules]: ../js-modules/
+[js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
+[observable-map]: http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map
+[rxjs]: http://reactivex.io/rxjs/
+[ts]: https://www.typescriptlang.org
+[ts-subject]: ../ts
+[understanding-angular-observables]: https://hackernoon.com/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3
+[web-components]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
+
+    </textarea>
+    <script src='https://embed.runkit.com'></script>
+    <script src='../../subject-029dd9a58d98cf81bc86.js'></script>
+  </body>
+</html>
