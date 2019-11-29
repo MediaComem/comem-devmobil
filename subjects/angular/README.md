@@ -32,30 +32,42 @@ which you should both read to gain a deeper understanding of Angular.
   - [Starter template](#starter-template)
   - [Overview](#overview)
   - [Modules](#modules)
+    - [Basic module definition](#basic-module-definition)
   - [Components](#components)
+    - [Component selector](#component-selector)
+    - [Component template](#component-template)
+    - [Component styles](#component-styles)
   - [Data binding](#data-binding)
+    - [Attribute binding](#attribute-binding)
+      - [To bind, or not to bind](#to-bind-or-not-to-bind)
+    - [Binding to events](#binding-to-events)
+      - [Getting at the event](#getting-at-the-event)
+    - [Interpolation with functions](#interpolation-with-functions)
 - [User input](#user-input)
   - [`ngModel`](#ngmodel)
+    - [`FormsModule`](#formsmodule)
   - [Two-way data binding](#two-way-data-binding)
 - [Directives](#directives)
   - [Structural directives](#structural-directives)
   - [Attribute directives](#attribute-directives)
+    - [Define and bind the classes](#define-and-bind-the-classes)
   - [Common directives](#common-directives)
+- [Pipes](#pipes)
+  - [Use case](#use-case)
+  - [Using a pipe](#using-a-pipe)
+  - [Angular built-in pipes](#angular-built-in-pipes)
 - [Models](#models)
   - [Using models](#using-models)
   - [Using `ngFor`](#using-ngfor)
   - [Using `ngPlural`](#using-ngplural)
-- [Pipes](#pipes)
-  - [Implementing a pipe](#implementing-a-pipe)
-  - [Using a pipe](#using-a-pipe)
-  - [Pipe parameters](#pipe-parameters)
-  - [Angular built-in pipes](#angular-built-in-pipes)
 - [Services](#services)
   - [The joke service](#the-joke-service)
   - [Providing the joke service](#providing-the-joke-service)
   - [Injecting the joke service](#injecting-the-joke-service)
+    - [Calling a method from a button](#calling-a-method-from-a-button)
   - [Why does it work?](#why-does-it-work)
   - [Dependency injection](#dependency-injection)
+    - [Why dependency injection?](#why-dependency-injection)
 - [Observable data](#observable-data)
   - [What (the hell) is an observable?](#what-the-hell-is-an-observable)
   - [What (the hell) is reactive programming?](#what-the-hell-is-reactive-programming)
@@ -64,14 +76,18 @@ which you should both read to gain a deeper understanding of Angular.
 - [Making HTTP calls](#making-http-calls)
   - [Injecting `HttpClient`](#injecting-httpclient)
   - [Joke API response](#joke-api-response)
+    - [Joke API response model](#joke-api-response-model)
   - [Making a GET call](#making-a-get-call)
   - [Transforming data](#transforming-data)
   - [Transforming Observable streams](#transforming-observable-streams)
   - [Reacting to errors in observable streams](#reacting-to-errors-in-observable-streams)
   - [Getting the HTTP response](#getting-the-http-response)
+    - [Observing the response](#observing-the-response)
 - [Component interaction](#component-interaction)
   - [Adding votes to the model](#adding-votes-to-the-model)
   - [Creating a child component](#creating-a-child-component)
+    - [The `JokeComponent`](#the-jokecomponent)
+  - [Using our new component](#using-our-new-component)
   - [Passing data from parent to child with input binding](#passing-data-from-parent-to-child-with-input-binding)
   - [Voting on jokes](#voting-on-jokes)
   - [Displaying global voting information](#displaying-global-voting-information)
@@ -79,19 +95,6 @@ which you should both read to gain a deeper understanding of Angular.
   - [Listening to child component events from a parent](#listening-to-child-component-events-from-a-parent)
   - [Clearing the votes](#clearing-the-votes)
   - [More component interaction](#more-component-interaction)
-- [Forms](#forms)
-  - [HTML validations](#html-validations)
-  - [Creating a form](#creating-a-form)
-  - [Checking the validation state](#checking-the-validation-state)
-  - [Angular validators](#angular-validators)
-  - [Custom validators](#custom-validators)
-  - [Displaying different messages for different errors](#displaying-different-messages-for-different-errors)
-  - [Asynchronous validators](#asynchronous-validators)
-- [Reactive forms](#reactive-forms)
-  - [Using reactive forms in the component](#using-reactive-forms-in-the-component)
-  - [Using reactive forms in the template](#using-reactive-forms-in-the-template)
-  - [Reactive form validations](#reactive-form-validations)
-  - [Which is better, reactive or template-driven?](#which-is-better-reactive-or-template-driven)
 - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -189,13 +192,27 @@ Starting with version 2 of the framework (released in June 2016) you can take ad
 
 ### Starter template
 
-You can clone the following project for the exercises in this tutorial:
+If you want to follow along this tutorial, you can generate a new barebone angular application.
 
-[COMEM+ Angular Starter Project][angular-starter]
+To do so, in the directory where you want to generate the application folder, execute the following script:
 
-You should keep your [developer console][chrome-dev] open throughout this tutorial to detect errors in your code.
+```bash
+$> npx @angular/cli new comem-angular-starter
+```
 
+When asked, respond with the following answers:
+```bash
+? Would you like to add Angular routing? `No`
+? Which stylesheet format would you like to use? `SCSS`
+```
 
+Wait for the generator to end (this may take several minutes), then go to the newly created folder and start the development server:
+
+```bash
+$> cd comem-angular-starter
+$> npm start
+```
+When the CLI tells you so, go to [`http://localhost:4200`](http://localhost:4200). Don't forget to keep your [developer console][chrome-dev] open throughout this tutorial to detect errors in your code.
 
 ### Overview
 
@@ -289,11 +306,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export `class AppComponent` {
-  title: string;
-
-  constructor() {
-    this.title = 'app';
-  }
+  title = 'comem-angular-starter';
 }
 ```
 
@@ -376,20 +389,18 @@ Read the [Component Styles][angular-component-styles] documentation to learn mor
 ### Data binding
 
 You can display data by **binding** parts of an HTML template to properties of a component.
+
 There is already a `title` property in `AppComponent` in `src/app/app.component.ts`:
 
 ```ts
 export class AppComponent {
-  `title: string;`
-
-  constructor() {
-    this.title = 'app';
-  }
+  title = 'comem-angular-starter';
 }
 ```
 
 Enclosing a component's property name in double curly braces in the template is called **interpolation**.
-This is already done in the `AppComponent`'s template in `src/app/app.component.html`:
+
+You can do so in the `AppComponent`'s template in `src/app/app.component.html` by removing **all** the biolerplate content and pasting the following code:
 
 ```html
 <h1>
@@ -400,7 +411,8 @@ This is already done in the `AppComponent`'s template in `src/app/app.component.
 #### Attribute binding
 
 Let's see what else we can interpolate.
-Add a `titleComment` property to the component in `src/app/app.component.ts`:
+
+Let's rewrite the `AppComponent`'s class definition and add a new `titleComment` property to the component in `src/app/app.component.ts`:
 
 ```ts
 export class AppComponent {
@@ -408,7 +420,7 @@ export class AppComponent {
   `titleComment: string;`
 
   constructor() {
-    this.title = 'app';
+    this.title = 'comem-angular-starter';
     `this.titleComment = 'This is awesome!';`
   }
 }
@@ -457,7 +469,7 @@ not the value of the corresponding variable:
 #### Binding to events
 
 Let's imagine that we want to log something when the user clicks on the title.
-Add an `onTitleClicked()` function to the component in `src/app/app.component.ts`:
+Add an `onTitleClicked()` method to the component's class in `src/app/app.component.ts`:
 
 ```ts
 export class AppComponent {
@@ -489,14 +501,15 @@ Let's update `onTitleClicked()` in `src/app/app.component.ts` to also log the ev
 export class AppComponent {
   // ...
 
-  onTitleClicked(`event`) {
+  onTitleClicked(`event: MouseEvent`) {
     console.log('The title was clicked'`, event`);
   }
 }
 ```
 
-To make it work, simply add the special `$event` variable to your function call in `src/app/app.component.html`,
-and Angular will pass the event object to your function:
+To make it work, simply pass the special `$event` variable as an argument to your function call in `src/app/app.component.html`, and Angular will pass the event object to your function:
+
+> Note that you **must** use exactly the name `$event` as the argument's name
 
 ```html
 <h1 [title]='titleComment' (click)='onTitleClicked(`$event`)'>
@@ -507,7 +520,7 @@ and Angular will pass the event object to your function:
 #### Interpolation with functions
 
 Interpolation is not limited to simple properties.
-You can also use a component's **methods** in the template.
+You can also use a component's **method** in the template.
 
 Add the following method to the component in `src/app/app.component.ts`:
 
@@ -524,12 +537,12 @@ export class AppComponent {
 Now use that function in the template in `src/app/app.component.html`:
 
 ```html
+<!-- Add this to the end of the file -->
 <p>
   `{{ hello("World") }}`
 </p>
 ```
-
-
+> Change the value passsed to the `hello()` function to see it change.
 
 ## User input
 
@@ -653,6 +666,8 @@ Let's add the [`ngIf`][angular-docs-ng-if] directive to our template in `src/app
 </p>
 ```
 
+> The `*` before `ngIf` in the template is not a typo ; structural directives must **always** be preceeded by a `*`.
+
 As you can see, the entire paragraph is now removed from the DOM as long as the `greeting` property is blank (e.g. `undefined` or an empty string).
 It is added back as soon as `greeting` has a value.
 
@@ -661,111 +676,163 @@ Many more such directives are provided by Angular out of the box, like [`ngFor`]
 
 ### Attribute directives
 
+> Want to create your own attributes directives ? See [advanced-angular][advanced-angular-subject]
+
 An **attribute** directive changes the **appearance or behavior of a DOM element**.
 
-Create a `src/app/highlight.directive.ts` file with the following contents:
+Let's say we want to programmatically add or remove classes to our `<h1>` tag in our template.
+
+First, open the `src/app/app.component.ts` to add a new property to the component's class called, for example, `titleClasses`:
 
 ```ts
-import { Directive } from '@angular/core';
+export class AppComponent {
+  // Previous properties
+* titleClasses: { [ name: string ]: boolean };
 
-`@Directive`({
-  selector: '[appHighlight]'
-})
-export `class HighlightDirective` {
   constructor() {
-    console.log('the highlight directive was used');
+    // ...
+*   this.titleClasses = {
+*     italic: true,
+*     hoverable: true
+*   };
   }
+  // ...
 }
 ```
 
-Similarly to a component, a directive is a JavaScript class, this time annotated with the [`@Directive`][angular-docs-directive] decorator.
+#### Define and bind the classes
 
-The selector, `[appHighlight]` is an [attribute selector][css-attribute-selector].
-Also note that it is good practice to prefix the selector with your application name ("app" for this example) to avoid **naming collisions** with other directives.
+We need to declare those two classes in our component's style. Open the `app.component.scss` file and add them there:
 
-#### Using an attribute directive
+```scss
+.italic { font-style: italic; }
 
-To use your new attribute directive, you must **declare** it in your module's `declarations` array in `src/app/app.module.ts`:
-
-```ts
-*import { HighlightDirective } from './highlight.directive';
-// Other imports...
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    `HighlightDirective`
-  ],
-  // ...
-})
-export class AppModule { }
+.hoverable { cursor: pointer; }
 ```
 
-Now all you need to do is add the attribute to an element in `src/app/app.component.html`.
-Let's add it to the greeting.
+Now, we can use Angular's `ngClass` attribute selective to bind the `titleClasses` oject to our `<h1>` title:
 
 ```html
-<h1 [title]='titleComment' (click)='onTitleClicked($event)' `appHighlight`>
+<h1 `[ngClass]="titleClasses"` [title]='titleComment' (click)="onTitleClicked($event)">
   Welcome to {{ title }}!
 </h1>
 ```
+> For each `titleClasses`'s property whose value is `true`, `ngClass` will add to the element a CSS class of the same name.
 
-You should see the directive being used in the console after entering some text in the input field.
-
-#### Modifying the DOM
-
-Now add an `ElementRef` argument to the directive's constructor in `src/app/highlight.directive.ts`:
-
-```ts
-import { Directive, `ElementRef` } from '@angular/core';
-
-@Directive({
-  selector: '[appHighlight]'
-})
-export class HighlightDirective {
-  constructor(`el: ElementRef`) {
-    `el.nativeElement.style.backgroundColor = 'yellow';`
-  }
-}
-```
-
-Doing this **injects** a reference to the host DOM element, the element to which you applied the `appHighlight` attribute.
-
-`ElementRef` grants direct access to the host DOM element through its `nativeElement` property.
-In this example we set the background color to yellow.
+> You can try changing the `titleClasses` properties value or add your own to see how that reflects to the element's classes.
 
 ### Common directives
 
 These common directives are provided by Angular out of the box:
 
-* [`ngClass`][angular-docs-ng-class] - Adds and removes **CSS classes** on an HTML element.
+**Structural directives**
+
 * [`ngFor`][angular-docs-ng-for] - Instantiates a template **once per item** from an iterable.
 * [`ngIf`][angular-docs-ng-if] - **Conditionally includes** a template based on the value of an expression.
+* [`ngSwitch`][angular-docs-ng-switch] - Adds/removes DOM sub-trees when the nest match expressions matches the **switch** expression.
+
+**Attribute directives**
+
+* [`ngClass`][angular-docs-ng-class] - Adds and removes **CSS classes** on an HTML element.
 * [`ngModel`][angular-docs-ng-model] - **Two-way binding** between a form's input field and a component's variable.
 * [`ngPlural`][angular-docs-ng-plural] - Adds/removes DOM sub-trees based on a numeric value. (Tailored for **pluralization**.)
 * [`ngStyle`][angular-docs-ng-style] - Update an HTML element's **styles**.
-* [`ngSwitch`][angular-docs-ng-switch] - Adds/removes DOM sub-trees when the nest match expressions matches the **switch** expression.
 
 
+## Pipes
+
+When primitive values or objects are interpolated into a template, they are serialized by Angular using their `toString()` method.
+
+That's fine for strings, but not for everything:
+
+* What about **numbers**? You might not want to display all their decimals.
+* What about **currencies**? They are usually displayed in a specific format.
+* What about **dates**? You might want to use a simple format like `April 15, 1988` rather than the default `Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)`.
+
+Clearly, some values benefit from a bit of editing and that's what Pipes are all about.
+
+They're special functions that your value will pass through before being rendered in the template.
+
+> Want to implement your own pipes? See [advances-angular][advanced-angular-subject]
+
+### Use case
+
+Open the `src/app/app.component.ts` file and add a new `progress` property:
+
+```ts
+export class AppComponent {
+  // Previous properties
+* progress: number;
+
+  constructor() {
+    // ...
+*   this.progress = 0.33;
+  }
+  // ...
+}
+```
+
+We want to display this value as a percentage in our template. We _could_ do this like so:
+
+```html
+<p>{{ progress * 100 }}%</p>
+```
+Doing so implies that we repeat this same snippet each time we want to display a percentage in our app. This is error prone as we could forget the `%`, or add an exceeding `0` when multiplying our value, etc.
+
+### Using a pipe
+
+In our case, the `percent` pipe, provided by Angular can help us in rendering our progress percentage in our template.
+
+Actually using the pipe is as simple as "piping" an interpolated value into it with the pipe (`|`) character in a template:
+
+```html
+<p>We've only done {{ progress` | percent` }} of those damned slides</p>
+```
+
+> You can see that this built-in pipe multiply the given value and add the `%` character at the end.
+
+### Angular built-in pipes
+
+Angular provides [a few pipes][angular-docs-pipes] out of the box.
+Here's some of them:
+
+* [`CurrencyPipe`][angular-docs-currency-pipe]
+* [`DatePipe`][angular-docs-date-pipe]
+* [`DecimalPipe`][angular-docs-decimal-pipe]
+* [`LowerCasePipe`][angular-docs-lowercase-pipe], [`UpperCasePipe`][angular-docs-uppercase-pipe] & [`TitleCasePipe`][angular-docs-titlecase-pipe]
+* [`PercentPipe`][angular-docs-percent-pipe]
+
+Here's few usage examples for [`DatePipe`][angular-docs-date-pipe]:
+
+```html
+<!-- Output: Jun 15, 2015 -->
+<p>Today is {{ dateValue | date }}</p>
+
+<!-- Output: Monday, June 15, 2015 -->
+<p>Or if you prefer, {{ dateValue | date:'fullDate' }}</p>
+
+<!-- Output: 9:43 AM -->
+<p>The time is {{ dateValue | date:'shortTime' }}</p>
+```
+
+Read [more about pipes][angular-pipes] in the developer guide.
 
 ## Models
 
-Let's make our application funny by adding some jokes.
+Now, let's make our application funny by adding some jokes.
 
 It's good practice to create **classes** for your **business models**.
 A TypeScript class with clearly defined fields and types will help us avoid mistakes in our code.
 Let's start with a very simple one.
 
-Angular CLI comes with scaffolding tools to help you create files.
-Install it, then generate a model class
-(the second command must be run in the project's directory):
+Angular CLI comes with scaffolding tools to help you create files. You can access the Angular CLI using the `npm run ng` script.
+Let's use this to generate a new blank class:
 
 ```bash
-$> npm install -g @angular/cli
-$> ng generate class models/joke
+$> npm run ng generate class models/joke
 ```
 
-This will create a `src/app/models/joke.ts` file.
+This will create a `src/app/models/joke.ts` file (and it's corresponding `joke.spec.ts` file that you can ignore).
 Open it and add a `text` attribute to our new `Joke` class:
 
 ```ts
@@ -788,13 +855,11 @@ Let's add some jokes to our component in `src/app/app.component.ts`:
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string;
-  greeting: string;
+  // ...previous properties
   `jokes: Joke[];`
 
   constructor() {
-    this.title = 'app';
-    this.greeting = '';
+    // ...
 *   this.jokes = [
 *     { text: 'Knock knock' },
 *     { text: 'The cake is a lie' }
@@ -844,129 +909,6 @@ The [`ngPlural`][angular-docs-ng-plural] directive comes to the rescue:
 </h2>
 ```
 
-
-
-## Pipes
-
-When primitive values or objects are interpolated into a template, they are serialized by Angular using their `toString()` method.
-
-That's fine for strings, but not for everything:
-
-* What about **numbers**? You might not want to display all their decimals.
-* What about **currencies**? They are usually displayed in a specific format.
-* What about **dates**? You might want to use a simple format like `April 15, 1988` rather than the default `Fri Apr 15 1988 00:00:00 GMT-0700 (Pacific Daylight Time)`.
-
-Clearly, some values benefit from a bit of editing.
-Pipes allow you to define **reusable value transformations** that you can apply in your HTML templates.
-
-### Implementing a pipe
-
-Let's implement an (amazing) pipe that adds an exclamation point to the end of a string:
-
-```bash
-$> ng generate pipe --spec false pipes/exclamation
-```
-
-Implement the transformation in the generated file (`src/app/pipes/exclamation.pipe.ts`):
-
-```ts
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'exclamation'
-})
-export class ExclamationPipe implements PipeTransform {
-  transform(value: any, args?: any): any {
-*   return \`${value}!`;
-  }
-}
-```
-
-### Using a pipe
-
-Note that Angular automatically registered our pipe in the module's `declarations` array in `src/app/app.module.ts`.
-This is necessary to be able to use it in a template:
-
-```ts
-// Other imports...
-*import { ExclamationPipe } from './pipes/exclamation.pipe';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    `ExclamationPipe`
-  ],
-  // ...
-})
-export class AppModule { }
-```
-
-Using the pipe is as simple as "piping" an interpolated value into it with the pipe (`|`) character in a template.
-You can do that in `src/app/app.component.html`, then type some text in the input field to see it:
-
-```html
-<p>
-  {{ hello(greeting)` | exclamation` }}
-</p>
-```
-
-### Pipe parameters
-
-Pipe can also take **parameters**.
-Let's add a number parameter to allow customizing the number of exclamation points in `src/app/pipes/exclamation.pipe.ts`:
-
-```ts
-import { Pipe, PipeTransform } from '@angular/core';
-
-@Pipe({
-  name: 'exclamation'
-})
-export class ExclamationPipe implements PipeTransform {
-  transform(value: any`, strength: number = 1`): any {
-*   const exclamation = '!'.repeat(strength);
-*   return \`${value}${exclamation}`;
-  }
-}
-```
-
-Parameters are passed to pipes by appending `:value` to them in the template in `src/app/app.component.html`:
-
-```html
-<p>
-  {{ hello(greeting) | exclamation`:3` }}
-</p>
-```
-
-### Angular built-in pipes
-
-Angular provides [a few pipes][angular-docs-pipes] out of the box.
-Here's some of them:
-
-* [`CurrencyPipe`][angular-docs-currency-pipe]
-* [`DatePipe`][angular-docs-date-pipe]
-* [`DecimalPipe`][angular-docs-decimal-pipe]
-* [`LowerCasePipe`][angular-docs-lowercase-pipe], [`UpperCasePipe`][angular-docs-uppercase-pipe] & [`TitleCasePipe`][angular-docs-titlecase-pipe]
-* [`PercentPipe`][angular-docs-percent-pipe]
-
-Here's few usage examples for [`DatePipe`][angular-docs-date-pipe]:
-
-```html
-<!-- Output: Jun 15, 2015 -->
-<p>Today is {{ dateValue | date }}</p>
-
-<!-- Output: Monday, June 15, 2015 -->
-<p>Or if you prefer, {{ dateValue | date:'fullDate' }}</p>
-
-<!-- Output: 9:43 AM -->
-<p>The time is {{ dateValue | date:'shortTime' }}</p>
-```
-
-Read [more about pipes][angular-pipes] in the developer guide.
-
-
-
-
-
 ## Services
 
 Let's do something more interesting: fetch some jokes from the internet.
@@ -983,11 +925,9 @@ This helps your components remain as simple as possible while services handle yo
 Let's use Angular CLI to generate a joke service:
 
 ```bash
-$> ng generate service --spec false services/joke
+$> npm run ng generate service services/joke
 ```
-
-(The `--spec false` option disables the generation of an test file for the service.
-We will not cover [automated tests][angular-testing] in this tutorial, but you should definitely check it out.)
+Again, you can ignore the generated `joke.spec.ts` file.
 
 ### The joke service
 
@@ -996,8 +936,8 @@ The `src/app/services/joke.service.ts` file has been generated:
 ```ts
 import { Injectable } from '@angular/core';
 
-`@Injectable`()
-export `class JokeService` {
+@Injectable({ providedIn: 'root' })
+export class JokeService {
   constructor() { }
 }
 ```
@@ -1008,9 +948,10 @@ More about that later.
 For now, simply add a method which returns a joke:
 
 ```ts
+import { Injectable } from '@angular/core';
 `import { Joke } from '../models/joke';`
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JokeService {
   constructor() { }
 
@@ -1022,25 +963,31 @@ export class JokeService {
 
 ### Providing the joke service
 
-To use the service, you must **provide** it in your module's `providers` array in `src/app/app.module.ts`:
+You may have notice the `providedIn: 'root'` property in the `@Injectable` param object of the generated service.
+
+This particular settings indicates that **the service is provided (meaning: made available) at the root of your application**.
+
+This way, you can **inject it in any of your component** out-of-the-box.
+
+You might encouter `Services` that do not have this setting in their `@Injectable` decorator (i.e. when using external libraries). If this is the case, you must **provide** them in a module's `providers` array:
 
 ```ts
 // Other imports...
-`import { JokeService } from './services/joke.service';`
+import { SomeService } from './some/directory';
 
 @NgModule({
   // ...
   providers: [
-    `JokeService`
+    `SomeService`
   ],
   // ...
 })
-export class AppModule { }
+export class SomeModule { }
 ```
 
 ### Injecting the joke service
 
-Once you've done that, you can **inject** it into your component in `src/app/app.component.ts`.
+Now, you can **inject** the service into your component in `src/app/app.component.ts`.
 
 You just have to add a **constructor parameter property**.
 While you're at it, also add a **method to add a joke**:
@@ -1064,8 +1011,7 @@ export class AppComponent {
 
 #### Calling a method from a button
 
-To use our new method,
-you can add a button in the template in `src/app/app.component.html`:
+To use our new method, you can add a button in the template in `src/app/app.component.html`:
 
 ```html
 <p>
@@ -1105,7 +1051,7 @@ You **never instantiated the service with `new`**, so where is the instance comi
 
 Angular relies on [dependency injection][di] to plug components, services and other elements together.
 
-* After creating your service, you **provided** it in the application **module**.
+* As previously said, your service is **provided** in the **root** of your application.
 * This makes it possible for Angular's **injector** to know that your service exists and to create instances of it.
 * By adding the parameter to the component's constructor, you **asked Angular to inject** an instance of the service at runtime.
 
@@ -1203,26 +1149,24 @@ you may want to read ["The introduction to Reactive Programming you've been miss
 
 Since Angular's `HttpClient` returns **Observables**, that's what we'll use.
 
-For now, let's modify the signature of our `getJoke()` method in `JokeService` in `src/app/services/joke.service.ts` to return an Observable,
-without actually making an HTTP call yet:
+For now, let's modify the signature of our `getJoke()` method in `JokeService` in `src/app/services/joke.service.ts` to return an `Observable` of a `Joke`, without actually making an HTTP call yet:
 
 ```ts
 // Other imports...
-*import { Observable } from 'rxjs/Observable';
-*import 'rxjs/add/observable/of';
+*import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class JokeService {
   // ...
   getJoke(): `Observable<Joke>` {
-    return `Observable.of({ text: 'Knock knock' })`;
+    return `of({ text: 'Knock knock' })`;
   }
 }
 ```
 
-`Observable.of` allows us to create a stream which will simply emit the specified value (or values) and complete.
+> Note the `<>` in `Observable<Joke>`. Thie a special TypeScript syntax used to clarifiy a type. Here, it says that not only the method returns an `Observable`, but its emitted values will be instances of `Joke`.
 
-In this case, we created an Observable which will emit one joke.
+`of` allows us to create an observable stream which will simply emit the specified value, or values (here, the `Joke`) and complete.
 
 ### Subscribing to an Observable
 
@@ -1257,8 +1201,7 @@ We now have our **asynchronous** implementation:
 
 Time to actually fetch some jokes from the internet.
 We'll need Angular's [`HttpClient`][angular-docs-http-client].
-It is part of `HttpClientModule`,
-so we need to provide that to our own application module, `AppModule`, in `src/app/app.module.ts`:
+It is part of `HttpClientModule`, so we need to import that to our own application module, `AppModule`, in `src/app/app.module.ts`:
 
 ```ts
 // Other imports...
@@ -1290,7 +1233,7 @@ Now that `HttpClientModule` is available, you can inject `HttpClient` into `Joke
 
 @Injectable()
 export class JokeService {
-  constructor(`private httpClient: HttpClient`) { }
+  constructor(`private http: HttpClient`) { }
   // ...
 }
 ```
@@ -1317,7 +1260,7 @@ This does not fit our `Joke` model, which only has a `text` property.
 Let's create a new `JokeResponse` model that we can use with this API:
 
 ```bash
-$> ng generate class models/joke-response
+$> npm run ng generate class models/joke-response
 ```
 
 This generates a new model file in `src/app/models/joke-response.ts`.
@@ -1355,8 +1298,7 @@ export class JokeService {
 }
 ```
 
-As you can see, [`HttpClient`][angular-docs-http-client]'s `get` method is **generic**,
-and Angular will take care of parsing the response body and giving us an object of the right type.
+As you can see by the use of the `<>`, we also specified that the [`HttpClient`][angular-docs-http-client]'s `get` method is supposed to receive data matching the `JokeResponse` model after the call completes. This helps TypeScript understand our code better.
 But we're still left with one problem: we need an Observable of `Joke` objects, and have one of `JokeResponse` objects instead:
 
 ```
@@ -1537,11 +1479,11 @@ function convertJokeResponseToJoke(response: JokeResponse): Joke {
 Let's generate our **new component**, the `JokeComponent`:
 
 ```ts
-$> ng generate component --spec false components/joke
+$> npm run ng generate component components/joke
 ```
 
 This will create a component in the `src/app/components/joke` directory,
-with its own TypeScript definition, HTML template and CSS styles.
+with its own TypeScript definition, HTML template and CSS styles (and test file).
 
 #### The `JokeComponent`
 
@@ -1552,7 +1494,7 @@ Let's add a `joke` property to the new component in `src/app/components/joke/jok
 
 ```ts
 // Other imports...
-*import { Joke } from '../../models/joke';
+*import { Joke } from 'src/app/models/joke';
 
 @Component({
   selector: 'app-joke',
@@ -1571,11 +1513,31 @@ And update the component's template in `src/app/components/joke/joke.component.h
 {{ joke.text }}
 ```
 
+### Using our new component
+
+As you can see in our component's class, we set the `selector` of our component to `app-joke`. This means that we can add a custom tag in an HTML template to add our component to the page. Let's do so in `src/app/app.component.html`:
+
+```html
+<ul>
+  <li *ngFor='let joke of jokes'>
+    `<app-joke></app-joke>`
+  </li>
+</ul>
+```
+
+We can see on our app page that the list tries to display our two initial jokes, but failed to do so, due to not being able to read the text of both jokes:
+
+```
+ERROR TypeError: Cannot read property 'text' of undefined
+```
+
+Indeed, we told our `JokeComponent` to display the `joke.text` property in its template. Except that we didn't give it any `joke` to get the `text` from...
+
 ### Passing data from parent to child with input binding
 
-We want the joke to be provided by the parent component, `AppComponent`.
-It's an **input** of the `JokeComponent`.
-Annotating a component's property with the [`@Input`][angular-docs-input] decorator marks it as an **input property** which can be set by a parent component.
+We want the joke to be provided by the parent component, `AppComponent`, to the `JokeComponent` as an **input** of this component.
+
+Annotating a component's property with the [`@Input`][angular-docs-input] decorator marks it as an **input property**.
 You can do this in `src/app/components/joke/joke.component.ts`:
 
 ```ts
@@ -1584,19 +1546,17 @@ import { Component, `Input`, OnInit } from '@angular/core';
 
 // ...
 export class JokeComponent implements OnInit {
-  `@Input()`
-  joke: Joke;
+  `@Input()` joke: Joke;
   // ...
 }
 ```
 
-You can now use the `JokeComponent` in the main component's template in `src/app/app.component.html`.
-You need to create an `<app-joke>` tag (matching the component's selector),
-and to set the `joke` input property:
-
+Now, update the main component's template in `src/app/app.component.html` so that it binds each joke object to the `joke` input of the `<app-joke>` tag.
 ```html
 <ul>
-  <li *ngFor='let joke of jokes'>`<app-joke [joke]='joke'></app-joke>`</li>
+  <li *ngFor='let joke of jokes'>
+    <app-joke `[joke]="joke"`></app-joke>
+  </li>
 </ul>
 ```
 
@@ -1666,8 +1626,7 @@ import { Component, `EventEmitter`, Input, OnInit, `Output` } from '@angular/cor
 // ...
 export class JokeComponent implements OnInit {
   // ...
-* @Output()
-* voted: EventEmitter<Joke>;
+* @Output() voted: EventEmitter<Joke>;
 
   constructor() {
 *  this.voted = new EventEmitter();
@@ -1739,605 +1698,12 @@ This can be useful if two components must communicate but neither is a parent of
 Read the [documentation][angular-component-interaction] to learn more.
 
 
-
-## Forms
-
-Angular provides **validation** services for forms and controls.
-These validations are performed **client-side** for a better user experience: the user gets **instant feedback**.
-
-However, keep in mind that although this provides a good user experience, it can easily be circumvented and thus **cannot be trusted**.
-**Server-side validation is still necessary** for a secure application.
-
-
-
-### HTML validations
-
-HTML 5 has [built-in validation attributes][html-input] to define validations on your form inputs (e.g. `<input>`, `<textarea>`, etc):
-
-Attribute   | Description
-:---        | :---
-`min`       | Minimum value for a number
-`max`       | Maximum value for a number
-`minlength` | Minimum length for a string
-`maxlength` | Maximum length for a string
-`pattern`   | Regular expression for a string
-`required`  | Required field
-
-You simply add them to the HTML tag:
-
-```html
-<input type='text' `required minlength=2` />
-```
-
-Usually the **browser** performs these validations.
-But Angular **overrides** these and provide its own implementation.
-This allows you to add **more complex validations and interaction**.
-
-
-
-### Creating a form
-
-Let's turn our lonely greeting input field into a proper form:
-
-* Wrap that part of the template in a `<form>` tag.
-* Add a `name` attribute to the input field (required by Angular).
-* Add a `required` attribute to the input field to have some validation.
-* Add a submit `<button>` tag to complete the form.
-
-```html
-*<form>
-  <p>
-    <input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-      `name='greeting' required` />
-
-    `<button type='submit'>Submit</button>`
-  </p>
-*</form>
-```
-
-#### Updating the component
-
-Let's now make it so that the greeting will only be displayed if submitted through the form.
-We need to add a separate property to our component:
-
-* The `greeting` property will represent the value of the input field.
-* The `displayedGreeting` property will represent the submitted value (which will no longer be bound to the input field).
-
-We also need a new `displayGreeting()` method which will take the current value of `greeting` and copy it to `displayedGreeting`:
-
-```ts
-// ...
-export class AppComponent {
-  // ...
-  greeting: string;
-* displayedGreeting: string;
-  // ...
-
-* displayGreeting() {
-*   this.displayedGreeting = this.greeting;
-*   console.log('Greeting displayed');
-* }
-}
-```
-
-#### Listening to form submit events
-
-Update the component's template to reflect the fact that we now want to display `displayedGreeting` instead of `greeting`:
-
-```html
-<p *ngIf='displayedGreeting'>
-  {{ hello(displayedGreeting) | exclamation:3 }}
-</p>
-```
-
-Bind the new `displayGreeting()` method to the form's `submit` event to make it work:
-
-```html
-<form `(submit)='displayGreeting()'`>
-```
-
-
-
-### Checking the validation state
-
-You might have noticed that we have marked the input field as **required**,
-but that the user can **still submit the form** when it is invalid (i.e. the input field is empty).
-
-That's not very user-friendly.
-We're going to make the following improvements:
-
-* **Prevent the form's submission** if it has invalid fields.
-* **Disable the submit button** if the form has invalid fields.
-* **Display an error message** when the greeting input field contains an invalid value.
-* **Set the input field background color to red** if it contains an invalid value.
-
-#### Prevent the form's submission
-
-In Angular, any `<form>` tag is enriched by the [`NgForm`][angular-docs-ng-form] directive.
-You can retrieve the instance of the directive attached to the form by using a [**template reference variable**][angular-template-reference-variable]
-(`#greetingForm` in this example):
-
-```html
-<form `#greetingForm='ngForm'` (submit)='displayGreeting(`greetingForm`)'>
-```
-
-We can now update the implementation of `displayGreeting()` to add this new argument.
-
-[`NgForm`][angular-docs-ng-form] must be imported from `@angular/forms`.
-This class provides, among other things, a `valid` (or `invalid`) attribute to check whether all the fields are valid or not:
-
-```ts
-*import { NgForm } from '@angular/forms';
-// ...
-
-displayGreeting(`form: NgForm`) {
-  `if (form.valid) {`
-    this.displayedGreeting = this.greeting;
-    console.log('Greeting displayed');
-  `}`
-}
-```
-
-#### Disable the submit button
-
-The `#greetingForm` template reference variable is already available in the template from the previous modification,
-since we passed it to `displayGreeting()` as an argument.
-
-You can also bind it to DOM elements or their attributes elsewhere in the template.
-
-This time, we'll use [`NgForm`][angular-docs-ng-form]'s `invalid` attribute.
-We simply have to bind the value of the `<button>` tag's `disabled` attribute to it:
-
-* When the form is **invalid** (`greetingForm.invalid` is true), the button should be **disabled** (`disabled` should be true).
-* When the form is **valid** (`greetingForm.invalid` is false), the button should **not be disabled** (`disabled` should be false).
-
-```html
-<button type='submit' `[disabled]='greetingForm.invalid'`>Submit</button>
-```
-
-#### Display an error message
-
-We've seen that the `<form>` tag is **enriched** with the [`NgForm`][angular-docs-ng-form] **directive**,
-and that it's possible to **retrieve that directive** to gain access to the **form's validation state**.
-
-You can do the same with the `<input>` tag, by retrieving the field's [`NgModel`][angular-docs-ng-model]'s directive
-(which you applied by using `[(ngModel)]='expression'`):
-
-```html
-<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-  name='greeting' required `#greetingInput='ngModel'` />
-```
-
-The `NgModel` directive also has the `valid` and `invalid` attributes,
-indicating whether that particular field is valid.
-All we have to do is add an error message to the form, and, through judicious use of our old friend the `NgIf` directive,
-only display the message when the field is invalid.
-
-```html
-<form #greetingForm='ngForm' (submit)='displayGreeting(greetingForm)'>
-  <!-- ... -->
-* <p *ngIf='greetingInput.invalid'>
-*   Name is required
-* </p>
-</form>
-```
-
-##### Dirty, pristine, touched, untouched
-
-That's nice, but the error message is displayed right away.
-It makes sense, since the **initial value** of the input field's **is actually invalid**.
-But that's not very user-friendly.
-Ideally, we would want the error message to be displayed **only once the user has interacted with the form**.
-
-Enter the following `NgForm` and `NgModel` attributes:
-
-* `dirty` - A control is **dirty** if the user has **changed its value**.
-* `pristine` - A control is **pristine** if the user has **not yet changed its value** (the opposite of `dirty`).
-* `touched` - A control is **touched** if the user has triggered a **[`blur`][blur-event] event** on it.
-* `untouched` - A control is **untouched** if the user has **not yet** triggered a **[`blur`][blur-event] event** on it (the opposite of `touched`).
-
-Make the following change to only display the error message after the user has started typing:
-
-```html
-<p *ngIf='greetingInput.invalid` && greetingInput.dirty`'>
-  Name is required
-</p>
-```
-
-#### Set the input field background color to red
-
-Angular automatically **mirrors** many `NgModel` **properties** onto the `<input>` tag as **CSS classes**.
-You can use these classes to **style** form elements according to the state of the form.
-
-These are some of the supported classes ([full list][angular-form-control-status-classes]):
-
-* `.ng-valid` or `.ng-invalid` is applied depending on whether the value is valid
-* `.ng-pristine` or `.ng-dirty` is applied depending on whether the user has changed the value
-* `.ng-untouched` or `.ng-touched` is applied depending on whether the user has triggered `blur` event
-
-So when our field is invalid and dirty, it will have both the `.ng-invalid` and `.ng-dirty` CSS classes added to it.
-All you need to do is modify `src/app/app.component.css` to add a background color to input fields with this combination of classes:
-
-```css
-input.ng-invalid.ng-dirty {
-  background-color: #ffc0c0;
-}
-```
-
-
-
-### Angular validators
-
-These are some of the validators provided **out of the box** by Angular:
-
-* [`email`][angular-docs-email-validator] - Validates that a string is a valid e-mail address.
-* [`min`][angular-docs-min-validator] & [`max`][angular-docs-max-validator] - Validate that a number is within the specified bound(s).
-* [`min-length`][angular-docs-min-length-validator] & [`max-length`][angular-docs-max-length-validator] - Validate that a string's length is within the specified bound(s).
-* [`pattern`][angular-docs-pattern-validator] - Validates that a value matches a regular expression.
-* [`required`][angular-docs-required-validator] - Validates that a value is present.
-
-Here's a few usage examples:
-
-```html
-<input `type='email'` name='email' />
-<input type='number' name='age' `min='3' max='10'` />
-<input type='text' name='firstName' `min-length='1' max-length='50'` />
-<input type='text' name='lastName' `pattern='[a-zA-Z ]*'` />
-<input type='text' name='occupation' `required` />
-```
-
-
-
-### Custom validators
-
-These validators are nice, but you might need **more complex validations**.
-
-That's why Angular allows you to implement [custom validators][angular-custom-validators].
-Here's an example of a validator that ensures a string is not in a list of forbidden values:
-
-```ts
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-
-export function notInValidator(notIn: string[]): ValidatorFn {
-  return (control: AbstractControl): ValidationErrors | null => {
-
-    // Check if the value is invalid.
-    if (notIn.indexOf(control.value) >= 0) {
-      // Return an error named after the validator if that is the case.
-      return {
-        notIn: { value: control.value }
-      };
-    }
-
-    // Otherwise, all is well, there is no error.
-    return null;
-  };
-}
-```
-
-#### Registering a custom validator
-
-To use your validation function in a form, you need to wrap it in a directive:
-
-```ts
-import { Directive, Input } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, ValidationErrors,
-         Validator } from '@angular/forms';
-
-import { notInValidator } from './not-in-validator';
-
-@Directive({
-  selector: '[notIn]',
-  providers: [
-    {
-      provide: NG_VALIDATORS,
-      useExisting: NotInValidatorDirective,
-      multi: true
-    }
-  ]
-})
-export class NotInValidatorDirective implements Validator {
-
-  @Input('notIn')
-  notIn: string[];
-
-  validate(control: AbstractControl): ValidationErrors | null {
-    return notInValidator(this.notIn)(control);
-  }
-}
-```
-
-#### Using a custom validator
-
-You must register the new directive in the module's `declarations` array:
-
-```ts
-// Other imports...
-*import { NotInValidatorDirective } from './validators/not-in-validator-directive';
-
-@NgModule({
-  declarations: [
-    AppComponent,
-    ExclamationPipe,
-    `NotInValidatorDirective`
-  ],
-  // ...
-})
-export class AppModule { }
-```
-
-You can then finally use it in the template:
-
-```html
-<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-  name='greeting' required `[notIn]='["Bob"]'` #greetingInput='ngModel' />
-```
-
-
-
-### Displaying different messages for different errors
-
-There's a little problem now.
-Since our error message is displayed as soon as there's an error on the `greetingInput` field,
-it always displays `Name is required`, even if the error is due to our new custom validator.
-
-```html
-<p *ngIf='`greetingInput.invalid` && greetingInput.dirty'>
-  Name is required
-</p>
-```
-
-To fix that, use `greetingInput.errors` which is an object containing a key for each type of error.
-That way you can react separately to the `required` validator's error and to the custom validator's `notIn` error:
-
-```html
-<p *ngIf='`greetingInput.errors?.required` && greetingInput.dirty'>
-  Name is required
-</p>
-*<p *ngIf='greetingInput.errors?.notIn && greetingInput.dirty'>
-* Name is forbidden
-*</p>
-```
-
-The special `.errors?.required` syntax with an interrogation mark is here to avoid an error if `.errors` returns `null` or `undefined`,
-in which case it will simply ignore the rest of the expression.
-
-
-
-### Asynchronous validators
-
-The validator we implemented is actually a function that matches Angular's [`ValidatorFn`][angular-docs-validator-fn] interface.
-It is **synchronous**, i.e. it performs no I/O operation to validate its value and immediately returns its errors (or `null`):
-
-```ts
-(control: AbstractControl): ValidationErrors | null
-```
-
-It's also possible to create **asynchronous validators**.
-For example, to check whether a **username is already taken**, you might have to **call your API**, which is an asynchronous operation.
-
-In that case, your validator function must match the [`AsyncValidatorFn`][angular-docs-async-validator-fn] interface instead.
-That is, instead of returning an object of validation errors, it must return either a **Promise or an Observable** of that object:
-
-```ts
-(control: AbstractControl): Promise<ValidationErrors | null>
-                            | Observable<ValidationErrors | null>
-```
-
-That way, Angular will wait for the Promise to be resolved or for the Observable to emit the errors before updating the template.
-
-
-
-## Reactive forms
-
-The form we have seen so far is a **template-driven form**.
-In contrast, **reactive forms** are an Angular technique for creating forms in a **reactive programming** style.
-They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]:
-
-```ts
-// Other imports...
-import { FormsModule`, ReactiveFormsModule` } from '@angular/forms';
-
-@NgModule({
-  // ...
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    `ReactiveFormsModule`
-  ],
-  // ...
-})
-export class AppModule { }
-```
-
-
-
-### Using reactive forms in the component
-
-With reactive forms, the form structure is also defined with code in the component:
-
-```ts
-// Other imports...
-*import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-
-// ...
-export class AppComponent {
-  // ...
-  `greetingForm: FormGroup;`
-
-  constructor(
-    `private formBuilder: FormBuilder,`
-    private jokeService: JokeService
-  ) {
-    // ...
-*   this.greetingForm = formBuilder.group({
-*     // Define the "greeting" field and its default value
-*     greeting: [ '' ]
-*   });
-  }
-
-  // ...
-}
-```
-
-#### Getting the form from the component
-
-Since the form is built directly in the component,
-you no longer have to retrieve it from the template.
-
-You can update the `displayGreeting()` method to use the new form group:
-
-```ts
-// ...
-export class AppComponent {
-  // ...
-
-  displayGreeting`()` {
-    if (`this.greetingForm`.valid) {
-      this.displayedGreeting = this.greeting;
-      console.log('Greeting displayed');
-    }
-  }
-
-  // ...
-}
-```
-
-#### Reacting to form value changes
-
-Reactive forms do not use `ngModel`, so there won't be two-way binding with the template any longer.
-There will only be **one-way binding** from the form group in the component to the template.
-
-To be notified of changes in the form group, you can subscribe to its `valueChanges` property, which is an Observable:
-
-```ts
-// ...
-export class AppComponent {
-  // ...
-  constructor(/* ... */) {
-    // ...
-*   this.greetingForm.valueChanges.subscribe(value => {
-*     console.log(`Greeting changed to "${value.greeting}"`);
-*     this.greeting = value.greeting;
-*   });
-  }
-  // ...
-}
-```
-
-
-
-### Using reactive forms in the template
-
-With reactive forms, your **template** is somewhat **simplified**.
-Remove `ngModel`, the validations, `#greetingForm` and `#greetingInput`.
-You simply have to pass the form group created in the component to the `<form>` tag with the `formGroup` directive,
-and use the `formControlName` directive on the `<input>` tag:
-
-```html
-<form `[formGroup]='greetingForm'` (submit)='`displayGreeting()`'>
-  <!-- ... -->
-  <input type='text' placeholder='Who are you?' `formControlName='greeting'` />
-  <!-- ... -->
-</form>
-```
-
-You must also update your error messages to get the input field from the form group with `greetingForm.get("greeting")`
-instead of using the `#greetingInput` template reference variable you just removed:
-
-```html
-<p *ngIf='`greetingForm.get("greeting")`.errors?.required
-          && `greetingForm.get("greeting")`.dirty'>
-  Name is required
-</p>
-<p *ngIf='`greetingForm.get("greeting")`.errors?.notIn
-          && `greetingForm.get("greeting")`.dirty'>
-  Name is forbidden
-</p>
-```
-
-
-
-### Reactive form validations
-
-The validations are no longer applied since we removed them from the template.
-With reactive forms, **validation is configured in the component**:
-
-```ts
-// Other imports...
-import { FormBuilder, FormGroup, NgForm`, Validators` } from '@angular/forms';
-*import { notInValidator } from './validators/not-in-validator';
-
-export class AppComponent {
-  // ...
-  constructor(/* ... */) {
-    // ...
-    this.greetingForm = formBuilder.group({
-      // Define the "greeting" field and its default value
-*     greeting: [
-*       '',
-*       Validators.compose([ // Add validators to the field.
-*         Validators.required, // Use the built-in "required" validator.
-*         notInValidator([ 'Bob' ]) // Use our custom validator function.
-*       ])
-*     ]
-    });
-  }
-  // ...
-}
-```
-
-#### Custom validators in reactive forms
-
-Note that we use our custom validator function (`notInValidator`) directly,
-instead of using the `NotInValidatorDirective` wrapper like before:
-
-```ts
-Validators.compose([ // Add validators to the field.
-  Validators.required, // Use the built-in "required" validator.
-  `notInValidator([ 'Bob' ])` // Use our custom validator function.
-])
-```
-
-This is an advantage of reactive forms over template-driven forms:
-validators can be **simple functions** that do not require an additional directive to be applied in the template.
-
-You can remove the directive (e.g. delete `src/app/validators/not-in-validator-directive.ts` and remove it from `declarations` in `src/app/app.module.ts`),
-and the form will keep working.
-
-
-
-### Which is better, reactive or template-driven?
-
-In [**template-driven forms**][angular-forms], form structure and validation are specified and handled **in the template**:
-
-* Creation of form controls is delegated to directives and asynchronous.
-* Angular handles data updates with two-way binding.
-* Hard to test with automated tests.
-
-In [**reactive forms**][angular-reactive-forms], a tree of form control objects and validations is managed **in the component** and bound to elements in the template:
-
-* The component class has immediate access to both the data model and the form control structure.
-* Changes can be subscribed to in the form of Observables.
-* Data and validity updates are synchronous and under your control.
-* Easier to test with automated tests.
-
-Neither is "better".
-They're two different architectural paradigms, with their own strengths and weaknesses.
-You may even use both in the same application.
-Read the documentation to learn more.
-
-
-
 ## Resources
 
 **Documentation**
 
 * [Angular Tour of Heroes Tutorial][angular-tour-of-heroes]
 * [Angular Developer Guide][angular-guide]
-  * [Template-driven Forms][angular-forms]
-  * [Reactive Forms][angular-reactive-forms]
   * [Automated Testing][angular-testing]
 * [Angular API reference][angular-api]
 
@@ -2351,6 +1717,7 @@ Read the documentation to learn more.
 
 
 [a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
+[advanced-angular-subject]: ../advanced-angular
 [ajax]: https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
 [angular]: https://angular.io
 [angular-api]: https://angular.io/api

@@ -1,0 +1,738 @@
+# Angular Forms
+
+Get started with and understand the basics of forms in [Angular][angular].
+
+This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
+which you should both read to gain a deeper understanding of Angular.
+
+<!-- slide-include ../../BANNER.md -->
+
+**You will need**
+
+* [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+
+**Recommended reading**
+
+* [Angular][ng-subject]
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Forms](#forms)
+  - [HTML validations](#html-validations)
+  - [Creating a form](#creating-a-form)
+    - [Updating the component](#updating-the-component)
+    - [Listening to form submit events](#listening-to-form-submit-events)
+  - [Checking the validation state](#checking-the-validation-state)
+    - [Prevent the form's submission](#prevent-the-forms-submission)
+    - [Disable the submit button](#disable-the-submit-button)
+    - [Display an error message](#display-an-error-message)
+      - [Dirty, pristine, touched, untouched](#dirty-pristine-touched-untouched)
+    - [Set the input field background color to red](#set-the-input-field-background-color-to-red)
+  - [Angular validators](#angular-validators)
+  - [Custom validators](#custom-validators)
+    - [Registering a custom validator](#registering-a-custom-validator)
+    - [Using a custom validator](#using-a-custom-validator)
+  - [Displaying different messages for different errors](#displaying-different-messages-for-different-errors)
+  - [Asynchronous validators](#asynchronous-validators)
+- [Reactive forms](#reactive-forms)
+  - [Using reactive forms in the component](#using-reactive-forms-in-the-component)
+    - [Getting the form from the component](#getting-the-form-from-the-component)
+    - [Reacting to form value changes](#reacting-to-form-value-changes)
+  - [Using reactive forms in the template](#using-reactive-forms-in-the-template)
+  - [Reactive form validations](#reactive-form-validations)
+    - [Custom validators in reactive forms](#custom-validators-in-reactive-forms)
+  - [Which is better, reactive or template-driven?](#which-is-better-reactive-or-template-driven)
+- [Resources](#resources)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Forms
+
+Angular provides **validation** services for forms and controls.
+These validations are performed **client-side** for a better user experience: the user gets **instant feedback**.
+
+However, keep in mind that although this provides a good user experience, it can easily be circumvented and thus **cannot be trusted**.
+
+> **Server-side validation is still necessary** for a secure application.
+
+
+### HTML validations
+
+HTML 5 has [built-in validation attributes][html-input] to define validations on your form inputs (e.g. `<input>`, `<textarea>`, etc):
+
+Attribute   | Description
+:---        | :---
+`min`       | Minimum value for a number
+`max`       | Maximum value for a number
+`minlength` | Minimum length for a string
+`maxlength` | Maximum length for a string
+`pattern`   | Regular expression for a string
+`required`  | Required field
+
+You simply add them to the HTML tag:
+
+```html
+<input type='text' `required minlength=2` />
+```
+
+Usually the **browser** performs these validations.
+But Angular **overrides** these and provide its own implementation.
+This allows you to add **more complex validations and interaction**.
+
+
+
+### Creating a form
+
+Let's turn our lonely greeting input field into a proper form:
+
+* Wrap that part of the template in a `<form>` tag.
+* Add a `name` attribute to the input field (required by Angular).
+* Add a `required` attribute to the input field to have some validation.
+* Add a submit `<button>` tag to complete the form.
+
+```html
+*<form>
+  <p>
+    <input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
+      `name='greeting' required` />
+
+    `<button type='submit'>Submit</button>`
+  </p>
+*</form>
+```
+
+#### Updating the component
+
+Let's now make it so that the greeting will only be displayed if submitted through the form.
+We need to add a separate property to our component:
+
+* The `greeting` property will represent the value of the input field.
+* The `displayedGreeting` property will represent the submitted value (which will no longer be bound to the input field).
+
+We also need a new `displayGreeting()` method which will take the current value of `greeting` and copy it to `displayedGreeting`:
+
+```ts
+// ...
+export class AppComponent {
+  // ...
+  greeting: string;
+* displayedGreeting: string;
+  // ...
+
+* displayGreeting() {
+*   this.displayedGreeting = this.greeting;
+*   console.log('Greeting displayed');
+* }
+}
+```
+
+#### Listening to form submit events
+
+Update the component's template to reflect the fact that we now want to display `displayedGreeting` instead of `greeting`:
+
+```html
+<p *ngIf='displayedGreeting'>
+  {{ hello(displayedGreeting) | exclamation:3 }}
+</p>
+```
+
+Bind the new `displayGreeting()` method to the form's `submit` event to make it work:
+
+```html
+<form `(submit)='displayGreeting()'`>
+```
+
+
+
+### Checking the validation state
+
+You might have noticed that we have marked the input field as **required**,
+but that the user can **still submit the form** when it is invalid (i.e. the input field is empty).
+
+That's not very user-friendly.
+We're going to make the following improvements:
+
+* **Prevent the form's submission** if it has invalid fields.
+* **Disable the submit button** if the form has invalid fields.
+* **Display an error message** when the greeting input field contains an invalid value.
+* **Set the input field background color to red** if it contains an invalid value.
+
+#### Prevent the form's submission
+
+In Angular, any `<form>` tag is enriched by the [`NgForm`][angular-docs-ng-form] directive.
+You can retrieve the instance of the directive attached to the form by using a [**template reference variable**][angular-template-reference-variable]
+(`#greetingForm` in this example):
+
+```html
+<form `#greetingForm='ngForm'` (submit)='displayGreeting(`greetingForm`)'>
+```
+
+We can now update the implementation of `displayGreeting()` to add this new argument.
+
+[`NgForm`][angular-docs-ng-form] must be imported from `@angular/forms`.
+This class provides, among other things, a `valid` (or `invalid`) attribute to check whether all the fields are valid or not:
+
+```ts
+*import { NgForm } from '@angular/forms';
+// ...
+
+displayGreeting(`form: NgForm`) {
+  `if (form.valid) {`
+    this.displayedGreeting = this.greeting;
+    console.log('Greeting displayed');
+  `}`
+}
+```
+
+#### Disable the submit button
+
+The `#greetingForm` template reference variable is already available in the template from the previous modification,
+since we passed it to `displayGreeting()` as an argument.
+
+You can also bind it to DOM elements or their attributes elsewhere in the template.
+
+This time, we'll use [`NgForm`][angular-docs-ng-form]'s `invalid` attribute.
+We simply have to bind the value of the `<button>` tag's `disabled` attribute to it:
+
+* When the form is **invalid** (`greetingForm.invalid` is true), the button should be **disabled** (`disabled` should be true).
+* When the form is **valid** (`greetingForm.invalid` is false), the button should **not be disabled** (`disabled` should be false).
+
+```html
+<button type='submit' `[disabled]='greetingForm.invalid'`>Submit</button>
+```
+
+#### Display an error message
+
+We've seen that the `<form>` tag is **enriched** with the [`NgForm`][angular-docs-ng-form] **directive**,
+and that it's possible to **retrieve that directive** to gain access to the **form's validation state**.
+
+You can do the same with the `<input>` tag, by retrieving the field's [`NgModel`][angular-docs-ng-model]'s directive
+(which you applied by using `[(ngModel)]='expression'`):
+
+```html
+<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
+  name='greeting' required `#greetingInput='ngModel'` />
+```
+
+The `NgModel` directive also has the `valid` and `invalid` attributes,
+indicating whether that particular field is valid.
+All we have to do is add an error message to the form, and, through judicious use of our old friend the `NgIf` directive,
+only display the message when the field is invalid.
+
+```html
+<form #greetingForm='ngForm' (submit)='displayGreeting(greetingForm)'>
+  <!-- ... -->
+* <p *ngIf='greetingInput.invalid'>
+*   Name is required
+* </p>
+</form>
+```
+
+##### Dirty, pristine, touched, untouched
+
+That's nice, but the error message is displayed right away.
+It makes sense, since the **initial value** of the input field's **is actually invalid**.
+But that's not very user-friendly.
+Ideally, we would want the error message to be displayed **only once the user has interacted with the form**.
+
+Enter the following `NgForm` and `NgModel` attributes:
+
+* `dirty` - A control is **dirty** if the user has **changed its value**.
+* `pristine` - A control is **pristine** if the user has **not yet changed its value** (the opposite of `dirty`).
+* `touched` - A control is **touched** if the user has triggered a **[`blur`][blur-event] event** on it.
+* `untouched` - A control is **untouched** if the user has **not yet** triggered a **[`blur`][blur-event] event** on it (the opposite of `touched`).
+
+Make the following change to only display the error message after the user has started typing:
+
+```html
+<p *ngIf='greetingInput.invalid` && greetingInput.dirty`'>
+  Name is required
+</p>
+```
+
+#### Set the input field background color to red
+
+Angular automatically **mirrors** many `NgModel` **properties** onto the `<input>` tag as **CSS classes**.
+You can use these classes to **style** form elements according to the state of the form.
+
+These are some of the supported classes ([full list][angular-form-control-status-classes]):
+
+* `.ng-valid` or `.ng-invalid` is applied depending on whether the value is valid
+* `.ng-pristine` or `.ng-dirty` is applied depending on whether the user has changed the value
+* `.ng-untouched` or `.ng-touched` is applied depending on whether the user has triggered `blur` event
+
+So when our field is invalid and dirty, it will have both the `.ng-invalid` and `.ng-dirty` CSS classes added to it.
+All you need to do is modify `src/app/app.component.css` to add a background color to input fields with this combination of classes:
+
+```css
+input.ng-invalid.ng-dirty {
+  background-color: #ffc0c0;
+}
+```
+
+
+
+### Angular validators
+
+These are some of the validators provided **out of the box** by Angular:
+
+* [`email`][angular-docs-email-validator] - Validates that a string is a valid e-mail address.
+* [`min`][angular-docs-min-validator] & [`max`][angular-docs-max-validator] - Validate that a number is within the specified bound(s).
+* [`min-length`][angular-docs-min-length-validator] & [`max-length`][angular-docs-max-length-validator] - Validate that a string's length is within the specified bound(s).
+* [`pattern`][angular-docs-pattern-validator] - Validates that a value matches a regular expression.
+* [`required`][angular-docs-required-validator] - Validates that a value is present.
+
+Here's a few usage examples:
+
+```html
+<input `type='email'` name='email' />
+<input type='number' name='age' `min='3' max='10'` />
+<input type='text' name='firstName' `min-length='1' max-length='50'` />
+<input type='text' name='lastName' `pattern='[a-zA-Z ]*'` />
+<input type='text' name='occupation' `required` />
+```
+
+
+
+### Custom validators
+
+These validators are nice, but you might need **more complex validations**.
+
+That's why Angular allows you to implement [custom validators][angular-custom-validators].
+Here's an example of a validator that ensures a string is not in a list of forbidden values:
+
+```ts
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+export function notInValidator(notIn: string[]): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+
+    // Check if the value is invalid.
+    if (notIn.indexOf(control.value) >= 0) {
+      // Return an error named after the validator if that is the case.
+      return {
+        notIn: { value: control.value }
+      };
+    }
+
+    // Otherwise, all is well, there is no error.
+    return null;
+  };
+}
+```
+
+#### Registering a custom validator
+
+To use your validation function in a form, you need to wrap it in a directive:
+
+```ts
+import { Directive, Input } from '@angular/core';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors,
+         Validator } from '@angular/forms';
+
+import { notInValidator } from './not-in-validator';
+
+@Directive({
+  selector: '[notIn]',
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: NotInValidatorDirective,
+      multi: true
+    }
+  ]
+})
+export class NotInValidatorDirective implements Validator {
+
+  @Input('notIn')
+  notIn: string[];
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    return notInValidator(this.notIn)(control);
+  }
+}
+```
+
+#### Using a custom validator
+
+You must register the new directive in the module's `declarations` array:
+
+```ts
+// Other imports...
+*import { NotInValidatorDirective } from './validators/not-in-validator-directive';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ExclamationPipe,
+    `NotInValidatorDirective`
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+You can then finally use it in the template:
+
+```html
+<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
+  name='greeting' required `[notIn]='["Bob"]'` #greetingInput='ngModel' />
+```
+
+
+
+### Displaying different messages for different errors
+
+There's a little problem now.
+Since our error message is displayed as soon as there's an error on the `greetingInput` field,
+it always displays `Name is required`, even if the error is due to our new custom validator.
+
+```html
+<p *ngIf='`greetingInput.invalid` && greetingInput.dirty'>
+  Name is required
+</p>
+```
+
+To fix that, use `greetingInput.errors` which is an object containing a key for each type of error.
+That way you can react separately to the `required` validator's error and to the custom validator's `notIn` error:
+
+```html
+<p *ngIf='`greetingInput.errors?.required` && greetingInput.dirty'>
+  Name is required
+</p>
+*<p *ngIf='greetingInput.errors?.notIn && greetingInput.dirty'>
+* Name is forbidden
+*</p>
+```
+
+The special `.errors?.required` syntax with an interrogation mark is here to avoid an error if `.errors` returns `null` or `undefined`,
+in which case it will simply ignore the rest of the expression.
+
+
+
+### Asynchronous validators
+
+The validator we implemented is actually a function that matches Angular's [`ValidatorFn`][angular-docs-validator-fn] interface.
+It is **synchronous**, i.e. it performs no I/O operation to validate its value and immediately returns its errors (or `null`):
+
+```ts
+(control: AbstractControl): ValidationErrors | null
+```
+
+It's also possible to create **asynchronous validators**.
+For example, to check whether a **username is already taken**, you might have to **call your API**, which is an asynchronous operation.
+
+In that case, your validator function must match the [`AsyncValidatorFn`][angular-docs-async-validator-fn] interface instead.
+That is, instead of returning an object of validation errors, it must return either a **Promise or an Observable** of that object:
+
+```ts
+(control: AbstractControl): Promise<ValidationErrors | null>
+                            | Observable<ValidationErrors | null>
+```
+
+That way, Angular will wait for the Promise to be resolved or for the Observable to emit the errors before updating the template.
+
+
+
+## Reactive forms
+
+The form we have seen so far is a **template-driven form**.
+In contrast, **reactive forms** are an Angular technique for creating forms in a **reactive programming** style.
+They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]:
+
+```ts
+// Other imports...
+import { FormsModule`, ReactiveFormsModule` } from '@angular/forms';
+
+@NgModule({
+  // ...
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    `ReactiveFormsModule`
+  ],
+  // ...
+})
+export class AppModule { }
+```
+
+
+
+### Using reactive forms in the component
+
+With reactive forms, the form structure is also defined with code in the component:
+
+```ts
+// Other imports...
+*import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+
+// ...
+export class AppComponent {
+  // ...
+  `greetingForm: FormGroup;`
+
+  constructor(
+    `private formBuilder: FormBuilder,`
+    private jokeService: JokeService
+  ) {
+    // ...
+*   this.greetingForm = formBuilder.group({
+*     // Define the "greeting" field and its default value
+*     greeting: [ '' ]
+*   });
+  }
+
+  // ...
+}
+```
+
+#### Getting the form from the component
+
+Since the form is built directly in the component,
+you no longer have to retrieve it from the template.
+
+You can update the `displayGreeting()` method to use the new form group:
+
+```ts
+// ...
+export class AppComponent {
+  // ...
+
+  displayGreeting`()` {
+    if (`this.greetingForm`.valid) {
+      this.displayedGreeting = this.greeting;
+      console.log('Greeting displayed');
+    }
+  }
+
+  // ...
+}
+```
+
+#### Reacting to form value changes
+
+Reactive forms do not use `ngModel`, so there won't be two-way binding with the template any longer.
+There will only be **one-way binding** from the form group in the component to the template.
+
+To be notified of changes in the form group, you can subscribe to its `valueChanges` property, which is an Observable:
+
+```ts
+// ...
+export class AppComponent {
+  // ...
+  constructor(/* ... */) {
+    // ...
+*   this.greetingForm.valueChanges.subscribe(value => {
+*     console.log(`Greeting changed to "${value.greeting}"`);
+*     this.greeting = value.greeting;
+*   });
+  }
+  // ...
+}
+```
+
+
+
+### Using reactive forms in the template
+
+With reactive forms, your **template** is somewhat **simplified**.
+Remove `ngModel`, the validations, `#greetingForm` and `#greetingInput`.
+You simply have to pass the form group created in the component to the `<form>` tag with the `formGroup` directive,
+and use the `formControlName` directive on the `<input>` tag:
+
+```html
+<form `[formGroup]='greetingForm'` (submit)='`displayGreeting()`'>
+  <!-- ... -->
+  <input type='text' placeholder='Who are you?' `formControlName='greeting'` />
+  <!-- ... -->
+</form>
+```
+
+You must also update your error messages to get the input field from the form group with `greetingForm.get("greeting")`
+instead of using the `#greetingInput` template reference variable you just removed:
+
+```html
+<p *ngIf='`greetingForm.get("greeting")`.errors?.required
+          && `greetingForm.get("greeting")`.dirty'>
+  Name is required
+</p>
+<p *ngIf='`greetingForm.get("greeting")`.errors?.notIn
+          && `greetingForm.get("greeting")`.dirty'>
+  Name is forbidden
+</p>
+```
+
+
+
+### Reactive form validations
+
+The validations are no longer applied since we removed them from the template.
+With reactive forms, **validation is configured in the component**:
+
+```ts
+// Other imports...
+import { FormBuilder, FormGroup, NgForm`, Validators` } from '@angular/forms';
+*import { notInValidator } from './validators/not-in-validator';
+
+export class AppComponent {
+  // ...
+  constructor(/* ... */) {
+    // ...
+    this.greetingForm = formBuilder.group({
+      // Define the "greeting" field and its default value
+*     greeting: [
+*       '',
+*       Validators.compose([ // Add validators to the field.
+*         Validators.required, // Use the built-in "required" validator.
+*         notInValidator([ 'Bob' ]) // Use our custom validator function.
+*       ])
+*     ]
+    });
+  }
+  // ...
+}
+```
+
+#### Custom validators in reactive forms
+
+Note that we use our custom validator function (`notInValidator`) directly,
+instead of using the `NotInValidatorDirective` wrapper like before:
+
+```ts
+Validators.compose([ // Add validators to the field.
+  Validators.required, // Use the built-in "required" validator.
+  `notInValidator([ 'Bob' ])` // Use our custom validator function.
+])
+```
+
+This is an advantage of reactive forms over template-driven forms:
+validators can be **simple functions** that do not require an additional directive to be applied in the template.
+
+You can remove the directive (e.g. delete `src/app/validators/not-in-validator-directive.ts` and remove it from `declarations` in `src/app/app.module.ts`),
+and the form will keep working.
+
+
+
+### Which is better, reactive or template-driven?
+
+In [**template-driven forms**][angular-forms], form structure and validation are specified and handled **in the template**:
+
+* Creation of form controls is delegated to directives and asynchronous.
+* Angular handles data updates with two-way binding.
+* Hard to test with automated tests.
+
+In [**reactive forms**][angular-reactive-forms], a tree of form control objects and validations is managed **in the component** and bound to elements in the template:
+
+* The component class has immediate access to both the data model and the form control structure.
+* Changes can be subscribed to in the form of Observables.
+* Data and validity updates are synchronous and under your control.
+* Easier to test with automated tests.
+
+Neither is "better".
+They're two different architectural paradigms, with their own strengths and weaknesses.
+You may even use both in the same application.
+Read the documentation to learn more.
+
+
+
+## Resources
+
+**Documentation**
+
+* [Angular Tour of Heroes Tutorial][angular-tour-of-heroes]
+* [Angular Developer Guide][angular-guide]
+  * [Template-driven Forms][angular-forms]
+  * [Reactive Forms][angular-reactive-forms]
+  * [Automated Testing][angular-testing]
+* [Angular API reference][angular-api]
+
+**Further reading**
+
+* [A guide to web components][a-guide-to-web-components]
+* [Angular 2 components][angular-2-series-components]
+* [Understanding, creating and subscribing to observables in Angular][understanding-angular-observables]
+* [The Introduction to Reactive Programming You've Been Missing][intro-to-reactive-programming]
+
+
+
+[a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
+[advanced-angular-subject]: ../advanced-angular
+[ajax]: https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+[angular]: https://angular.io
+[angular-api]: https://angular.io/api
+[angular-component-interaction]: https://angular.io/guide/component-interaction
+[angular-component-styles]: https://angular.io/guide/component-styles
+[angular-custom-validators]: https://angular.io/guide/form-validation#custom-validators
+[angular-docs-async-validator-fn]: https://angular.io/api/forms/AsyncValidatorFn
+[angular-docs-component]: https://angular.io/api/core/Component
+[angular-docs-currency-pipe]: https://angular.io/api/common/CurrencyPipe
+[angular-docs-date-pipe]: https://angular.io/api/common/DatePipe
+[angular-docs-decimal-pipe]: https://angular.io/api/common/DecimalPipe
+[angular-docs-directive]: https://angular.io/api/core/Directive
+[angular-docs-email-validator]: https://angular.io/api/forms/EmailValidator
+[angular-docs-event-emitter]: https://angular.io/api/core/EventEmitter
+[angular-docs-http-client]: https://angular.io/guide/http
+[angular-docs-http-response]: https://angular.io/api/common/http/HttpResponse
+[angular-docs-injectable]: https://angular.io/api/core/Injectable
+[angular-docs-input]: https://angular.io/api/core/Input
+[angular-docs-lowercase-pipe]: https://angular.io/api/common/LowerCasePipe
+[angular-docs-max-length-validator]: https://angular.io/api/forms/MaxLengthValidator
+[angular-docs-min-length-validator]: https://angular.io/api/forms/MinLengthValidator
+[angular-docs-max-validator]: https://angular.io/api/forms/Validators#max
+[angular-docs-min-validator]: https://angular.io/api/forms/Validators#min
+[angular-docs-ng-class]: https://angular.io/api/common/NgClass
+[angular-docs-ng-for]: https://angular.io/api/common/NgForOf
+[angular-docs-ng-if]: https://angular.io/api/common/NgIf
+[angular-docs-ng-form]: https://angular.io/api/forms/NgForm
+[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
+[angular-docs-ng-module]: https://angular.io/api/core/NgModule
+[angular-docs-ng-plural]: https://angular.io/api/common/NgPlural
+[angular-docs-ng-style]: https://angular.io/api/common/NgStyle
+[angular-docs-ng-switch]: https://angular.io/api/common/NgSwitch
+[angular-docs-output]: https://angular.io/api/core/Output
+[angular-docs-pattern-validator]: https://angular.io/api/forms/PatternValidator
+[angular-docs-percent-pipe]: https://angular.io/api/common/PercentPipe
+[angular-docs-pipes]: https://angular.io/api?type=pipe
+[angular-docs-reactive-forms-module]: https://angular.io/api/forms/ReactiveFormsModule
+[angular-docs-required-validator]: https://angular.io/api/forms/RequiredValidator
+[angular-docs-titlecase-pipe]: https://angular.io/api/common/TitleCasePipe
+[angular-docs-uppercase-pipe]: https://angular.io/api/common/UpperCasePipe
+[angular-docs-validator-fn]: https://angular.io/api/forms/ValidatorFn
+[angular-form-control-status-classes]: https://angular.io/guide/form-validation#control-status-css-classes
+[angular-forms]: https://angular.io/guide/forms
+[angular-guide]: https://angular.io/guide/architecture
+[angular-pipes]: https://angular.io/guide/pipes
+[angular-reactive-forms]: https://angular.io/guide/reactive-forms
+[angular-starter]: https://github.com/MediaComem/comem-angular-starter#readme
+[angular-structural-directives]: https://angular.io/guide/structural-directives
+[angular-subject]: ../angular
+[angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
+[angular-testing]: https://angular.io/guide/testing
+[angular-tour-of-heroes]: https://angular.io/tutorial
+[angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
+[blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
+[chrome]: https://www.google.com/chrome/
+[chrome-dev]: https://developers.google.com/web/tools/chrome-devtools/console/
+[css-attribute-selector]: https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+[di]: https://en.wikipedia.org/wiki/Dependency_injection
+[dom-event]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[html-history-api]: https://developer.mozilla.org/en-US/docs/Web/API/History_API
+[html-input]: https://www.w3schools.com/tags/tag_input.asp
+[intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+[jquery]: http://jquery.com
+[js]: ../js/
+[js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+[js-classes]: ../js-classes/
+[js-closures]: ../js-closures/
+[js-modules]: ../js-modules/
+[js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
+[ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
+[observable-map]: http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map
+[rxjs]: http://reactivex.io/rxjs/
+[ts]: https://www.typescriptlang.org
+[ts-subject]: ../ts
+[understanding-angular-observables]: https://hackernoon.com/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3
+[web-components]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
