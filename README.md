@@ -25,31 +25,31 @@ You will:
 
 ## Plan
 
-* [Introduction](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic?home=MediaComem%2Fcomem-devmobil%23readme)
+* [Introduction](./subjects/inoic)
 
 * Going further with JavaScript
-  * [JavaScript prototypes](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-prototypes?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [JavaScript classes](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-classes?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [JavaScript modules](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-modules?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [JavaScript promises](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-promises?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [JavaScript prototypes](./subjects/js-prototypes)
+  * [JavaScript classes](./subjects/js-classes)
+  * [JavaScript modules](./subjects/js-modules)
+  * [JavaScript promises](./subjects/js-promises)
 
 * Ionic
-  * [TypeScript](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme)
-  * [Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [TypeScript](./subjects/ts)
+  * [Angular](./subjects/angular)
   * [Angular Forms](./subjects/angular-forms)
-  * [Ionic navigation with Angular](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [Ionic navigation with Angular](./subjects/ionic-angular)
 
 * App Development
   * Mockups
   * [Live setup][setup-project] (Tailored for the Travel Log subject, but it can help you kickstart your own app)
 
 * Additional JavaScript concepts
-  * [JavaScript closures](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [JavaScript closures](./subjects/js-closures)
 
 * [Advanced Angular](./subjects/advanced-angular)
 
 * Ionic (advanced)
-  * [Ionic extras (geolocation, leaflet & camera)](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme)
+  * [Ionic extras (geolocation, leaflet & camera)](./subjects/ionic-extras)
   * [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 ## What you will need
@@ -114,26 +114,19 @@ Each group must send an e-mail **no later than 21th of january 2020** to [Mathia
 * [Travel Log API documentation][travel-log-api]
 * [Ionic setup][setup-project] ([completed starter project][starter-project])
 * [qimg API][qimg]
-* [TypeScript support in Atom](ATOM-TYPESCRIPT.md)
+* [TypeScript support in Atom](https://github.com/MediaComem/comem-devmobil/blob/03da6e080cf5def32425fc58a3bc5d53047c09eb/ATOM-TYPESCRIPT.md#typescript-support-in-atom)
 
 [angular]: https://angular.io
 [archioweb]: https://github.com/MediaComem/comem-archioweb
 [chrome]: https://www.google.com/chrome/
 [cordova]: https://cordova.apache.org
-[github]: https://github.com
 [git-downloads]: https://git-scm.com/downloads
+[github]: https://github.com
 [ionic]: http://ionicframework.com
 [ionic-getting-started]: http://ionicframework.com/getting-started/
 [node]: https://nodejs.org/
+[qimg]: https://mediacomem.github.io/comem-qimg/
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://comem-travel-log-api.herokuapp.com
 [vs-code]: https://code.visualstudio.com/
-
-<!-- Unused links -->
-[angular-leaflet-directive]: https://github.com/tombatossals/angular-leaflet-directive
-[angularjs-geolocation]: https://github.com/arunisrael/angularjs-geolocation
-[comem]: http://www.heig-vd.ch/comem
-[heig]: http://www.heig-vd.ch
-[mapbox]: https://www.mapbox.com
-[qimg]: https://mediacomem.github.io/comem-qimg/

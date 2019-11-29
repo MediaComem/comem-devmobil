@@ -772,16 +772,18 @@ export class AppComponent {
 }
 ```
 
-We want to display this value as a percentage in our template. We _could_ do this like so:
+We want to display this value as a percentage in our template. We _could_ do it like so:
 
 ```html
 <p>{{ progress * 100 }}%</p>
 ```
-Doing so implies that we repeat this same snippet each time we want to display a percentage in our app. This is error prone as we could forget the `%`, or add an exceeding `0` when multiplying our value, etc.
+Doing so implies that we repeat this same snippet each time we want to display a percentage in our app. This is error prone as we might forget the `%`, or add an exceeding `0` when multiplying our value, etc.
+
+We'd be better off having this formula in a `Pipe` so we could use it any time we want.
 
 ### Using a pipe
 
-In our case, the `percent` pipe, provided by Angular can help us in rendering our progress percentage in our template.
+In this case, Angular provides us with a `Pipe` named `percent` that does display values as percentages and thus, can help us rendering our progress percentage in our template.
 
 Actually using the pipe is as simple as "piping" an interpolated value into it with the pipe (`|`) character in a template:
 
@@ -1714,82 +1716,57 @@ Read the [documentation][angular-component-interaction] to learn more.
 * [Understanding, creating and subscribing to observables in Angular][understanding-angular-observables]
 * [The Introduction to Reactive Programming You've Been Missing][intro-to-reactive-programming]
 
-
-
-[a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
-[advanced-angular-subject]: ../advanced-angular
-[ajax]: https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
 [angular]: https://angular.io
-[angular-api]: https://angular.io/api
-[angular-component-interaction]: https://angular.io/guide/component-interaction
-[angular-component-styles]: https://angular.io/guide/component-styles
-[angular-custom-validators]: https://angular.io/guide/form-validation#custom-validators
-[angular-docs-async-validator-fn]: https://angular.io/api/forms/AsyncValidatorFn
+[angular-guide]: https://angular.io/guide/architecture
+[angular-tour-of-heroes]: https://angular.io/tutorial
+[chrome]: https://www.google.com/chrome/
+[js]: ../js/
+[js-modules]: ../js-modules/
+[js-classes]: ../js-classes/
+[ts-subject]: ../ts
+[ajax]: https://developer.mozilla.org/en-US/docs/AJAX/Getting_Started
+[jquery]: http://jquery.com
+[html-history-api]: https://developer.mozilla.org/en-US/docs/Web/API/History_API
+[web-components]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
+[ts]: https://www.typescriptlang.org
+[chrome-dev]: https://developers.google.com/web/tools/chrome-devtools/console/
+[angular-docs-ng-module]: https://angular.io/api/core/NgModule
 [angular-docs-component]: https://angular.io/api/core/Component
+[angular-component-styles]: https://angular.io/guide/component-styles
+[dom-event]: https://developer.mozilla.org/en-US/docs/Web/API/Event
+[angular-docs-ng-for]: https://angular.io/api/common/NgForOf
+[angular-docs-ng-if]: https://angular.io/api/common/NgIf
+[angular-docs-ng-switch]: https://angular.io/api/common/NgSwitch
+[angular-structural-directives]: https://angular.io/guide/structural-directives
+[advanced-angular-subject]: ../advanced-angular
+[angular-docs-ng-class]: https://angular.io/api/common/NgClass
+[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
+[angular-docs-ng-plural]: https://angular.io/api/common/NgPlural
+[angular-docs-ng-style]: https://angular.io/api/common/NgStyle
 [angular-docs-currency-pipe]: https://angular.io/api/common/CurrencyPipe
 [angular-docs-date-pipe]: https://angular.io/api/common/DatePipe
 [angular-docs-decimal-pipe]: https://angular.io/api/common/DecimalPipe
-[angular-docs-directive]: https://angular.io/api/core/Directive
-[angular-docs-email-validator]: https://angular.io/api/forms/EmailValidator
-[angular-docs-event-emitter]: https://angular.io/api/core/EventEmitter
-[angular-docs-http-client]: https://angular.io/guide/http
-[angular-docs-http-response]: https://angular.io/api/common/http/HttpResponse
-[angular-docs-injectable]: https://angular.io/api/core/Injectable
-[angular-docs-input]: https://angular.io/api/core/Input
 [angular-docs-lowercase-pipe]: https://angular.io/api/common/LowerCasePipe
-[angular-docs-max-length-validator]: https://angular.io/api/forms/MaxLengthValidator
-[angular-docs-min-length-validator]: https://angular.io/api/forms/MinLengthValidator
-[angular-docs-max-validator]: https://angular.io/api/forms/Validators#max
-[angular-docs-min-validator]: https://angular.io/api/forms/Validators#min
-[angular-docs-ng-class]: https://angular.io/api/common/NgClass
-[angular-docs-ng-for]: https://angular.io/api/common/NgForOf
-[angular-docs-ng-if]: https://angular.io/api/common/NgIf
-[angular-docs-ng-form]: https://angular.io/api/forms/NgForm
-[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
-[angular-docs-ng-module]: https://angular.io/api/core/NgModule
-[angular-docs-ng-plural]: https://angular.io/api/common/NgPlural
-[angular-docs-ng-style]: https://angular.io/api/common/NgStyle
-[angular-docs-ng-switch]: https://angular.io/api/common/NgSwitch
-[angular-docs-output]: https://angular.io/api/core/Output
-[angular-docs-pattern-validator]: https://angular.io/api/forms/PatternValidator
 [angular-docs-percent-pipe]: https://angular.io/api/common/PercentPipe
-[angular-docs-pipes]: https://angular.io/api?type=pipe
-[angular-docs-reactive-forms-module]: https://angular.io/api/forms/ReactiveFormsModule
-[angular-docs-required-validator]: https://angular.io/api/forms/RequiredValidator
 [angular-docs-titlecase-pipe]: https://angular.io/api/common/TitleCasePipe
 [angular-docs-uppercase-pipe]: https://angular.io/api/common/UpperCasePipe
-[angular-docs-validator-fn]: https://angular.io/api/forms/ValidatorFn
-[angular-form-control-status-classes]: https://angular.io/guide/form-validation#control-status-css-classes
-[angular-forms]: https://angular.io/guide/forms
-[angular-guide]: https://angular.io/guide/architecture
 [angular-pipes]: https://angular.io/guide/pipes
-[angular-reactive-forms]: https://angular.io/guide/reactive-forms
-[angular-starter]: https://github.com/MediaComem/comem-angular-starter#readme
-[angular-structural-directives]: https://angular.io/guide/structural-directives
-[angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
-[angular-testing]: https://angular.io/guide/testing
-[angular-tour-of-heroes]: https://angular.io/tutorial
-[angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
-[blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
-[chrome]: https://www.google.com/chrome/
-[chrome-dev]: https://developers.google.com/web/tools/chrome-devtools/console/
-[css-attribute-selector]: https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
+[angular-docs-injectable]: https://angular.io/api/core/Injectable
 [di]: https://en.wikipedia.org/wiki/Dependency_injection
-[dom-event]: https://developer.mozilla.org/en-US/docs/Web/API/Event
-[html-history-api]: https://developer.mozilla.org/en-US/docs/Web/API/History_API
-[html-input]: https://www.w3schools.com/tags/tag_input.asp
-[intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
-[jquery]: http://jquery.com
-[js]: ../js/
-[js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
-[js-classes]: ../js-classes/
-[js-closures]: ../js-closures/
-[js-modules]: ../js-modules/
-[js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
-[observable-map]: http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map
+[js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [rxjs]: http://reactivex.io/rxjs/
-[ts]: https://www.typescriptlang.org
-[ts-subject]: ../ts
+[intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
+[angular-docs-http-client]: https://angular.io/guide/http
+[js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+[observable-map]: http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-map
+[angular-docs-http-response]: https://angular.io/api/common/http/HttpResponse
+[angular-docs-input]: https://angular.io/api/core/Input
+[angular-docs-event-emitter]: https://angular.io/api/core/EventEmitter
+[angular-docs-output]: https://angular.io/api/core/Output
+[angular-component-interaction]: https://angular.io/guide/component-interaction
+[a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
+[angular-api]: https://angular.io/api
+[angular-testing]: https://angular.io/guide/testing
+[angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
 [understanding-angular-observables]: https://hackernoon.com/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3
-[web-components]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
