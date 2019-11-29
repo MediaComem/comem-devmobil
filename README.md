@@ -46,6 +46,8 @@ You will:
 * Additional JavaScript concepts
   * [JavaScript closures](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme)
 
+* [Advanced Angular](./subjects/advanced-angular)
+
 * Ionic (advanced)
   * [Ionic extras (geolocation, leaflet & camera)](https://mediacomem.github.io/comem-devmobil/2019-2020/subjects/ionic-extras?home=MediaComem%2Fcomem-devmobil%23readme)
   * [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
