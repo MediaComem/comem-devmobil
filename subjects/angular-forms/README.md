@@ -252,7 +252,7 @@ only display the message when the field is invalid.
 ```html
 <form #greetingForm="ngForm" (submit)="displayGreeting(greetingForm)">
   <!-- input -->
-* <p *ngIf="greetingInput.invalid && greetingInput.dirty">
+* <p *ngIf="greetingInput.invalid">
 *   Name is required
 * </p>
   <!-- button -->
