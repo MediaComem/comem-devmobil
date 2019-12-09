@@ -1,6 +1,6 @@
 # Angular Forms
 
-Get started with and understand the basics of forms in [Angular][angular].
+Get started with and understand the basics of forms in [Angular][angular], using Ionic components.
 
 This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
 which you should both read to gain a deeper understanding of Angular.
@@ -10,6 +10,7 @@ which you should both read to gain a deeper understanding of Angular.
 **You will need**
 
 * [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+* [Ionic CLI][ionic] (to generate the blank app)
 
 **Recommended reading**
 
@@ -48,6 +49,22 @@ which you should both read to gain a deeper understanding of Angular.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Getting started
+
+To follow along this tutorial, you'll need a blank Ionic application.
+
+Generate one using the following command, somewhere on your file system:
+
+```bash
+$> ionic start comem-ionic-angular-forms blank
+```
+Wait for it to finish (this can take several minutes), then head to the newly created folder and start the app:
+
+```bash
+$> cd ./comem-ionic-angular-forms
+$> ionic serve
+```
+
 ## Forms
 
 Angular provides **validation** services for forms and controls.
@@ -60,7 +77,7 @@ However, keep in mind that although this provides a good user experience, it can
 
 ### HTML validations
 
-HTML 5 has [built-in validation attributes][html-input] to define validations on your form inputs (e.g. `<input>`, `<textarea>`, etc):
+HTML 5 has [built-in validation attributes][html-input] to define validations on your HTML form inputs (e.g. `<input>`, `<textarea>`, etc), or Ionic form components ([`<ion-checkbox>`][ion-checkbox], [`<ion-input>`][ion-input], etc):
 
 Attribute   | Description
 :---        | :---
@@ -74,7 +91,7 @@ Attribute   | Description
 You simply add them to the HTML tag:
 
 ```html
-<input type='text' `required minlength=2` />
+<ion-input type="text" `required minlength="2"` />
 ```
 
 Usually the **browser** performs these validations.
@@ -85,22 +102,33 @@ This allows you to add **more complex validations and interaction**.
 
 ### Creating a form
 
-Let's turn our lonely greeting input field into a proper form:
+Let's add a very simple greeting form to our app:
 
-* Wrap that part of the template in a `<form>` tag.
-* Add a `name` attribute to the input field (required by Angular).
-* Add a `required` attribute to the input field to have some validation.
-* Add a submit `<button>` tag to complete the form.
+Open the `home.page.html` file, and the `<ion-content>` tags and everything inbetween by:
 
 ```html
-*<form>
-  <p>
-    <input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-      `name='greeting' required` />
+<ion-content class="ion-padding">
 
-    `<button type='submit'>Submit</button>`
-  </p>
-*</form>
+* <form>
+    <ion-input type="text" placeholder="Who are you?" [(ngModel)]="greeting"
+      `name="greeting" required`></ion-input>
+    `<ion-button type="submit">Submit</ion-button>`
+* </form>
+
+  <p>Hello {{ greeting }}</p>
+
+</ion-content>
+```
+
+Add a `greeting` property to the `HomePage` component in the `home.page.ts` file:
+
+```ts
+@Component({ /* ... */ })
+export class HomePage {
+
+  `greeting: string;`
+
+}
 ```
 
 #### Updating the component
@@ -108,14 +136,14 @@ Let's turn our lonely greeting input field into a proper form:
 Let's now make it so that the greeting will only be displayed if submitted through the form.
 We need to add a separate property to our component:
 
-* The `greeting` property will represent the value of the input field.
+* The `greeting` property will represent the internal value of the input field.
 * The `displayedGreeting` property will represent the submitted value (which will no longer be bound to the input field).
 
 We also need a new `displayGreeting()` method which will take the current value of `greeting` and copy it to `displayedGreeting`:
 
 ```ts
 // ...
-export class AppComponent {
+export class HomePage {
   // ...
   greeting: string;
 * displayedGreeting: string;
@@ -133,15 +161,15 @@ export class AppComponent {
 Update the component's template to reflect the fact that we now want to display `displayedGreeting` instead of `greeting`:
 
 ```html
-<p *ngIf='displayedGreeting'>
-  {{ hello(displayedGreeting) | exclamation:3 }}
+<p *ngIf="displayedGreeting">
+  Hello {{ displayedGreeting }}
 </p>
 ```
 
 Bind the new `displayGreeting()` method to the form's `submit` event to make it work:
 
 ```html
-<form `(submit)='displayGreeting()'`>
+<form `(submit)="displayGreeting()"`>
 ```
 
 
@@ -166,7 +194,7 @@ You can retrieve the instance of the directive attached to the form by using a [
 (`#greetingForm` in this example):
 
 ```html
-<form `#greetingForm='ngForm'` (submit)='displayGreeting(`greetingForm`)'>
+<form `#greetingForm="ngForm"` (submit)="displayGreeting(`greetingForm`)">
 ```
 
 We can now update the implementation of `displayGreeting()` to add this new argument.
@@ -200,7 +228,7 @@ We simply have to bind the value of the `<button>` tag's `disabled` attribute to
 * When the form is **valid** (`greetingForm.invalid` is false), the button should **not be disabled** (`disabled` should be false).
 
 ```html
-<button type='submit' `[disabled]='greetingForm.invalid'`>Submit</button>
+<ion-button `[disabled]="greetingForm.invalid"` type="submit">Submit</ion-button>
 ```
 
 #### Display an error message
@@ -212,8 +240,8 @@ You can do the same with the `<input>` tag, by retrieving the field's [`NgModel`
 (which you applied by using `[(ngModel)]='expression'`):
 
 ```html
-<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-  name='greeting' required `#greetingInput='ngModel'` />
+<input type="text" placeholder="Who are you?" [(ngModel)]="greeting"
+  name="greeting" required `#greetingInput="ngModel"` />
 ```
 
 The `NgModel` directive also has the `valid` and `invalid` attributes,
@@ -222,11 +250,12 @@ All we have to do is add an error message to the form, and, through judicious us
 only display the message when the field is invalid.
 
 ```html
-<form #greetingForm='ngForm' (submit)='displayGreeting(greetingForm)'>
-  <!-- ... -->
-* <p *ngIf='greetingInput.invalid'>
+<form #greetingForm="ngForm" (submit)="displayGreeting(greetingForm)">
+  <!-- input -->
+* <p *ngIf="greetingInput.invalid && greetingInput.dirty">
 *   Name is required
 * </p>
+  <!-- button -->
 </form>
 ```
 
@@ -247,14 +276,14 @@ Enter the following `NgForm` and `NgModel` attributes:
 Make the following change to only display the error message after the user has started typing:
 
 ```html
-<p *ngIf='greetingInput.invalid` && greetingInput.dirty`'>
+<p *ngIf="greetingInput.invalid` && greetingInput.dirty`">
   Name is required
 </p>
 ```
 
 #### Set the input field background color to red
 
-Angular automatically **mirrors** many `NgModel` **properties** onto the `<input>` tag as **CSS classes**.
+Angular automatically **mirrors** many `NgModel` **properties** onto the `<ion-input>` tag as **CSS classes**.
 You can use these classes to **style** form elements according to the state of the form.
 
 These are some of the supported classes ([full list][angular-form-control-status-classes]):
@@ -267,7 +296,7 @@ So when our field is invalid and dirty, it will have both the `.ng-invalid` and 
 All you need to do is modify `src/app/app.component.css` to add a background color to input fields with this combination of classes:
 
 ```css
-input.ng-invalid.ng-dirty {
+ion-input.ng-invalid.ng-dirty {
   background-color: #ffc0c0;
 }
 ```
@@ -287,11 +316,11 @@ These are some of the validators provided **out of the box** by Angular:
 Here's a few usage examples:
 
 ```html
-<input `type='email'` name='email' />
-<input type='number' name='age' `min='3' max='10'` />
-<input type='text' name='firstName' `min-length='1' max-length='50'` />
-<input type='text' name='lastName' `pattern='[a-zA-Z ]*'` />
-<input type='text' name='occupation' `required` />
+<ion-input `type="email"` name="email"></ion-input>
+<ion-input type="number" name="age" `min="3" max="10"`></ion-input>
+<ion-input type="text" name="firstName" `min-length="1" max-length="50"`></ion-input>
+<ion-input type="text" name="lastName" `pattern="[a-zA-Z ]*"`></ion-input>
+<ion-input type="text" name="occupation" `required`></ion-input>
 ```
 
 
@@ -302,6 +331,8 @@ These validators are nice, but you might need **more complex validations**.
 
 That's why Angular allows you to implement [custom validators][angular-custom-validators].
 Here's an example of a validator that ensures a string is not in a list of forbidden values:
+
+Create a new `validators.ts` file in `src/app` with this content:
 
 ```ts
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
@@ -325,17 +356,17 @@ export function notInValidator(notIn: string[]): ValidatorFn {
 
 #### Registering a custom validator
 
-To use your validation function in a form, you need to wrap it in a directive:
+To use your validation function in a form, you need to wrap it in a directive. Create another file in `src/app`, called for example `not-in.directive.ts` with this content:
 
 ```ts
 import { Directive, Input } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, ValidationErrors,
-         Validator } from '@angular/forms';
+import { AbstractControl, NG_VALIDATORS,
+         ValidationErrors, Validator } from '@angular/forms';
 
-import { notInValidator } from './not-in-validator';
+import { notInValidator } from './validators';
 
 @Directive({
-  selector: '[notIn]',
+  selector: "[notIn]",
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -345,9 +376,7 @@ import { notInValidator } from './not-in-validator';
   ]
 })
 export class NotInValidatorDirective implements Validator {
-
-  @Input('notIn')
-  notIn: string[];
+  @Input() notIn: string[];
 
   validate(control: AbstractControl): ValidationErrors | null {
     return notInValidator(this.notIn)(control);
@@ -357,30 +386,29 @@ export class NotInValidatorDirective implements Validator {
 
 #### Using a custom validator
 
-You must register the new directive in the module's `declarations` array:
+You must register the new directive in the `declarations` array of the module that needs to use this directive, in our case, it's the `home.module.ts`:
+
+> In a real life scenario, and in your application, you should instead create a `SharedModule` that will declare and export all shared directives and components throughout your application (see [this tutorial][angular-shared-module], in French)
 
 ```ts
 // Other imports...
-*import { NotInValidatorDirective } from './validators/not-in-validator-directive';
+*import { NotInValidatorDirective } from '../not-in.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ExclamationPipe,
-    `NotInValidatorDirective`
-  ],
-  // ...
+  imports: [/* ... */],
+  declarations: [HomePage, `NotInValidatorDirective`]
 })
-export class AppModule { }
+export class HomePageModule {}
 ```
 
 You can then finally use it in the template:
 
 ```html
-<input type='text' placeholder='Who are you?' [(ngModel)]='greeting'
-  name='greeting' required `[notIn]='["Bob"]'` #greetingInput='ngModel' />
+<ion-input #greetingInput="ngModel" type="text" placeholder="Who are you?"
+  [(ngModel)]="greeting" name="greeting" `[notIn]="['Bob']"` required>
+</ion-input>
 ```
-
+> Notice that the `notIn` attribute must be bound to an array of string
 
 
 ### Displaying different messages for different errors
@@ -390,27 +418,24 @@ Since our error message is displayed as soon as there's an error on the `greetin
 it always displays `Name is required`, even if the error is due to our new custom validator.
 
 ```html
-<p *ngIf='`greetingInput.invalid` && greetingInput.dirty'>
+<p *ngIf="`greetingInput.invalid` && greetingInput.dirty">
   Name is required
 </p>
 ```
 
-To fix that, use `greetingInput.errors` which is an object containing a key for each type of error.
+To fix that, use `greetingInput.hasError(<errorName: string>)` which is a method that checks if the given `errorName` is present in the `errors` array of the input.
+
 That way you can react separately to the `required` validator's error and to the custom validator's `notIn` error:
 
 ```html
-<p *ngIf='`greetingInput.errors?.required` && greetingInput.dirty'>
+<p *ngIf="`greetingInput.hasError('required')` && greetingInput.dirty">
   Name is required
 </p>
-*<p *ngIf='greetingInput.errors?.notIn && greetingInput.dirty'>
+*<p *ngIf="greetingInput.hasError('notIn') && greetingInput.dirty">
 * Name is forbidden
 *</p>
 ```
-
-The special `.errors?.required` syntax with an interrogation mark is here to avoid an error if `.errors` returns `null` or `undefined`,
-in which case it will simply ignore the rest of the expression.
-
-
+> `notIn` is, in this case, the name of the `ValidationError`'s property returned by the `notInValidator` function
 
 ### Asynchronous validators
 
@@ -418,7 +443,7 @@ The validator we implemented is actually a function that matches Angular's [`Val
 It is **synchronous**, i.e. it performs no I/O operation to validate its value and immediately returns its errors (or `null`):
 
 ```ts
-(control: AbstractControl): ValidationErrors | null
+(control: AbstractControl): `ValidationErrors | null`
 ```
 
 It's also possible to create **asynchronous validators**.
@@ -428,8 +453,8 @@ In that case, your validator function must match the [`AsyncValidatorFn`][angula
 That is, instead of returning an object of validation errors, it must return either a **Promise or an Observable** of that object:
 
 ```ts
-(control: AbstractControl): Promise<ValidationErrors | null>
-                            | Observable<ValidationErrors | null>
+(control: AbstractControl): `Promise<ValidationErrors | null>`
+                            | `Observable<ValidationErrors | null>`
 ```
 
 That way, Angular will wait for the Promise to be resolved or for the Observable to emit the errors before updating the template.
@@ -438,79 +463,82 @@ That way, Angular will wait for the Promise to be resolved or for the Observable
 
 ## Reactive forms
 
-The form we have seen so far is a **template-driven form**.
+The form we have seen so far is a [**template-driven form**][angular-template-driven-form].
 In contrast, **reactive forms** are an Angular technique for creating forms in a **reactive programming** style.
-They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]:
+They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]. Let's add it to our `HomePageModule`'s `imports` array:
 
 ```ts
-// Other imports...
-import { FormsModule`, ReactiveFormsModule` } from '@angular/forms';
+// Other imports
+import { FormsModule, `ReactiveFormsModule` } from '@angular/forms';
 
 @NgModule({
-  // ...
   imports: [
-    BrowserModule,
+    CommonModule,
     FormsModule,
-    HttpClientModule,
+    IonicModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: HomePage
+      }
+    ]),
     `ReactiveFormsModule`
   ],
   // ...
 })
-export class AppModule { }
+export class HomePageModule {}
 ```
 
 
 
 ### Using reactive forms in the component
 
-With reactive forms, the form structure is also defined with code in the component:
+With reactive forms, the form structure is also defined with code in the component
+
+Replace all the content of `home.page.ts` with the following:
 
 ```ts
-// Other imports...
-*import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { Component } from '@angular/core';
+import { `FormBuilder, FormGroup` } from '@angular/forms';
 
-// ...
-export class AppComponent {
-  // ...
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss']
+})
+export class HomePage {
+  greeting: string;
+  displayedGreeting: string;
   `greetingForm: FormGroup;`
 
-  constructor(
-    `private formBuilder: FormBuilder,`
-    private jokeService: JokeService
-  ) {
-    // ...
-*   this.greetingForm = formBuilder.group({
-*     // Define the "greeting" field and its default value
-*     greeting: [ '' ]
+  constructor(`private formBuilder: FormBuilder`) {
+*   this.greetingForm = this.formBuilder.group({
+*     // Define the greeting input and its default value
+*     greeting: ['']
 *   });
   }
-
-  // ...
 }
 ```
 
-#### Getting the form from the component
+#### Form submition
 
-Since the form is built directly in the component,
-you no longer have to retrieve it from the template.
+Since the form is built directly into the component, the method that is executed when it's submitted doesn't need an argument anymore.
 
-You can update the `displayGreeting()` method to use the new form group:
+It can be rewritten as follows:
 
 ```ts
 // ...
-export class AppComponent {
+export class HomePage {
   // ...
 
   displayGreeting`()` {
     if (`this.greetingForm`.valid) {
       this.displayedGreeting = this.greeting;
-      console.log('Greeting displayed');
     }
   }
-
-  // ...
 }
 ```
+
 
 #### Reacting to form value changes
 
@@ -521,16 +549,15 @@ To be notified of changes in the form group, you can subscribe to its `valueChan
 
 ```ts
 // ...
-export class AppComponent {
+export class HomePage {
   // ...
-  constructor(/* ... */) {
+  constructor(private formBuilder: FormBuilder) {
     // ...
-*   this.greetingForm.valueChanges.subscribe(value => {
-*     console.log(`Greeting changed to "${value.greeting}"`);
-*     this.greeting = value.greeting;
+*   this.greetingForm.valueChanges.subscribe(formValues => {
+*     console.log('Greeting changed to', formValues.greeting);
+*     this.greeting = formValues.greeting;
 *   });
   }
-  // ...
 }
 ```
 
@@ -544,9 +571,8 @@ You simply have to pass the form group created in the component to the `<form>` 
 and use the `formControlName` directive on the `<input>` tag:
 
 ```html
-<form `[formGroup]='greetingForm'` (submit)='`displayGreeting()`'>
-  <!-- ... -->
-  <input type='text' placeholder='Who are you?' `formControlName='greeting'` />
+<form `[formGroup]="greetingForm"` (submit)="`displayGreeting()`">
+  <ion-input type="text" placeholder="Who are you?" `formControlName="greeting"`></ion-input>
   <!-- ... -->
 </form>
 ```
@@ -555,12 +581,12 @@ You must also update your error messages to get the input field from the form gr
 instead of using the `#greetingInput` template reference variable you just removed:
 
 ```html
-<p *ngIf='`greetingForm.get("greeting")`.errors?.required
-          && `greetingForm.get("greeting")`.dirty'>
+<p *ngIf="`greetingForm.get('greeting')`.hasError('required')
+          && `greetingForm.get('greeting')`.dirty">
   Name is required
 </p>
-<p *ngIf='`greetingForm.get("greeting")`.errors?.notIn
-          && `greetingForm.get("greeting")`.dirty'>
+<p *ngIf="`greetingForm.get('greeting')`.hasError('notIn')
+          && `greetingForm.get('greeting')`.dirty">
   Name is forbidden
 </p>
 ```
@@ -574,15 +600,14 @@ With reactive forms, **validation is configured in the component**:
 
 ```ts
 // Other imports...
-import { FormBuilder, FormGroup, NgForm`, Validators` } from '@angular/forms';
-*import { notInValidator } from './validators/not-in-validator';
+import { FormBuilder, FormGroup, `Validators` } from '@angular/forms';
+*import { notInValidator } from '../validators';
 
-export class AppComponent {
+@Component({/* ... */})
+export class HomePage {
   // ...
-  constructor(/* ... */) {
-    // ...
-    this.greetingForm = formBuilder.group({
-      // Define the "greeting" field and its default value
+  constructor(private formBuilder: FormBuilder) {
+    this.greetingForm = this.formBuilder.group({
 *     greeting: [
 *       '',
 *       Validators.compose([ // Add validators to the field.
@@ -591,6 +616,7 @@ export class AppComponent {
 *       ])
 *     ]
     });
+    // ...
   }
   // ...
 }
@@ -611,7 +637,7 @@ Validators.compose([ // Add validators to the field.
 This is an advantage of reactive forms over template-driven forms:
 validators can be **simple functions** that do not require an additional directive to be applied in the template.
 
-You can remove the directive (e.g. delete `src/app/validators/not-in-validator-directive.ts` and remove it from `declarations` in `src/app/app.module.ts`),
+You can remove the directive (e.g. delete `src/app/not-in.directive.ts` and remove it from `declarations` in `src/app/home/home.module.ts`),
 and the form will keep working.
 
 
@@ -634,7 +660,8 @@ In [**reactive forms**][angular-reactive-forms], a tree of form control objects 
 Neither is "better".
 They're two different architectural paradigms, with their own strengths and weaknesses.
 You may even use both in the same application.
-Read the documentation to learn more.
+
+**Read the documentation to learn more.**
 
 
 
@@ -667,9 +694,14 @@ Read the documentation to learn more.
 [angular-forms]: https://angular.io/guide/forms
 [angular-guide]: https://angular.io/guide/architecture
 [angular-subject]: ../angular
+[angular-template-driven-form]: https://angular.io/guide/forms
 [angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
 [angular-tour-of-heroes]: https://angular.io/tutorial
 [angular-reactive-forms]: https://angular.io/guide/reactive-forms
+[angular-shared-module]: https://guide-angular.wishtack.io/angular/project-structure-and-modules/shared-module
 [blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
 [chrome]: https://www.google.com/chrome/
 [html-input]: https://www.w3schools.com/tags/tag_input.asp
+[ionic]: https://ionicframework.com/docs/cli
+[ion-input]: https://ionicframework.com/docs/api/input
+[ion-checkbox]: https://ionicframework.com/docs/api/checkbox

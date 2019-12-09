@@ -36,8 +36,8 @@ You will:
 * Ionic
   * [TypeScript](./subjects/ts)
   * [Angular](./subjects/angular)
-  * [Angular Forms](./subjects/angular-forms)
   * [Ionic navigation with Angular](./subjects/ionic-angular)
+  * [Angular Forms](./subjects/angular-forms)
 
 * App Development
   * Mockups
