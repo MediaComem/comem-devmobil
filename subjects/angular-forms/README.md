@@ -293,7 +293,7 @@ These are some of the supported classes ([full list][angular-form-control-status
 * `.ng-untouched` or `.ng-touched` is applied depending on whether the user has triggered `blur` event
 
 So when our field is invalid and dirty, it will have both the `.ng-invalid` and `.ng-dirty` CSS classes added to it.
-All you need to do is modify `src/app/app.component.css` to add a background color to input fields with this combination of classes:
+All you need to do is modify `src/app/home/home.page.css` to add a background color to input fields with this combination of classes:
 
 ```css
 ion-input.ng-invalid.ng-dirty {
