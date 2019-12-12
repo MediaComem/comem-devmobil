@@ -56,12 +56,13 @@ From the root of your project, use the following command to set up a "Hello" pag
 ```ts
 $> `ionic generate page Hello`
 > ng.cmd generate page Hello
-CREATE src/app/hello/hello.module.ts (533 bytes)
-CREATE src/app/hello/hello.page.html (123 bytes)
-CREATE src/app/hello/hello.page.spec.ts (677 bytes)
-CREATE src/app/hello/hello.page.ts (248 bytes)
+CREATE src/app/hello/hello-routing.module.ts (343 bytes)
+CREATE src/app/hello/hello.module.ts (465 bytes)
+CREATE src/app/hello/hello.page.html (124 bytes)
+CREATE src/app/hello/hello.page.spec.ts (640 bytes)
+CREATE src/app/hello/hello.page.ts (252 bytes)
 CREATE src/app/hello/hello.page.scss (0 bytes)
-UPDATE src/app/app-routing.module.ts (637 bytes)
+UPDATE src/app/app-routing.module.ts (497 bytes)
 [OK] Generated page!
 ```
 
@@ -78,6 +79,7 @@ Here is what executing the command did in our project:
 * Created a `hello.page.ts` file containing your page **class definition**, and referecing the previous `.html` and `.scss` files as your new page's template and style, respectively,
 * Created a `hello.page.spec.ts` file to write your page's tests into (forget this for now, we'll see what tests in Angular are all about later on this course),
 * Created a `hello.module.ts` file containing **a module that declares your new page** and how to navigate to it (more on this later),
+* Created a `hello-routing.module.ts` file defining **the navigation for this new page**,
 * Finally, updated the `app-routing.module.ts` file to **add your new page to your app's navigation**.
 
 > Now is a good time to take a look at **how navigation's done in an Ionic/Angular app**.
@@ -167,20 +169,50 @@ Let's see how the `HomePageModule` is defined to better understand what we're ta
 The code for the `HomePageModule` in the starter is as follows:
 
 ```ts
-// imports omitted for brevity
-* const routes: Routes = [{ path: '', component: HomePage }];
+// Other imports...
+*import { HelloPageRoutingModule } from './hello-routing.module';
+
+import { HelloPage } from './hello.page';
 
 @NgModule({
   imports: [
-    /* other imports */
-    RouterModule.`forChild`(routes)
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    `HelloPageRoutingModule`
   ],
-  declarations: [HomePage]
+  declarations: [HelloPage]
 })
-export class HomePageModule {}
+export class HelloPageModule {}
 ```
+
+We can see that the `HomePageModule` imports another module named `HelloPageRoutingModule`. The name is obviously related to routing, and so navigation.
+
+Let's see what's inside
+
+#### HomePageRoutingModule
+
+This module is the equivalent of the `app-routing.module.ts` file, but for our new `HelloPage`. It's content should be as follows:
+
+```ts
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { HelloPage } from './hello.page';
+
+*const routes: Routes = [
+*  { path: '', component: HelloPage }
+*];
+
+@NgModule({
+  imports: [RouterModule.`forChild`(routes)],
+  exports: [RouterModule],
+})
+export class HelloPageRoutingModule {}
+
+```
+
 * The only route defined in this module means that when the remaining path starts with `''` (i.e. nothing), then the `HomePage` should be rendered.
-* Note the usage of the `forChild` method when importing the `RouterModule`, instead of `forRoot`. This is necesseray to indicate that the `routes` of the `HomePageModule` are child routes.
+* Note the usage of the `forChild` method when importing the `RouterModule`, instead of `forRoot`. This is necesseray to indicate that the `routes` of the `HomePageRoutingModule` are child routes.
 
 ### URL matching (1/3)
 
@@ -206,13 +238,13 @@ Looking again at the root routes, the Router will find a match for the new path 
   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
 }
 ```
-This route will make Angular loads the `HomePageModule` and its child routes.
+This route will make Angular loads the `HomePageModule`, which imports the `HomePageRoutingModule` that declares its child routes.
 
-Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, which is also `home`, leaving a remaining path of `''` to match with one of the child routes of the `HomePageModule`.
+Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, which is also `home`, leaving a remaining path of `''` to match with one of the child routes in the `HomePageRoutingModule`.
 
 ### URL matching (3/3)
 
-Looking through the `HomePageModule` child routes for a match to the path `''`, the router will find one:
+Looking through the `HomePageRoutingModule` child routes for a match to the path `''`, the router will find one:
 
 ```ts
 { path: '', component: HomePage }
@@ -227,21 +259,24 @@ Let's add a new page to our app to see how we can navigate from one to the other
 From the root of your project, execute this command:
 
 ```bash
-$> ionic generate page UserPage
+$> ionic generate page User
 ```
 
 This generates a new page component in `src/app/user`, and update the root routes to include this new page in `app-routing.module.ts`:
 
 ```ts
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'prefix' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
-* { path: 'user', loadChildren: './user/user.module#UserPageModule' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'hello',
+    loadChildren: () => import('./hello/hello.module').then(m => m.HelloPageModule)
+  },
+* {
+*   path: 'user',
+*   loadChildren: () => import('./user/user.module').then(m => m.UserPageModule)
+* }
 ];
 ```
-> **Notice** how the `loadChildren` value for the `user` route is a simple string instead of a function. This is a **deprecated** notation (**strictly** equivalent to the other) that you should **not** use yourself.
-
-> Unfortunately, the Ionic CLI `generate` command still use it, at least with the `5.2.7` version. Future versions might fix it.
 
 ### Link to other page
 
@@ -266,21 +301,22 @@ Provided that our app is accessible at `https://example.com`, clicking this new 
 
 Until now, all our pages where accessible with a simple path: `home`, `user`.
 
-Let's say we want to add a `ProfilePage` as a child to our `UserPage`, and make it accessible with the `/user/profile` URL.
+Let's say we want to add a `ProfilePage` as a child to our `UserPage`, and make it accessible through the `/user/profile` URL.
 
 We could try to use once again the `ionic generate page` command. Let's do this with the `--dry-run` parameter to see if it does what we want:
 
 ```bash
 $> `ionic generate page Profile --dry-run`
 > ng.cmd generate page Profile --dry-run
+CREATE `src/app`/profile/profile-routing.module.ts (351 bytes)
+CREATE `src/app`/profile/profile.module.ts (479 bytes)
+CREATE `src/app`/profile/profile.page.html (126 bytes)
+CREATE `src/app`/profile/profile.page.spec.ts (654 bytes)
+CREATE `src/app`/profile/profile.page.ts (260 bytes)
+CREATE `src/app`/profile/profile.page.scss (0 bytes)
+*UPDATE src/app/app-routing.module.ts (735 bytes)
 
 NOTE: The "dryRun" flag means no changes were made.
-CREATE src/app/profile/profile.module.ts (569 bytes)
-CREATE src/app/profile/profile.page.html (130 bytes)
-CREATE src/app/profile/profile.page.spec.ts (727 bytes)
-CREATE src/app/profile/profile.page.ts (279 bytes)
-CREATE src/app/profile/profile.page.scss (0 bytes)
-UPDATE src/app/app-routing.module.ts (646 bytes)
 ```
 We see that this new page would be created in the `src/app` directory, and a new route would be added to the `app-routing.module.ts` file at the root level.
 
@@ -297,56 +333,43 @@ $> ionic generate page `user/`Profile --dry-run
 ```
 > Notice that the path added before our page's name is relative to the `src/app` folder.
 
-The result of this command is:
+#### That's it!
+
+The result of the command is:
 
 ```bash
+$> `ionic generate page user/Profile --dry-run`
 > ng.cmd generate page user/Profile --dry-run
+CREATE src/app/user/profile/profile-routing.module.ts (351 bytes)
+CREATE src/app/user/profile/profile.module.ts (479 bytes)
+CREATE src/app/user/profile/profile.page.html (126 bytes)
+CREATE src/app/user/profile/profile.page.spec.ts (654 bytes)
+CREATE src/app/user/profile/profile.page.ts (260 bytes)
+CREATE src/app/user/profile/profile.page.scss (0 bytes)
+UPDATE src/app/user/user-routing.module.ts (581 bytes)
 
 NOTE: The "dryRun" flag means no changes were made.
-CREATE src/app/user/profile/profile.module.ts (548 bytes)
-CREATE src/app/user/profile/profile.page.html (126 bytes)
-CREATE src/app/user/profile/profile.page.spec.ts (698 bytes)
-CREATE src/app/user/profile/profile.page.ts (260 bytes)
-CREATE src/app/user/profile/profile.page.scss (0 bytes)
-UPDATE `src/app/app-routing.module.ts` (632 bytes)
 ```
 
-The location of our files is correct, but the route is still added to the wrong file.
+The location of our files is correct, and the `user-routing.module.ts` has been updated.
 
-### Generate page's route in specific module
-
-Remember we want this new page to be reachable with the `https://example.com/user/profile` URL, thus a path of `user/profile`.
-
-With our current configuration, when the router encouters an URL that starts with `user`, it will search a match for the remaining path, `profile` in this case, in the child routes of the `UserPageModule`.
-
-Thus, this is where we should add our new route.
-
-We need to use the `--module` parameter and pass it **the path, relative to `src/app`, that points to the file containing the module in which we want to add the new route**:
+Everything looks good, we can execute the command without the `--dryRun` param:
 
 ```bash
-$> ionic generate page user/Profile `--module=user/user.module.ts`
-> ng.cmd generate page user/Profile --module=user/user.module.ts
-CREATE src/app/user/profile/profile.module.ts (548 bytes)
-CREATE src/app/user/profile/profile.page.html (126 bytes)
-CREATE src/app/user/profile/profile.page.spec.ts (698 bytes)
-CREATE src/app/user/profile/profile.page.ts (260 bytes)
-CREATE src/app/user/profile/profile.page.scss (0 bytes)
-UPDATE `src/app/user/user.module.ts` (616 bytes)
-[OK] Generated page!
+$> ionic generate page user/Profile
 ```
-That seems to have done what we wanted. Let's take a look at the files
 
-### Updates files
+### Check the paths
 
-First, open the `user/user.module.ts` file and look at the `routes` constant:
+First, open the `user/user-routing.module.ts` file and look at the `routes` constant:
 
 ```ts
 const routes: Routes = [
   { path: '', component: UserPage },
-* { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' }
+  `{ path: 'profile', loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule) }`
 ];
 ```
-Then, open the `user/profile/profile.module.ts` file:
+Then, open the `user/profile/profile-routing.module.ts` file:
 
 ```ts
 // imports omitted for brevity
@@ -355,13 +378,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    /* other imports */
-    RouterModule.forChild(routes)
-  ],
-  declarations: [ProfilePage]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class ProfilePageModule {}
+export class ProfilePageRoutingModule {}
 ```
 We should be able to access this new page through `https://example.com/user/profile`, or a button in the `UserPage` template.
 
@@ -377,9 +397,9 @@ Do this by setting the `path` to the special value `**` (which means "everything
 
 ```ts
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'prefix' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
-  { path: 'user', loadChildren: './user/user.module#UserPageModule' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'hello', loadChildren: () => import('./hello/hello.module').then(m => m.HelloPageModule) },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserPageModule) },
 * { path: '**', component: ErrorPage }
 ];
 ```
