@@ -22,6 +22,9 @@ Learn what's a JavaScript closure, how to use them, and common pitfalls.
   - [Wait... what?](#wait-what)
   - [Doing it right](#doing-it-right)
   - [The revelation](#the-revelation)
+  - [Doing it right - ES6 version](#doing-it-right---es6-version)
+    - [But... WHY?! - `var`](#but-why---var)
+    - [But... WHY?! - `let`](#but-why---let)
 - [References](#references)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
