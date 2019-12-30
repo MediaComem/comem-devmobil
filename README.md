@@ -52,6 +52,9 @@ You will:
   * [Ionic extras (geolocation, leaflet & camera)](./subjects/ionic-extras)
   * [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
+* Real-Time
+  * [WebSocket](./subjects/websocket)
+
 ## What you will need
 
 * A Unix CLI like Terminal on Mac, Git Bash or equivalent on Windows (avoid WSL as it does not work well with Ionic for now)
