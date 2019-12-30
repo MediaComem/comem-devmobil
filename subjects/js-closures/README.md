@@ -36,7 +36,7 @@ Consider this example:
 
 ```javascript
 function makeLeader() {
-  let city = 'Sparta';
+  var city = 'Sparta';
 * return function leader() {
 *   console.log('This is... ' + city);
 * };
@@ -79,7 +79,7 @@ For illustration purposes, let's rewrite the previous example like this.
 
 ```javascript
 function makeLeader() {
-  let city = "Sparta";
+  var city = "Sparta";
   return leader; // Return the leader() function declared below
 };
 
@@ -121,8 +121,8 @@ Consider the following code:
 // Returns an array of 10 soldier() functions
 function createArmy() {
   const generatedSoldiers = []; // Create the array
-  for (let nb = 1; nb < 11; nb++) {
-    let soldier = function() { // soldier function that logs the soldier's number
+  for (var nb = 1; nb < 11; nb++) {
+    const soldier = function() { // soldier function that logs the soldier's number
       console.log("I'm the soldier n°" + nb);
     };
     generatedSoldiers.push(soldier); // Store it in the array
@@ -155,8 +155,8 @@ In this case, `soldier` has a reference to the `nb` variable (declared in the `f
 
 ```javascript
 // ...
-*for (let nb = 1; nb < 11; nb++) {
-  let soldier = function() {
+*for (var nb = 1; nb < 11; nb++) {
+  const soldier = function() {
 *   console.log("I'm the soldier n°" + nb);
   };
   // ...
@@ -188,7 +188,7 @@ To solve this problem, we have to find a way to capture not a *reference* to `nb
 // Returns an array of 10 soldier() functions
 function createArmy() {
   const generatedSoldiers = [];
-  for (let nb = 1; nb < 11; nb++) {
+  for (var nb = 1; nb < 11; nb++) {
 *   generatedSoldiers.push(makeSoldier(nb));
   }
   return generatedSoldiers;
@@ -228,15 +228,88 @@ When you pass a primitive value to a function in JavaScript, its **value** is pa
 
 So each `soldier()` function will keep a reference to its own `rank` variable, which had a different value at every iteration of the `for` loop.
 
+### Doing it right - ES6 version
+
+<runkit></runkit>
+
+Since ES6, there's another way to avoid this reference issue that is much more straight-forward and doesn't required changing the code so much.
+
+The solution is to use the `let` keyword instead of the `var` keyword:
+
+```js
+// Returns an array of 10 soldier() functions
+function createArmy() {
+  const generatedSoldiers = [];
+  for (`let` nb = 1; nb < 11; nb++) {
+    const soldier = function() {
+      console.log("I'm the soldier n°" + nb);
+    };
+    generatedSoldiers.push(soldier);
+  }
+  return generatedSoldiers;
+};
+
+const spartan = createArmy();
+
+spartan.forEach(function(soldierFunc) {
+  soldierFunc();
+});
+```
+> No need to create a factory function if you use the `let` keyword.
+
+#### But... WHY?! - `var`
+
+<runkit></runkit>
+
+To undestand of changing the keyword solve the issue, it's important to understand the notion of variable scoping and how `let` and `var` handle this notion differently.
+
+Using `var` to declare a variable makes it scoped to the **function** in which it is declared.
+
+```js
+function createArmy() {
+  // ...
+  for (`var nb` = 1; nb < 11; nb++) {
+    // ...
+  }
+  console.log(nb);
+};
+createArmy();
+```
+
+In this case, the `var nb` variable declared in the `for` loop is scoped to the `createArmy()` function, meaning that it will be shared and visible by all the code inside this function.
+
+#### But... WHY?! - `let`
+
+<runkit></runkit>
+
+On the other hand, the `let` keyword declares a variable that is scoped to the **block** in which it is declared.
+
+A function is a block, all right, but an `if...else` is also a block, as well as a `for` loop.
+
+```js
+function createArmy() {
+  // ...
+  for (`let nb` = 1; nb < 11; nb++) {
+    // ...
+  }
+  console.log(nb);
+};
+createArmy();
+```
+In this case, the `let nb` variable is scoped to **one specific iteration** of the `for` loop. Each iteration will have its own `nb` variable, with a different value each time (the first iteration will have `nb = 1` ; the second iteration, `nb = 2` ; and so on...), **thus fixing the closure issue**.
+
+`nb` being scoped to the `for` loop means that **it does not exist outside of it** ; the code inside `createArmy()` but outside the `for` loop can neither _see_ the `nb` variable, nor _access_ it.
+
+This is why executing the above code will result in a `ReferenceError`.
 
 ## References
 
 **Documentation**
 
 * [MDN - Closures][closure]
-
+* [MDN - let][let]
 
 
 [chrome]: https://www.google.com/chrome/
 [closure]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures
-[closure-loop-bug-codepen]: http://codepen.io/AlphaHydrae/pen/gmYQpN?editors=0010#0
+[let]: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Instructions/let
