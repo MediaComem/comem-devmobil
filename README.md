@@ -25,7 +25,7 @@ You will:
 
 ## Plan
 
-* [Introduction](./subjects/inoic)
+* [Introduction](./subjects/ionic)
 
 * Going further with JavaScript
   * [JavaScript prototypes](./subjects/js-prototypes)
