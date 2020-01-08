@@ -54,6 +54,7 @@ You will:
 
 * Real-Time
   * [WebSocket](./subjects/websocket)
+  * [WAMP](./subjects/wamp)
 
 ## What you will need
 
