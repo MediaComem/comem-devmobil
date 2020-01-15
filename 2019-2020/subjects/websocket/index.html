@@ -3,7 +3,7 @@
   <head>
     <title>WebSocket (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/e97f37982350cc6b4ef58a4321ece7a78862ffa8/subjects/websocket/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/12160f90f1896aaa8e2fd130cbc13a31aa1188e2/subjects/websocket/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -72,7 +72,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 const WS_SERVER_URL = 'ws://echo.websocket.org';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   // A ReplaySubject will emit its X latest values (1 in this case) each time
   // its 'subscribe()' method is called
@@ -162,7 +162,7 @@ import { Injectable } from '@angular/core';
 *import { Observable, Observer, ReplaySubject } from 'rxjs';
 *import { map, switchMap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   // ...
   public listen(): Observable<MessageEvent> {
@@ -245,7 +245,7 @@ To make our `WebSocketService` capable of sending messages, we will create a new
 
 const WS_SERVER_URL = 'ws://echo.websocket.org';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   private ws: WebSocket;
 
