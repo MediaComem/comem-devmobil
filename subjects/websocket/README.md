@@ -71,7 +71,7 @@ import { map, switchMap } from 'rxjs/operators';
 
 const WS_SERVER_URL = 'ws://echo.websocket.org';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   // A ReplaySubject will emit its X latest values (1 in this case) each time
   // its 'subscribe()' method is called
@@ -149,7 +149,7 @@ import { Injectable } from '@angular/core';
 *import { Observable, Observer, ReplaySubject } from 'rxjs';
 *import { map, switchMap } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   // ...
   public listen(): Observable<MessageEvent> {
@@ -223,7 +223,7 @@ To make our `WebSocketService` capable of sending messages, we will create a new
 
 const WS_SERVER_URL = 'ws://echo.websocket.org';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   private ws: WebSocket;
 
