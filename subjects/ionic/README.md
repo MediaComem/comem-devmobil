@@ -15,19 +15,28 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [What is Ionic?](#what-is-ionic)
-  - [Which OS should you support?](#which-os-should-you-support)
-  - [How can you deal with OS fragmentation?](#how-can-you-deal-with-os-fragmentation)
-  - [Cordova](#cordova)
+- [Which OS (and version) should your app support?](#which-os-and-version-should-your-app-support)
+- [Hybrid mobile applications](#hybrid-mobile-applications)
+  - [Hybrid VS Native](#hybrid-vs-native)
+    - [Native Development](#native-development)
+    - [Hybrid Development](#hybrid-development)
+  - [Apache Cordova](#apache-cordova)
+    - [Other options](#other-options)
   - [What about Ionic?](#what-about-ionic)
+    - [A small word about Capacitor](#a-small-word-about-capacitor)
+    - [What can I do with Ionic?](#what-can-i-do-with-ionic)
 - [Demo](#demo)
   - [Install Ionic](#install-ionic)
   - [Starter templates](#starter-templates)
 - [Basics of Ionic](#basics-of-ionic)
   - [Components](#components)
   - [Angular components](#angular-components)
+    - [List component functionality](#list-component-functionality)
 - [Running apps on your mobile device](#running-apps-on-your-mobile-device)
   - [Ionic Dev App](#ionic-dev-app)
+  - [iOS device](#ios-device)
+  - [Android device](#android-device)
+    - [Android SDK](#android-sdk)
 - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

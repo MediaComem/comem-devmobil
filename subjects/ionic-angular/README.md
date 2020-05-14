@@ -10,11 +10,31 @@ Learn to work with [Angular][angular] in an [Ionic][ionic] project.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Scaffolding](#scaffolding)
+  - [Generate app pages](#generate-app-pages)
+  - [What did `generate` do?](#what-did-generate-do)
 - [Navigation](#navigation)
-  - [Navigating to a page](#navigating-to-a-page)
-  - [Passing parameters](#passing-parameters)
-  - [Lifecycle hooks](#lifecycle-hooks)
+  - [Base navigation](#base-navigation)
+  - [Route definition (1/2)](#route-definition-12)
+  - [Route definition (2/2)](#route-definition-22)
+  - [HomePageModule](#homepagemodule)
+    - [HomePageRoutingModule](#homepageroutingmodule)
+  - [URL matching (1/3)](#url-matching-13)
+  - [URL matching (2/3)](#url-matching-23)
+  - [URL matching (3/3)](#url-matching-33)
+- [Navigating to a page](#navigating-to-a-page)
+  - [Link to other page](#link-to-other-page)
+- [Nested pages](#nested-pages)
+  - [Generate page in specific path](#generate-page-in-specific-path)
+    - [That's it!](#thats-it)
+  - [Check the paths](#check-the-paths)
+- ["Catch all" route](#catch-all-route)
+- [Path placeholder](#path-placeholder)
+  - [Access path parameter](#access-path-parameter)
+  - [Link to parametrized path](#link-to-parametrized-path)
+- [Lifecycle hooks](#lifecycle-hooks)
+- [Guarding routes](#guarding-routes)
 - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

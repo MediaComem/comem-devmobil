@@ -20,6 +20,7 @@ which you should both read to gain a deeper understanding of Angular.
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
+- [Getting started](#getting-started)
 - [Forms](#forms)
   - [HTML validations](#html-validations)
   - [Creating a form](#creating-a-form)
@@ -39,7 +40,7 @@ which you should both read to gain a deeper understanding of Angular.
   - [Asynchronous validators](#asynchronous-validators)
 - [Reactive forms](#reactive-forms)
   - [Using reactive forms in the component](#using-reactive-forms-in-the-component)
-    - [Getting the form from the component](#getting-the-form-from-the-component)
+    - [Form submition](#form-submition)
     - [Reacting to form value changes](#reacting-to-form-value-changes)
   - [Using reactive forms in the template](#using-reactive-forms-in-the-template)
   - [Reactive form validations](#reactive-form-validations)

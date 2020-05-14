@@ -19,7 +19,7 @@
   "scripts": {
     "build": "courses-md build",
     "deploy": "courses-md publish",
-    "doctoc": "doctoc --notitle --github README.md",
+    "doctoc": "doctoc --notitle --github ./subjects && doctoc --notitle --github README.md",
     "start": "courses-md",
     "watch": "courses-md watch"
   },

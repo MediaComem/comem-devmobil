@@ -38,8 +38,9 @@ Learn the power of reactive programming using Observables to work with asynchron
     - [Marble-ous](#marble-ous)
 - [What are the advantages](#what-are-the-advantages)
   - [Function refactor](#function-refactor)
+- [Parallel Operations](#parallel-operations)
 - [Why would I use this... thing?](#why-would-i-use-this-thing)
-- [Resources](#resources)
+  - [Comparison](#comparison)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

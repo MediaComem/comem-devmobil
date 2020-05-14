@@ -15,17 +15,25 @@ Useful tools to add to an Ionic application.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Geolocation](#geolocation)
   - [Registering the Geolocation service with Angular](#registering-the-geolocation-service-with-angular)
   - [Injecting the Geolocation service](#injecting-the-geolocation-service)
   - [Getting the user's location](#getting-the-users-location)
+  - [Tracking the user's location](#tracking-the-users-location)
   - [Allowing the brower to retrieve the user's location](#allowing-the-brower-to-retrieve-the-users-location)
   - [Geolocation on insecure origins](#geolocation-on-insecure-origins)
 - [Leaflet](#leaflet)
   - [Importing Leaflet styles](#importing-leaflet-styles)
+  - [Importing Leaflet assets](#importing-leaflet-assets)
   - [Registering the Leaflet module with Angular](#registering-the-leaflet-module-with-angular)
   - [Displaying a map](#displaying-a-map)
+    - [Adding the map to the component's template](#adding-the-map-to-the-components-template)
+    - [Troubleshooting](#troubleshooting)
   - [Markers](#markers)
+    - [Define](#define)
+    - [Adding the markers to the map](#adding-the-markers-to-the-map)
+    - [Adding a tooltip to a marker](#adding-a-tooltip-to-a-marker)
   - [Getting a reference to the map](#getting-a-reference-to-the-map)
   - [Listening to map events](#listening-to-map-events)
 - [Using your mobile device's camera](#using-your-mobile-devices-camera)

@@ -12,17 +12,18 @@ Learn how to connect to a WAMP Brocker, and send/receive events on topics or cal
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [WebSocket API](#websocket-api)
-- [`WebSocket`](#websocket)
-  - [Angular WebSocket Service](#angular-websocket-service)
+- [WAMP](#wamp)
+  - [Angular WAMP Service](#angular-wamp-service)
   - [Use the service](#use-the-service)
-- [Listening to messages](#listening-to-messages)
-  - [Add listening capabilities to the Angular Service](#add-listening-capabilities-to-the-angular-service)
-    - [`listen()` method](#listen-method)
-    - [Listen on the component](#listen-on-the-component)
-  - [Send messages](#send-messages)
-    - [Sending messages on the service](#sending-messages-on-the-service)
-    - [Sending messages from the component](#sending-messages-from-the-component)
+- [Listening to topics](#listening-to-topics)
+  - [Listen on the component](#listen-on-the-component)
+- [Send events in topic](#send-events-in-topic)
+  - [Sending events from the component](#sending-events-from-the-component)
+- [RPC](#rpc)
+  - [Calling a registered procedure](#calling-a-registered-procedure)
+  - [Call a registered procedure from the component](#call-a-registered-procedure-from-the-component)
+  - [Registering a procedure](#registering-a-procedure)
+  - [Register a component's method as a Remote Procedure](#register-a-components-method-as-a-remote-procedure)
 - [Next steps](#next-steps)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
