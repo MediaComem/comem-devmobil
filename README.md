@@ -11,8 +11,8 @@ You will:
 - Add a **real-time** component to your hybrid mobile application.
 - Run the mobile application on your **phone**.
 
-<!** START doctoc generated TOC please keep comment here to allow auto update **>
-<!** DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE **>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Plan](#plan)
 - [What you will need](#what-you-will-need)
@@ -20,7 +20,7 @@ You will:
   - [Delivery](#delivery)
 - [Useful links](#useful-links)
 
-<!** END doctoc generated TOC please keep comment here to allow auto update **>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## What you will need
 
