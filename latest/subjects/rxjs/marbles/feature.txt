@@ -1,0 +1,6 @@
+marble feature
+{
+  source click: +-C--C-(SC)-C-(SC)-(SC)->
+  operator "filter(click => click.shiftKey)": +------(SC)---(SC)-(SC)->
+  operator "map(click => ({ x: click.pageX, y: click.pageY }))": +------(Obj)---(Obj)-(Obj)->
+}

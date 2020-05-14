@@ -1,0 +1,5 @@
+marble map_operator
+{
+  source lettersObservable: +-A--B--C--A--A--D->
+  operator "map(letter => letter.toLowerCase())": +-a--b--c--a--a--d->
+}
