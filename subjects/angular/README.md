@@ -1123,6 +1123,8 @@ Another solution is to return an **Observable**.
 Angular includes the [RxJS][rxjs] library for reactive programming using Observables,
 to make it easier to compose asynchronous or callback-based code.
 
+> To learn more about `Observables` and the `RxJS` library, see [the corresponding subject][rxjs-subject].
+
 ### What (the hell) is an observable?
 
 An observable is an **asynchronous data stream**, meaning that it allows you to observe **multiple events over time**.
@@ -1756,6 +1758,7 @@ Read the [documentation][angular-component-interaction] to learn more.
 [ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
 [js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [rxjs]: http://reactivex.io/rxjs/
+[rxjs-subject]: ../rxjs
 [intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
 [angular-docs-http-client]: https://angular.io/guide/http
 [js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
