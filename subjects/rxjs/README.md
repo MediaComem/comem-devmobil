@@ -47,7 +47,7 @@ Learn the power of reactive programming using Observables to work with asynchron
 
 To follow along the examples of this subject, here is what you need to do:
 
-1. Create a new directory in your `dfa-course` main directory. Let's call it `rxjs`
+1. Create a new directory somewhere in your filesystem. Let's call it `rxjs`
 1. Create those files in this new `rxjs` directory:
   - An `index.html` file with [minimal markup][htmlshell],
   - A blank `script.js`
