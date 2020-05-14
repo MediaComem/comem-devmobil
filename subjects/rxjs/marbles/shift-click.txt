@@ -1,0 +1,5 @@
+marble shift_click
+{
+  source click: +-C--C-(SC)-C-(SC)-(SC)->
+  operator "filter(click => click.shiftKey)": +------(SC)---(SC)-(SC)->
+}
