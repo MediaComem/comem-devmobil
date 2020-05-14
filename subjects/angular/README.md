@@ -198,13 +198,10 @@ To do so, in the directory where you want to generate the application folder, ex
 
 ```bash
 $> npx @angular/cli new comem-angular-starter
-```
-
-When asked, respond with the following answers:
-```bash
 ? Would you like to add Angular routing? `No`
 ? Which stylesheet format would you like to use? `SCSS`
 ```
+> If you'd prefer to install the Angular CLI locally, see [the related subject][angular-cli]
 
 Wait for the generator to end (this may take several minutes), then go to the newly created folder and start the development server:
 
@@ -265,6 +262,9 @@ export `class AppModule` { }
 
 A module is a way to help organize related things (components, services, etc) together.
 
+> **Angular CLI**: Use `ng generate module <ModuleName>` to create a new module in its new directory
+
+
 #### Basic module definition
 
 Take a look at the [`@NgModule`][angular-docs-ng-module] annotation:
@@ -313,6 +313,8 @@ export `class AppComponent` {
 A component is any [JavaScript class][js-classes] annotated with the [`@Component`][angular-docs-component] decorator.
 
 Let's dig into that line by line.
+
+> **Angular CLI**: Use `ng generate component <ComponentName>` to create all the files for a new component in a new directory
 
 #### Component selector
 
@@ -827,21 +829,14 @@ It's good practice to create **classes** for your **business models**.
 A TypeScript class with clearly defined fields and types will help us avoid mistakes in our code.
 Let's start with a very simple one.
 
-Angular CLI comes with scaffolding tools to help you create files. You can access the Angular CLI using the `npm run ng` script.
-Let's use this to generate a new blank class:
-
-```bash
-$> npm run ng generate class models/joke
-```
-
-This will create a `src/app/models/joke.ts` file (and it's corresponding `joke.spec.ts` file that you can ignore).
-Open it and add a `text` attribute to our new `Joke` class:
+Create a new file at `src/app/models/joke.ts` with the following content:
 
 ```ts
 export class Joke {
   `text: string;`
 }
 ```
+> **Angular CLI**: Use `ng generate class <ClassName>` to create the files for a new model class
 
 ### Using models
 
@@ -924,30 +919,14 @@ they should focus on **presenting data** and **delegate data access** to special
 
 This helps your components remain as simple as possible while services handle your business logic.
 
-Let's use Angular CLI to generate a joke service:
-
-```bash
-$> npm run ng generate service services/joke
-```
-Again, you can ignore the generated `joke.spec.ts` file.
+> **Angular CLI**: Use `ng generate service <ServiceName>` to create all the files for a new service
 
 ### The joke service
-
-The `src/app/services/joke.service.ts` file has been generated:
-
-```ts
-import { Injectable } from '@angular/core';
-
-@Injectable({ providedIn: 'root' })
-export class JokeService {
-  constructor() { }
-}
-```
 
 Once again, a service is simply a JavaScript class, annotated with the [`@Injectable`][angular-docs-injectable] decorator.
 More about that later.
 
-For now, simply add a method which returns a joke:
+Create a new `src/app/services/joke.service.ts` file with the following content:
 
 ```ts
 import { Injectable } from '@angular/core';
@@ -1261,15 +1240,11 @@ This does not fit our `Joke` model, which only has a `text` property.
 
 #### Joke API response model
 
-Let's create a new `JokeResponse` model that we can use with this API:
+Let's create a new `JokeResponse` model that we can use with this API.
 
-```bash
-$> npm run ng generate class models/joke-response
-```
+Since it's a nested structure, we'll need **2 classes**.
 
-This generates a new model file in `src/app/models/joke-response.ts`.
-Update it to reflect the **structure** of the API response.
-Since it's a nested structure, we'll need **2 classes**:
+Create a new file at `src/app/models/joke-response.ts` with the following content:
 
 ```ts
 export class JokeResponse {
@@ -1769,6 +1744,7 @@ Read the [documentation][angular-component-interaction] to learn more.
 [angular-docs-output]: https://angular.io/api/core/Output
 [angular-component-interaction]: https://angular.io/guide/component-interaction
 [a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
+[angular-cli]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular-cli/?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest
 [angular-api]: https://angular.io/api
 [angular-testing]: https://angular.io/guide/testing
 [angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/

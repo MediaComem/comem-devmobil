@@ -30,6 +30,8 @@ Learn about more advanced [Angular][angular] concept.
 
 An **attribute** directive changes the **appearance or behavior of a DOM element**.
 
+> **Angular CLI**: Use `ng generate directive <DirectiveName>` to create all the files for a new directive
+
 Create a `src/app/highlight.directive.ts` file with the following contents:
 
 ```ts
@@ -47,8 +49,7 @@ export `class HighlightDirective` {
 
 Similarly to a component, a directive is a JavaScript class, this time annotated with the [`@Directive`][angular-docs-directive] decorator.
 
-The selector, `[appHighlight]` is an [attribute selector][css-attribute-selector].
-Also note that it is good practice to prefix the selector with your application name ("app" for this example) to avoid **naming collisions** with other directives.
+The selector, `[appHighlight]` is an [attribute selector][css-attribute-selector]. It's a good practice to prefix the selector ("app" for this example) to avoid **naming collisions**.
 
 ### Using an attribute directive
 
@@ -105,11 +106,9 @@ In this example we set the background color to yellow.
 
 Let's implement an (amazing) pipe that adds an exclamation point to the end of a string:
 
-```bash
-$> ng generate pipe --spec false pipes/exclamation
-```
+> **Angular CLI**: Use `ng generate pipe <PipeName>` to create all the files for a new pipe
 
-Implement the transformation in the generated file (`src/app/pipes/exclamation.pipe.ts`):
+Create a `src/app/pipes/exclamation.pipe.ts` file with the following contents:
 
 ```ts
 import { Pipe, PipeTransform } from '@angular/core';
@@ -126,8 +125,7 @@ export class ExclamationPipe implements PipeTransform {
 
 ### Using a pipe
 
-Note that Angular automatically registered our pipe in the module's `declarations` array in `src/app/app.module.ts`.
-This is necessary to be able to use it in a template:
+To use your new pipe, you must **declare** it in your module's `declarations` array in `src/app/app.module.ts`:
 
 ```ts
 // Other imports...
@@ -136,6 +134,7 @@ This is necessary to be able to use it in a template:
 @NgModule({
   declarations: [
     AppComponent,
+    HighlightDirective,
     `ExclamationPipe`
   ],
   // ...
