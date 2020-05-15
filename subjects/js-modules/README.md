@@ -1,5 +1,9 @@
 # JavaScript Modules
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn about JavaScript module systems and ECMAScript modules.
 
 <!-- slide-include ../../BANNER.md -->
