@@ -3,11 +3,19 @@
   <head>
     <title>JavaScript Modules (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/b9e10ba57ef3e19618e80a2b671226729f6d5142/subjects/js-modules/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/f4bf9b137a8564ad277c6472e43d71f68ba55c70/subjects/js-modules/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # JavaScript Modules
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">JavaScript Modules</a>]
 
 Learn about JavaScript module systems and ECMAScript modules.
 
@@ -57,7 +65,7 @@ Conflicts between different pieces of software must be avoided (e.g. prevent var
 ---
 ### Traditional client-side JavaScript dependencies
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#2">Why are modules needed?</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#3">Why are modules needed?</a>]
 
 Dependencies are **implicit** in a traditional client-side JavaScript browser page.
 It's the **developer's job** to **manually** ensure all dependencies are satisfied **in the correct order**:
@@ -86,7 +94,7 @@ It's the **developer's job** to **manually** ensure all dependencies are satisfi
 ---
 ### Traditional client-side JavaScript encapsulation
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#2">Why are modules needed?</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#3">Why are modules needed?</a>]
 
 <runkit></runkit>
 
@@ -122,7 +130,7 @@ console.log(privateName); // ReferenceError: privateName is not defined
 ---
 ### Problems of traditional dependency & encapsulation
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#2">Why are modules needed?</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#3">Why are modules needed?</a>]
 
 * **Dependency management** gets cumbersome as JavaScript development complexifies:
   where should newer dependencies be put to maintain proper order of the load chain?
@@ -170,7 +178,7 @@ export function myExample() {}
 ---
 ### JavaScript module systems compabitility
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#6">Modern JavaScript module systems</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#7">Modern JavaScript module systems</a>]
 
 Those systems are **not natively supported by browsers** (although ECMAScript modules are almost there),
 meaning that you cannot use AMD's `define()` or CommonJS's `require()` in the browser without including a module loader like RequireJS or System.js;
@@ -218,7 +226,7 @@ export default function doAllTheThings() {
 ---
 ### What's in a module?
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 A module is simply a JavaScript file.
 
@@ -233,7 +241,7 @@ where all public variables are in the global scope.
 ---
 ### The `export` statement
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 The **`export`** statement is used to export functions, objects or primitive values
 from a module so they can be used by other programs with the `import` statement.
@@ -262,7 +270,7 @@ export { default } from …;
 ---
 ### The `import` statement
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 The **`import`** statement is used to import functions, objects or primitive values exported by another module.
 
@@ -283,7 +291,7 @@ import 'module-name';
 ---
 ### Exporting and importing values
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 .grid-45[
 
@@ -351,7 +359,7 @@ console.log(`plane`.speed): // 3540
 ---
 ### Default exports
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 .grid-40[
 
@@ -409,7 +417,7 @@ console.log(`truth`); // true
 ---
 ### Renaming exports and imports
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 The `as` keyword can be used to rename an exported variable:
 
@@ -446,7 +454,7 @@ export default class Component extends `ReactComponent` {
 ---
 ### Transitive exports
 
-.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#8">ECMAScript modules</a>]
+.breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#9">ECMAScript modules</a>]
 
 Let's assume `module-a.js` exports these values:
 
