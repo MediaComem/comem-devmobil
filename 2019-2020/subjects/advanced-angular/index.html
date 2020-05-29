@@ -3,11 +3,19 @@
   <head>
     <title>Advanced Angular (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/advanced-angular/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/advanced-angular/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # Advanced Angular
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">Advanced Angular</a>]
 
 Learn about more advanced [Angular][angular] concept.
 
@@ -54,7 +62,7 @@ The selector, `[appHighlight]` is an [attribute selector][css-attribute-selector
 ---
 ### Using an attribute directive
 
-.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#2">Custom attribute directives</a>]
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#3">Custom attribute directives</a>]
 
 To use your new attribute directive, you must **declare** it in your module's `declarations` array in `src/app/app.module.ts`:
 
@@ -86,7 +94,7 @@ You should see the directive being used in the console after entering some text 
 ---
 ### Modifying the DOM
 
-.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#2">Custom attribute directives</a>]
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#3">Custom attribute directives</a>]
 
 Now add an `ElementRef` argument to the directive's constructor in `src/app/highlight.directive.ts`:
 
@@ -135,7 +143,7 @@ export class ExclamationPipe implements PipeTransform {
 ---
 ### Using a pipe
 
-.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#5">Custom pipes</a>]
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#6">Custom pipes</a>]
 
 To use your new pipe, you must **declare** it in your module's `declarations` array in `src/app/app.module.ts`:
 
@@ -166,7 +174,7 @@ You can do that in `src/app/app.component.html`, then type some text in the inpu
 ---
 ### Pipe parameters
 
-.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#5">Custom pipes</a>]
+.breadcrumbs[<a href="#1">Advanced Angular</a> > <a href="#6">Custom pipes</a>]
 
 Pipe can also take **parameters**.
 Let's add a number parameter to allow customizing the number of exclamation points in `src/app/pipes/exclamation.pipe.ts`:

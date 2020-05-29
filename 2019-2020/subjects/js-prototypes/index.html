@@ -3,11 +3,19 @@
   <head>
     <title>JavaScript Prototypes (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/js-prototypes/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/js-prototypes/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # JavaScript Prototypes
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a>]
 
 Learn about prototypal inheritance in JavaScript.
 
@@ -47,7 +55,7 @@ class: center, middle
 ---
 ### The prototype chain
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a>]
 
 <runkit></runkit>
 
@@ -79,7 +87,7 @@ the prototype of the prototype, and so on until either a property with a matchin
 ---
 ### Creating plain JavaScript objects
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a>]
 
 <runkit></runkit>
 
@@ -112,7 +120,7 @@ a property that doesn't exist on `person` or on `Object.prototype`, we got `unde
 ---
 ### Creating objects with `Object.create`
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a>]
 
 <runkit></runkit>
 
@@ -142,7 +150,7 @@ console.log(prototypeOfPerson === Object.prototype); // true
 ---
 #### Accessing properties in a prototype chain (part 1)
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a> > <a href="#5">Creating objects with `Object.create`</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a> > <a href="#6">Creating objects with `Object.create`</a>]
 
 <runkit></runkit>
 
@@ -169,7 +177,7 @@ Obviously, we can retrieve that property since we just added it to `child`.
 ---
 #### Accessing properties in a prototype chain (part 2)
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a> > <a href="#5">Creating objects with `Object.create`</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a> > <a href="#6">Creating objects with `Object.create`</a>]
 
 <runkit></runkit>
 
@@ -198,7 +206,7 @@ Since `person` is the prototype of `child`, and it has a `firstName` property, w
 ---
 #### Accessing properties in a prototype chain (part 3)
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a> > <a href="#5">Creating objects with `Object.create`</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a> > <a href="#6">Creating objects with `Object.create`</a>]
 
 <runkit></runkit>
 
@@ -226,7 +234,7 @@ so after moving all the way up the prototype chain and having found no matching 
 ---
 #### Overwriting a parent prototype's property
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a> > <a href="#5">Creating objects with `Object.create`</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a> > <a href="#6">Creating objects with `Object.create`</a>]
 
 <runkit></runkit>
 
@@ -256,7 +264,7 @@ When you access `child.lastName`, it returns its prototype's property:
 ---
 ### Creating objects with a constructor function
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a>]
 
 <runkit></runkit>
 
@@ -289,7 +297,7 @@ When you use that function **as a constructor with `new`**, the prototype of the
 ---
 ### What does this mean?
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#2">Prototypal inheritance</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#3">Prototypal inheritance</a>]
 
 Let's combine two of the important things we just learned:
 
@@ -357,7 +365,7 @@ console.log(person.getFullName()); // "Bob Page"
 ---
 ### The value of `this`
 
-.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#12">Implementing a class-like structure with prototypes</a>]
+.breadcrumbs[<a href="#1">JavaScript Prototypes</a> > <a href="#13">Implementing a class-like structure with prototypes</a>]
 
 <runkit></runkit>
 

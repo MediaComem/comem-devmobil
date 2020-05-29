@@ -3,11 +3,19 @@
   <head>
     <title>JavaScript Closures (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/js-closures/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/js-closures/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # JavaScript Closures
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">JavaScript Closures</a>]
 
 Learn what's a JavaScript closure, how to use them, and common pitfalls.
 
@@ -74,7 +82,7 @@ console.log(gerard === leonidas); // false
 ---
 ### This is not...
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#2">THIS!.. IS!.. CLOSURE!</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#3">THIS!.. IS!.. CLOSURE!</a>]
 
 <runkit></runkit>
 
@@ -156,7 +164,7 @@ Instead, all the functions will print `"I'm the soldier n°11"`...
 ---
 ### Wait... what?
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a>]
 
 In the previous example, the function stored in `soldier` is a **closure**: it has a reference to a variable declared in an outer scope.
 
@@ -184,7 +192,7 @@ The `soldier` functions will only check the value of `nb` **when they are execut
 ---
 ### Doing it right
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a>]
 
 <runkit></runkit>
 
@@ -217,7 +225,7 @@ spartan.forEach(function(soldierFunc) {
 ---
 ### The revelation
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a>]
 
 We have introduced a **factory function**, `makeSoldier()`, which returns a new `soldier()` function when called:
 
@@ -246,7 +254,7 @@ So each `soldier()` function will keep a reference to its own `rank` variable, w
 ---
 ### Doing it right - ES6 version
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a>]
 
 <runkit></runkit>
 
@@ -278,7 +286,7 @@ spartan.forEach(function(soldierFunc) {
 ---
 #### But... WHY?! - `var`
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a> > <a href="#8">Doing it right - ES6 version</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a> > <a href="#9">Doing it right - ES6 version</a>]
 
 <runkit></runkit>
 
@@ -302,7 +310,7 @@ In this case, the `var nb` variable declared in the `for` loop is scoped to the 
 ---
 #### But... WHY?! - `let`
 
-.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#4">Closures in loops</a> > <a href="#8">Doing it right - ES6 version</a>]
+.breadcrumbs[<a href="#1">JavaScript Closures</a> > <a href="#5">Closures in loops</a> > <a href="#9">Doing it right - ES6 version</a>]
 
 <runkit></runkit>
 

@@ -3,11 +3,19 @@
   <head>
     <title>Angular Forms (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/angular-forms/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/angular-forms/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # Angular Forms
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">Angular Forms</a>]
 
 Get started with and understand the basics of forms in [Angular][angular], using Ionic components.
 
@@ -62,7 +70,7 @@ However, keep in mind that although this provides a good user experience, it can
 ---
 ### HTML validations
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 HTML 5 has [built-in validation attributes][html-input] to define validations on your HTML form inputs (e.g. `<input>`, `<textarea>`, etc), or Ionic form components ([`<ion-checkbox>`][ion-checkbox], [`<ion-input>`][ion-input], etc):
 
@@ -90,7 +98,7 @@ This allows you to add **more complex validations and interaction**.
 ---
 ### Creating a form
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 Let's add a very simple greeting form to our app:
 
@@ -124,7 +132,7 @@ export class HomePage {
 ---
 #### Updating the component
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#5">Creating a form</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#6">Creating a form</a>]
 
 Let's now make it so that the greeting will only be displayed if submitted through the form.
 We need to add a separate property to our component:
@@ -152,7 +160,7 @@ export class HomePage {
 ---
 #### Listening to form submit events
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#5">Creating a form</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#6">Creating a form</a>]
 
 Update the component's template to reflect the fact that we now want to display `displayedGreeting` instead of `greeting`:
 
@@ -173,7 +181,7 @@ Bind the new `displayGreeting()` method to the form's `submit` event to make it 
 ---
 ### Checking the validation state
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 You might have noticed that we have marked the input field as **required**,
 but that the user can **still submit the form** when it is invalid (i.e. the input field is empty).
@@ -189,7 +197,7 @@ We're going to make the following improvements:
 ---
 #### Prevent the form's submission
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#8">Checking the validation state</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#9">Checking the validation state</a>]
 
 In Angular, any `<form>` tag is enriched by the [`NgForm`][angular-docs-ng-form] directive.
 You can retrieve the instance of the directive attached to the form by using a [**template reference variable**][angular-template-reference-variable]
@@ -219,7 +227,7 @@ displayGreeting(`form: NgForm`) {
 ---
 #### Disable the submit button
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#8">Checking the validation state</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#9">Checking the validation state</a>]
 
 The `#greetingForm` template reference variable is already available in the template from the previous modification,
 since we passed it to `displayGreeting()` as an argument.
@@ -239,7 +247,7 @@ We simply have to bind the value of the `<button>` tag's `disabled` attribute to
 ---
 #### Display an error message
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#8">Checking the validation state</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#9">Checking the validation state</a>]
 
 We've seen that the `<form>` tag is **enriched** with the [`NgForm`][angular-docs-ng-form] **directive**,
 and that it's possible to **retrieve that directive** to gain access to the **form's validation state**.
@@ -270,7 +278,7 @@ only display the message when the field is invalid.
 ---
 ##### Dirty, pristine, touched, untouched
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#8">Checking the validation state</a> > <a href="#11">Display an error message</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#9">Checking the validation state</a> > <a href="#12">Display an error message</a>]
 
 That's nice, but the error message is displayed right away.
 It makes sense, since the **initial value** of the input field's **is actually invalid**.
@@ -295,7 +303,7 @@ Make the following change to only display the error message after the user has s
 ---
 #### Set the input field background color to red
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#8">Checking the validation state</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#9">Checking the validation state</a>]
 
 Angular automatically **mirrors** many `NgModel` **properties** onto the `<ion-input>` tag as **CSS classes**.
 You can use these classes to **style** form elements according to the state of the form.
@@ -320,7 +328,7 @@ ion-input.ng-invalid.ng-dirty {
 ---
 ### Angular validators
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 These are some of the validators provided **out of the box** by Angular:
 
@@ -345,7 +353,7 @@ Here's a few usage examples:
 ---
 ### Custom validators
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 These validators are nice, but you might need **more complex validations**.
 
@@ -377,7 +385,7 @@ export function notInValidator(notIn: string[]): ValidatorFn {
 ---
 #### Registering a custom validator
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#15">Custom validators</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#16">Custom validators</a>]
 
 To use your validation function in a form, you need to wrap it in a directive. Create another file in `src/app`, called for example `not-in.directive.ts` with this content:
 
@@ -410,7 +418,7 @@ export class NotInValidatorDirective implements Validator {
 ---
 #### Using a custom validator
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a> > <a href="#15">Custom validators</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a> > <a href="#16">Custom validators</a>]
 
 You must register the new directive in the `declarations` array of the module that needs to use this directive, in our case, it's the `home.module.ts`:
 
@@ -440,7 +448,7 @@ You can then finally use it in the template:
 ---
 ### Displaying different messages for different errors
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 There's a little problem now.
 Since our error message is displayed as soon as there's an error on the `greetingInput` field,
@@ -469,7 +477,7 @@ That way you can react separately to the `required` validator's error and to the
 ---
 ### Asynchronous validators
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#3">Forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#4">Forms</a>]
 
 The validator we implemented is actually a function that matches Angular's [`ValidatorFn`][angular-docs-validator-fn] interface.
 It is **synchronous**, i.e. it performs no I/O operation to validate its value and immediately returns its errors (or `null`):
@@ -529,7 +537,7 @@ export class HomePageModule {}
 ---
 ### Using reactive forms in the component
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a>]
 
 With reactive forms, the form structure is also defined with code in the component
 
@@ -561,7 +569,7 @@ export class HomePage {
 ---
 #### Form submition
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a> > <a href="#21">Using reactive forms in the component</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a> > <a href="#22">Using reactive forms in the component</a>]
 
 Since the form is built directly into the component, the method that is executed when it's submitted doesn't need an argument anymore.
 
@@ -584,7 +592,7 @@ export class HomePage {
 ---
 #### Reacting to form value changes
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a> > <a href="#21">Using reactive forms in the component</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a> > <a href="#22">Using reactive forms in the component</a>]
 
 Reactive forms do not use `ngModel`, so there won't be two-way binding with the template any longer.
 There will only be **one-way binding** from the form group in the component to the template.
@@ -610,7 +618,7 @@ export class HomePage {
 ---
 ### Using reactive forms in the template
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a>]
 
 With reactive forms, your **template** is somewhat **simplified**.
 Remove `ngModel`, the validations, `#greetingForm` and `#greetingInput`.
@@ -643,7 +651,7 @@ instead of using the `#greetingInput` template reference variable you just remov
 ---
 ### Reactive form validations
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a>]
 
 The validations are no longer applied since we removed them from the template.
 With reactive forms, **validation is configured in the component**:
@@ -675,7 +683,7 @@ export class HomePage {
 ---
 #### Custom validators in reactive forms
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a> > <a href="#25">Reactive form validations</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a> > <a href="#26">Reactive form validations</a>]
 
 Note that we use our custom validator function (`notInValidator`) directly,
 instead of using the `NotInValidatorDirective` wrapper like before:
@@ -698,7 +706,7 @@ and the form will keep working.
 ---
 ### Which is better, reactive or template-driven?
 
-.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#20">Reactive forms</a>]
+.breadcrumbs[<a href="#1">Angular Forms</a> > <a href="#21">Reactive forms</a>]
 
 In [**template-driven forms**][angular-forms], form structure and validation are specified and handled **in the template**:
 

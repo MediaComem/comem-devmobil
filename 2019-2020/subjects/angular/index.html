@@ -3,11 +3,19 @@
   <head>
     <title>Angular (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/angular/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/angular/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # Angular
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">Angular</a>]
 
 Get started with and understand the basics of [Angular][angular], the JavaScript front-end web application framework.
 
@@ -48,7 +56,7 @@ class: center, middle, image-header
 ---
 ### Traditional Model-View-Controller (MVC) architecture
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#2">What is Angular?</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#3">What is Angular?</a>]
 
 In traditional MVC frameworks,
 the application's **Controllers** receive the user's requests when navigating from page to page in the browser,
@@ -61,7 +69,7 @@ and respond by generating HTML **Views** from the **Model**.
 ---
 ### DOM manipulation and AJAX requests
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#2">What is Angular?</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#3">What is Angular?</a>]
 
 .grid-60[
 
@@ -93,7 +101,7 @@ Initially, these technologies were used to **enrich** existing HTML pages that w
 ---
 ### Single-page applications
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#2">What is Angular?</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#3">What is Angular?</a>]
 
 .grid-50[
 
@@ -116,7 +124,7 @@ A single-page application (SPA) is a web application that **fits on a single web
 ---
 ### Dynamic HTML with Angular
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#2">What is Angular?</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#3">What is Angular?</a>]
 
 > "AngularJS is what HTML would have been, had it been designed for building web-apps."
 
@@ -132,7 +140,7 @@ With Angular, you can:
 ---
 ### Evolution of Angular
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#2">What is Angular?</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#3">What is Angular?</a>]
 
 Angular is one of the most popular client-side frameworks, and it is still evolving.
 Starting with version 2 of the framework (released in June 2016) you can take advantage of:
@@ -156,7 +164,7 @@ class: center, middle
 ---
 ### Starter template
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a>]
 
 If you want to follow along this tutorial, you can generate a new barebone angular application.
 
@@ -180,7 +188,7 @@ When the CLI tells you so, go to [`http://localhost:4200`](http://localhost:4200
 ---
 ### Overview
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a>]
 
 .grid-50[
 
@@ -212,7 +220,7 @@ When the CLI tells you so, go to [`http://localhost:4200`](http://localhost:4200
 ---
 ### Modules
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a>]
 
 An Angular application is a **module**.
 You can find one in `src/app/app.module.ts` in the starter project:
@@ -244,7 +252,7 @@ A module is a way to help organize related things (components, services, etc) to
 ---
 #### Basic module definition
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#11">Modules</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#12">Modules</a>]
 
 Take a look at the [`@NgModule`][angular-docs-ng-module] annotation:
 
@@ -272,7 +280,7 @@ Take a look at the [`@NgModule`][angular-docs-ng-module] annotation:
 ---
 ### Components
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a>]
 
 Components are the most basic **building block** of an UI in an Angular application.
 An Angular application is a tree of Angular components.
@@ -301,7 +309,7 @@ Let's dig into that line by line.
 ---
 #### Component selector
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#13">Components</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#14">Components</a>]
 
 The `selector` property of the `@Component` decorator indicates what tag you should put in your HTML to instantiate the component:
 
@@ -325,7 +333,7 @@ You will find the `<app-root>` tag:
 ---
 #### Component template
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#13">Components</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#14">Components</a>]
 
 The `templateUrl` property of the `@Component` decorator tells Angular which HTML file to use to display the component:
 
@@ -350,7 +358,7 @@ For very simple components, you can also use `template` instead of `templateUrl`
 ---
 #### Component styles
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#13">Components</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#14">Components</a>]
 
 Similarly, the `styleUrls` property is a list of CSS files to apply to the component:
 
@@ -382,7 +390,7 @@ Read the [Component Styles][angular-component-styles] documentation to learn mor
 ---
 ### Data binding
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a>]
 
 You can display data by **binding** parts of an HTML template to properties of a component.
 
@@ -407,7 +415,7 @@ You can do so in the `AppComponent`'s template in `src/app/app.component.html` b
 ---
 #### Attribute binding
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#17">Data binding</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#18">Data binding</a>]
 
 Let's see what else we can interpolate.
 
@@ -437,7 +445,7 @@ You can do this in `src/app/app.component.html`:
 ---
 ##### To bind, or not to bind
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#17">Data binding</a> > <a href="#18">Attribute binding</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#18">Data binding</a> > <a href="#19">Attribute binding</a>]
 
 Note the two ways to interpolate attributes.
 Here, as in the previous example, the `[]` syntax **binds the the `title` attribute** to the `titleComment` variable:
@@ -471,7 +479,7 @@ not the value of the corresponding variable:
 ---
 #### Binding to events
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#17">Data binding</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#18">Data binding</a>]
 
 Let's imagine that we want to log something when the user clicks on the title.
 Add an `onTitleClicked()` method to the component's class in `src/app/app.component.ts`:
@@ -500,7 +508,7 @@ You should now see the message being logged in the console when clicking on the 
 ---
 ##### Getting at the event
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#17">Data binding</a> > <a href="#20">Binding to events</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#18">Data binding</a> > <a href="#21">Binding to events</a>]
 
 You might need the actual [event object][dom-event] to get some data out of it (e.g. the click coordinates).
 Let's update `onTitleClicked()` in `src/app/app.component.ts` to also log the event object:
@@ -528,7 +536,7 @@ To make it work, simply pass the special `$event` variable as an argument to you
 ---
 #### Interpolation with functions
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#8">Getting started</a> > <a href="#17">Data binding</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#9">Getting started</a> > <a href="#18">Data binding</a>]
 
 Interpolation is not limited to simple properties.
 You can also use a component's **method** in the template.
@@ -588,7 +596,7 @@ Now interpolate that new property into the `hello` function in the template in `
 ---
 ### `ngModel`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#23">User input</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#24">User input</a>]
 
 Add an input field to the template above the greeting in `src/app/app.component.html`:
 
@@ -616,7 +624,7 @@ This is because `[(ngModel)]` belongs to the optional `FormsModule`, which you h
 ---
 #### `FormsModule`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#23">User input</a> > <a href="#24">`ngModel`</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#24">User input</a> > <a href="#25">`ngModel`</a>]
 
 To **import** the module into your application, you must add it to the `imports` array of your own module in `src/app/app.module.ts`:
 
@@ -646,7 +654,7 @@ and Angular **updates the template** to reflect its new value.
 ---
 ### Two-way data binding
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#23">User input</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#24">User input</a>]
 
 .grid-50[
 
@@ -686,7 +694,7 @@ Two other kinds of directives exist: **structural** and **attribute** directives
 ---
 ### Structural directives
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#27">Directives</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#28">Directives</a>]
 
 Structural directives are responsible for HTML layout.
 They shape or reshape the **DOM's structure**, typically by **adding, removing, or manipulating elements**.
@@ -710,7 +718,7 @@ Many more such directives are provided by Angular out of the box, like [`ngFor`]
 ---
 ### Attribute directives
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#27">Directives</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#28">Directives</a>]
 
 > Want to create your own attributes directives ? See [advanced-angular][advanced-angular-subject]
 
@@ -739,7 +747,7 @@ export class AppComponent {
 ---
 #### Define and bind the classes
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#27">Directives</a> > <a href="#29">Attribute directives</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#28">Directives</a> > <a href="#30">Attribute directives</a>]
 
 We need to declare those two classes in our component's style. Open the `app.component.scss` file and add them there:
 
@@ -763,7 +771,7 @@ Now, we can use Angular's `ngClass` attribute selective to bind the `titleClasse
 ---
 ### Common directives
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#27">Directives</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#28">Directives</a>]
 
 These common directives are provided by Angular out of the box:
 
@@ -803,7 +811,7 @@ They're special functions that your value will pass through before being rendere
 ---
 ### Use case
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#32">Pipes</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#33">Pipes</a>]
 
 Open the `src/app/app.component.ts` file and add a new `progress` property:
 
@@ -832,7 +840,7 @@ We'd be better off having this formula in a `Pipe` so we could use it any time w
 ---
 ### Using a pipe
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#32">Pipes</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#33">Pipes</a>]
 
 In this case, Angular provides us with a `Pipe` named `percent` that does display values as percentages and thus, can help us rendering our progress percentage in our template.
 
@@ -847,7 +855,7 @@ Actually using the pipe is as simple as "piping" an interpolated value into it w
 ---
 ### Angular built-in pipes
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#32">Pipes</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#33">Pipes</a>]
 
 Angular provides [a few pipes][angular-docs-pipes] out of the box.
 Here's some of them:
@@ -896,7 +904,7 @@ export class Joke {
 ---
 ### Using models
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#36">Models</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#37">Models</a>]
 
 Let's add some jokes to our component in `src/app/app.component.ts`:
 
@@ -927,7 +935,7 @@ export class AppComponent {
 ---
 ### Using `ngFor`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#36">Models</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#37">Models</a>]
 
 Now that we have some jokes, let's display them.
 We want a `<ul>` list, with a `<li>` item for each joke.
@@ -947,7 +955,7 @@ No need to write it multiple times, or to manually build and concatenate DOM ele
 ---
 ### Using `ngPlural`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#36">Models</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#37">Models</a>]
 
 While we're at it, let's also add a header above the list:
 
@@ -991,7 +999,7 @@ This helps your components remain as simple as possible while services handle yo
 ---
 ### The joke service
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a>]
 
 Once again, a service is simply a JavaScript class, annotated with the [`@Injectable`][angular-docs-injectable] decorator.
 More about that later.
@@ -1015,7 +1023,7 @@ export class JokeService {
 ---
 ### Providing the joke service
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a>]
 
 You may have notice the `providedIn: 'root'` property in the `@Injectable` param object of the generated service.
 
@@ -1042,7 +1050,7 @@ export class SomeModule { }
 ---
 ### Injecting the joke service
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a>]
 
 Now, you can **inject** the service into your component in `src/app/app.component.ts`.
 
@@ -1069,7 +1077,7 @@ export class AppComponent {
 ---
 #### Calling a method from a button
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a> > <a href="#43">Injecting the joke service</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a> > <a href="#44">Injecting the joke service</a>]
 
 To use our new method, you can add a button in the template in `src/app/app.component.html`:
 
@@ -1084,7 +1092,7 @@ The `(click)` attribute is Angular's syntax to listen to the `click` event on a 
 ---
 ### Why does it work?
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a>]
 
 Our component now uses the service.
 But why does it work?
@@ -1113,7 +1121,7 @@ You **never instantiated the service with `new`**, so where is the instance comi
 ---
 ### Dependency injection
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a>]
 
 Angular relies on [dependency injection][di] to plug components, services and other elements together.
 
@@ -1133,7 +1141,7 @@ The general goal is to:
 ---
 #### Why dependency injection?
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#40">Services</a> > <a href="#46">Dependency injection</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#41">Services</a> > <a href="#47">Dependency injection</a>]
 
 .grid-50[
 
@@ -1202,7 +1210,7 @@ to make it easier to compose asynchronous or callback-based code.
 ---
 ### What (the hell) is an observable?
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#48">Observable data</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#49">Observable data</a>]
 
 An observable is an **asynchronous data stream**, meaning that it allows you to observe **multiple events over time**.
 
@@ -1214,7 +1222,7 @@ there will be several of them and they will happen at different times in the fut
 ---
 ### What (the hell) is reactive programming?
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#48">Observable data</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#49">Observable data</a>]
 
 Basically, **reactive programming** is programming with **asynchronous** data **streams**.
 
@@ -1232,7 +1240,7 @@ you may want to read ["The introduction to Reactive Programming you've been miss
 ---
 ### Making `getJoke()` observable
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#48">Observable data</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#49">Observable data</a>]
 
 Since Angular's `HttpClient` returns **Observables**, that's what we'll use.
 
@@ -1258,7 +1266,7 @@ export class JokeService {
 ---
 ### Subscribing to an Observable
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#48">Observable data</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#49">Observable data</a>]
 
 Of course, the code in our component no longer works now,
 since it expects a `Joke` and gets an Observable of a `Joke` instead:
@@ -1315,7 +1323,7 @@ export class AppModule { }
 ---
 ### Injecting `HttpClient`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 Earlier we annotated `JokeService` with the [`@Injectable`][angular-docs-injectable] decorator.
 This not only makes it available to the **injector** for creation,
@@ -1337,7 +1345,7 @@ export class JokeService {
 ---
 ### Joke API response
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 The API we are going to call returns JSON data that looks like this:
 
@@ -1357,7 +1365,7 @@ This does not fit our `Joke` model, which only has a `text` property.
 ---
 #### Joke API response model
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a> > <a href="#55">Joke API response</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a> > <a href="#56">Joke API response</a>]
 
 Let's create a new `JokeResponse` model that we can use with this API.
 
@@ -1381,7 +1389,7 @@ export class JokeResponseValue {
 ---
 ### Making a GET call
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 We can now update `getJoke()` in `src/app/services/joke.service.ts` to make an actual HTTP call:
 
@@ -1412,7 +1420,7 @@ ERROR in src/app/services/joke.service.ts(15,5): error TS2322:
 ---
 ### Transforming data
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 We need to be able to transform a `JokeResponse` object into a `Joke`.
 Let's add a utility function at the bottom of the file in `src/app/services/joke.service.ts`:
@@ -1428,7 +1436,7 @@ function convertJokeResponseToJoke(response: JokeResponse): Joke {
 ---
 ### Transforming Observable streams
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 Similarly to the [`map`][js-array-map] method of JavaScript arrays, Observables have a [`map`][observable-map] operator,
 which allows you to transform each item emitted in the stream:
@@ -1452,7 +1460,7 @@ To use it, you need to import it and use the Observable's `pipe` method in `Joke
 ---
 ### Reacting to errors in observable streams
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 An observable stream may emit an **error**.
 You can be notified of that error by passing a second callback function to `subscribe` in `AppComponent` in `src/app/app.component.ts`:
@@ -1485,7 +1493,7 @@ You can then change it back to the correct URL.
 ---
 ### Getting the HTTP response
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a>]
 
 We've seen that by default, Angular's `HttpClient` returns only the **body of the response**
 (this is a *generic example*; do **not** make this change to the project):
@@ -1508,7 +1516,7 @@ That's nice, but in some cases we might need access to the **HTTP status** or **
 ---
 #### Observing the response
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#53">Making HTTP calls</a> > <a href="#61">Getting the HTTP response</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#54">Making HTTP calls</a> > <a href="#62">Getting the HTTP response</a>]
 
 To get Angular's `HttpClient` to give you the full [`HttpResponse`][angular-docs-http-response] object,
 you need to pass an additional options object to your HTTP call,
@@ -1569,7 +1577,7 @@ it's good practice to **isolate each part into a component**:
 ---
 ### Adding votes to the model
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Update the `Joke` model in `src/app/models/joke.ts` to have a `votes` property:
 
@@ -1603,7 +1611,7 @@ function convertJokeResponseToJoke(response: JokeResponse): Joke {
 ---
 ### Creating a child component
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Let's generate our **new component**, the `JokeComponent`:
 
@@ -1617,7 +1625,7 @@ with its own TypeScript definition, HTML template and CSS styles (and test file)
 ---
 #### The `JokeComponent`
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a> > <a href="#65">Creating a child component</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a> > <a href="#66">Creating a child component</a>]
 
 The responsibility of the new `JokeComponent` will be to display a `Joke` object,
 and to provide a button to vote on the joke.
@@ -1648,7 +1656,7 @@ And update the component's template in `src/app/components/joke/joke.component.h
 ---
 ### Using our new component
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 As you can see in our component's class, we set the `selector` of our component to `app-joke`. This means that we can add a custom tag in an HTML template to add our component to the page. Let's do so in `src/app/app.component.html`:
 
@@ -1671,7 +1679,7 @@ Indeed, we told our `JokeComponent` to display the `joke.text` property in its t
 ---
 ### Passing data from parent to child with input binding
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 We want the joke to be provided by the parent component, `AppComponent`, to the `JokeComponent` as an **input** of this component.
 
@@ -1701,7 +1709,7 @@ Now, update the main component's template in `src/app/app.component.html` so tha
 ---
 ### Voting on jokes
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Now that `JokeComponent` is working, we can use it to **handle the logic related to one joke**, like voting.
 
@@ -1726,7 +1734,7 @@ You can now vote!
 ---
 ### Displaying global voting information
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Let's now display the **total number of votes** and the **best vote** on the page.
 That's the job of the **main component**, since a `JokeComponent` only knows about its own joke,
@@ -1758,7 +1766,7 @@ And display it in the template in `src/app/app.component.html`:
 ---
 ### Output from child components
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 The vote button is in the child component's template, so `AppComponent` can't put an event listener on it directly.
 Instead, we need our `JokeComponent` to have an **output** that its parent can listen to.
@@ -1789,7 +1797,7 @@ export class JokeComponent implements OnInit {
 ---
 ### Listening to child component events from a parent
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Let's add an `onJokeVoted()` method to `AppComponent` in `src/app/app.component.ts`:
 
@@ -1815,7 +1823,7 @@ Do that in `src/app/app.component.html`:
 ---
 ### Clearing the votes
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 Now that our components are already plugged together,
 adding the functionality to **clear the votes** is trivial.
@@ -1844,7 +1852,7 @@ When you modify them in any component, Angular **automatically updates all the r
 ---
 ### More component interaction
 
-.breadcrumbs[<a href="#1">Angular</a> > <a href="#63">Component interaction</a>]
+.breadcrumbs[<a href="#1">Angular</a> > <a href="#64">Component interaction</a>]
 
 These were just a few examples of how to communicate between components.
 

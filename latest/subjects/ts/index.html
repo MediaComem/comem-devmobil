@@ -3,11 +3,19 @@
   <head>
     <title>TypeScript (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6285ff7cc1a069b94361e3ecd0fb9ec62124eadf/subjects/ts/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/8b9a4da6e1ce282860ff0d74f6a6a050265f774f/subjects/ts/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # TypeScript
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">TypeScript</a>]
 
 Learn the basics of [TypeScript][typescript], a typed superset of JavaScript that compiles to plain JavaScript.
 
@@ -37,7 +45,7 @@ Define interfaces between software components.
 ---
 ### Basic types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 .grid-40[
 
@@ -84,7 +92,7 @@ let names: string[] = [ 'Alice', 'Bob' ];
 ---
 ### Type checking
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 TypeScript will not compile code that attempts to use values of the wrong type:
 
@@ -115,7 +123,7 @@ In exchange for losing some of JavaScript's **flexibility**, you gain:
 ---
 ### Function parameter & return types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 The parameters and return values of TypeScript functions can also be typed:
 
@@ -142,7 +150,7 @@ let foo: number = multiply(2, 'bar');
 ---
 ### Function types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 You can also define the **type of a function** itself:
 
@@ -175,7 +183,7 @@ mathOperation = function(foo: string): number {
 ---
 ### Type inference
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 Even when you do not explicitly use types, TypeScript will attempt to **infer** the type of your variables:
 
@@ -197,7 +205,7 @@ values.push('Bob');
 ---
 ### Any
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 The `any` type allows you to opt out of type checking for some variables:
 
@@ -225,7 +233,7 @@ You should **not** use `any` unless there's a very good reason to, as it makes y
 ---
 #### Type assertions
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a> > <a href="#8">Any</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#9">Any</a>]
 
 Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any`.
 
@@ -248,7 +256,7 @@ Again, you should **not** have to use this in most of your TypeScript code.
 ---
 ### Union types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 A union type describes a value that can be of **one of several types**:
 
@@ -278,7 +286,7 @@ numerals.push('forty-two');
 ---
 #### Type guards
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a> > <a href="#10">Union types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#11">Union types</a>]
 
 Sometimes you will have a function parameter that can be of one type or another.
 TypeScript cannot know which type the value is if you do not check:
@@ -315,7 +323,7 @@ console.log(lower(43));     // "42"
 ---
 ### Enums
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 You can define [enumerations][typescript-enums] with TypeScript:
 
@@ -346,7 +354,7 @@ if (value === Direction.South) {
 ---
 ### Void
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 `void` indicates the **absence of any type** at all.
 It is commonly used to indicate that a function does not return a value:
@@ -366,7 +374,7 @@ let foo: string = warnUser();
 ---
 ### Type aliases
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#2">Types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
 Type aliases create a **new name for a type**.
 They can be used to "rename" primitives, unions, tuples, and any other types that you'd otherwise have to write by hand:
@@ -401,7 +409,7 @@ How to *do* things.
 ---
 ### Mandatory parameters
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#15">Functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#16">Functions</a>]
 
 In TypeScript, every function parameter is assumed to be required by the function.
 You can pass `null` or `undefined`, but the compiler will check that you have provided the correct number of parameters.
@@ -432,7 +440,7 @@ console.log(result4); // "Bob null"
 ---
 ### Optional parameters
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#15">Functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#16">Functions</a>]
 
 In JavaScript, every parameter is optional, and their value is `undefined` if not provided:
 
@@ -475,7 +483,7 @@ Object-oriented TypeScript.
 ---
 ### Class types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
 
 TypeScript extends the JavaScript classes available since ECMAScript 6.
 You can use types in them as well:
@@ -506,7 +514,7 @@ greeter.greet(); // "Hello World!"
 ---
 ### Accessibility modifiers
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
 
 The `private`, `protected` and `public` accessibility modifiers can be used in TypeScript classes to restrict access to fields or methods.
 By default, a field or method is always `public`:
@@ -536,7 +544,7 @@ class Animal {
 ---
 #### Private
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#20">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
 
 When a field or method is marked `private`, it cannot be accessed from outside of its containing class:
 
@@ -568,7 +576,7 @@ new Animal('Cat').getName();
 ---
 #### Protected
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#20">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
 
 A field or method marked `protected` behaves like one marked `private`,
 with the exception that it **can** be accessed from within a **sub-class**:
@@ -602,7 +610,7 @@ console.log(cat.name);
 ---
 #### Read-only
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#20">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
 
 The `readonly` modifier forces a field to be initialized at its declaration or in the constructor.
 It cannot be modified later:
@@ -625,7 +633,7 @@ cat.name = 'Dog';
 ---
 #### Parameter properties
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#20">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
 
 It is a common pattern to have a field with an accessibility modifier
 and to set the value of that field directly from a constructor parameter:
@@ -659,7 +667,7 @@ class Animal {
 ---
 ### Abstract classes
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
 
 Abstract classes are base classes from which other classes may be derived.
 
@@ -688,7 +696,7 @@ cat.cry(); // "I sound like this: Meow"
 ---
 #### Abstract methods
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#25">Abstract classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#26">Abstract classes</a>]
 
 A non-abstract class extending an abstract class **must implement all its abstract methods**:
 
@@ -714,7 +722,7 @@ class Dog extends Animal {
 ---
 #### Abstract classes cannot be instantiated
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#18">Classes</a> > <a href="#25">Abstract classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#26">Abstract classes</a>]
 
 An abstract class **cannot be instantiated directly**:
 
@@ -749,7 +757,7 @@ A powerful way of defining contracts within your code.
 ---
 ### Defining an interface
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
 
 Here's a simple example:
 
@@ -774,7 +782,7 @@ but the compiler only checks that **at least** the ones required are present and
 ---
 #### Interface checks
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a> > <a href="#29">Defining an interface</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a> > <a href="#30">Defining an interface</a>]
 
 If you try to pass an object which does not match the interface, TypeScript will refuse to compile the code:
 
@@ -800,7 +808,7 @@ printLabel(invalidValue);
 ---
 ### Optional properties
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
 
 Much like with function parameters, you can mark some properties of an interface as **optional** by adding an **interrogation mark** after the property name.
 
@@ -831,7 +839,7 @@ let square = createSquare({ color: "black" }); // OK, the width is optional
 ---
 ### Interface functions
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
 
 An interface is also capable of describing that an object must have a specific function:
 
@@ -860,7 +868,7 @@ value = { foo: 'bar' };
 ---
 #### Classes implementing interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a> > <a href="#32">Interface functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a> > <a href="#33">Interface functions</a>]
 
 Classes which implement this interface **must** have a `greet` method:
 
@@ -896,7 +904,7 @@ class Dog implements Greeter {
 ---
 ### Extending interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#28">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
 
 Like classes, interfaces can **extend** each other.
 This allows you to copy the properties and functions of one interface into another:
@@ -935,7 +943,7 @@ Work on the data of today as well as the data of tomorrow.
 ---
 ### Generic functions
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
 
 Let's take a look at this logging function which logs the specified value and returns it:
 
@@ -960,7 +968,7 @@ because then TypeScript won't let us use properties or methods that should not b
 ---
 #### Pseudo-generic function with `any`
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a> > <a href="#36">Generic functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#37">Generic functions</a>]
 
 You could rewrite the function using the `any` type:
 
@@ -986,7 +994,7 @@ but you **lose the information** about **what type of value** the function **ret
 ---
 #### Using generics in a function
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a> > <a href="#36">Generic functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#37">Generic functions</a>]
 
 Instead, we need a way of **capturing the type** of the argument in such a way that we can also use it to denote what is being returned:
 
@@ -1016,7 +1024,7 @@ It works over a range of types, **without losing the type information** of its r
 ---
 ### Generic type syntax
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
 
 You may name the **type variable** however you want.
 It's often named `T` when there is only one, but that's not mandatory:
@@ -1043,7 +1051,7 @@ function logAndReturnFirst`<T, U>`(arg1: `T`, arg2: `U`): `T` {
 ---
 ### Generic type argument inference
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
 
 You may have noticed that we specified the **input type** of the generic function **when calling it**:
 
@@ -1075,7 +1083,7 @@ However, in some cases it may improve the **readability** of your code to explic
 ---
 ### Generic classes & interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
 
 Generic type arguments can also be used on **classes**:
 
@@ -1112,7 +1120,7 @@ And on **interfaces**:
 ---
 ### Generic constraints
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
 
 What if we wanted to create a generic logging function that logs an object's **length**.
 It should work with **any type of object that has a length**, such as an **array** or **string**.
@@ -1132,7 +1140,7 @@ TypeScript will refuse to compile the function, because `T` could be **any type*
 ---
 #### Adding a generic type argument constraint
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#35">Generics</a> > <a href="#42">Generic constraints</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#43">Generic constraints</a>]
 
 By using the `extends` keyword, you can specify that a type argument **must match a constraint**.
 In this case, we require that the argument of type `T` must match an interface that requires a `length` property:
@@ -1179,7 +1187,7 @@ Modify existing classes.
 ---
 ### What is a decorator?
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#44">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
 
 Decorators are an experimental feature ([stage 2 proposal][js-decorators-proposal]) of JavaScript that is available in TypeScript.
 
@@ -1201,7 +1209,7 @@ class Person {
 ---
 #### Implementing a decorator
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#44">Decorators</a> > <a href="#45">What is a decorator?</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a> > <a href="#46">What is a decorator?</a>]
 
 Any function can be used as a decorator by applying it with `@` before a class, method, accessor, property or parameter.
 In this example, we **decorate a class**.
@@ -1223,7 +1231,7 @@ The function is called at runtime with the class being decorated as an argument,
 ---
 ### Decorator factory
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#44">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
 
 If we want to customize how a decorator is applied to a declaration, we can write a **decorator factory**.
 It's simply a function that builds and returns the actual decorator:
@@ -1250,7 +1258,7 @@ You **apply the factory** with `@`, and the **resulting decorator** will be appl
 ---
 ### Class decorator example
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#44">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
 
 Class decorators can be used to apply **modifications to an existing class** and return the updated class.
 
@@ -1273,7 +1281,7 @@ In this example, the decorator defines that `GreetComponent` is used with the `<
 ---
 ### Method decorator example
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#44">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
 
 This example shows how it's possible to **override methods** on an existing class with a **method decorator**:
 
