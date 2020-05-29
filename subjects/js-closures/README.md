@@ -1,5 +1,9 @@
 # JavaScript Closures
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn what's a JavaScript closure, how to use them, and common pitfalls.
 
 <!-- slide-include ../../BANNER.md -->

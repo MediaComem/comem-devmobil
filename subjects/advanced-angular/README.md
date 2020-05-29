@@ -1,5 +1,9 @@
 # Advanced Angular
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn about more advanced [Angular][angular] concept.
 
 <!-- slide-include ../../BANNER.md -->

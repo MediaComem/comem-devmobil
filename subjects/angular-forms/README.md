@@ -1,5 +1,9 @@
 # Angular Forms
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Get started with and understand the basics of forms in [Angular][angular], using Ionic components.
 
 This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],

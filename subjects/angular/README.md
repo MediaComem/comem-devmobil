@@ -1,5 +1,9 @@
 # Angular
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Get started with and understand the basics of [Angular][angular], the JavaScript front-end web application framework.
 
 This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],

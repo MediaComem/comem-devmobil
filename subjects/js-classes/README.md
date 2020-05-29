@@ -1,5 +1,9 @@
 # JavaScript Classes
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn about JavaScript classes (ES6+).
 
 <!-- slide-include ../../BANNER.md -->

@@ -1,5 +1,9 @@
 # JavaScript Promises
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn to use promises for asynchronous computation.
 
 **Recommended reading**

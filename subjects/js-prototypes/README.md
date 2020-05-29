@@ -1,5 +1,9 @@
 # JavaScript Prototypes
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn about prototypal inheritance in JavaScript.
 
 <!-- slide-include ../../BANNER.md -->

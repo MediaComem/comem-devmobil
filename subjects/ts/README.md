@@ -1,5 +1,9 @@
 # TypeScript
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 Learn the basics of [TypeScript][typescript], a typed superset of JavaScript that compiles to plain JavaScript.
 
 TypeScript is also the language recommended by the Angular team to develop [Angular][angular] applications
