@@ -9,7 +9,7 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **Recommended reading**
 
-* [Angular](../angular/)
+* [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

@@ -6,19 +6,21 @@
 
 Get started with and understand the basics of forms in [Angular][angular], using Ionic components.
 
-This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
+This subject is an adaptation of the [Angular Forms][angular-forms-subject]] subject to the context of an Ionic application.
+
+It is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
 which you should both read to gain a deeper understanding of Angular.
 
 <!-- slide-include ../../BANNER.md -->
 
 **You will need**
 
-* [Google Chrome][chrome] (recommended, any browser with developer tools will do)
-* [Ionic CLI][ionic] (to generate the blank app)
+- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+- [Ionic CLI][ionic-cli] (to generate the blank app)
 
 **Recommended reading**
 
-* [Angular][angular-subject]
+- [Angular][angular-subject]
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -141,8 +143,8 @@ export class HomePage {
 Let's now make it so that the greeting will only be displayed if submitted through the form.
 We need to add a separate property to our component:
 
-* The `greeting` property will represent the internal value of the input field.
-* The `displayedGreeting` property will represent the submitted value (which will no longer be bound to the input field).
+- The `greeting` property will represent the internal value of the input field.
+- The `displayedGreeting` property will represent the submitted value (which will no longer be bound to the input field).
 
 We also need a new `displayGreeting()` method which will take the current value of `greeting` and copy it to `displayedGreeting`:
 
@@ -187,10 +189,10 @@ but that the user can **still submit the form** when it is invalid (i.e. the inp
 That's not very user-friendly.
 We're going to make the following improvements:
 
-* **Prevent the form's submission** if it has invalid fields.
-* **Disable the submit button** if the form has invalid fields.
-* **Display an error message** when the greeting input field contains an invalid value.
-* **Set the input field background color to red** if it contains an invalid value.
+- **Prevent the form's submission** if it has invalid fields.
+- **Disable the submit button** if the form has invalid fields.
+- **Display an error message** when the greeting input field contains an invalid value.
+- **Set the input field background color to red** if it contains an invalid value.
 
 #### Prevent the form's submission
 
@@ -229,8 +231,8 @@ You can also bind it to DOM elements or their attributes elsewhere in the templa
 This time, we'll use [`NgForm`][angular-docs-ng-form]'s `invalid` attribute.
 We simply have to bind the value of the `<button>` tag's `disabled` attribute to it:
 
-* When the form is **invalid** (`greetingForm.invalid` is true), the button should be **disabled** (`disabled` should be true).
-* When the form is **valid** (`greetingForm.invalid` is false), the button should **not be disabled** (`disabled` should be false).
+- When the form is **invalid** (`greetingForm.invalid` is true), the button should be **disabled** (`disabled` should be true).
+- When the form is **valid** (`greetingForm.invalid` is false), the button should **not be disabled** (`disabled` should be false).
 
 ```html
 <ion-button `[disabled]="greetingForm.invalid"` type="submit">Submit</ion-button>
@@ -273,10 +275,10 @@ Ideally, we would want the error message to be displayed **only once the user ha
 
 Enter the following `NgForm` and `NgModel` attributes:
 
-* `dirty` - A control is **dirty** if the user has **changed its value**.
-* `pristine` - A control is **pristine** if the user has **not yet changed its value** (the opposite of `dirty`).
-* `touched` - A control is **touched** if the user has triggered a **[`blur`][blur-event] event** on it.
-* `untouched` - A control is **untouched** if the user has **not yet** triggered a **[`blur`][blur-event] event** on it (the opposite of `touched`).
+- `dirty` - A control is **dirty** if the user has **changed its value**.
+- `pristine` - A control is **pristine** if the user has **not yet changed its value** (the opposite of `dirty`).
+- `touched` - A control is **touched** if the user has triggered a **[`blur`][blur-event] event** on it.
+- `untouched` - A control is **untouched** if the user has **not yet** triggered a **[`blur`][blur-event] event** on it (the opposite of `touched`).
 
 Make the following change to only display the error message after the user has started typing:
 
@@ -293,9 +295,9 @@ You can use these classes to **style** form elements according to the state of t
 
 These are some of the supported classes ([full list][angular-form-control-status-classes]):
 
-* `.ng-valid` or `.ng-invalid` is applied depending on whether the value is valid
-* `.ng-pristine` or `.ng-dirty` is applied depending on whether the user has changed the value
-* `.ng-untouched` or `.ng-touched` is applied depending on whether the user has triggered `blur` event
+- `.ng-valid` or `.ng-invalid` is applied depending on whether the value is valid
+- `.ng-pristine` or `.ng-dirty` is applied depending on whether the user has changed the value
+- `.ng-untouched` or `.ng-touched` is applied depending on whether the user has triggered `blur` event
 
 So when our field is invalid and dirty, it will have both the `.ng-invalid` and `.ng-dirty` CSS classes added to it.
 All you need to do is modify `src/app/home/home.page.css` to add a background color to input fields with this combination of classes:
@@ -312,11 +314,11 @@ ion-input.ng-invalid.ng-dirty {
 
 These are some of the validators provided **out of the box** by Angular:
 
-* [`email`][angular-docs-email-validator] - Validates that a string is a valid e-mail address.
-* [`min`][angular-docs-min-validator] & [`max`][angular-docs-max-validator] - Validate that a number is within the specified bound(s).
-* [`min-length`][angular-docs-min-length-validator] & [`max-length`][angular-docs-max-length-validator] - Validate that a string's length is within the specified bound(s).
-* [`pattern`][angular-docs-pattern-validator] - Validates that a value matches a regular expression.
-* [`required`][angular-docs-required-validator] - Validates that a value is present.
+- [`email`][angular-docs-email-validator] - Validates that a string is a valid e-mail address.
+- [`min`][angular-docs-min-validator] & [`max`][angular-docs-max-validator] - Validate that a number is within the specified bound(s).
+- [`min-length`][angular-docs-min-length-validator] & [`max-length`][angular-docs-max-length-validator] - Validate that a string's length is within the specified bound(s).
+- [`pattern`][angular-docs-pattern-validator] - Validates that a value matches a regular expression.
+- [`required`][angular-docs-required-validator] - Validates that a value is present.
 
 Here's a few usage examples:
 
@@ -651,16 +653,16 @@ and the form will keep working.
 
 In [**template-driven forms**][angular-forms], form structure and validation are specified and handled **in the template**:
 
-* Creation of form controls is delegated to directives and asynchronous.
-* Angular handles data updates with two-way binding.
-* Hard to test with automated tests.
+- Creation of form controls is delegated to directives and asynchronous.
+- Angular handles data updates with two-way binding.
+- Hard to test with automated tests.
 
 In [**reactive forms**][angular-reactive-forms], a tree of form control objects and validations is managed **in the component** and bound to elements in the template:
 
-* The component class has immediate access to both the data model and the form control structure.
-* Changes can be subscribed to in the form of Observables.
-* Data and validity updates are synchronous and under your control.
-* Easier to test with automated tests.
+- The component class has immediate access to both the data model and the form control structure.
+- Changes can be subscribed to in the form of Observables.
+- Data and validity updates are synchronous and under your control.
+- Easier to test with automated tests.
 
 Neither is "better".
 They're two different architectural paradigms, with their own strengths and weaknesses.
@@ -674,14 +676,15 @@ You may even use both in the same application.
 
 **Documentation**
 
-* [Angular Tour of Heroes Tutorial][angular-tour-of-heroes]
-* [Angular Developer Guide][angular-guide]
+- [Angular Tour of Heroes Tutorial][angular-tour-of-heroes]
+- [Angular Developer Guide][angular-guide]
   * [Template-driven Forms][angular-forms]
   * [Reactive Forms][angular-reactive-forms]
-* [Angular API reference][angular-api]
+- [Angular API reference][angular-api]
 
 [angular]: https://angular.io
 [angular-api]: https://angular.io/api
+[angular-cli-subject]: ../angular-cli
 [angular-custom-validators]: https://angular.io/guide/form-validation#custom-validators
 [angular-docs-async-validator-fn]: https://angular.io/api/forms/AsyncValidatorFn
 [angular-docs-email-validator]: https://angular.io/api/forms/EmailValidator
@@ -697,8 +700,9 @@ You may even use both in the same application.
 [angular-docs-validator-fn]: https://angular.io/api/forms/ValidatorFn
 [angular-form-control-status-classes]: https://angular.io/guide/form-validation#control-status-css-classes
 [angular-forms]: https://angular.io/guide/forms
+[angular-forms-subject]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular-forms?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest
 [angular-guide]: https://angular.io/guide/architecture
-[angular-subject]: ../angular
+[angular-subject]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest
 [angular-template-driven-form]: https://angular.io/guide/forms
 [angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
 [angular-tour-of-heroes]: https://angular.io/tutorial
@@ -707,6 +711,6 @@ You may even use both in the same application.
 [blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
 [chrome]: https://www.google.com/chrome/
 [html-input]: https://www.w3schools.com/tags/tag_input.asp
-[ionic]: https://ionicframework.com/docs/cli
+[ionic-cli]: https://ionicframework.com/docs/cli
 [ion-input]: https://ionicframework.com/docs/api/input
 [ion-checkbox]: https://ionicframework.com/docs/api/checkbox

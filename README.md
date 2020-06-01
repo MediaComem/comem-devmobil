@@ -49,9 +49,9 @@ You will:
 - Ionic
 
   - [TypeScript](./subjects/ts)
-  - [Angular](./subjects/angular)
+  - [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
   - [Ionic navigation with Angular](./subjects/ionic-angular)
-  - [Angular Forms](./subjects/angular-forms)
+  - [Angular Forms With Ionic](./subjects/angular-forms)
 
 - App Development
 
@@ -62,7 +62,7 @@ You will:
 
   - [JavaScript closures](./subjects/js-closures)
 
-- [Advanced Angular](./subjects/advanced-angular)
+- [Advanced Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/advanced-angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
 
 - Ionic (advanced)
 
