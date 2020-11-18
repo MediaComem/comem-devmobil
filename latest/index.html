@@ -40,11 +40,10 @@
 i.e. web apps embedded into native apps on multiple platforms.
 You will:</p>
 <ul>
-<li>Learn about hybrid mobile application development with <a href="http://ionicframework.com">Ionic</a> and <a href="https://cordova.apache.org">Cordova</a>.</li>
-<li>Learn the <strong>core principles</strong> of <a href="https://angular.io">Angular</a>.</li>
-<li>Design and develop a <strong>mobile application</strong> optionally based on the API developed in the <a href="https://github.com/MediaComem/comem-archioweb">previous course</a>.</li>
-<li>Learn the <strong>basics of Unit Testing</strong> with Angular.</li>
-<li>Add a <strong>real-time</strong> component to your hybrid mobile application.</li>
+<li>Learn about hybrid mobile application development with <a href="http://ionicframework.com">Ionic</a> and <a href="https://cordova.apache.org">Cordova</a> ;</li>
+<li>Learn the <strong>core principles</strong> of <a href="https://angular.io">Angular</a> ;</li>
+<li>Design and develop a <strong>mobile application</strong> optionally based on the API developed in the <a href="https://github.com/MediaComem/comem-archioweb">previous course</a> ;</li>
+<li>Add a <strong>real-time</strong> component to your hybrid mobile application ;</li>
 <li>Run the mobile application on your <strong>phone</strong>.</li>
 </ul>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -52,7 +51,7 @@ You will:</p>
 <ul>
 <li><a href="#what-you-will-need">What you will need</a></li>
 <li><a href="#plan">Plan</a></li>
-<li><a href="#additionnal-concepts">Additionnal concepts</a></li>
+<li><a href="#additionnal-subjects">Additionnal subjects</a></li>
 <li><a href="#evaluation">Evaluation</a><ul>
 <li><a href="#delivery">Delivery</a></li>
 </ul>
@@ -62,13 +61,13 @@ You will:</p>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <h2 id="what-you-will-need">What you will need</h2>
 <ul>
-<li>A Unix CLI like Terminal on Mac, Git Bash or equivalent on Windows (avoid WSL as it does not work well with Ionic for now)</li>
-<li><a href="https://git-scm.com/downloads">Git</a></li>
+<li>A Unix CLI like Terminal on Mac, Git Bash or WSL2 on Windows</li>
+<li><a href="https://git-scm.com/downloads">Git</a> (on Windows, download and install <a href="https://gitforwindows.org/">Git for Windows</a></li>
 <li>A free <a href="https://github.com">GitHub</a> account</li>
-<li><a href="https://www.google.com/chrome/">Google Chrome</a> (recommended, any browser with developer tools will do)</li>
-<li><a href="https://nodejs.org/">Node.js</a> 10+</li>
-<li><a href="http://ionicframework.com/getting-started/">Ionic</a></li>
-<li>An IDE or code editor of your choice (although I strongly recommend using <a href="https://code.visualstudio.com/">VS Code</a> when working with Typescript)</li>
+<li>A web browser (recommended are <a href="https://www.microsoft.com/en-us/edge">Edge</a> or <a href="https://www.google.com/chrome/">Chrome</a>, but any browser with developer tools will do)</li>
+<li><a href="https://nodejs.org/">Node.js</a> 14+ (latest Ferbium version)</li>
+<li>Latest Ionic CLI: <code>npm install -g @ionic/cli</code></li>
+<li>An IDE or code editor of your choice (although I strongly recommend using <a href="https://code.visualstudio.com/">VS Code</a> when working with Typescript and Angular)</li>
 </ul>
 <h2 id="plan">Plan</h2>
 <ul>
@@ -79,9 +78,8 @@ You will:</p>
 <li><a href="./subjects/js-classes">JavaScript classes</a></li>
 <li><a href="./subjects/js-modules">JavaScript modules</a></li>
 <li><a href="./subjects/js-promises-basics">JavaScript Basic promises</a></li>
+<li><a href="./subjects/rxjs">Observables with Rxjs</a></li>
 </ul>
-</li>
-<li><p><a href="./subjects/rxjs">Observables with Rxjs</a></p>
 </li>
 <li><p>Ionic</p>
 <ul>
@@ -117,10 +115,11 @@ You will:</p>
 </ul>
 </li>
 </ul>
-<h2 id="additionnal-concepts">Additionnal concepts</h2>
+<h2 id="additionnal-subjects">Additionnal subjects</h2>
 <ul>
-<li><a href="./subjects/js-prototypes">JavaScript prototypes</a></li>
-<li><a href="./subjects/js-promises">JavaScript Advanced promises</a></li>
+<li><a href="https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/js/#1">Javascript: basics and more</a></li>
+<li><a href="./subjects/js-prototypes">JavaScript: prototypes</a></li>
+<li><a href="./subjects/js-promises">JavaScript: advanced promises</a></li>
 </ul>
 <h2 id="evaluation">Evaluation</h2>
 <p><strong>Features</strong></p>
@@ -166,7 +165,7 @@ You can choose from the following options (one is enough):</p>
 <em>This last one is kind of tough, and doing it will not get you a better grade. You&#39;ve been warned</em></li>
 </ul>
 <h3 id="delivery">Delivery</h3>
-<p>Each group must send an e-mail <strong>no later than 21th of january 2020</strong> to <a href="mailto:mathias.oberson@heig-vd.ch">Mathias Oberson</a> with:</p>
+<p>Each group must send an e-mail <strong>no later than (TBD)</strong> to <a href="mailto:mathias.oberson@squareservices.ch">Mathias Oberson</a> with:</p>
 <ul>
 <li>The list of group members.</li>
 <li>The link to your source code repository on GitHub.</li>
@@ -175,9 +174,8 @@ You can choose from the following options (one is enough):</p>
 <h2 id="useful-links">Useful links</h2>
 <ul>
 <li><a href="https://comem-travel-log-api.herokuapp.com">Travel Log API documentation</a></li>
-<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Ionic setup</a> (<a href="https://github.com/MediaComem/comem-travel-log-ionic-starter">completed starter project</a>)</li>
+<li><a href="https://github.com/MediaComem/comem-travel-log-ionic-setup">Ionic setup</a> (<a href="https://github.com/MediaComem/comem-travel-log-ionic-starter">complete starter project</a>)</li>
 <li><a href="https://mediacomem.github.io/comem-qimg/">qimg API</a></li>
-<li><a href="https://github.com/MediaComem/comem-devmobil/blob/03da6e080cf5def32425fc58a3bc5d53047c09eb/ATOM-TYPESCRIPT.md#typescript-support-in-atom">TypeScript support in Atom</a></li>
 </ul>
 
     </div>
