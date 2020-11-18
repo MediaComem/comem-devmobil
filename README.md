@@ -16,7 +16,7 @@ You will:
 
 - [What you will need](#what-you-will-need)
 - [Plan](#plan)
-- [Additionnal concepts](#additionnal-concepts)
+- [Additionnal subjects](#additionnal-subjects)
 - [Evaluation](#evaluation)
   - [Delivery](#delivery)
 - [Useful links](#useful-links)
@@ -42,8 +42,7 @@ You will:
   - [JavaScript classes](./subjects/js-classes)
   - [JavaScript modules](./subjects/js-modules)
   - [JavaScript Basic promises](./subjects/js-promises-basics)
-
-- [Observables with Rxjs](./subjects/rxjs)
+  - [Observables with Rxjs](./subjects/rxjs)
 
 - Ionic
 
@@ -72,10 +71,11 @@ You will:
   - [WebSocket](./subjects/websocket)
   - [WAMP](./subjects/wamp)
 
-## Additionnal concepts
+## Additionnal subjects
 
-- [JavaScript prototypes](./subjects/js-prototypes)
-- [JavaScript Advanced promises](./subjects/js-promises)
+- [Javascript: basics and more][js-basics]
+- [JavaScript: prototypes](./subjects/js-prototypes)
+- [JavaScript: advanced promises](./subjects/js-promises)
 
 ## Evaluation
 
@@ -118,7 +118,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than 21th of january 2020** to [Mathias Oberson](mailto:mathias.oberson@heig-vd.ch) with:
+Each group must send an e-mail **no later than (TBD)** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
@@ -127,9 +127,8 @@ Each group must send an e-mail **no later than 21th of january 2020** to [Mathia
 ## Useful links
 
 - [Travel Log API documentation][travel-log-api]
-- [Ionic setup][setup-project] ([completed starter project][starter-project])
+- [Ionic setup][setup-project] ([complete starter project][starter-project])
 - [qimg API][qimg]
-- [TypeScript support in Atom](https://github.com/MediaComem/comem-devmobil/blob/03da6e080cf5def32425fc58a3bc5d53047c09eb/ATOM-TYPESCRIPT.md#typescript-support-in-atom)
 
 [angular]: https://angular.io
 [archioweb]: https://github.com/MediaComem/comem-archioweb
@@ -141,6 +140,7 @@ Each group must send an e-mail **no later than 21th of january 2020** to [Mathia
 [github]: https://github.com
 [ionic]: http://ionicframework.com
 [ionic-getting-started]: http://ionicframework.com/getting-started/
+[js-basics]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/js/#1
 [node]: https://nodejs.org/
 [qimg]: https://mediacomem.github.io/comem-qimg/
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
