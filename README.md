@@ -4,11 +4,10 @@ The goal of this course is to learn how to develop hybrid mobile applications,
 i.e. web apps embedded into native apps on multiple platforms.
 You will:
 
-- Learn about hybrid mobile application development with [Ionic][ionic] and [Cordova][cordova].
-- Learn the **core principles** of [Angular][angular].
-- Design and develop a **mobile application** optionally based on the API developed in the [previous course][archioweb].
-- Learn the **basics of Unit Testing** with Angular.
-- Add a **real-time** component to your hybrid mobile application.
+- Learn about hybrid mobile application development with [Ionic][ionic] and [Cordova][cordova] ;
+- Learn the **core principles** of [Angular][angular] ;
+- Design and develop a **mobile application** optionally based on the API developed in the [previous course][archioweb] ;
+- Add a **real-time** component to your hybrid mobile application ;
 - Run the mobile application on your **phone**.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -26,13 +25,13 @@ You will:
 
 ## What you will need
 
-- A Unix CLI like Terminal on Mac, Git Bash or equivalent on Windows (avoid WSL as it does not work well with Ionic for now)
-- [Git][git-downloads]
+- A Unix CLI like Terminal on Mac, Git Bash or WSL2 on Windows
+- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows]
 - A free [GitHub][github] account
-- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
-- [Node.js][node] 10+
-- [Ionic][ionic-getting-started]
-- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript)
+- A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do)
+- [Node.js][node] 14+ (latest Ferbium version)
+- Latest Ionic CLI: `npm install -g @ionic/cli`
+- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript and Angular)
 
 ## Plan
 
@@ -136,7 +135,9 @@ Each group must send an e-mail **no later than 21th of january 2020** to [Mathia
 [archioweb]: https://github.com/MediaComem/comem-archioweb
 [chrome]: https://www.google.com/chrome/
 [cordova]: https://cordova.apache.org
+[edge]: https://www.microsoft.com/en-us/edge
 [git-downloads]: https://git-scm.com/downloads
+[git-for-windows]: https://gitforwindows.org/
 [github]: https://github.com
 [ionic]: http://ionicframework.com
 [ionic-getting-started]: http://ionicframework.com/getting-started/
