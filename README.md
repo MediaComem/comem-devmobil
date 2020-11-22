@@ -30,7 +30,7 @@ You will:
 - [Git][git-downloads]
 - A free [GitHub][github] account
 - [Google Chrome][chrome] (recommended, any browser with developer tools will do)
-- [Node.js][node] 10+
+- [Node.js][node] 14+
 - [Ionic][ionic-getting-started]
 - An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript)
 

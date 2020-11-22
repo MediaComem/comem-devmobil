@@ -4,7 +4,7 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **You will need**
 
-* [Node.js][node] 10+
+* [Node.js][node] 14+
 * [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 **Recommended reading**
