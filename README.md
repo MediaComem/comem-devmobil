@@ -4,11 +4,10 @@ The goal of this course is to learn how to develop hybrid mobile applications,
 i.e. web apps embedded into native apps on multiple platforms.
 You will:
 
-- Learn about hybrid mobile application development with [Ionic][ionic] and [Cordova][cordova].
-- Learn the **core principles** of [Angular][angular].
-- Design and develop a **mobile application** optionally based on the API developed in the [previous course][archioweb].
-- Learn the **basics of Unit Testing** with Angular.
-- Add a **real-time** component to your hybrid mobile application.
+- Learn about hybrid mobile application development with [Ionic][ionic] and [Cordova][cordova] ;
+- Learn the **core principles** of [Angular][angular] ;
+- Design and develop a **mobile application** optionally based on the API developed in the [previous course][archioweb] ;
+- Add a **real-time** component to your hybrid mobile application ;
 - Run the mobile application on your **phone**.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -17,7 +16,7 @@ You will:
 
 - [What you will need](#what-you-will-need)
 - [Plan](#plan)
-- [Additionnal concepts](#additionnal-concepts)
+- [Additionnal subjects](#additionnal-subjects)
 - [Evaluation](#evaluation)
   - [Delivery](#delivery)
 - [Useful links](#useful-links)
@@ -26,13 +25,13 @@ You will:
 
 ## What you will need
 
-- A Unix CLI like Terminal on Mac, Git Bash or equivalent on Windows (avoid WSL as it does not work well with Ionic for now)
-- [Git][git-downloads]
+- A Unix CLI like Terminal on Mac, Git Bash or WSL2 on Windows
+- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows]
 - A free [GitHub][github] account
-- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
-- [Node.js][node] 14+
-- [Ionic][ionic-getting-started]
-- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript)
+- A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do)
+- [Node.js][node] 14+ (latest Ferbium version)
+- Latest Ionic CLI: `npm install -g @ionic/cli`
+- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript and Angular)
 
 ## Plan
 
@@ -43,8 +42,7 @@ You will:
   - [JavaScript classes](./subjects/js-classes)
   - [JavaScript modules](./subjects/js-modules)
   - [JavaScript Basic promises](./subjects/js-promises-basics)
-
-- [Observables with Rxjs](./subjects/rxjs)
+  - [Observables with Rxjs](./subjects/rxjs)
 
 - Ionic
 
@@ -73,10 +71,11 @@ You will:
   - [WebSocket](./subjects/websocket)
   - [WAMP](./subjects/wamp)
 
-## Additionnal concepts
+## Additionnal subjects
 
-- [JavaScript prototypes](./subjects/js-prototypes)
-- [JavaScript Advanced promises](./subjects/js-promises)
+- [Javascript: basics and more][js-basics]
+- [JavaScript: prototypes](./subjects/js-prototypes)
+- [JavaScript: advanced promises](./subjects/js-promises)
 
 ## Evaluation
 
@@ -119,7 +118,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than 21th of january 2020** to [Mathias Oberson](mailto:mathias.oberson@heig-vd.ch) with:
+Each group must send an e-mail **no later than (TBD)** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
@@ -128,18 +127,20 @@ Each group must send an e-mail **no later than 21th of january 2020** to [Mathia
 ## Useful links
 
 - [Travel Log API documentation][travel-log-api]
-- [Ionic setup][setup-project] ([completed starter project][starter-project])
+- [Ionic setup][setup-project] ([complete starter project][starter-project])
 - [qimg API][qimg]
-- [TypeScript support in Atom](https://github.com/MediaComem/comem-devmobil/blob/03da6e080cf5def32425fc58a3bc5d53047c09eb/ATOM-TYPESCRIPT.md#typescript-support-in-atom)
 
 [angular]: https://angular.io
 [archioweb]: https://github.com/MediaComem/comem-archioweb
 [chrome]: https://www.google.com/chrome/
 [cordova]: https://cordova.apache.org
+[edge]: https://www.microsoft.com/en-us/edge
 [git-downloads]: https://git-scm.com/downloads
+[git-for-windows]: https://gitforwindows.org/
 [github]: https://github.com
 [ionic]: http://ionicframework.com
 [ionic-getting-started]: http://ionicframework.com/getting-started/
+[js-basics]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/js/#1
 [node]: https://nodejs.org/
 [qimg]: https://mediacomem.github.io/comem-qimg/
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
