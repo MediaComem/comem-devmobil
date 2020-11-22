@@ -7,10 +7,6 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 * [Node.js][node] 14+
 * [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
-**Recommended reading**
-
-* [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -131,7 +127,6 @@ Cordova is not the only system that allows developing hybrid (or hybrid-like) mo
 Here's a list of other technologies and why they were not chosen for this course:
 
 * [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
-* [Adobe PhoneGap](https://phonegap.com/) - This is a fork of Cordova
 * [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
 * [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
 * And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
@@ -163,11 +158,14 @@ Ionic is basically **Cordova**, a JavaScript framework (**Angular**, **Vue**, **
 
 At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications (or any hybrid app, for that matter), in the long run.
 
-Currently, both Cordova and Capacitor are supported by the Ionic framework, but **Cordova is still the default bridge** used.
+Currently, both Cordova and Capacitor are supported by the Ionic framework.
 
-**We will keep using Cordova for this course as Capacitor is still in its infancy.**
+**We will keep using Cordova for this course in the slidedocs and example.**
 
-> Whenever the choice between Capacitor and Cordova is given to you in tutorials or documentations, **follow instructions for Cordova**.
+Although, based on the documentation, Cordova requires some additionnal steps when preparing the development environment.
+
+> You are free to use Capacitor instead of Cordova if you want to. The official documentation should be enough to help you. If it's not, I'll try to help as best I can, but I don't have any experience using it.
+
 
 #### What can I do with Ionic?
 
@@ -186,28 +184,28 @@ Ionic lets you build web apps that **look like native apps** with HTML, CSS and 
 Ionic provides you a **CLI tool** that you should install globally with the following command:
 
 ```bash
-$> npm install -g ionic
+$> npm install -g @ionic/cli
 ```
 
 You're now ready to use Ionic.
-Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template:
+Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template, using `Angular` as the underlying framework:
 
 ```bash
 $> cd /path/to/projects
-$> ionic start ionic-tabs-demo tabs
-✔ Preparing directory ./ionic-tabs-demo - done!
-✔ Downloading and extracting tabs starter - done!
+$> ionic start ionic-tabs-demo tabs --type=angular
+✔ Preparing directory ./ionic-tabs-demo in 5.63ms
+✔ Downloading and extracting tabs starter in 187.93ms
+? Integrate your new app with Capacitor to target native iOS and Android? `No`
 Installing dependencies may take several minutes.
 ...
-[INFO] Next Steps:
-  `- Go to your newly created project: 'cd ./ionic-tabs-demo`
-  `- Run 'ionic serve' within the app directory to see your app`
-  - Build features and components: `https://ion.link/scaffolding-docs`
-  - Get Ionic DevApp for easy device testing: https://ion.link/devapp
+? Create free Ionic account? `No`
+Your Ionic app is ready! Follow these next steps:
+
+*- Go to your new project: cd ./ionic-tabs-demo
+*- Run ionic serve within the app directory to see your app in the browser
+- ...
 ```
 > Follow the first two infos to see your app in your browser.
-
-> You're also advised to take a look at [the third info's link](https://ion.link/scaffolding-docs)
 
 ### Starter templates
 
@@ -295,7 +293,8 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 
 Many of these components are actually [**Angular components**][angular-components].
 They not only look pretty, but they also bring **functionality**.
-Here's a code example for an Ionic list:
+
+Here's a code example for an Ionic list, that will dynamically build each item based on an `people` array of `person` objects:
 
 ```html
 <ion-list>
@@ -349,101 +348,16 @@ For example, the `ion-item-sliding` component automatically enables you to [slid
 
 ## Running apps on your mobile device
 
-There are several ways to run your Ionic application on a mobile device.
-This section will describe some of them:
+Even if Ionic lets you develop and run your app on a browser, the final goal should be to build your app and run it on a actual mobile device.
 
-* Run with the **Ionic Dev App** (Android & iOS)
-* Run on an **iOS device** (Mac users only)
-* Run on an **Android device**
+How this can be achieved depends heavily on which mobile device and computer you actually have...
 
-Whatever's the method, you'll need to **install Cordova** and **configure your project to use it** with the following commands:
+* Want to test your app on **an iOS device**? You'll **need a Mac** for that...
+* Want to test your app on **an Android device**? Any computer will do
 
-```bash
-$> cd /path/to/projects/my-app
-$> npm i -g cordova
-```
+Whatever your setup, the Ionic documentation has dedicated walkthrough to set up your environment.
 
-If you want to deploy your app on an Android device
-
-```bash
-$> ionic cordova prepare android
-```
-
-If you want to deploy your app on an iOS device
-
-```bash
-$> ionic cordova prepare ios
-```
-
-### Ionic Dev App
-
-The [Ionic Dev App][ionic-dev-app] is an Android and iOS application in which your own app can run without having to be built and installed on your physically connected device.
-
-To use it, you must serve your app with the `--devapp` option:
-
-```bash
-$> cd /path/to/projects/my-app
-$> ionic serve `--devapp`
-```
-
-If your phone is on the **same network as your computer**,
-the Dev App can connect to the mobile application running on your machine.
-
-It may find it automatically, or you may have to manually enter your computer's IP address on some networks.
-
-### iOS device
-
-> You can only run on an iOS device from a Mac, since you'll need to install and use Xcode, which is a Mac-only software.
->
-> If you don't have a Mac but want to run your app on an iOS anyway, you'll have to try using the **Ionic Dev App**
-
-First, you'll need to prepare your Mac for deploying to a real or simulated iOS device, by following this instructions page:
-
-[iOS setup][ionic-ios-setup]
-
-Once you're done with those install and setup, you should be able to follow those insctructions:
-
-[Running on iOS][ionic-ios-run]
-
-### Android device
-
-> You can run your app on an Android device from either a Mac or a PC
-
-First, you'll need to prepare your computer for deploying to a real or simulated Android device, by following this instructions page:
-
-[Android setup][ionic-android-setup]
-
-> You'll need to create an Oracle account before being able to download the Java Development Kit (JDK) 8.
-
-> If you don't want to, you can download the JDK from open sources like [AdoptOpenJDK][adoptopenjdk]
-
-Once you're done with those install and setup, you should be able to follow those insctructions:
-
-[Running on Android][ionic-android-run]
-
-> After installing Android Studio, go to the next slide
-
-#### Android SDK
-
-Now that you installed and finished configuring Android Studio, you should have installed the latest SDK version of Android (at the time of writing, that should be Android 10).
-
-This SDK version **might not be the same** as the device on which you plan to run your app.
-
-Check the Android version of your device by going to the **Settings**. There should be something like **About phone** then **Android version**, and keep track of the number.
-
-<!-- slide-column -->
-
-Go to Android Studio and click on the **Configure** button, then select **SDK Manager**.
-
-In the **SDK Platforms** tab, tick the box next to the SDK matching your device version, and click on **Apply** to download and install it.
-
-<!-- slide-column 30 -->
-
-<img src='images/android-studio-configure.png' />
-
-<!-- slide-container -->
-
-> You can now go back to the **Android Setup** for [Configuring Command Line Tools][configure-cli-tools]
+* [iOS Development][ionic-ios-dev]
 
 ## Resources
 
@@ -468,10 +382,8 @@ In the **SDK Platforms** tab, tick the box next to the SDK matching your device 
 [ionic-components]: https://ionicframework.com/docs/components/
 [ionic-dev-app]: https://ionicframework.com/docs/appflow/devapp/
 [ionic-docs]: https://ionicframework.com/docs/
-[ionic-ios-setup]: https://ionicframework.com/docs/installation/ios
-[ionic-ios-run]: https://ionicframework.com/docs/building/ios
 [ionic-market]: https://market.ionicframework.com/
 [ionic-sliding-list]: https://ionicframework.com/docs/api/item-sliding
 [node]: https://nodejs.org/en/
-[ionic-android-setup]: https://ionicframework.com/docs/installation/android
-[ionic-android-run]: https://ionicframework.com/docs/building/android
+[ionic-ios-dev]: https://ionicframework.com/docs/developing/ios
+[ionic-android-dev]: https://ionicframework.com/docs/developing/android

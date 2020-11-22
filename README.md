@@ -35,7 +35,7 @@ You will:
 
 ## Plan
 
-- [Introduction](./subjects/ionic)
+- [Introduction](./subjects/introduction)
 
 - Going further with JavaScript
 
@@ -48,7 +48,7 @@ You will:
 
   - [TypeScript](./subjects/ts)
   - [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
-  - [Ionic navigation with Angular](./subjects/ionic-angular)
+  - [Ionic navigation with Angular](./subjects/introduction-angular)
   - [Angular Forms With Ionic](./subjects/angular-forms)
 
 - App Development
@@ -64,7 +64,7 @@ You will:
 
 - Ionic (advanced)
 
-  - [Ionic extras (geolocation, leaflet & camera)](./subjects/ionic-extras)
+  - [Ionic extras (geolocation, leaflet & camera)](./subjects/introduction-extras)
   - [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 - Real-Time
