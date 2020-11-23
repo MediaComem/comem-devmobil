@@ -358,6 +358,7 @@ How this can be achieved depends heavily on which mobile device and computer you
 Whatever your setup, the Ionic documentation has dedicated walkthrough to set up your environment.
 
 * [iOS Development][ionic-ios-dev]
+* [Android Development][ionic-android-dev]
 
 ## Resources
 
