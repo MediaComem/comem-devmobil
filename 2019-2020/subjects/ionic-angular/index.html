@@ -3,7 +3,7 @@
   <head>
     <title>Ionic navigation with Angular (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/c2cf9b497507592cd491e4aa136af94fa133107c/subjects/ionic-angular/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/43c84f9d43e25936dee230256b0f52b1505d2d9e/subjects/ionic-angular/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -13,8 +13,8 @@ Learn to work with [Angular][angular] in an [Ionic][ionic] project.
 
 **Recommended reading**
 
-* [Ionic](../ionic/)
-* [Angular](../angular/)
+- [Ionic](../ionic/)
+- [Angular](../angular/)
 
 
 
@@ -38,12 +38,13 @@ $> ionic generate --help
     - For a full list of available types, use npx ng g --help
     - For a list of options for a types, use npx ng g <type> --help
 
-    You can specify a path to nest your feature within any number of subdirectories.
-    For example, specify a name of "pages/New Page" to generate page files at src/app/pages/new-page/.
+    You can specify a path to nest your feature within any number of subdirectories. For example, specify a name of
+    "pages/New Page" to generate page files at src/app/pages/new-page/.
 
-    To test a generator before file modifications are made, use the --dry-run option
+    To test a generator before file modifications are made, use the --dry-run option.
 ```
-> Since `ionic generate` is based off the `Angular CLI`, you're advised to also take a look at [its own `generate` command documentation][ng-generate].
+
+> Since `ionic generate` is based off of the `Angular CLI`, you're advised to also take a look at [its own `generate` command documentation][ng-generate].
 
 ---
 ### Generate app pages
@@ -59,19 +60,19 @@ From the root of your project, use the following command to set up a "Hello" pag
 > Add `--dry-run` at the end of your `generate` command if you want to test what the command would do, without actually doing it.
 
 ```ts
-$> `ionic generate page Hello`
-> ng.cmd generate page Hello
+$> `ionic generate page Hello --dry-run`
+> ng generate page Hello --dry-run --project=app
 CREATE src/app/hello/hello-routing.module.ts (343 bytes)
 CREATE src/app/hello/hello.module.ts (465 bytes)
+CREATE src/app/hello/hello.page.scss (0 bytes)
 CREATE src/app/hello/hello.page.html (124 bytes)
 CREATE src/app/hello/hello.page.spec.ts (640 bytes)
 CREATE src/app/hello/hello.page.ts (252 bytes)
-CREATE src/app/hello/hello.page.scss (0 bytes)
-UPDATE src/app/app-routing.module.ts (497 bytes)
-[OK] Generated page!
+UPDATE src/app/app-routing.module.ts (629 bytes)
+NOTE: The "dryRun" flag means no changes were made.
 ```
 
-The Ionic CLI tells us that it's created a bunch of files, and updated one.
+The Ionic CLI tells us that it's **created** a bunch of files, and **updated** one.
 
 _Let's see what all of this means._
 
@@ -82,13 +83,13 @@ _Let's see what all of this means._
 
 Here is what executing the command did in our project:
 
-* Created a `hello.page.html` file to write your page's **HTML template** into,
-* Created a `hello.page.scss` file to write your page's **style** into,
-* Created a `hello.page.ts` file containing your page **class definition**, and referecing the previous `.html` and `.scss` files as your new page's template and style, respectively,
-* Created a `hello.page.spec.ts` file to write your page's tests into (forget this for now, we'll see what tests in Angular are all about later on this course),
-* Created a `hello.module.ts` file containing **a module that declares your new page** and how to navigate to it (more on this later),
-* Created a `hello-routing.module.ts` file defining **the navigation for this new page**,
-* Finally, updated the `app-routing.module.ts` file to **add your new page to your app's navigation**.
+- Created a `hello.page.html` file to write your page's **HTML template** into,
+- Created a `hello.page.scss` file to write your page's **style** into,
+- Created a `hello.page.ts` file containing your page **class definition**, and referecing the previous `.html` and `.scss` files as your new page's template and style, respectively,
+- Created a `hello.page.spec.ts` file to write your page's tests into (_subject not covered in this course_),
+- Created a `hello.module.ts` file containing **a module that declares your new page** and how to navigate to it (more on this later),
+- Created a `hello-routing.module.ts` file defining **the navigation for this new page's module**,
+- Finally, updated the `app-routing.module.ts` file to **add your new page to your app's root navigation**.
 
 > Now is a good time to take a look at **how navigation's done in an Ionic/Angular app**.
 
@@ -106,9 +107,10 @@ This router uses a **URL based system**, meaning that your app will display page
 From the [Angular Router documentation][angular-router]:
 
 > The browser is a familiar model of application navigation:
-> * Enter a URL in the address bar and the browser navigates to a corresponding page.
-> * Click links on the page and the browser navigates to a new page.
-> * Click the browser's back and forward buttons and the browser navigates backward and forward through the history of pages you've seen.
+>
+> - Enter a URL in the address bar and the browser navigates to a corresponding page.
+> - Click links on the page and the browser navigates to a new page.
+> - Click the browser's back and forward buttons and the browser navigates backward and forward through the history of pages you've seen.
 
 With Ionic starter templates, base navigation is defined in the `app-routing.module.ts` file.
 
@@ -137,6 +139,7 @@ The content of the `app-routing.module.ts` file for the **Blank Starter** (the s
 })
 export class AppRoutingModule { }
 ```
+
 The `RouterModule.forRoot` method uses the `routes` constant to configure the `Router`'s top level navigation.
 
 > We won't see what the second `forRoot` param is about, but you can learn more about it [here][how-to-lazy-load].
@@ -157,10 +160,11 @@ const routes: Routes = [
   }
 ];
 ```
-* `path` defines the URL path that, if matched, will trigger this route. A `path` of `''` means that this route is the default route, and is matched when there is no path in the URL (like with `https://example.com`).
+
+- `path` defines the URL path that, if matched, will trigger this route. A `path` of `''` means that it's the default route, matched when there is no path in the URL (like with `https://example.com`).
   > _The path of the URL is the part that comes right after the domain name ; in a URL like `https://example.com/foo`, the path would be `foo`._
-* `redirectTo` makes a route redirecting to another path. Here, the URL `https://example.com` will redirect to `https://example.com/home`, as if the user directly accessed it.
-* `pathMatch: full` is required with `redirectTo` and means that only URLs with the exact same path as the one defined for this route will match.
+- `redirectTo` makes a route redirecting to another route's path. Here, the URL `https://example.com` will redirect to `https://example.com/home`, as if the user directly accessed it.
+- `pathMatch: full` is required with `redirectTo` and means that only URLs with the **exact same path** as the one defined for this route will match.
 
 ---
 ### Route definition (2/2)
@@ -178,9 +182,12 @@ const routes: Routes = [
   }
 ];
 ```
-`loadChildren` is used to **Lazy Load** modules, meaning that modules will only be loaded when they are requested by the user's action, instead of at the app's startup. This is a _Good Practice™_, as it **speeds up** the start of your app (with the downside of minor loads when first accessing the Lazy Loaded module).
 
-Here, any URL with a path that starts with `home` will make Angular loads the `HomePageModule`. This module **MUST** have its own routes array so that the Router can keep searching for a match with what remains of the initial path.
+`loadChildren` is used to **Lazy Load** modules, meaning that they will be loaded **only** when the user tries to access their associated path, instead of at the app's startup.
+
+This is a _Good Practice™_, as it **speeds up** the start of your app (with the downside of minor few loads when first accessing the Lazy Loaded module).
+
+Here, any URL with a path that **starts with** `home` will make Angular loads the `HomePageModule`. This module **MUST** have its own routes definition so that the Router can keep looking for a match with what remains of the initial path.
 
 Let's see how the `HomePageModule` is defined to better understand what we're talking about.
 
@@ -193,25 +200,25 @@ The code for the `HomePageModule` in the starter is as follows:
 
 ```ts
 // Other imports...
-*import { HelloPageRoutingModule } from './hello-routing.module';
+*import { HomePageRoutingModule } from './home-routing.module';
 
-import { HelloPage } from './hello.page';
+import { HomePage } from './home.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    `HelloPageRoutingModule`
+    `HomePageRoutingModule`
   ],
-  declarations: [HelloPage]
+  declarations: [HomePage]
 })
-export class HelloPageModule {}
+export class HomePageModule {}
 ```
 
-We can see that the `HomePageModule` imports another module named `HelloPageRoutingModule`. The name is obviously related to routing, and so navigation.
+We can see that the `HomePageModule` imports another module named `HomePageRoutingModule`. The name is obviously related to routing, and so navigation.
 
-Let's see what's inside
+Let's see what's inside...
 
 ---
 #### HomePageRoutingModule
@@ -237,8 +244,8 @@ export class HelloPageRoutingModule {}
 
 ```
 
-* The only route defined in this module means that when the remaining path starts with `''` (i.e. nothing), then the `HomePage` should be rendered.
-* Note the usage of the `forChild` method when importing the `RouterModule`, instead of `forRoot`. This is necesseray to indicate that the `routes` of the `HomePageRoutingModule` are child routes.
+- The only route defined in this module means that when the remaining path starts with `''` (i.e. nothing), then the `HomePage` should be rendered.
+- Note the usage of the `forChild` method when importing the `RouterModule`, instead of `forRoot`. This is necesseray to indicate that the `routes` of the `HomePageRoutingModule` are child routes.
 
 ---
 ### URL matching (1/3)
@@ -255,14 +262,14 @@ Looking at the root routes (in `app-routing.module.ts`), the Router will find a 
 { path: '', redirectTo: 'home', pathMatch: 'full' }
 ```
 
-This route will redirect the user to `https://example.com/home`, causing the router to start again and try and match this new URL using its path, which is now `home`.
+This route will seamlessly redirect the user to `https://example.com/home`, causing the router to start again and try and match this new URL using its path, which is now `home`.
 
 ---
 ### URL matching (2/3)
 
 .breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#5">Navigation</a>]
 
-Looking again at the root routes, the Router will find a match for the new path `home`:
+Looking again at the root routes, the router will find a match for the new path `home`:
 
 ```ts
 {
@@ -270,9 +277,10 @@ Looking again at the root routes, the Router will find a match for the new path 
   loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
 }
 ```
-This route will make Angular loads the `HomePageModule`, which imports the `HomePageRoutingModule` that declares its child routes.
 
-Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, which is also `home`, leaving a remaining path of `''` to match with one of the child routes in the `HomePageRoutingModule`.
+This route will make Angular asynchronously load the `HomePageModule`, which imports the `HomePageRoutingModule`, that defines additional navigation.
+
+Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, which is also `home`, leaving a remaining path of `''` to match with one of the child routes defined the `HomePageRoutingModule`.
 
 ---
 ### URL matching (3/3)
@@ -300,7 +308,7 @@ From the root of your project, execute this command:
 $> ionic generate page User
 ```
 
-This generates a new page component in `src/app/user`, and update the root routes to include this new page in `app-routing.module.ts`:
+This generates a new page component in `src/app/user`, and updates the root routes to include navigation to this new page in `app-routing.module.ts`:
 
 ```ts
 const routes: Routes = [
@@ -323,18 +331,19 @@ const routes: Routes = [
 
 We will add a button in our `HomePage` that allow our users to navigate to the `UserPage`.
 
-To do so, let's open the `home.page.html` file and add some content:
+To do so, let's open the `home.page.html` file and replace the content in the `div#container`:
 
 ```html
 <!-- Other HTML -->
-<ion-content padding>
+<div id="container">
   <p>Welcome to the Home Page</p>
-  <ion-button `routerLink="/user"`>Go to User Page</ion-button>
-</ion-content>
+  <ion-button `routerLink="/user" `>Go to User Page</ion-button>
+</div>
 ```
-We added an Ionic [`ion-button`][ionic-button] tag with a [`routerLink`][angular-router-link] attribute.
 
-This attribute is related to the Angular Router and allows the element to which it is attached to **make the app navigate to the given relative URL** when clicked by the user.
+We added an [`ion-button`][ionic-button] tag with a [`routerLink`][angular-router-link] attribute.
+
+This attribute is related to the Angular Router and allows the element to which it is attached to **make the app navigate to the given URL** when clicked by the user.
 
 Provided that our app is accessible at `https://example.com`, clicking this new button will make our app navigate to `https://example.com/user`, ultimately displaying the `UserPage` component to our user.
 
@@ -362,23 +371,25 @@ CREATE `src/app`/profile/profile.page.scss (0 bytes)
 
 NOTE: The "dryRun" flag means no changes were made.
 ```
+
 We see that this new page would be created in the `src/app` directory, and a new route would be added to the `app-routing.module.ts` file at the root level.
 
-This is not what we want...
+This is not what we'd like!
 
 ---
 ### Generate page in specific path
 
 .breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#16">Nested pages</a>]
 
-We'd like to create the files for this new `ProfilePage` under the `src/app/user` directory, since it's a **child page** of the user page.
+We want to create this new `ProfilePage` under the `src/app/user` directory, since it's a **child page** of the user page.
 
 To do so, we can add a path before the name of our page when executing the `generate` command:
 
 ```bash
 $> ionic generate page `user/`Profile --dry-run
 ```
-> Notice that the path added before our page's name is relative to the `src/app` folder.
+
+> Notice that the path added before our page's name is always relative to the `src/app` folder.
 
 ---
 #### That's it!
@@ -418,10 +429,11 @@ First, open the `user/user-routing.module.ts` file and look at the `routes` cons
 
 ```ts
 const routes: Routes = [
-  { path: '', component: UserPage },
-  `{ path: 'profile', loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule) }`
+  { path: "", component: UserPage },
+  `{ path: 'profile', loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule) }`,
 ];
 ```
+
 Then, open the `user/profile/profile-routing.module.ts` file:
 
 ```ts
@@ -436,20 +448,43 @@ const routes: Routes = [
 })
 export class ProfilePageRoutingModule {}
 ```
-We should be able to access this new page through `https://example.com/user/profile`, or a button in the `UserPage` template.
+
+We should now be able to access this new page by directly entering this URL in the browser `https://example.com/user/profile`, or with a button in the `UserPage` template.
+
+---
+### Relative router link
+
+.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#16">Nested pages</a>]
+
+We've already seen a case where we used an **absolute link** (starting with a `/`) to tell the router where to navigate:
+
+```html
+<ion-button `routerLink="/user" `>Go to User Page</ion-button>
+```
+
+The `routerLink` attribute also support links that are **relative to the current route** (starting with a `./`).
+
+Let's add a button in the user page template to navigate to the profile page. We know the profile page is a **child page** of the user page, thus we can use a link relative to the user page route:
+
+```html
+<!-- user.page.html -->
+<ion-content>
+  <ion-button routerLink="./profile">Go to Profile Page</ion-button>
+</ion-content>
+```
+
+> The link value starts with `./` ; the router will thus append `profile` to the **current route**, which is `/user`, and search for a match to an URL of `http://example.com/user/profile`.
 
 ---
 ## "Catch all" route
 
 .breadcrumbs[<a href="#1">Ionic navigation with Angular</a>]
 
-It's possible to set special values to the `path` property of a `Route` object.
+If a user maliciously or involontarily enter an URL that is unknown to our Router, this will raise an error in the console, saying `Error: Cannot match any routes`.
 
-You could for example declare a route in your `app-routing.module.ts` (or any other module, for that matter), that would match **anything that hasn't matched** any preceding route.
+To prevent this (and display a nice 404 page instead), you can define a "catch all" route, that will match **anything that hasn't matched** any preceding route.
 
-This could be useful to set up a fallback page, like a **404 page**.
-
-Do this by setting the `path` to the special value `**` (which means "everything"):
+Do this by setting the `path` or the route to the special value `**` (which means "everything"):
 
 ```ts
 const routes: Routes = [
@@ -459,71 +494,73 @@ const routes: Routes = [
 * { path: '**', component: ErrorPage }
 ];
 ```
+
 This way, URLs that don't start with `/home` or `/user` wil display the `ErrorPage`.
 
-> Remember that the order in which the routes are declared is important. If the highlighted route was in **first position**, all URLs would match its `path`, and nothing beside the `ErrorPage` would ever be displayed.
+> Note that the **order** in which the routes are declared is **important**. If the highlighted route was in **first position**, all URLs would match its `path`, and nothing beside the `ErrorPage` would ever be displayed.
 
 ---
 ## Path placeholder
 
 .breadcrumbs[<a href="#1">Ionic navigation with Angular</a>]
 
-It's also possible to declare dynamic routes, whose `path` value is not know beforehand.
+It's also possible to declare dynamic routes, whose `path` value is not exactly known beforehand.
 
-This could be the case if you want to display e.g. a product detail page with URL like those:
+This could be the case if you want to display, for example, a product detail page with URL like those:
 
-* `https://example.com/product/12`
-* `https://example.com/product/817`
-* `https://example.com/product/9`
+- `https://example.com/product/12`
+- `https://example.com/product/817`
+- `https://example.com/product/9`
 
-All of them would display the same "page", with the relevant content depending on the product `id` in the URL.
+All of them would display the same "page", with its actual content depending on the product `id` in the URL.
 
 You can declare this kind of route like so:
 
 ```ts
 { path: 'product/:id', component: ProductDetailPage }
 ```
-The `:id` token in the `path` value declares a path parameter that you can access in your component's code, and whose value will be the value in the URL (`12`, `817` or `9` in the above examples)
+
+The `:id` token in the `path` value declares a **path parameter** that you can access in your component's code, and whose value will be the actual value in the URL (`12`, `817` or `9` in the above examples)
 
 ---
 ### Access path parameter
 
-.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#21">Path placeholder</a>]
+.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#22">Path placeholder</a>]
 
-To access this `:id` path parameter from your code, you'll need to inject the [`ActivatedRoute`][angular-activated-route] service in your component's controller, and subscribe to its `paramMap` **observable** (this is not a synchronous operation!):
+To access this `:id` path parameter from your code, you'll need to inject the [`ActivatedRoute`][angular-activated-route] service in your component's controller, and access the param value using its `snapshot.paramMap` property:
 
 ```ts
 // imports omitted for brevity
 @Component({ /* ... */ })
 export class ProductPage  {
 
-  productId: any;
+  productId: string;
 
   constructor(
 *   private route: ActivatedRoute
   ) {
-*   this.route.paramMap.subscribe((params: ParamMap) => {
-*     this.productId = params.get('id');
-*   });
+*   this.productId = this.route.snapshot.paramMap.get('id');
   }
 }
 ```
-> The value passed to `params.get` must be **the name of the param** as declared in the route's path, **without** the `:`.
 
-> In this case `params.get('id')` and **not** `params.get(':id')`.
+> The value passed to `paramMap.get(...)` must be **the name of the param** as declared in the route's path, **without** the `:`.
+
+> In this case `paramMap.get('id')` and **not** `paramMap.get(':id')`.
 
 ---
 ### Link to parametrized path
 
-.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#21">Path placeholder</a>]
+.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#22">Path placeholder</a>]
 
 If you want to link to such a route from your templates, you can still use the [`routerLink`][angular-router-link] attribute, but will need to use another notation:
 
 ```html
-<ion-button `[routerLink]="['/product', product.id]"`>
+<ion-button `[routerLink]="['/product', product.id]" `>
   {{ product.name }} Details
 </ion-button>
 ```
+
 You could also make the navigation from your component's code by injecting the [`Router`][angular-router-class] service in your component's controller:
 
 ```ts
@@ -551,23 +588,41 @@ export class ExamplePage {
 
 Any component may implement any of these [lifecycle methods][ionic-page-event] to be notified of navigation events:
 
-Method              | Called when
-:---                | :---
-`ionViewWillEnter`  | The targeted page is about to animate into view and become the active page.
-`ionViewDidEnter`   | The targeted page has finished animating into view and is now the active page. This event will fire, whether it was the first load or a cached page.
-`ionViewWillLeave`  | The current page is about to animate out of view and no longer be the active page.
-`ionViewDidLeave`   | The current page has finished animating out of view and is no longer the active page.
+| Method             | Called when                                                                                                                                          |
+| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ionViewWillEnter` | The targeted page is about to animate into view and become the active page.                                                                          |
+| `ionViewDidEnter`  | The targeted page has finished animating into view and is now the active page. This event will fire, whether it was the first load or a cached page. |
+| `ionViewWillLeave` | The current page is about to animate out of view and no longer be the active page.                                                                   |
+| `ionViewDidLeave`  | The current page has finished animating out of view and is no longer the active page.                                                                |
 
 ---
 ## Guarding routes
 
 .breadcrumbs[<a href="#1">Ionic navigation with Angular</a>]
 
-Angular also provides you with a mean of preventing unauthorized accesses to routes by using services called `Guard`.
+Angular also provides you with a mean of preventing unwanted navigation to routes by using special services called `Guard`.
 
 This is usefull for example if your app implements **authentication** and you want to prevent unauthenticated access to restricted pages.
 
-A Guard is simply an Angular service implementing the [`CanActivate` interface][angular-can-activate]:
+A Guard can be used to prevent **four types of actions** on the route it is assigned to, by **implementing** the related Angular provided **interface**:
+
+| Interface                                        | Action                                                                           |
+| :----------------------------------------------- | :------------------------------------------------------------------------------- |
+| [`CanActivate`][angular-can-activate]            | Check if **navigating to** or through **the route** is allowed                   |
+| [`CanActivateChild`][angular-can-activate-child] | Check if **navigating to** or through any of **the route's children** is allowed |
+| [`CanDeactivate`][angular-can-deactivate]        | Check if **navigating out** from **the route** is allowed                        |
+| [`CanLoad`][angular-can-load]                    | Check if **lazy loading** of **this route's module** is allowed                  |
+
+> All of those interfaces define a single method to implement that should return `true`/`false` values depending on wether the action is effectively allowed
+
+---
+### CanActivate
+
+.breadcrumbs[<a href="#1">Ionic navigation with Angular</a> > <a href="#26">Guarding routes</a>]
+
+Let's see an example of a Guard implementing the `CanActivate` interface.
+
+> Note that one Guard can absolutely implement all the Guard interfaces. You don't have to create one Guard per interface.
 
 ```ts
 // random-access.ts
@@ -583,10 +638,11 @@ export class RandomAccessGuard implements CanActivate {
 ```
 You can then use this Guard with the [`canActivate`][angular-route-can-activate] property of your route:
 
+> Routes also have a dedicated `canActivateChild`, `canDeactivate` and `canLoad` properties. All of them requiring an array of applicable Guard as their value.
+
 ```ts
 { path: 'admin', `canActivate: [ RandomAccessGuard ]`, component: AdminPage }
 ```
-> `canActivate` takes an array of one or more Guards
 
 ---
 ## Resources
@@ -595,15 +651,18 @@ You can then use this Guard with the [`canActivate`][angular-route-can-activate]
 
 **Documentation**
 
-* [Ionic][ionic-docs]
-  * [Navigation][ionic-nav-tutorial]
-* [Angular][angular-docs]
-  * [Routing & Navigation tutorial][angular-routing-navigation]
-  * [Route Guard (french) tutorial][angular-route-guard]
+- [Ionic][ionic-docs]
+  - [Navigation][ionic-nav-tutorial]
+- [Angular][angular-docs]
+  - [Routing & Navigation tutorial][angular-routing-navigation]
+  - [Route Guard (french) tutorial][angular-route-guard]
 
 [angular]: https://angular.io
 [angular-activated-route]: https://angular.io/api/router/ActivatedRoute
 [angular-can-activate]: https://angular.io/api/router/CanActivate
+[angular-can-activate-child]: https://angular.io/api/router/CanActivateChild
+[angular-can-deactivate]: https://angular.io/api/router/CanDeactivate
+[angular-can-load]: https://angular.io/api/router/CanLoad
 [angular-docs]: https://angular.io/docs
 [angular-route-can-activate]: https://angular.io/api/router/Route#canActivate
 [angular-route-guard]: https://guide-angular.wishtack.io/angular/routing/route-guards
