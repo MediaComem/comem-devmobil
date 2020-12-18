@@ -56,15 +56,9 @@ You will:
   - Mockups
   - [Live setup][setup-project] (Tailored for the Travel Log subject, but it can help you kickstart your own app)
 
-- Additional JavaScript concepts
-
-  - [JavaScript closures](./subjects/js-closures)
-
-- [Advanced Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/advanced-angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
-
 - Ionic (advanced)
 
-  - [Ionic extras (geolocation, leaflet & camera)](./subjects/introduction-extras)
+  - [Ionic extras (geolocation, leaflet & camera)](./subjects/ionic-extras)
   - [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 - Real-Time
@@ -76,6 +70,9 @@ You will:
 - [Javascript: basics and more][js-basics]
 - [JavaScript: prototypes](./subjects/js-prototypes)
 - [JavaScript: advanced promises](./subjects/js-promises)
+- [JavaScript closures](./subjects/js-closures)
+
+- [Advanced Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/advanced-angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
 
 ## Evaluation
 

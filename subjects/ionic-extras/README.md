@@ -4,7 +4,6 @@ Useful tools to add to an Ionic application.
 
 **You will need**
 
-- [Cordova][cordova]
 - A running [Ionic][ionic] application
 
 **Recommended reading**
@@ -49,18 +48,10 @@ Useful tools to add to an Ionic application.
 The [HTML Geolocation API][html-geolocation] allows the user to provide their geographical location to web applications.
 Since an Ionic app is a web app, you can use it directly.
 
-However, you can also use the [Cordova geolocation plugin][cordova-geolocation] in conjonction with the [Ionic native geolocation][ionic-native-geolocation] plugin.
-The Cordova plugin provides a JavaScript API to use native geolocation capabilities, when the HTML Geolocation API is not available ; the Ionic Native plugin wraps this JavaScript API in an Angular Service for usage in an Ionic/Angular app.
+However, you can also use the [Ionic native geolocation][ionic-native-geolocation] plugin (and the related Cordova plugin).
+The Cordova plugin provides a JavaScript API to use native geolocation capabilities when the HTML Geolocation API is not available ; the Ionic Native plugin wraps this JavaScript API in an Angular Service for usage in an Ionic/Angular app.
 
-Install both:
-
-```bash
-$> ionic cordova plugin add \
-   cordova-plugin-geolocation \
-   --variable GEOLOCATION_USAGE_DESCRIPTION="To locate you"
-
-$> npm install @ionic-native/geolocation
-```
+Install the plugins by following [the documentation][ionic-native-geolocation] adapted for wether you're using Cordova or Capacitor in your app.
 
 ### Registering the Geolocation service with Angular
 
@@ -135,7 +126,7 @@ export class ExamplePage implements OnInit {
 }
 ```
 
-The `getCurrentPosition()` methid is an **asynchronous** operation which returns a promise, so you have to call `.then()` to be notified when the location is available.
+The `getCurrentPosition()` method is an **asynchronous** operation which returns a promise, so you have to call `.then()` to be notified when the location is available.
 You should also call `.catch()` to be notified if there's a problem retrieving the location.
 
 ### Tracking the user's location
@@ -270,6 +261,7 @@ To use the [ngx-leaflet][ngx-leaflet] library, you must add its `LeafletModule` 
 })
 export class AppModule {}
 ```
+> Note the call to `forRoot()`, since we are in our root module
 
 And also import it in the module that declares the page displaying your map:
 
@@ -287,6 +279,7 @@ And also import it in the module that declares the page displaying your map:
 })
 export class ExamplePageModule {}
 ```
+> Note that in this case, we **do not** call `forRoot()`, since we are importing the module in a non-root module
 
 ### Displaying a map
 
@@ -319,7 +312,7 @@ export class ExamplePage {
 
 #### Adding the map to the component's template
 
-To display the map in your page's template, you need to add the `leaflet` directive to a `<div>` on the page.
+To display the map in your page's template, you need to add the `leaflet` directive to a `<div>` on the page. You can pass the options to this map by binding an object to the `leafletOptions` directive:
 
 ```html
 <div class="map" leaflet [leafletOptions]="mapOptions"></div>
@@ -327,8 +320,8 @@ To display the map in your page's template, you need to add the `leaflet` direct
 
 <!-- slide-column -->
 
-The `leaflet` attribute instructs the ngx-leaflet library to create a map in this DOM element,
-with our previously defined `mapOptions` bound through the `[leafletOptions]` attribute.
+The `leaflet` directive instructs the `ngx-leaflet` library to create a map in this DOM element,
+with our previously defined `mapOptions` bound through the `[leafletOptions]` directive.
 
 The map will have no height by default,
 so add the following to the component's stylesheet to make it visible:
@@ -355,7 +348,7 @@ If you do **not** have a working Leaflet map, but instead have some kind of brok
 
 <!-- slide-column 70 -->
 
-> Note that this "issue" is [well](https://stackoverflow.com/questions/38832273/leafletjs-not-loading-all-tiles-until-moving-map) [known](https://github.com/Asymmetrik/ngx-leaflet/issues/104), but it's very hard to pinpoint what causes it in your app.
+> Note that this "issue" is [well](https://stackoverflow.com/questions/38832273/leafletjs-not-loading-all-tiles-until-moving-map) [known](https://github.com/Asymmetrik/ngx-leaflet/issues/104), but it's very hard to pinpoint what exactly causes it in your app.
 
 In your page's class, add the following method:
 
@@ -524,15 +517,11 @@ export class ExamplePage {
 ## Using your mobile device's camera
 
 The camera is part of your mobile device's hardware,
-so you'll need Cordova to access it for you.
-Install the [Cordova Camera plugin][cordova-camera] and the [Ionic native camera plugin][ionic-native-camera]:
+so you'll need Cordova/Capacitor to access it for you.
 
-```bash
-$> ionic cordova plugin add cordova-plugin-camera
-$> npm install @ionic-native/camera
-```
+Follow the appropriate installation instruction of the [Ionic native camera plugin][ionic-native-camera] to setup those plugins in your project.
 
-The Ionic native camera plugin has a `Camera` service which you need to add to your application's module,
+The Ionic native camera plugin has a `Camera` service which you need to add to your `AppModule`'s `providers` array,
 typically in `src/app/app.module.ts` in a starter project:
 
 ```ts

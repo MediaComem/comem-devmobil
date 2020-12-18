@@ -37,8 +37,10 @@ Do not forget to also update `src/environments/environment.sample.ts` to provide
 ## Model
 
 Here's a model you might need.
-Save it, for example to `src/app/models/qimg-image.ts`.
-It represents the response from the qimg API when creating an image:
+
+Create a new file where you want in your app's file structure and copy the following code there.
+
+> It represents the response from the qimg API when creating an image:
 
 ```ts
 export class QimgImage {
@@ -49,9 +51,13 @@ export class QimgImage {
 }
 ```
 
-## Provider
+## Service
 
-Let's create a new service that will be responsible for:
+**To take pictures using a phone camera, you will need the Ionic Native Camera plugin, along with the related Cordova plugin.**
+
+To install and configure them, follow [the plugin's documentation](https://ionicframework.com/docs/native/camera) for the bridge you're using in your app (Cordova or Capacitor).
+
+Now, let's create a service that will be responsible for:
 
 * Taking pictures.
 * Uploading them to the qimg API.
@@ -59,9 +65,9 @@ Let's create a new service that will be responsible for:
 You can generate it with this command:
 
 ```bash
-$> ionic generate service sercices/picture/Picture
+$> ionic generate service sercices/picture/Picture --skip-tests=true
 ```
-> This will generate the service and its test suite in `src/app/services/picture`. Change the path at will.
+> This will generate the service in `src/app/services/picture`. Change the path at will.
 
 **Replace the entire contents of `src/app/services/picture/picture.ts`** with the following code:
 
