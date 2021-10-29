@@ -17,7 +17,6 @@ Learn the power of reactive programming using Observables to work with asynchron
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Setup](#setup)
 - [What (the hell) is...](#what-the-hell-is)
     - [... an observable?](#-an-observable)

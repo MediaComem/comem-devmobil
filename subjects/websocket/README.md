@@ -11,7 +11,6 @@ Learn how to connect and react to events from a WebSocket in your Angular applic
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [WebSocket API](#websocket-api)
 - [`WebSocket`](#websocket)
   - [Angular WebSocket Service](#angular-websocket-service)

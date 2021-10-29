@@ -14,7 +14,6 @@ Useful tools to add to an Ionic application.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Geolocation](#geolocation)
   - [Registering the Geolocation service with Angular](#registering-the-geolocation-service-with-angular)
   - [Injecting the Geolocation service](#injecting-the-geolocation-service)

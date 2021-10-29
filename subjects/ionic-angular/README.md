@@ -28,12 +28,14 @@ Learn to work with [Angular][angular] in an [Ionic][ionic] project.
   - [Generate page in specific path](#generate-page-in-specific-path)
     - [That's it!](#thats-it)
   - [Check the paths](#check-the-paths)
+  - [Relative router link](#relative-router-link)
 - ["Catch all" route](#catch-all-route)
 - [Path placeholder](#path-placeholder)
   - [Access path parameter](#access-path-parameter)
   - [Link to parametrized path](#link-to-parametrized-path)
 - [Lifecycle hooks](#lifecycle-hooks)
 - [Guarding routes](#guarding-routes)
+  - [CanActivate](#canactivate)
 - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->

@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const config = {
   title: 'Media Engineering Mobile Development',
-  version: '2019-2020',
+  version: '2021-2022',
   repoUrl: 'https://github.com/MediaComem/comem-devmobil',
   remark: {
     highlightLines: true,
@@ -19,7 +19,7 @@ const config = {
     gitUrl: 'git@github.com:MediaComem/comem-devmobil.git',
     baseUrl: 'https://mediacomem.github.io/comem-devmobil',
     branch: 'gh-pages',
-    version: '2019-2020'
+    version: '2021-2022'
   },
   subjectScripts: [
     'https://embed.runkit.com'

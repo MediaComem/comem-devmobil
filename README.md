@@ -1,37 +1,24 @@
 # COMEM+ Mobile Development Course
 
 The goal of this course is to learn how to develop hybrid mobile applications,
-i.e. web apps embedded into native apps on multiple platforms.
+that is web apps embedded into native wrappers for multiple platforms.
 You will:
 
-- Learn about hybrid mobile application development with [Ionic][ionic] and [Cordova][cordova] ;
-- Learn the **core principles** of [Angular][angular] ;
-- Design and develop a **mobile application** optionally based on the API developed in the [previous course][archioweb] ;
-- Add a **real-time** component to your hybrid mobile application ;
-- Run the mobile application on your **phone**.
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-
-- [What you will need](#what-you-will-need)
-- [Plan](#plan)
-- [Additionnal subjects](#additionnal-subjects)
-- [Evaluation](#evaluation)
-  - [Delivery](#delivery)
-- [Useful links](#useful-links)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+- Learn about hybrid mobile application development with [Ionic][ionic] and [Capacitor][capacitor]
+- Learn the **core principles** of [Angular][angular]
+- Design and develop a **frontend mobile application** optionally based on the API developed in the [previous course][archioweb]
+- Add a **real-time** component to your hybrid mobile application
+- Run the mobile application on your **phone** (ideally)
 
 ## What you will need
 
-- A Unix CLI like Terminal on Mac, Git Bash or WSL2 on Windows
-- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows]
+- A Unix CLI, like Terminal (on Mac) or Git Bash (on Windows)
+- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows] to install Git and Git Bash at the same time)
 - A free [GitHub][github] account
 - A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do)
-- [Node.js][node] 14+ (latest Ferbium version)
-- Latest Ionic CLI: `npm install -g @ionic/cli`
-- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code] when working with Typescript and Angular)
+- [Node.js][node] 16+ (latest Gallium LTS version)
+- Latest [Ionic CLI][ionic-cli] 6+
+- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code])
 
 ## Plan
 
@@ -85,17 +72,17 @@ You will:
   - A user must be able to delete at least one of the resources of the domain model (e.g. delete a Place in the Travel Log).
 - At least two mobile-oriented features must be used, for example:
   - Geolocation of the user (e.g. to center a map on the user's location, or to determine a Place's location in the Travel log).
-  - Pictures taken with the phone's camera (works only on physical devices).
-    **You are not required to exclusively implement those two ; you can choose others depending on your subject**
+  - Pictures taken with the phone's camera.
+    **You are not required to exclusively implement those two ; you can choose completly others ones depending on your subject**
 - There must be a map showing geolocated resources (with more than one item on the same map).
-- There must be a resource list with filters or search parameters.
+- There must be a resource list with filters/search parameters.
 
 **Implementation**
 
 - The app must follow Angular and Ionic best practices.
 - The app must use an approved API.
 - Asynchronous code must be correctly handled (e.g. callbacks, promises and/or observables).
-- The app must provide clear feedback when errors are likely to occur:
+- The app must provide clear feedback to the user when errors are likely to occur:
   - When submitting a form (input might be invalid or the API call might fail).
   - When geolocating the user (it might fail).
 - Secrets (passwords & keys) **must not** be committed to the Git repository.
@@ -110,12 +97,10 @@ You can choose from the following options (one is enough):
 - You can make a **webcast/video** demonstrating or selling your app.
 - You can provide a tutorial **inside** the app.
 - You can use any other presentation tool (subject to approval) but your user guide or pitch must be available online.
-- You can upload your app to a store (e.g. Google Play), and write the store page as you would for a real app.
-  _This last one is kind of tough, and doing it will not get you a better grade. You've been warned_
 
 ### Delivery
 
-Each group must send an e-mail **no later than (TBD)** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
+Each group must send an e-mail **no later than friday 28/01/2022** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
@@ -130,12 +115,13 @@ Each group must send an e-mail **no later than (TBD)** to [Mathias Oberson](mail
 [angular]: https://angular.io
 [archioweb]: https://github.com/MediaComem/comem-archioweb
 [chrome]: https://www.google.com/chrome/
-[cordova]: https://cordova.apache.org
+[capacitor]: https://capacitorjs.com/
 [edge]: https://www.microsoft.com/en-us/edge
 [git-downloads]: https://git-scm.com/downloads
 [git-for-windows]: https://gitforwindows.org/
 [github]: https://github.com
 [ionic]: http://ionicframework.com
+[ionic-cli]: https://ionicframework.com/docs/cli
 [ionic-getting-started]: http://ionicframework.com/getting-started/
 [js-basics]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/js/#1
 [node]: https://nodejs.org/

@@ -135,3 +135,12 @@ p.shadow { width: 100%; }
 .commands-table table td code:only-child {
   white-space: nowrap;
 }
+
+.slide-logo {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.slide-logo > a {
+  display: block;
+}

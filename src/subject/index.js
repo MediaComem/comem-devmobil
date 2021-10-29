@@ -1,28 +1,22 @@
-import subject from 'courses-md/dist/client';
+import subject from "courses-md/dist/client";
 
 window.subject = subject;
 
-import { RunkitController } from './runkit';
+import "@fortawesome/fontawesome-free/css/all.css";
 
-import 'font-awesome/css/font-awesome.css';
+import "./assets/bootstrap-btn.css";
+import "./assets/fonts/DroidSerif/DroidSerif.css";
+import "./assets/fonts/UbuntuMono/UbuntuMono.css";
+import "./assets/fonts/YanoneKaffeesatz/YanoneKaffeesatz.css";
+import "./assets/slides.css";
+import "./assets/micromodal.css";
 
-import './assets/bootstrap-btn.css';
-import 'tippy.js/dist/tippy.css';
-import './assets/fonts/DroidSerif/DroidSerif.css';
-import './assets/fonts/UbuntuMono/UbuntuMono.css';
-import './assets/fonts/YanoneKaffeesatz/YanoneKaffeesatz.css';
-import './assets/slides.css';
-import './assets/micromodal.css';
-import './assets/runkit.css';
-
-import heigLogo from './assets/heig.png';
+import heigLogo from "./assets/heig.svg";
 
 subject.setLogo({
-  url: 'https://heig-vd.ch',
+  url: "https://heig-vd.ch",
   imageUrl: heigLogo,
-  height: 60
+  height: 40,
 });
 
-subject
-  .afterStart(() => RunkitController.start())
-  .start();
+subject.start();

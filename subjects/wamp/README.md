@@ -11,7 +11,6 @@ Learn how to connect to a WAMP Brocker, and send/receive events on topics or cal
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [WAMP](#wamp)
   - [Angular WAMP Service](#angular-wamp-service)
   - [Use the service](#use-the-service)

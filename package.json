@@ -19,16 +19,15 @@
   "scripts": {
     "build": "courses-md build",
     "deploy": "courses-md publish",
-    "doctoc": "doctoc --notitle --github ./subjects && doctoc --notitle --github README.md",
+    "doctoc": "doctoc --notitle --github ./subjects",
     "start": "courses-md",
     "watch": "courses-md watch"
   },
   "dependencies": {
-    "courses-md": "~0.5.0",
-    "doctoc": "^1.4.0",
-    "font-awesome": "^4.7.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "courses-md": "^0.6.0",
+    "doctoc": "^2.1.0",
     "lodash": "^4.17.21",
-    "micromodal": "^0.4.2",
-    "tippy.js": "^1.4.1"
+    "micromodal": "^0.4.2"
   }
 }

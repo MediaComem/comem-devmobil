@@ -21,7 +21,6 @@ Get an overview of the Promise API and how to use it to handle asynchronous oper
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Asynchronous callback styles](#asynchronous-callback-styles)
   - [What's wrong with that?](#whats-wrong-with-that)
   - [Callback hell example](#callback-hell-example)

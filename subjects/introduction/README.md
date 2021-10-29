@@ -1,46 +1,48 @@
 # Introduction
 
-Learn about [Ionic][ionic], an open source framework to build hybrid mobile applications based on [Cordova][cordova] and [Angular][angular].
+Learn about [Ionic][ionic], an open source framework to build hybrid mobile applications based on [Capacitor][capacitor] and [Angular][angular].
 
 **You will need**
 
-* [Node.js][node] 14+
-* [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+- [Node.js][node] 16+
+- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 
 - [Which OS (and version) should your app support?](#which-os-and-version-should-your-app-support)
 - [Hybrid mobile applications](#hybrid-mobile-applications)
   - [Hybrid VS Native](#hybrid-vs-native)
     - [Native Development](#native-development)
     - [Hybrid Development](#hybrid-development)
-  - [Apache Cordova](#apache-cordova)
+  - [Capacitor](#capacitor)
     - [Other options](#other-options)
   - [What about Ionic?](#what-about-ionic)
-    - [A small word about Capacitor](#a-small-word-about-capacitor)
     - [What can I do with Ionic?](#what-can-i-do-with-ionic)
 - [Demo](#demo)
   - [Install Ionic](#install-ionic)
   - [Starter templates](#starter-templates)
 - [Basics of Ionic](#basics-of-ionic)
   - [Components](#components)
-  - [Angular components](#angular-components)
-    - [List component functionality](#list-component-functionality)
+  - [Component functionality](#component-functionality)
 - [Running apps on your mobile device](#running-apps-on-your-mobile-device)
-  - [Ionic Dev App](#ionic-dev-app)
-  - [iOS device](#ios-device)
-  - [Android device](#android-device)
-    - [Android SDK](#android-sdk)
 - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
 ## Which OS (and version) should your app support?
 
-<p class='center'><img src='images/fragmentation.png' class='w80' /></p>
+**iOS version share**
+
+<img src='./images/ios-share-2021.png' class='w100' />
+
+[source](https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/switzerland)
+
+**Android version share**
+
+<img src='./images/android-share-2021.png' class='w100' />
+
+[source](https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/switzerland)
 
 ## Hybrid mobile applications
 
@@ -65,18 +67,16 @@ Embed it into a **native application**:
 <!-- slide-column 10 -->
 
 <div class='center'>
+  <i class="fas fa-map-marker-alt x2" aria-hidden="true" style="margin-bottom: 25px"></i>
   <i class='fa fa-camera x2' aria-hidden='true'></i>
-  <br />
-  <i class='fa fa-location-arrow x2' aria-hidden='true'></i>
-  <br />
   <i class='fa fa-arrows-alt x2' aria-hidden='true'></i>
 </div>
 
 <!-- slide-column -->
 
-Since you are writing a **web app**, you can access **web APIs** like the [geolocation API][geolocation-api].
+Since you are writing a **web app**, you can access **web APIs** like the [Geolocation API][geolocation-api].
 
-You can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**, with the help of dedicated plugins.
+But since you are using a native wrapper, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**, with the help of dedicated plugins.
 
 ### Hybrid VS Native
 
@@ -90,13 +90,13 @@ _[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%2
 
 **Pros**
 
-* Highest performances
-* No dependencies to third-parties (access all of the features offered by the native SDK)
+- Highest performances
+- No dependencies to third-parties (access all of the features offered by the native SDK)
 
 **Cons**
 
-* One codebase/release cycle/team per platform
-* Requires more resources, time and knowledge
+- One codebase/release cycle/team per platform
+- Requires more resources, time and knowledge
 
 <!-- slide-column -->
 
@@ -104,32 +104,32 @@ _[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%2
 
 **Pros**
 
-* One codebase for all platforms (mobile and desktop alike)
-* Widely used and known technologies
+- One codebase for all platforms (mobile and desktop alike)
+- Widely used and known technologies
 
 **Cons**
 
-* (Little) Less performant than native apps
-* Access to native device capabilities limited by plugins
+- (Little) Less performant than native apps
+- Access to native device capabilities limited by plugins
 
-### Apache Cordova
+### Capacitor
 
-<p class='center'><img src='images/cordova.png' class='w35' /></p>
+<p class='center'><img src='images/capacitor.png' class='w35' style="margin-bottom: 25px" /></p>
 
-> "[Cordova][cordova] wraps your **HTML/JavaScript app** into a **native container** which can **access the device functions** of several platforms.
-> These functions are exposed via a unified JavaScript API,
-> allowing you to easily write one set of code to target nearly every phone or tablet on the market today and publish to their app stores."
+> Capacitor is an open source native runtime for building Web Native apps.
+> Create cross-platform iOS, Android, and Progressive Web Apps with JavaScript, HTML, and CSS.
 
 #### Other options
 
-Cordova is not the only system that allows developing hybrid (or hybrid-like) mobile applications.
+Capacitor is not the only system that allows developing hybrid (or hybrid-like) mobile applications.
 
 Here's a list of other technologies and why they were not chosen for this course:
 
-* [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
-* [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
-* [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
-* And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
+- [Cordova](https://cordova.apache.org/) - The Ionic team developped Capacitor to replace Cordova
+- [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
+- [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
+- [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
+- And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
 
 ### What about Ionic?
 
@@ -143,35 +143,32 @@ Here's a list of other technologies and why they were not chosen for this course
 
 <!-- slide-container -->
 
-Ionic is basically **Cordova**, a JavaScript framework (**Angular**, **Vue**, **React**) and a set of **pre-made web components** plugged together:
+Ionic plugs together a JavaScript framework (**Angular, React, Vue, ...**), a library of **pre-made components** and the capabilities of the **Capacitor native bridge**.
 
-<div class='center'>
-  <img src='images/cordova.png' height=200 />
-  <img src='images/ng-js-ts-html.png' height=200 />
+<div class='center' style="display: flex; align-items: center; justify-content: space-between;">
+  <img src='images/capacitor.png' height="150"/>
+  <img src='images/ng-js-ts-html.png' height="200"/>
 </div>
 
 > Please note that we will be using **Angular** as the underlying framework in this course.
 
-#### A small word about Capacitor
-
-<p class='center'><img src='images/capacitor.png' class='w30'/></p>
-
-At the beginning of 2019, the Ionic team released [Capacitor][capacitor], a new multi-platform bridge that allows deploying the same applications on iOS, Android, Electron or the Web (juste like Cordova). It's intended to replace Cordova in Ionic applications (or any hybrid app, for that matter), in the long run.
-
-Currently, both Cordova and Capacitor are supported by the Ionic framework.
-
-**We will keep using Cordova for this course in the slidedocs and example.**
-
-Although, based on the documentation, Cordova requires some additionnal steps when preparing the development environment.
-
-> You are free to use Capacitor instead of Cordova if you want to. The official documentation should be enough to help you. If it's not, I'll try to help as best I can, but I don't have any experience using it.
-
-
 #### What can I do with Ionic?
 
-Ionic lets you build web apps that **look like native apps** with HTML, CSS and JavaScript:
+Ionic lets you build web apps that **look and behave like native apps** with HTML, CSS and a JavaScript or a supported framework.
 
-<p class='center'><img src='images/ionic-app.jpg' class='w80' /></p>
+The same application can be deployed on the web (as a PWA or not), Android or iOS, and will adope the plateform's visual look and feel
+
+<!-- slide-column -->
+
+_A card component displayed on an iOS platform_
+
+<img src='./images/ionic-card-ios.png' class="w80"/>
+
+<!-- slide-column -->
+
+_The same card displayed on an Android platform_
+
+<img src='./images/ionic-card-android.png' class="w80"/>
 
 ## Demo
 
@@ -193,18 +190,18 @@ Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template,
 ```bash
 $> cd /path/to/projects
 $> ionic start ionic-tabs-demo tabs --type=angular
-✔ Preparing directory ./ionic-tabs-demo in 5.63ms
-✔ Downloading and extracting tabs starter in 187.93ms
-? Integrate your new app with Capacitor to target native iOS and Android? `No`
-Installing dependencies may take several minutes.
-...
-? Create free Ionic account? `No`
+[All bunch of stuff going on... Just wait]
+
 Your Ionic app is ready! Follow these next steps:
 
 *- Go to your new project: cd ./ionic-tabs-demo
 *- Run ionic serve within the app directory to see your app in the browser
-- ...
+- Run ionic capacitor add to add a native iOS or Android project using Capacitor
+- Generate your app icon and splash screens using cordova-res --skip-config --copy
+- Explore the Ionic docs for components, tutorials, and more: https://ion.link/docs
+- Building an enterprise app? Ionic has Enterprise Support and Features: https://ion.link/enterprise-edition
 ```
+
 > Follow the first two infos to see your app in your browser.
 
 ### Starter templates
@@ -287,39 +284,12 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 
 <img src='images/ionic-range.png' />
 
-
-
-### Angular components
+### Component functionality
 
 Many of these components are actually [**Angular components**][angular-components].
 They not only look pretty, but they also bring **functionality**.
 
-Here's a code example for an Ionic list, that will dynamically build each item based on an `people` array of `person` objects:
-
-```html
-<ion-list>
-  <ion-item-sliding `*ngFor='let person of people'`>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img `[src]="person.avatarUrl"`>
-      </ion-avatar>
-      <ion-label>
-        <h2>`{{ person.name }}`</h2>
-        <h3>`{{ person.description }}`</h3>
-        <p>`{{ person.lastMessage }}`</p>
-      </ion-label>
-    </ion-item>
-    <ion-item-options>
-      <ion-item-option>Favorite</ion-item-option>
-      <ion-item-option color="danger">Share</ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-</ion-list>
-```
-
-#### List component functionality
-
-For example, the `ion-item-sliding` component automatically enables you to [slide in][ionic-sliding-list] controls from the side as most mobile applications do:
+For example, the [`ion-item-sliding`][ionic-sliding-list] component automatically enables you to slide in controls from the side as most mobile applications do:
 
 <!-- slide-column 65 -->
 
@@ -344,39 +314,37 @@ For example, the `ion-item-sliding` component automatically enables you to [slid
 
 <img src='images/ionic-list-features.png' />
 
-
-
 ## Running apps on your mobile device
 
 Even if Ionic lets you develop and run your app on a browser, the final goal should be to build your app and run it on a actual mobile device.
 
 How this can be achieved depends heavily on which mobile device and computer you actually have...
 
-* Want to test your app on **an iOS device**? You'll **need a Mac** for that...
-* Want to test your app on **an Android device**? Any computer will do
+- Want to test your app on **an iOS device**? You'll **need a Mac** for that...
+- Want to test your app on **an Android device**? Any computer will do
 
 Whatever your setup, the Ionic documentation has dedicated walkthrough to set up your environment.
 
-* [iOS Development][ionic-ios-dev]
-* [Android Development][ionic-android-dev]
+- [iOS Development][ionic-ios-dev]
+- [Android Development][ionic-android-dev]
 
 ## Resources
 
 **Documentation**
 
-* [Cordova requirements][cordova-requirements]
-* [Ionic][ionic-docs]
-  * [Components][ionic-components]
-  * [API Documentation][ionic-api-docs]
+- [Capacitor requirements][capacitor-requirements]
+- [Ionic][ionic-docs]
+  - [Components][ionic-components]
+  - [API Documentation][ionic-api-docs]
 
 [adoptopenjdk]: https://adoptopenjdk.net/index.html
 [angular]: https://angular.io
 [angular-components]: https://angular.io/guide/architecture#components
-[capacitor]: https://capacitor.ionicframework.com/
+[capacitor]: https://capacitorjs.com/
 [chrome]: https://www.google.com/chrome/
 [configure-cli-tools]: https://ionicframework.com/docs/installation/android#configuring-command-line-tools
 [cordova]: https://cordova.apache.org
-[cordova-requirements]: http://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html
+[capacitor-requirements]: https://capacitorjs.com/docs/getting-started/environment-setup
 [geolocation-api]: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation
 [ionic]: http://ionicframework.com
 [ionic-api-docs]: https://ionicframework.com/docs/api/
