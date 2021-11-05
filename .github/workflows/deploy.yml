@@ -34,7 +34,7 @@ jobs:
         git config --global user.name "GitHub Actions"
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     - name: Deploy course
       id: deploy
