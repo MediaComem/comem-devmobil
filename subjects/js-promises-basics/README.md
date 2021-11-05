@@ -35,7 +35,6 @@ Get an overview of the Promise API and how to use it to handle asynchronous oper
   - [Promise callbacks are **optional**](#promise-callbacks-are-optional)
     - [Unhandled promise rejections](#unhandled-promise-rejections)
   - [Using `catch()`](#using-catch)
-  - [Promise utilities](#promise-utilities)
   - [Chaining `.then()` calls](#chaining-then-calls)
   - [Chaining promises](#chaining-promises)
     - [Practical example](#practical-example)
@@ -46,6 +45,7 @@ Get an overview of the Promise API and how to use it to handle asynchronous oper
 ## Asynchronous callback styles
 
 There are many asynchronous callback styles.
+
 Some libraries like jQuery use **custom callbacks**:
 
 ```js
@@ -58,7 +58,6 @@ function onFail(xhr) {
 
 $.get("http://example.com").done(onDone).fail(onFail);
 ```
-> Although jQuery's ajax methods can also be used as Promises
 
 Node.js imposes a well-defined **convention**:
 
@@ -114,7 +113,6 @@ $.post("/api/users", userData, function (createdUser) {
 You have to **nest the callbacks** because AJAX requests are asynchronous.
 
 This is pretty deep already, and we're not even handling errors yet.
-
 
 ### Flatten the pyramid of doom
 
@@ -215,9 +213,10 @@ Let's illustrate this behavior with a simple example using an API to get random 
 We'll use the [Fetch API][fetch], a alternative to the good ol' **XmlHttpRequest** object, to do this AJAX request.
 
 ```js
-const request = fetch('https://api.chucknorris.io/jokes/random');
+const request = fetch("https://api.chucknorris.io/jokes/random");
 console.log(request); // Promise
 ```
+
 > If you execute this code, you'll see that the `request` constant contains a `Promise` object, not the joke itself.
 
 > Nonetheless, the request have been executed. You can be sure of that by displaying the **Network** tab of your browser's console
@@ -237,7 +236,7 @@ function onRejected(reason) {
   console.log("Failed at getting a joke...", reason);
 }
 
-fetch('https://api.chucknorris.io/jokes/random')`.then(onResolved, onRejected)`;
+fetch("https://api.chucknorris.io/jokes/random")`.then(onResolved, onRejected)`;
 ```
 
 - If a promise is **resolved**, the **first callback** will be called with the **resolved value**
@@ -281,7 +280,7 @@ Further examples will use these shorter versions for brevity.
 You don't have to pass both resolution and rejection callbacks:
 
 ```js
-const request = fetch("https://api.chucknorris.io/jokes/random")
+const request = fetch("https://api.chucknorris.io/jokes/random");
 
 // Only check if resolved.
 request.then(console.log); // Response object
@@ -294,11 +293,11 @@ request.then(undefined, console.warn); // Not called.
 
 However, if you don't specify a **rejection callback** and the promise is rejected,
 it will produce an **unhandled promise rejection warning**.
-Depending on the JavaScript runtime, it may even kill the process:
+Depending on the JavaScript runtime (NodeJS for example), it may even kill the process:
 
 ```js
 // Unknown hostname
-const request = fetch(`"https://api.chucknorris"`)
+const request = fetch(`"https://api.chucknorris"`);
 
 // Only check if resolved.
 request.then(console.log); // Not called, but UnhandledPromiseRejectionWarning.
@@ -338,38 +337,11 @@ request.then(onResolved)`.then`(undefined, `onRejected`);
 
 But it's easier to read and is similar in behavior to `try/catch`.
 
-### Promise utilities
-
-Quickly create a resolved promise with `Promise.resolve`:
-
-```js
-const resolvedPromise = `Promise.resolve`('foo');
-
-resolvedPromise.then(function onResolved(value) {
-* console.log(value); // "foo"
-}, function onRejected(err) {
-  console.warn(\`Oops: ${err.message}`); // not called
-});
-```
-
-Quickly create a rejected promise with `Promise.reject`:
-
-```js
-const rejectedPromise = `Promise.reject`(new Error('bug'));
-
-rejectedPromise.then(function onResolved(value) {
-  console.log(value); // not called
-}, function onRejected(err) {
-* console.warn(\`Oops: ${err.message}`); // "Oops: bug"
-});
-```
-
-
 ### Chaining `.then()` calls
 
 On of the advantages of Promises over basic callbacks is the ability **to chain operations**, creating a clear sequence of decoupled operations.
 
-The `then(...)` method returns a new `Promise`.
+> To understand this, its important to remember that **a call to the `then(...)` method returns a new `Promise`**.
 
 If your return a **value** from the callback argument, this returned `Promise` will be **resolved with this value**.
 
@@ -377,10 +349,11 @@ If your return a **value** from the callback argument, this returned `Promise` w
 const request = fetch("https://api.chucknorris.io/jokes/random");
 
 request
-  .then(function () {
+  .then((response) => {
+    // When the request call succeeds, return a string value
 *   return "Random value";
   })
-  .then(console.log); `// Random value`
+  .then((value => console.log(value))); `// "Random value"`
 ```
 
 ### Chaining promises
@@ -391,23 +364,19 @@ If you return **another Promise** from the callback argument, the next `then(...
 const request = fetch("https://api.chucknorris.io/jokes/random");
 
 request
-  .then(
-    function onResolved(chuckJoke) {
-*     return fetch("https://icanhazdadjoke.com/");
-    },
-    function onRejected() {
-      console.warn("Chuck Norris Joke Not Received"); // Not called
-    }
-  )
-  .then(
-    function onResolved(dadJoke) {
-      console.log("Dad Joke Received", dadJoke);
-      // `Dad Joke Received: Response { ... }`
-    },
-    function onRejected() {
-      console.warn("Dad Joke Not Received"); // Not called
-    }
-  );
+  .then((chuckJokeResponse) => {
+*   return fetch("https://icanhazdadjoke.com/");
+  })
+  .catch((chuckJokeError) => {
+    console.warn("Chuck Joke Not Received", chuckJokeError));
+  })
+  .then((dadJokeResponse) {
+    console.log("Dad Joke Received", dadJokeResponse);
+    // `Dad Joke Received: Response { ... }`
+  })
+  .catch((dadJokeError) => {
+    console.warn("Dad Joke Not Received", dadJokeError);
+  });
 ```
 
 #### Practical example
@@ -418,14 +387,15 @@ We need to get the content of the `Response` in order to display our joke. Let's
 
 ```js
 fetch("https://api.chucknorris.io/jokes/random")
-  // First promise: Response to API call
+  // First promise value: Response to API call
 * .then(response => response.json())
-  // Second promise: Received Joke object
+  // Second promise value: Received Joke object
 * .then(joke => console.log(\`Heard a new joke today!\nIt goes: "${joke.value}"`))
   // Prints:
   // Heard a new joke today!
   // It goes: "Chuck Norris went out of an infinite loop."
 ```
+
 > The `json()` method of a `Response` object parses the body content as a JSON string and returns a corresponding JS object
 
 ## Dive deeper
@@ -442,3 +412,4 @@ If you want to **dive deeper** in the subject of Promises, [here's a more in-dep
 [fetch]: https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
 [js-bas]: ../js
 [js-prom]: https://mediacomem.github.io/comem-devmobil/latest/subjects/js-promises/?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-masrad-dfa%2Flatest
+[promises-spec]: https://promisesaplus.com/
