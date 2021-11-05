@@ -26,9 +26,9 @@ You will:
 
 - Going further with JavaScript
 
-  - [JavaScript classes](./subjects/js-classes)
-  - [JavaScript modules](./subjects/js-modules)
-  - [JavaScript Basic promises](./subjects/js-promises-basics)
+  - [JavaScript: classes](./subjects/js-classes)
+  - [JavaScript: modules](./subjects/js-modules)
+  - [JavaScript: basic promises](./subjects/js-promises-basics)
   - [Observables with Rxjs](./subjects/rxjs)
 
 - Ionic
@@ -57,7 +57,7 @@ You will:
 - [Javascript: basics and more][js-basics]
 - [JavaScript: prototypes](./subjects/js-prototypes)
 - [JavaScript: advanced promises](./subjects/js-promises)
-- [JavaScript closures](./subjects/js-closures)
+- [JavaScript: closures](./subjects/js-closures)
 
 - [Advanced Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/advanced-angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
 
