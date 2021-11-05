@@ -64,16 +64,6 @@ Embed it into a **native application**:
 
 <!-- slide-container -->
 
-<!-- slide-column 10 -->
-
-<div class='center'>
-  <i class="fas fa-map-marker-alt x2" aria-hidden="true" style="margin-bottom: 25px"></i>
-  <i class='fa fa-camera x2' aria-hidden='true'></i>
-  <i class='fa fa-arrows-alt x2' aria-hidden='true'></i>
-</div>
-
-<!-- slide-column -->
-
 Since you are writing a **web app**, you can access **web APIs** like the [Geolocation API][geolocation-api].
 
 But since you are using a native wrapper, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**, with the help of dedicated plugins.
