@@ -60,10 +60,7 @@ This tutorial is a summary of some of the [TypeScript Handbook][typescript-handb
     - [Adding a generic type argument constraint](#adding-a-generic-type-argument-constraint)
 - [Decorators](#decorators)
   - [What is a decorator?](#what-is-a-decorator)
-    - [Implementing a decorator](#implementing-a-decorator)
-  - [Decorator factory](#decorator-factory)
   - [Class decorator example](#class-decorator-example)
-  - [Method decorator example](#method-decorator-example)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
