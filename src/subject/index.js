@@ -2,7 +2,7 @@ import subject from "courses-md/dist/client";
 
 window.subject = subject;
 
-import "@fortawesome/fontawesome-free/css/all.css";
+// import "@fortawesome/fontawesome-free/css/all.css";
 
 import "./assets/bootstrap-btn.css";
 import "./assets/fonts/DroidSerif/DroidSerif.css";
