@@ -4,8 +4,7 @@ Learn to work with [Angular][angular] in an [Ionic][ionic] project.
 
 **Recommended reading**
 
-- [Ionic](../ionic/)
-- [Angular](../angular/)
+- [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -50,9 +49,10 @@ which can help you quickly generate new application elements:
 ```bash
 $> ionic generate --help
 
-  ionic generate - Automatically create framework features
+  ionic generate - Create Pages, Components, & Angular Features
 
-    This command uses the Angular CLI to generate features such as pages, components, directives, services, etc.
+    Automatically create framework features with Ionic Generate. This command uses the Angular CLI to generate features
+    such as pages, components, directives, services, and more.
 
     - For a full list of available types, use npx ng g --help
     - For a list of options for a types, use npx ng g <type> --help
@@ -254,7 +254,7 @@ Looking at the root routes (in `app-routing.module.ts`), the Router will find a 
 { path: '', redirectTo: 'home', pathMatch: 'full' }
 ```
 
-This route will seamlessly redirect the user to `https://example.com/home`, causing the router to start again and try and match this new URL using its path, which is now `home`.
+This route will make the Router redirect the user to `https://example.com/home`, causing the router to start again and try and match this new URL using its path, which is now `home`.
 
 ### URL matching (2/3)
 
@@ -269,7 +269,7 @@ Looking again at the root routes, the router will find a match for the new path 
 
 This route will make Angular asynchronously load the `HomePageModule`, which imports the `HomePageRoutingModule`, that defines additional navigation.
 
-Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, which is also `home`, leaving a remaining path of `''` to match with one of the child routes defined the `HomePageRoutingModule`.
+Now that it matched a route, the router will remove this route's path, `home`, from the path its trying to match, leaving a remaining path of `''` to match with one of the child routes defined the `HomePageRoutingModule`.
 
 ### URL matching (3/3)
 
@@ -506,10 +506,10 @@ export class ProductPage  {
 
 ### Link to parametrized path
 
-If you want to link to such a route from your templates, you can still use the [`routerLink`][angular-router-link] attribute, but will need to use another notation:
+If you want to link to such a route from your templates, you can still use the [`routerLink`][angular-router-link] attribute, but will need to bind it with an array of path segments:
 
 ```html
-<ion-button `[routerLink]="['/product', product.id]" `>
+<ion-button `[routerLink]="['/product', product.id]"`>
   {{ product.name }} Details
 </ion-button>
 ```
@@ -538,12 +538,14 @@ export class ExamplePage {
 
 Any component may implement any of these [lifecycle methods][ionic-page-event] to be notified of navigation events:
 
-| Method             | Called when                                                                                                                                          |
-| :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ionViewWillEnter` | The targeted page is about to animate into view and become the active page.                                                                          |
-| `ionViewDidEnter`  | The targeted page has finished animating into view and is now the active page. This event will fire, whether it was the first load or a cached page. |
-| `ionViewWillLeave` | The current page is about to animate out of view and no longer be the active page.                                                                   |
-| `ionViewDidLeave`  | The current page has finished animating out of view and is no longer the active page.                                                                |
+| Method             | Interface | Called when                                                                                                                                          |
+| :----------------- | :--- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ngOnInit()`         | `OnInit` | The component is being initialized |
+| `ionViewWillEnter()` | `ViewWillEnter` | The component is about to animate into view and become the active page.                                                                          |
+| `ionViewDidEnter()`  | `ViewDidEnter` | The component has finished animating into view and is now the active page. This event will fire, whether it was the first load or a cached page. |
+| `ionViewWillLeave()` | `ViewWillLeave` | The component is about to animate out of view and no longer be the active page.                                                                   |
+| `ionViewDidLeave()`  | `ViewDidLeave` | The component has finished animating out of view and is no longer the active page.                                                                |
+| `ngOnDestroy()` | `OnDestroy` | The component is being destroyed |
 
 ## Guarding routes
 
