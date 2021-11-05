@@ -1101,48 +1101,8 @@ class Person {
 }
 ```
 
-#### Implementing a decorator
-
 Any function can be used as a decorator by applying it with `@` before a class, method, accessor, property or parameter.
-In this example, we **decorate a class**.
-
-```ts
-function `classDecorator`(target: Function) {
-  console.log(\`Class "${target.name}" is decorated`);
-}
-
-`@classDecorator`
-class Person {}
-// Class "Person" is decorated
-```
-
-The function is called at runtime with the class being decorated as an argument,
-
-
-
-### Decorator factory
-
-If we want to customize how a decorator is applied to a declaration, we can write a **decorator factory**.
-It's simply a function that builds and returns the actual decorator:
-
-```ts
-function color(value: string) { // This is the decorator factory.
-  return function (target) { // This is the decorator.
-    // Do something with "target" and "value"...
-  };
-}
-```
-
-For example, this is how you would use it on a class:
-
-```ts
-@color('blue')
-class Whale {}
-```
-
-You **apply the factory** with `@`, and the **resulting decorator** will be applied to the class.
-
-
+In this example, we **decorate a class**
 
 ### Class decorator example
 
@@ -1161,39 +1121,6 @@ class GreetComponent {
 ```
 
 In this example, the decorator defines that `GreetComponent` is used with the `<greet>` tag and specifies its HTML template.
-
-
-
-### Method decorator example
-
-This example shows how it's possible to **override methods** on an existing class with a **method decorator**:
-
-```ts
-function `logCalls`(target, key, descriptor) {
-
-  const originalMethod = target[key];
-  descriptor.value = function(...args: any[]) {
-    console.log(\`Method "${key}" was called`);
-    return originalMethod.apply(this, args);
-  };
-
-  return descriptor;
-}
-
-class Person {
-  constructor(private name: string) {}
-
-  `@logCalls`
-  getName() {
-    return this.name;
-  }
-}
-
-const jdoe = new Person('John Doe');
-const name = jdoe.getName(); // Method "getName" was called
-```
-
-
 
 [angular]: https://angular.io
 [js-decorators-proposal]: https://github.com/tc39/proposal-decorators
