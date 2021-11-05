@@ -59,6 +59,9 @@ To follow along the examples of this subject, here is what you need to do:
   &lt;/body>
   ```
 
+> Note that we did not install RxJS using `npm` here, as that would require a lot more setup and configuration
+> and that is not the purpose of this subject.
+
 ## What (the hell) is...
 
 <h4>... an observable?</h4>
@@ -100,7 +103,7 @@ Suppose you want to react to clicks on a particular button in your page:
 &lt;/body>
 ```
 
-This could be achieved by adding an `EventListener` to said button and providing a callback:
+This could be achieved in pure JavaScript by adding an `EventListener` to the `click` event of the button and providing a callback:
 
 ```js
 document
@@ -113,9 +116,7 @@ document
 
 ### Work with Observables
 
-To do the same thing using `Observable` and the **RxJS** library is not that much complicated.
-
-Remove any previous code in `script.js` and add:
+Let's convert this to reactive programming. Remove any previous code in `script.js` and add:
 
 ```js
 const { fromEvent } = rxjs; // `1`
@@ -123,17 +124,18 @@ const { fromEvent } = rxjs; // `1`
 fromEvent(document.getElementById("myButton"), "click") // `2`
   .subscribe(() => alert("Button has been clicked")); // `3`
 ```
-**`1`** - With the CDN script included, the **RxJS** library is globally available through the `rxjs` variable. We used here some [destructuring assignment][destructuring] to get the `fromEvent(...)` function.
+**`1`** - The **RxJS** library is available through the `rxjs` global variable. We used some [destructuring assignment][destructuring] to only get the `fromEvent(...)` function.
+> In a properly configured application, you would have accessed this function by `import`ing from the `rxjs` module
 
-**`2`** - [`fromEvent(...)`][from-event] creates an `Observable` from **a particular event** occuring on **a particular DOM element**. In this case, an `Obervable` for `click` events on the `#myButton` element.
+**`2`** - [`fromEvent(...)`][from-event] creates an `Observable` that will emit **each particular event** occuring on **a particular DOM element**. Here, those are `click` events on the `#myButton` element.
 
-**`3`** - `Observable`s won't **emit** or even **do** anything until an **Observer subscribes to them** by calling their `subscribe(...)` method, and passing it a callback. For each emitted value, this callback is called with the value as argument.
+**`3`** - `Observable`s _usually_ won't **emit** any values until an **Observer subscribes to them** by calling their `subscribe(...)` method, passing it a callback which will be called by the `Observable` for each value it emits.
 
 > Go on and click the button, now.
 
 ### Complicate all the things
 
-Suppose now, for the sake of the argument, that we want to react to the click button only if the user **pressed the `Shift` key** while clicking, in which case we display in an alert **the coordinates of the mouse**.
+Suppose now, for the sake of the argument, that we want to react to the button being clicked only if the user also **pressed the `Shift` key** while clicking, in which case we display in an alert **the coordinates of the mouse**.
 
 Without using **RxJS** and `Observables`, we could write something like this:
 
@@ -191,9 +193,9 @@ $> `ls` -la . | `grep` txt
 ```
 > Here, the result of the `ls` command is used as the input for the `grep` command
 
-Coincidentally, every `Observable` has a method named `pipe(...)`, that can be used to apply a sequence of operations on this `Observable` and/or its emitted values.
+Conveniently, every `Observable` has a method named `pipe(...)`, that can be used to apply a **sequence of operations** on its emitted values.
 
-An operation is nothing more than a function, called `Operator`, that takes an `Observable` as input, does something based on it, and outputs the results in a _new_ `Observable`.
+An operation is nothing more than a function, called `Operator`, that takes an `Observable` as input, does something with its emitted values, and outputs the results in a _new_ `Observable`.
 
 > This output `Observable` will be used as input for the next `Operator` in the sequence, or be subscribed to if it's the last one.
 
@@ -228,9 +230,9 @@ Here's a marble representation of this operator:
 And how you would use it:
 
 ```js
-randomLetters()
-  .pipe(`filter(letter => letter === 'A')`)
-  .subscribe(a => console.log(a));
+randomLetters() // Emits random letters
+  .pipe(`filter(letter => letter === 'A')`) // Emits only letters "A"
+  .subscribe(letter => console.log(letter)); // "A"
 ```
 > See [the official documentation][rxjs-filter]
 
@@ -265,9 +267,9 @@ Here's a marble representation of this operator:
 And how you would use it:
 
 ```js
-randomLetters()
-  .pipe(`map(letter => letter.toLowerCase())`)
-  .subscribe(letter => console.log(letter));
+randomLetters() // Emits randomm letters in upper case
+  .pipe(`map(letter => letter.toLowerCase())`) // Emits those letters in lower case
+  .subscribe(letter => console.log(letter)); // "a", "b", "c", ...
 ```
 > See [the official documentation][rxjs-map]
 
@@ -282,8 +284,11 @@ As a marble diagram, this would look like this:
 And in the code:
 
 ```js
+// Emits only click eventy with Shift Key pressed
 shiftClick()
+  // Emits click coordinates for each shift click
   .pipe(`map(click => ({ x: click.pageX, y: click.pageY }))`)
+  // Prints coordinates
   .subscribe(coords => console.log('Received coordinates!', coords))
 ```
 ### All together now
@@ -304,6 +309,7 @@ fromEvent(document.getElementById("myButton"), "click")
     alert(\`Clicked at [${coordinates.x}, ${coordinates.y}]`)
   );
 ```
+> To `import` operators in an ES Module context, you would import them from `rxjs/operators`.
 
 #### Marble-ous
 
@@ -319,9 +325,9 @@ As a marble diagram, this would look like this:
 
 This `pipe` and `Operators` approach has several advantages:
 
-1. The `subscribe` callback **only contains the code for the actual operation** we want to achieve in the end.
+1. The `subscribe` callback **only contains the code for the ultimate operation** we want to execute.
 1. The list of operators breaks down in a readable way **which operations are applied and in which order**.
-1. You can store each `Operator`'s produced `Observable` in its own variable, to enhance reusability and/or readability:
+1. You can store the `Observables` produced by each `Operator` in their own variable, to enhance reusability and/or readability:
   ```js
   const `clickObs` = fromEvent(document.getElementById("myButton"), "click");
 
@@ -345,16 +351,16 @@ const { filter, map } = rxjs.operators;
 
 fromEvent(document.getElementById("myButton"), "click")
   .pipe(
-    filter(`clickWithShift`),
-    map(`mouseCoordinates`)
+    filter(`isClickWithShift`),
+    map(`extractMouseCoordinates`)
   )
   .subscribe(`displayCoordinates`);
 
-function `clickWithShift`(click) {
+function `isClickWithShift`(click) {
   return click.shiftKey;
 }
 
-function `mouseCoordinates`(event) {
+function `extractMouseCoordinates`(event) {
   return {
     x: event.pageX,
     y: event.pageY
@@ -379,13 +385,13 @@ Some of those `Operator`s are particularely useful when dealing with parallel as
 
 ## Why would I use this... thing?
 
-We already discussed the topic of using **callbacks** to do so, and seen that it could rapidly [get out of hands][callback-hell] when multiple async operations are to be executed one after the other.
+We already discussed the topic of using **callbacks** to handle asynchronous operations, and seen that it could rapidly [get out of hands][callback-hell] when multiple async operations are to be executed one after the other.
 
-So we learnt about **[Promises][js-prom]**, wich aleviate the pains of callbacks and allow setting up more controlled flow of actions.
+So we learnt about **[Promises][js-prom]**, wich mitigates the pains of callbacks and allow setting up more controlled flow of actions.
 
-> But depending on the use case, Promises would not be adequate.
+> But Promises have their limitations and, depending on your needs, they could not be adequates.
 
-Observables (and reactive programming) are nothing more than **another tool to work with async operations**.
+Observables (and reactive programming) are **another tool to work with async operations**.
 
 ### Comparison
 
@@ -398,21 +404,34 @@ Observables have some **similarities** with [Promises][js-prom], but here's the 
 | Resolve once with one value | Can emit different values periodically until completion |
 | - | `Operator`s ! |
 
-Plus, you can easily convert Promise-based logic to use Observables instead, with `rxjs.from(...)` that can create an `Observable` from a `Promise`:
+### Convertion
+
+The RxJS library provides you with utility to convert Promise-based logic to Observable-based logic, and _vice-versa_.
+
+**Promise to Observable**
+
+Use the `from(...)` function to create an `Observable` from a `Promise`:
 
 ```js
-const { from } = rxjs;
-
 const promise = Promise.resolve("World");
-
 `from(promise)`.subscribe((name) => console.log(\`Hello ${name}`));
 ```
 > The resulting `Observable` wil emit once, when the underlying `Promise` resolves, then complete.
+
+**Observable to Promise**
+
+Use the `toPromise()` method of an `Observable` to create a `Promise` out of it:
+
+```js
+const promise = someObserable$.toPromise();
+promise.then(/* ... */);
+```
+
 ## Resources
 
 - [JavaScript Theory: Promise vs Observable][prom-vs-obs]
 - [RxJS Documentation][rxjs-doc]
-- [Observable Decision Tree][obs-decision] - A very useful tool to help you selet the write Operator for the task
+- [Observable Decision Tree][obs-decision] - A very useful tool to help you selet the right Operator for your use case
 
 [from-event]: https://rxjs-dev.firebaseapp.com/api/index/function/fromEvent
 [destructuring]: ../js/#38
