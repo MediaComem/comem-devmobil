@@ -10,11 +10,11 @@ Learn about JavaScript module systems and ECMAScript modules.
 
 **You will need**
 
-* [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 **Recommended reading**
 
-* [JavaScript][subject-js]
+- [JavaScript][subject-js]
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -38,8 +38,6 @@ Learn about JavaScript module systems and ECMAScript modules.
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-
 ## Why are modules needed?
 
 The purpose of module systems is to solve these 2 concerns:
@@ -59,8 +57,6 @@ Pieces of software need to be able to depend upon other pieces of software writt
 Conflicts between different pieces of software must be avoided (e.g. prevent variable/function name collision, prevent access to private members).
 
 <img src='images/encapsulation.jpg' class='w70' />
-
-
 
 ### Traditional client-side JavaScript dependencies
 
@@ -86,19 +82,16 @@ It's the **developer's job** to **manually** ensure all dependencies are satisfi
 </html>
 ```
 
-
-
 ### Traditional client-side JavaScript encapsulation
-
-<runkit></runkit>
 
 In a web page, encapsulation has been traditionally achieved by taking advantage of the JavaScript function scope.
 Patterns like the [revealing module pattern][revealing-module-pattern] can be used to
 isolate private members within an [Immediately-Invoked Function Expression (IIFE)][iife]:
 
 ```js
-var myRevealingModule = (function () { // IIFE
-  var privateName = 'John Doe'; // Declare private members inside the IIFE.
+var myRevealingModule = (function () {
+  // IIFE
+  var privateName = "John Doe"; // Declare private members inside the IIFE.
 
   function publicSetName(name) {
     privateName = name;
@@ -108,60 +101,55 @@ var myRevealingModule = (function () { // IIFE
     return privateName;
   }
 
-  return { // Reveal a public interface.
+  // Reveal a public interface.
+  return {
     setName: publicSetName,
-    getName: publicGetName
+    getName: publicGetName,
   };
 })();
 
-myRevealingModule.setName('John Smith');
+myRevealingModule.setName("John Smith");
 console.log(myRevealingModule.getName()); // "John Smith"
 console.log(privateName); // ReferenceError: privateName is not defined
 ```
 
-
-
 ### Problems of traditional dependency & encapsulation
 
-* **Dependency management** gets cumbersome as JavaScript development complexifies:
+- **Dependency management** gets cumbersome as JavaScript development complexifies:
   where should newer dependencies be put to maintain proper order of the load chain?
-* The risk of **naming collisions** increases with the number of dependencies,
+- The risk of **naming collisions** increases with the number of dependencies,
   since all public functions and variables are in the **global scope**.
-* There is no way to programmatically **import modules** (e.g. revealing modules):
+- There is no way to programmatically **import modules** (e.g. revealing modules):
   dependencies must be handled **manually**.
-* **Asynchronous loading** of modules is not possible.
-* Revealing modules are **hard to analyze** for static code analyzers.
-
-
+- **Asynchronous loading** of modules is not possible.
+- Revealing modules are **hard to analyze** for static code analyzers.
 
 ## Modern JavaScript module systems
 
 Various module systems were created over the years to solve these issues:
 
-* [AMD][amd] - Asynchronous Module Definition with `define()`:
+- [AMD][amd] - Asynchronous Module Definition with `define()`:
 
-    ```js
-    define([ 'jquery' ] , function ($) {
-      return function myExample() {};
-    });
-    ```
+  ```js
+  define(["jquery"], function ($) {
+    return function myExample() {};
+  });
+  ```
 
-* [CommonJS][commonjs] - Synchronous imports with `require()` (used in Node.js):
+- [CommonJS][commonjs] - Synchronous imports with `require()` (used in Node.js):
 
-    ```js
-    const jquery = require('jquery');
-    exports.myExample = function() {};
-    ```
+  ```js
+  const jquery = require("jquery");
+  exports.myExample = function () {};
+  ```
 
 With ECMAScript 2015 (ES6), a new standard has emerged—[ECMAScript Modules][esm] ([import][esm-import]/[export][esm-export]):
 
 ```js
-import jquery from 'jquery';
-import { Component } from 'react';
+import jquery from "jquery";
+import { Component } from "react";
 export function myExample() {}
 ```
-
-
 
 ### JavaScript module systems compabitility
 
@@ -171,18 +159,15 @@ and support for ECMAScript's `import/export` is not yet complete (and might neve
 
 Various tools can be used to work with JavaScript modules today:
 
-* [Babel][babel] - Transform "new" JavaScript (ES6+, AMD, CommonJS) into "old" JavaScript (ES5).
-* [System.js][systemjs] - Load any kind of JavaScript module (AMD, CommonJS, ECMAScript).
-* [TypeScript][ts] - A typed superset of JavaScript that compiles to plain JavaScript.
-* [Webpack][webpack] - Bundle all your assets (including modern JavaScript) into a minified production bundle.
-
-
+- [Babel][babel] - Transform "new" JavaScript (ES6+, AMD, CommonJS) into "old" JavaScript (ES5).
+- [System.js][systemjs] - Load any kind of JavaScript module (AMD, CommonJS, ECMAScript).
+- [TypeScript][ts] - A typed superset of JavaScript that compiles to plain JavaScript.
+- [Webpack][webpack] - Bundle all your assets (including modern JavaScript) into a minified production bundle.
 
 ## ECMAScript modules
 
 ECMAScript modules have been defined by [ECMA TC39, the ECMAScript International, Technical Committee 39][tc39].
-Full support has not yet been achieved but it will eventually become compatible with all modern browsers [and with Node.js][node-esm].
-It's *the way of the future*:
+Full support has not yet been achieved but it is compatible with most modern browsers, [and with Node.js][node-esm].
 
 ```js
 import jquery from 'jquery';
@@ -203,8 +188,6 @@ export default function doAllTheThings() {
 }
 ```
 
-
-
 ### What's in a module?
 
 A module is simply a JavaScript file.
@@ -214,8 +197,6 @@ This is unlike traditional JavaScript environments with `<script>` tags in a web
 where all public variables are in the global scope.
 
 <p class='center'><img src='images/modules.jpg' class='w70' /></p>
-
-
 
 ### The `export` statement
 
@@ -241,8 +222,6 @@ export { import1 as name1, import2 as name2, …, nameN } from …;
 export { default } from …;
 ```
 
-
-
 ### The `import` statement
 
 The **`import`** statement is used to import functions, objects or primitive values exported by another module.
@@ -258,8 +237,6 @@ import defaultExport, { export, … } from 'module-name';
 import defaultExport, * as name from 'module-name';
 import 'module-name';
 ```
-
-
 
 ### Exporting and importing values
 
@@ -320,8 +297,6 @@ console.log(`foo`); // "bar"
 console.log(`plane`.speed): // 3540
 ```
 
-
-
 ### Default exports
 
 <!-- slide-column 40 -->
@@ -371,8 +346,6 @@ console.log(p.full); // "John Doe"
 console.log(`truth`); // true
 ```
 
-
-
 ### Renaming exports and imports
 
 The `as` keyword can be used to rename an exported variable:
@@ -405,15 +378,13 @@ export default class Component extends `ReactComponent` {
 }
 ```
 
-
-
 ### Transitive exports
 
 Let's assume `module-a.js` exports these values:
 
 ```js
 // FILE: module-a.js
-export let foo = 'bar';
+export let foo = "bar";
 export const truth = true;
 ```
 
@@ -434,45 +405,39 @@ and to `foo` coming from `module-a.js` and re-exported through `module-b.js`:
 
 ```js
 // FILE: module-c.js
-import { foo, lies } from './module-b';
-console.log(foo);   // "bar"
-console.log(lies);  // false
+import { foo, lies } from "./module-b";
+console.log(foo); // "bar"
+console.log(lies); // false
 ```
-
-
 
 ## Why should I use ECMAScript modules?
 
 Because:
 
-* They are integrated in the language (eventually they will supported everywhere, with no need for libraries).
-* They support **synchronous** (CommonJS, server-side) and **asynchronous** (AMD, client-side) **loading**.
-* `import` and `export` are defined so as to support **static analysis** by tools.
-* Circular dependencies are supported.
+- They are integrated in the language.
+- They support **synchronous** (CommonJS, server-side) and **asynchronous** (AMD, client-side) **loading**.
+- `import` and `export` are defined so as to support **static analysis** by tools.
+- Circular dependencies are supported.
 
 However:
 
-* They are **not yet supported** now, meaning that it forces you to use a transpiler like [Babel][babel],
-  a module loader like [System.js][systemjs], or a bundler like [Webpack][webpack].
-
-
+- They are [**not supported by older browsers**][caniuse-esm], meaning that, depending on your project and its target audience, you might need to use a transpiler like [Babel][babel], a module loader like [System.js][systemjs], or a bundler like [Webpack][webpack].
 
 ## Resources
 
 **Documentation**
 
-* [`export`][esm-export]
-* [`import`][esm-import]
+- [`export`][esm-export]
+- [`import`][esm-import]
 
 **Further reading**
 
-* [Brief History of JavaScript Modules][js-modules-history]
-* [JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015][js-module-systems-showdown]
-
-
+- [Brief History of JavaScript Modules][js-modules-history]
+- [JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015][js-module-systems-showdown]
 
 [amd]: https://github.com/amdjs/amdjs-api/blob/master/AMD.md
 [babel]: https://babeljs.io
+[caniuse-esm]: https://caniuse.com/es6-module
 [chrome]: https://www.google.com/chrome/
 [commonjs]: http://www.commonjs.org
 [esm]: http://2ality.com/2014/09/es6-modules-final.html
