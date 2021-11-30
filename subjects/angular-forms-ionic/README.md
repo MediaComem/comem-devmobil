@@ -6,7 +6,7 @@
 
 Get started with and understand the basics of forms in [Angular][angular], using Ionic components.
 
-This subject is an adaptation of the [Angular Forms][angular-forms-subject]] subject to the context of an Ionic application.
+This subject is an adaptation of the [Angular Forms][angular-forms-subject] subject to the context of an Ionic application.
 
 It is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
 which you should both read to gain a deeper understanding of Angular.
@@ -110,7 +110,7 @@ This allows you to add **more complex validations and interaction**.
 
 Let's add a very simple greeting form to our app:
 
-Open the `home.page.html` file, and the `<ion-content>` tags and everything inbetween by:
+Open the `home.page.html` file, and replace the `<ion-content>` tags and everything inbetween by:
 
 ```html
 <ion-content class="ion-padding">
@@ -586,12 +586,14 @@ and use the `formControlName` directive on the `<input>` tag:
 You must also update your error messages to get the input field from the form group with `greetingForm.get("greeting")`
 instead of using the `#greetingInput` template reference variable you just removed:
 
+> Since `get()` can return `undefined`, we need the `?` after the call
+
 ```html
-<p *ngIf="`greetingForm.get('greeting')`.hasError('required')
+<p *ngIf="`greetingForm.get('greeting')?`.hasError('required')
           && `greetingForm.get('greeting')`.dirty">
   Name is required
 </p>
-<p *ngIf="`greetingForm.get('greeting')`.hasError('notIn')
+<p *ngIf="`greetingForm.get('greeting')?`.hasError('notIn')
           && `greetingForm.get('greeting')`.dirty">
   Name is forbidden
 </p>
@@ -616,10 +618,8 @@ export class HomePage {
     this.greetingForm = this.formBuilder.group({
 *     greeting: [
 *       '',
-*       Validators.compose([ // Add validators to the field.
-*         Validators.required, // Use the built-in "required" validator.
-*         notInValidator([ 'Bob' ]) // Use our custom validator function.
-*       ])
+*       // Add the built-in "required" validator and our custom function
+*       [ Validators.required, notInValidator([ 'Bob' ]) ]
 *     ]
     });
     // ...
@@ -634,10 +634,10 @@ Note that we use our custom validator function (`notInValidator`) directly,
 instead of using the `NotInValidatorDirective` wrapper like before:
 
 ```ts
-Validators.compose([ // Add validators to the field.
+[ // Add validators to the field.
   Validators.required, // Use the built-in "required" validator.
   `notInValidator([ 'Bob' ])` // Use our custom validator function.
-])
+]
 ```
 
 This is an advantage of reactive forms over template-driven forms:
