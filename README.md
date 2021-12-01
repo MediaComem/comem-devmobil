@@ -26,7 +26,6 @@ You will:
 
 - Going further with JavaScript
 
-  - [JavaScript: classes](./subjects/js-classes)
   - [JavaScript: modules](./subjects/js-modules)
   - [JavaScript: basic promises](./subjects/js-promises-basics)
   - [Observables with Rxjs](./subjects/rxjs)
@@ -36,12 +35,16 @@ You will:
   - [TypeScript](./subjects/ts)
   - [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
   - [Ionic navigation with Angular](./subjects/ionic-angular)
-  - [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
 - App Development
 
   - Mockups
   - [Live setup][setup-project] (Tailored for the Travel Log subject, but it can help you kickstart your own app)
+
+## Complementary subjects
+
+- [JavaScript: classes](./subjects/js-classes)
+- [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
 - Ionic (advanced)
 
@@ -52,7 +55,7 @@ You will:
   - [WebSocket](./subjects/websocket)
   - [WAMP](./subjects/wamp)
 
-## Additionnal subjects
+## Optional subjects
 
 - [Javascript: basics and more][js-basics]
 - [JavaScript: prototypes](./subjects/js-prototypes)
