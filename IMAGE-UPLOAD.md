@@ -207,7 +207,7 @@ Here's an example of how to use the new provider in a sample `ExamplePage` compo
 // Other imports...
 // TODO: import the model and provider. The path should be changed depending on where you import them.
 import { QimgImage } from "../../models/qimg-image";
-import { PictureProvider } from "../../picture/picture.service";
+import { PictureService } from "../../picture/picture.service";
 
 @Component({
   selector: "page-example",
