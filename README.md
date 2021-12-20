@@ -46,10 +46,12 @@ You will:
 - [JavaScript: classes](./subjects/js-classes)
 - [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
-- Ionic (advanced)
+- Extras
 
-  - [Ionic extras (geolocation, leaflet & camera)](./subjects/ionic-extras)
-  - [Image upload](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
+  - [**NEEDS UPDATE** Geolocation with Ionic](./subjects/ionic-geolocation)
+  - [**NEEDS UPDATE** Using the camera with Ionic](./subjects/ionic-camera)
+  - [Intergrating Leaflet with Angular](./subjects/angular-leaflet)
+  - [Uploading images to qImg](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 - Real-Time
   - [WebSocket](./subjects/websocket)

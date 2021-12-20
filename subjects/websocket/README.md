@@ -6,7 +6,7 @@ Learn how to connect and react to events from a WebSocket in your Angular applic
 
 **Recommended reading**
 
-* [WebSocket (archioweb)](https://mediacomem.github.io/comem-archioweb/2019-2020/subjects/ws/?home=MediaComem%2Fcomem-archioweb%23readme#1)
+- [WebSocket (archioweb)](https://mediacomem.github.io/comem-archioweb/2019-2020/subjects/ws/?home=MediaComem%2Fcomem-archioweb%23readme#1)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -43,11 +43,13 @@ To connect to an existing WebSocket server, you simply need to instantiate a new
 ```js
 const ws = `new WebSocket('ws://echo.websocket.org')`;
 ```
+
 A `WebSocket` object can be in one of four states, defined as static constants of the `WebSocket` class:
-* `CONNECTING` - The connection is not yet opened
-* `OPEN` - The connection is opened and messages can be exchanged
-* `CLOSING` - The connection is being closed
-* `CLOSED` - The connection is closed and messages can no longer be exchanged
+
+- `CONNECTING` - The connection is not yet opened
+- `OPEN` - The connection is opened and messages can be exchanged
+- `CLOSING` - The connection is being closed
+- `CLOSED` - The connection is closed and messages can no longer be exchanged
 
 To check the state in which a `WebSocket` instance currently is, use its `readyState` property:
 
@@ -107,15 +109,17 @@ export class ExampleComponent {
   // ...
 }
 ```
+
 > Injecting the service is enough to connect to the WebSocket, since we do this in the Service constructor.
 
 ## Listening to messages
 
 Several of a `WebSocket` object's properties can be set to react to specific events such as:
-* The connection is opened ([`onopen`][onopen])
-* A message is received ([`onmessage`][onmessage])
-* An error occured ([`onerror`][onerror])
-* The connection is closed ([`onclose`][onclose])
+
+- The connection is opened ([`onopen`][onopen])
+- A message is received ([`onmessage`][onmessage])
+- An error occured ([`onerror`][onerror])
+- The connection is closed ([`onclose`][onclose])
 
 Each of these porperties expect a callback function that will be called when the corresponding event occurs:
 
@@ -135,9 +139,10 @@ Remember that `Observable` allow us to **subscribe** to a particular **stream of
 From the the front-end point of view, a WebSocket connection is pretty much the same thing: a **stream of messages** emitted until the **connection is closed**.
 
 It would thus be quite natural that our Angular `WebSocketService` exposes an `Observable` that emits a new value each time a message is broadcasted on the WebSocket connection.
+
 > The WebSocket API define such a message with the `MessageEvent` interface.
 
-Let's create a new `listen()` method on our `WebSocketService` that returns an `Observable<MessageEvent>`.
+Let's create a new `listen()` method on our `WebSocketService` that returns an `Observable<any>` (where any is the data of the message).
 
 #### `listen()` method
 
@@ -151,12 +156,12 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class WebsocketService {
   // ...
-  public listen(): Observable<MessageEvent> {
+  public listen<T = any>(): Observable<T> {
     // Only listen when the connection is opened
     return this.ws$.pipe(
       // Make an observable out of the websocket stream
-      switchMap(socket => {
-        return new Observable((subscriber: Observer<MessageEvent>) => {
+      switchMap(socket =>
+        new Observable((subscriber: Observer<MessageEvent<T>>) => {
           // When a new message is received, the Observable will emit this message
 *         socket.onmessage = message => subscriber.next(message);
           // When a websocket error occurs, the Observable will emit a new error
@@ -165,14 +170,15 @@ export class WebsocketService {
 *         socket.onclose = () => subscriber.complete();
           // Function that will be called if the user manually unsubscribe
 *         return () => socket.close();
-        });
-      }),
+        }
+      ),
       // When a message is emitted, change the value to the message content
-*     map((event: MessageEvent) => event.data)
+*     map((event: MessageEvent<T>) => event.data)
     );
   }
 }
 ```
+
 #### Listen on the component
 
 To listen to messages on the `WebSocket` instance in your component, subscribe to its `listen()` method:
@@ -199,6 +205,26 @@ export class ExampleComponent {
 }
 ```
 
+#### Type the message data
+
+By default, the data that you can access in the `listen()` subscribe callback is type with `any`, since the method does not know the structure of the received message data. You can tell what type of data you expect to receive to the `listen()` to have proper typings.
+
+Let's suppose we designed our WebSocket API so that all our messages have a `type` and `content` property. We could define it in our app:
+
+```ts
+export type WsMessage = {
+  type: string;
+  content: any;
+};
+```
+Now, when calling the `listen()` method, we can tell it that we expect to receive this type of data in our messages:
+
+```ts
+this.wsService.listen`<WsMessage>`().subscribe(message => {
+  // message is now of type WsMessage.
+});
+```
+
 ### Send messages
 
 Sending a message is very easy, once connected to a WebSocket.
@@ -211,6 +237,7 @@ const data = {
 };
 *ws.send(JSON.stringify(data));
 ```
+
 > Note that you could also send binary data (e.g. files) through this method.
 
 #### Sending messages on the service
@@ -228,20 +255,22 @@ export class WebsocketService {
 
   // ...
 
-  public `send(data: any): void` {
+  public `send(data: unknown): void` {
     this.ws$.subscribe(socket => {
 *     socket.send(JSON.stringify(data));
     });
   }
 }
 ```
+> Note that the `data` param is typed as `unknown`, because the `send()` method doesn't care (nor know) what type of data you want to send.
+
 #### Sending messages from the component
 
 To send some message from the component, simply call our `WebSocketService`'s `send()` method with a serializable value, e.g. a binded input value:
 
 ```html
-<input type="text" name="msg" id="msg" `[(ngModel)]="message"`>
-<button `(click)="sendMessage()"`>Envoyer</button>
+<input type="text" name="msg" id="msg" `[(ngModel)]="message" ` />
+<button `(click)="sendMessage()" `>Envoyer</button>
 ```
 
 ```ts
@@ -260,15 +289,16 @@ export class ExampleComponent {
   // ...
 }
 ```
+
 ## Next steps
 
 As annouced, we've built a very simple Angular Service to manage websocket connection, and sending/receiving messages.
 
 Some enhancment could be implemented, depending on your needs, such as:
 
-* Sending binary data with our service's `send()` method,
-* Keeping and retrieving several websocket connections in the service,
-* ...
+- Sending binary data with our service's `send()` method,
+- Keeping and retrieving several websocket connections in the service,
+- ...
 
 > The complete Angular `WebSocketService` can be found [here][ng-ws]
 
