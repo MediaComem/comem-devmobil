@@ -101,25 +101,25 @@ $> ionic generate service picture/Picture --skip-tests=true
 > Don't forget to also **READ** the code to better understand what's going on and adapt it to your needs.
 
 ```ts
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import {
   Camera,
   CameraResultType,
   CameraSource,
   ImageOptions,
   Photo,
-} from "@capacitor/camera";
-import { Observable, from } from "rxjs";
-import { switchMap, tap } from "rxjs/operators";
+} from '@capacitor/camera';
+import { Observable, from } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
-import { environment } from "../../environments/environment";
-import { QimgImage } from "../models/qimg-image";
+import { environment } from '../../environments/environment';
+import { QimgImage } from '../models/qimg-image.model';
 
 /**
  * Service to take pictures and upload them to the qimg API.
  */
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class PictureService {
   constructor(private http: HttpClient) {}
 
@@ -180,62 +180,42 @@ export class PictureService {
    * An error may be emitted instead if the upload fails.
    */
   private uploadPicture(photo: Photo): Observable<QimgImage> {
-    const requestBody = {
-      data: photo.base64String,
-    };
-
-    const requestOptions = {
-      headers: {
-        Authorization: `Bearer ${environment.qimgSecret}`,
-      },
-    };
-
-    return this.http.post<QimgImage>(
-      `${environment.qimgUrl}/images`,
-      requestBody,
-      requestOptions
+    // Wait for the convertion of the photo to a base64 representation of it
+    // before calling the API to upload the picture there.
+    return this.readAsBase64(photo).pipe(
+      switchMap((data) =>
+        this.http.post<QimgImage>(
+          `${environment.qimgUrl}/images`,
+          { data },
+          {
+            headers: {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              Authorization: `Bearer ${environment.qimgSecret}`,
+            },
+          }
+        )
+      )
     );
   }
-}
-```
 
-## Usage
-
-Here's an example of how to use the new provider in a sample `ExamplePage` component:
-
-```ts
-// Other imports...
-// TODO: import the model and provider. The path should be changed depending on where you import them.
-import { QimgImage } from "../../models/qimg-image";
-import { PictureService } from "../../picture/picture.service";
-
-@Component({
-  selector: "page-example",
-  templateUrl: "example.html",
-})
-export class ExamplePage {
-  // TODO: add a picture field to the class
-  picture: QimgImage;
-
-  constructor(
-    // Other constructor parameters...
-    // TODO: inject the picture service
-    private pictureService: PictureService
-  ) {}
-
-  // ...
-
-  // TODO: add a method to take a picture
-  //       (replace it if you already have it)
-  takePicture() {
-    this.pictureService.takeAndUploadPicture().subscribe(
-      (picture) => {
-        this.picture = picture;
-      },
-      (err) => {
-        console.warn("Could not take picture", err);
-      }
+  private readAsBase64(photo: Photo): Observable<string | ArrayBuffer> {
+    // Fetch the photo, read as a blob, then convert to base64 format
+    return from(
+      fetch(photo.webPath)
+        .then((response) => response.blob())
+        .then((blob) => this.convertBlobToBase64(blob))
     );
+  }
+
+  private convertBlobToBase64(blob: Blob): Promise<string | ArrayBuffer> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.readAsDataURL(blob);
+    });
   }
 }
 ```
