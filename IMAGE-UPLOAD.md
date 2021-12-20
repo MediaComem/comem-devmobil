@@ -134,7 +134,9 @@ export class PictureService {
     // Take a picture.
     // This creates an observable of picture data.
     return this.takePicture().pipe(
-      // Once the picture has been taken, upload it to the qimg API.
+      // Once the picture has been taken, transform it as a base64 string representation.
+      switchMap((photo) => this.readAsBase64(photo)),
+      // With the base64 representation of the image, upload it to the qimg API.
       // This returns a new observable of the resulting QimgImage object.
       switchMap((data) => this.uploadPicture(data)),
       // Once the picture has been uploaded, log a message to the console
@@ -179,22 +181,22 @@ export class PictureService {
    * Returns an observable that will emit the created QimgImage object.
    * An error may be emitted instead if the upload fails.
    */
-  private uploadPicture(photo: Photo): Observable<QimgImage> {
-    // Wait for the convertion of the photo to a base64 representation of it
-    // before calling the API to upload the picture there.
-    return this.readAsBase64(photo).pipe(
-      switchMap((data) =>
-        this.http.post<QimgImage>(
-          `${environment.qimgUrl}/images`,
-          { data },
-          {
-            headers: {
-              // eslint-disable-next-line @typescript-eslint/naming-convention
-              Authorization: `Bearer ${environment.qimgSecret}`,
-            },
-          }
-        )
-      )
+  private uploadPicture(base64: string | ArrayBuffer): Observable<QimgImage> {
+    const requestBody = {
+      data: base64,
+    };
+
+    const requestOptions = {
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: `Bearer ${environment.qimgSecret}`,
+      },
+    };
+
+    return this.http.post<QimgImage>(
+      `${environment.qimgUrl}/images`,
+      requestBody,
+      requestOptions
     );
   }
 
