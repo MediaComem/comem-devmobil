@@ -48,10 +48,9 @@ You will:
 
 - Extras
 
-  - [**NEEDS UPDATE** Geolocation with Ionic](./subjects/ionic-geolocation)
-  - [**NEEDS UPDATE** Using the camera with Ionic](./subjects/ionic-camera)
+  - [Geolocation with Ionic](https://capacitorjs.com/docs/apis/geolocation)
+  - [Taking pictures and uploading them to qImg](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
   - [Intergrating Leaflet with Angular](./subjects/angular-leaflet)
-  - [Uploading images to qImg](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
 
 - Real-Time
   - [WebSocket](./subjects/websocket)

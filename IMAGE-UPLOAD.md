@@ -53,7 +53,7 @@ export type QimgImage = {
 
 ## Requirements
 
-**To properly take pictures, you will need the Capacitor Camera Plugin and Ionic PWA Elements plugin.**
+**To properly take pictures, you will need the [Capacitor Camera Plugin](https://capacitorjs.com/docs/apis/camera#capacitorcamera) and [Ionic PWA Elements](https://capacitorjs.com/docs/web/pwa-elements) plugin.**
 
 > The PWA Elements plugin will simulate native features on your browser.
 
