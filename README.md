@@ -104,7 +104,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than friday 28/01/2022** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
+Each group must send an e-mail **no later than friday 30/01/2022** to [Mathias Oberson](mailto:mathias.oberson@squareservices.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
