@@ -170,7 +170,7 @@ export class WebsocketService {
 *         socket.onclose = () => subscriber.complete();
           // Function that will be called if the user manually unsubscribe
 *         return () => socket.close();
-        }
+        })
       ),
       // When a message is emitted, change the value to the message content
 *     map((event: MessageEvent<T>) => event.data)
