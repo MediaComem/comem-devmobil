@@ -143,19 +143,9 @@ Various module systems were created over the years to solve these issues:
   exports.myExample = function () {};
   ```
 
-With ECMAScript 2015 (ES6), a new standard has emerged—[ECMAScript Modules][esm] ([import][esm-import]/[export][esm-export]):
-
-```js
-import jquery from "jquery";
-import { Component } from "react";
-export function myExample() {}
-```
-
 ### JavaScript module systems compabitility
 
-Those systems are **not natively supported by browsers** (although ECMAScript modules are almost there),
-meaning that you cannot use AMD's `define()` or CommonJS's `require()` in the browser without including a module loader like RequireJS or System.js;
-and support for ECMAScript's `import/export` is not yet complete (and might never be on old browsers like Internet Explorer).
+Those systems are **not natively supported by browsers** meaning that you cannot use AMD's `define()` or CommonJS's `require()` in the browser without including a module loader like RequireJS or System.js.
 
 Various tools can be used to work with JavaScript modules today:
 
@@ -163,6 +153,8 @@ Various tools can be used to work with JavaScript modules today:
 - [System.js][systemjs] - Load any kind of JavaScript module (AMD, CommonJS, ECMAScript).
 - [TypeScript][ts] - A typed superset of JavaScript that compiles to plain JavaScript.
 - [Webpack][webpack] - Bundle all your assets (including modern JavaScript) into a minified production bundle.
+
+With ECMAScript 2015 (ES6), a new standard has emerged—[ECMAScript Modules][esm] ([import][esm-import]/[export][esm-export]), which is now widely supported by the major browsers.
 
 ## ECMAScript modules
 
