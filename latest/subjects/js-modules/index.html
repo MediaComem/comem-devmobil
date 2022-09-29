@@ -3,7 +3,7 @@
   <head>
     <title>JavaScript Modules (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/1f46f40c7019dc46cda5983fcccd9b4c00a8d3c3/subjects/js-modules/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false,&quot;navigation&quot;:{&quot;click&quot;:false,&quot;scroll&quot;:false,&quot;touch&quot;:true}},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/1dfc61a6dd4554bed6c27374168b1d5ea79d95f4/subjects/js-modules/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -155,22 +155,12 @@ Various module systems were created over the years to solve these issues:
   exports.myExample = function () {};
   ```
 
-With ECMAScript 2015 (ES6), a new standard has emerged—[ECMAScript Modules][esm] ([import][esm-import]/[export][esm-export]):
-
-```js
-import jquery from "jquery";
-import { Component } from "react";
-export function myExample() {}
-```
-
 ---
 ### JavaScript module systems compabitility
 
 .breadcrumbs[<a href="#1">JavaScript Modules</a> > <a href="#7">Modern JavaScript module systems</a>]
 
-Those systems are **not natively supported by browsers** (although ECMAScript modules are almost there),
-meaning that you cannot use AMD's `define()` or CommonJS's `require()` in the browser without including a module loader like RequireJS or System.js;
-and support for ECMAScript's `import/export` is not yet complete (and might never be on old browsers like Internet Explorer).
+Those systems are **not natively supported by browsers** meaning that you cannot use AMD's `define()` or CommonJS's `require()` in the browser without including a module loader like RequireJS or System.js.
 
 Various tools can be used to work with JavaScript modules today:
 
@@ -178,6 +168,8 @@ Various tools can be used to work with JavaScript modules today:
 - [System.js][systemjs] - Load any kind of JavaScript module (AMD, CommonJS, ECMAScript).
 - [TypeScript][ts] - A typed superset of JavaScript that compiles to plain JavaScript.
 - [Webpack][webpack] - Bundle all your assets (including modern JavaScript) into a minified production bundle.
+
+With ECMAScript 2015 (ES6), a new standard has emerged—[ECMAScript Modules][esm] ([import][esm-import]/[export][esm-export]), which is now widely supported by the major browsers.
 
 ---
 ## ECMAScript modules
