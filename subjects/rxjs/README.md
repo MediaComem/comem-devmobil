@@ -56,7 +56,7 @@ To follow along the examples of this subject, here is what you need to do:
 3. Include the **RxJS library** and the `script.js` file in `index.html` before the `&lt;/body>` tag:
   ```html
   <body>
-  * <script src="https://unpkg.com/@reactivex/rxjs@6.5.5/dist/global/rxjs.umd.js"></script>
+  * <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
   * <script src="./script.js"></script>
   &lt;/body>
   ```
