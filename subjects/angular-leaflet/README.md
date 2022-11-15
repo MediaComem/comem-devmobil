@@ -9,7 +9,7 @@ How to integrate Leaflet in your angular application
 **Recommended reading**
 
 - [Ionic](../ionic/)
-- [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
+- [Angular](../angular/)
 - [Geolocation with Ionic](../ionic-geolocation)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->

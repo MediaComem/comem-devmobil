@@ -33,7 +33,7 @@ You will:
 - Ionic
 
   - [TypeScript](./subjects/ts)
-  - [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
+  - [Angular](./subjects/angular)
   - [Ionic navigation with Angular](./subjects/ionic-angular)
 
 - App Development
@@ -58,12 +58,11 @@ You will:
 
 ## Optional subjects
 
-- [Javascript: basics and more][js-basics]
+- [Javascript: basics and more](./subjects/js)
 - [JavaScript: prototypes](./subjects/js-prototypes)
 - [JavaScript: advanced promises](./subjects/js-promises)
 - [JavaScript: closures](./subjects/js-closures)
-
-- [Advanced Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/advanced-angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
+- [Advanced Angular](./subjects/advanced-angular)
 
 ## Evaluation
 
@@ -104,7 +103,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than sunday 30/01/2022 at midnight** to [Mathias Oberson](mailto:mathias@squareservices.ch) with:
+Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** to [Mathias Oberson](mailto:mathias@squareservices.ch) and [Simon Pinkas](mailto:simon.pinkas@heig-vd.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
@@ -127,7 +126,6 @@ Each group must send an e-mail **no later than sunday 30/01/2022 at midnight** t
 [ionic]: http://ionicframework.com
 [ionic-cli]: https://ionicframework.com/docs/cli
 [ionic-getting-started]: http://ionicframework.com/getting-started/
-[js-basics]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/js/#1
 [node]: https://nodejs.org/
 [qimg]: https://mediacomem.github.io/comem-qimg/
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup

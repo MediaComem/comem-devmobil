@@ -411,5 +411,5 @@ If you want to **dive deeper** in the subject of Promises, [here's a more in-dep
 [chuck-jokes]: https://api.chucknorris.io/
 [fetch]: https://developer.mozilla.org/fr/docs/Web/API/Fetch_API/Using_Fetch
 [js-bas]: ../js
-[js-prom]: https://mediacomem.github.io/comem-devmobil/latest/subjects/js-promises/?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-masrad-dfa%2Flatest
+[js-prom]: ../js-promises/
 [promises-spec]: https://promisesaplus.com/

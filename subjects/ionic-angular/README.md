@@ -4,7 +4,7 @@ Learn to work with [Angular][angular] in an [Ionic][ionic] project.
 
 **Recommended reading**
 
-- [Angular](https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-devmobil%2Flatest)
+- [Angular](../angular)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
