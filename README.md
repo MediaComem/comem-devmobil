@@ -26,15 +26,15 @@ You will:
 
 - Going further with JavaScript
 
-  - [JavaScript: modules](./subjects/js-modules)
-  - [JavaScript: basic promises](./subjects/js-promises-basics)
-  - [Observables with Rxjs](./subjects/rxjs)
+  - [JavaScript: modules](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-modules?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [JavaScript: basic promises](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-promises-basics?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [Observables with Rxjs](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/rxjs?home=MediaComem%2Fcomem-devmobil%23readme)
 
 - Ionic
 
-  - [TypeScript](./subjects/ts)
-  - [Angular](./subjects/angular)
-  - [Ionic navigation with Angular](./subjects/ionic-angular)
+  - [TypeScript](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/ts?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [Angular](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/angular?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [Ionic navigation with Angular](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/ionic-angular?home=MediaComem%2Fcomem-devmobil%23readme)
 
 - App Development
 
@@ -43,26 +43,26 @@ You will:
 
 ## Complementary subjects
 
-- [JavaScript: classes](./subjects/js-classes)
-- [Angular Forms With Ionic](./subjects/angular-forms-ionic)
+- [JavaScript: classes](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-classes?home=MediaComem%2Fcomem-devmobil%23readme)
+- [Angular Forms With Ionic](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/angular-forms-ionic?home=MediaComem%2Fcomem-devmobil%23readme)
 
 - Extras
 
-  - [Geolocation with Ionic](https://capacitorjs.com/docs/apis/geolocation)
-  - [Taking pictures and uploading them to qImg](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload)
-  - [Intergrating Leaflet with Angular](./subjects/angular-leaflet)
+  - [Geolocation with Ionic](https://capacitorjs.com/docs/apis/geolocation?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [Taking pictures and uploading them to qImg](https://github.com/MediaComem/comem-devmobil/blob/master/IMAGE-UPLOAD.md#image-upload?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [Intergrating Leaflet with Angular](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/angular-leaflet?home=MediaComem%2Fcomem-devmobil%23readme)
 
 - Real-Time
-  - [WebSocket](./subjects/websocket)
-  - [WAMP](./subjects/wamp)
+  - [WebSocket](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/websocket?home=MediaComem%2Fcomem-devmobil%23readme)
+  - [WAMP](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/wamp?home=MediaComem%2Fcomem-devmobil%23readme)
 
 ## Optional subjects
 
-- [Javascript: basics and more](./subjects/js)
-- [JavaScript: prototypes](./subjects/js-prototypes)
-- [JavaScript: advanced promises](./subjects/js-promises)
-- [JavaScript: closures](./subjects/js-closures)
-- [Advanced Angular](./subjects/advanced-angular)
+- [Javascript: basics and more](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js?home=MediaComem%2Fcomem-devmobil%23readme)
+- [JavaScript: prototypes](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-prototypes?home=MediaComem%2Fcomem-devmobil%23readme)
+- [JavaScript: advanced promises](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-promises?home=MediaComem%2Fcomem-devmobil%23readme)
+- [JavaScript: closures](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/js-closures?home=MediaComem%2Fcomem-devmobil%23readme)
+- [Advanced Angular](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/advanced-angular?home=MediaComem%2Fcomem-devmobil%23readme)
 
 ## Evaluation
 
