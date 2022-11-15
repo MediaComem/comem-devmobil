@@ -19,7 +19,6 @@ Learn about more advanced [Angular][angular] concept.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Custom attribute directives](#custom-attribute-directives)
   - [Using an attribute directive](#using-an-attribute-directive)
   - [Modifying the DOM](#modifying-the-dom)

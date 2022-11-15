@@ -20,7 +20,6 @@ Get introduced to an essential tool when working with Angular: the official CLI.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Why the need for a CLI?](#why-the-need-for-a-cli)
 - [Install the CLI](#install-the-cli)
 - [Create a new blank project](#create-a-new-blank-project)

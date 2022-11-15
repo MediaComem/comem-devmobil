@@ -24,7 +24,6 @@ which you should both read to gain a deeper understanding of Angular.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Getting started](#getting-started)
 - [Forms](#forms)
   - [HTML validations](#html-validations)

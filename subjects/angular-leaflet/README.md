@@ -15,13 +15,6 @@ How to integrate Leaflet in your angular application
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Geolocation](#geolocation)
-  - [Registering the Geolocation service with Angular](#registering-the-geolocation-service-with-angular)
-  - [Injecting the Geolocation service](#injecting-the-geolocation-service)
-  - [Getting the user's location](#getting-the-users-location)
-  - [Tracking the user's location](#tracking-the-users-location)
-  - [Allowing the brower to retrieve the user's location](#allowing-the-brower-to-retrieve-the-users-location)
-  - [Geolocation on insecure origins](#geolocation-on-insecure-origins)
 - [Leaflet](#leaflet)
   - [Importing Leaflet styles](#importing-leaflet-styles)
   - [Importing Leaflet assets](#importing-leaflet-assets)
@@ -35,11 +28,7 @@ How to integrate Leaflet in your angular application
     - [Adding a tooltip to a marker](#adding-a-tooltip-to-a-marker)
   - [Getting a reference to the map](#getting-a-reference-to-the-map)
   - [Listening to map events](#listening-to-map-events)
-- [Using your mobile device's camera](#using-your-mobile-devices-camera)
-  - [Injecting the camera service](#injecting-the-camera-service)
-  - [Taking a picture](#taking-a-picture)
-  - [Displaying the picture in the template](#displaying-the-picture-in-the-template)
-- [Resources](#resources)
+  - [Resources](#resources)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

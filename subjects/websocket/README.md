@@ -19,6 +19,7 @@ Learn how to connect and react to events from a WebSocket in your Angular applic
   - [Add listening capabilities to the Angular Service](#add-listening-capabilities-to-the-angular-service)
     - [`listen()` method](#listen-method)
     - [Listen on the component](#listen-on-the-component)
+    - [Type the message data](#type-the-message-data)
   - [Send messages](#send-messages)
     - [Sending messages on the service](#sending-messages-on-the-service)
     - [Sending messages from the component](#sending-messages-from-the-component)

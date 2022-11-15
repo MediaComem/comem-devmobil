@@ -18,7 +18,6 @@ and one of the three core technologies of the web.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Setup](#setup)
 - [What is JavaScript?](#what-is-javascript)
   - [JavaScript is still evolving](#javascript-is-still-evolving)
