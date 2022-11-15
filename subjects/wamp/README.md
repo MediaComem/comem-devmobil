@@ -6,7 +6,7 @@ Learn how to connect to a WAMP Brocker, and send/receive events on topics or cal
 
 **Recommended reading**
 
-* [WAMP (archioweb)](https://mediacomem.github.io/comem-archioweb/2019-2020/subjects/wamp/?home=MediaComem%2Fcomem-archioweb%23readme#1)
+* [WAMP (archioweb)](https://mediacomem.github.io/comem-archioweb/2022-2023/subjects/wamp/?home=MediaComem%2Fcomem-archioweb%23readme#1)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

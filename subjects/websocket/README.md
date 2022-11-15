@@ -6,7 +6,7 @@ Learn how to connect and react to events from a WebSocket in your Angular applic
 
 **Recommended reading**
 
-- [WebSocket (archioweb)](https://mediacomem.github.io/comem-archioweb/2019-2020/subjects/ws/?home=MediaComem%2Fcomem-archioweb%23readme#1)
+- [WebSocket (archioweb)](https://mediacomem.github.io/comem-archioweb/2022-2023/subjects/ws/?home=MediaComem%2Fcomem-archioweb%23readme#1)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->

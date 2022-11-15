@@ -1566,8 +1566,8 @@ Read the [documentation][angular-component-interaction] to learn more.
 [ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
 [js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 [rxjs]: http://reactivex.io/rxjs/
-[rxjs-subject]: https://mediacomem.github.io/comem-devmobil/latest/subjects/rxjs/?home=https%3A%2F%2Fmediacomem.github.io%2Fcomem-masrad-dfa%2Flatest
-[rxjs-subject-map]: https://mediacomem.github.io/comem-devmobil/latest/subjects/rxjs/#14
+[rxjs-subject]: ../rxjs/
+[rxjs-subject-map]: ../rxjs/#14
 [intro-to-reactive-programming]: https://gist.github.com/staltz/868e7e9bc2a7b8c1f754
 [angular-docs-http-client]: https://angular.io/guide/http
 [js-array-map]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
@@ -1578,7 +1578,7 @@ Read the [documentation][angular-component-interaction] to learn more.
 [angular-docs-output]: https://angular.io/api/core/Output
 [angular-component-interaction]: https://angular.io/guide/component-interaction
 [a-guide-to-web-components]: https://css-tricks.com/modular-future-web-components/
-[angular-cli]: https://mediacomem.github.io/comem-masrad-dfa/latest/subjects/angular-cli/
+[angular-cli]: ../angular-cli/
 [angular-api]: https://angular.io/api
 [angular-testing]: https://angular.io/guide/testing
 [angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
