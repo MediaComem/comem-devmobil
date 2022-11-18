@@ -64,15 +64,11 @@ This tutorial is a summary of some of the [TypeScript Handbook][typescript-handb
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-
-
 ## Types
 
 <!-- slide-front-matter class: center, middle -->
 
 Define interfaces between software components.
-
-
 
 ### Basic types
 
@@ -82,7 +78,7 @@ JavaScript variables are untyped:
 
 ```js
 // Statement Name  Value
-         let foo = 'bar';
+let foo = "bar";
 ```
 
 <!-- slide-column -->
@@ -91,7 +87,7 @@ In TypeScript, you can specifiy a type after the name and before the assignment:
 
 ```ts
 // Statement Name Type     Value
-         let foo: string = 'bar';
+let foo: string = "bar";
 ```
 
 <!-- slide-container -->
@@ -110,19 +106,17 @@ let digits: number[] = [ 1, 2, 3 ];
 let names: string[] = [ 'Alice', 'Bob' ];
 ```
 
-
-
 ### Type checking
 
 TypeScript will not compile code that attempts to use values of the wrong type:
 
 ```ts
 let value: number = 6;
-value = 'foo';
+value = "foo";
 //      ^^^^^ ERROR!
 //      Type '"foo"' is not assignable to type 'number'.
 
-let names: string[] = [ 'Alice', 'Bob' ];
+let names: string[] = ["Alice", "Bob"];
 names.push(42);
 //         ^^ ERROR!
 //         Argument of type '42' is not assignable to parameter of type 'string'.
@@ -135,10 +129,8 @@ value.yeehaw();
 
 In exchange for losing some of JavaScript's **flexibility**, you gain:
 
-* **Clarity:** explicit types help understand the code.
-* **Compile-time checking:** some errors can be identified when writing the code, rather than at runtime.
-
-
+- **Clarity:** explicit types help understand the code.
+- **Compile-time checking:** some errors can be identified when writing the code, rather than at runtime.
 
 ### Function parameter & return types
 
@@ -156,33 +148,32 @@ let fortyTwo: string = multiply(2, 21);
 //                     ^^^^^^^^^^^^^^^ ERROR!
 //                     Type 'number' is not assignable to type 'string'.
 
-let foo: number = multiply(2, 'bar');
+let foo: number = multiply(2, "bar");
 //                            ^^^^^ ERROR!
 //                            Argument of type '"bar"' is not assignable
 //                            to parameter of type 'number'.
 ```
 
-
-
 ### Function types
 
-You can also define the **type of a function** itself:
+You can also define the **type of a function signature** itself:
 
 ```ts
+// Only accept a function with two number params and returning a number value
 let mathOperation: (a: number, b: number) => number;
 
 // Addition
-mathOperation = function(a: number, b: number): number {
+mathOperation = function (a: number, b: number): number {
   return a + b;
 };
 
 // Multiplication
-mathOperation = function(a: number, b: number): number {
+mathOperation = function (a: number, b: number): number {
   return a * b;
 };
 
 // Wrong types
-mathOperation = function(foo: string): number {
+mathOperation = function (foo: string): number {
   return foo.length;
 };
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ERROR!
@@ -192,71 +183,22 @@ mathOperation = function(foo: string): number {
 // Type 'number' is not assignable to type 'string'.
 ```
 
-
-
 ### Type inference
 
 Even when you do not explicitly use types, TypeScript will attempt to **infer** the type of your variables:
 
 ```ts
 let done = false;
-done = 'YES';
+done = "YES";
 //     ^^^^^ ERROR!
 //     Type '"YES"' is not assignable to type 'boolean'.
 
-let values = [ 1, 2, 3 ];
-values.push('Bob');
+let values = [1, 2, 3];
+values.push("Bob");
 //          ^^^^^ ERROR!
 //          Argument of type '"Bob"' is not assignable
 //          to parameter of type 'number'.
 ```
-
-
-
-### Any
-
-The `any` type allows you to opt out of type checking for some variables:
-
-```ts
-let value: any = true;
-// No errors, like in standard JavaScript
-value = 42;
-value = 'Bob';
-```
-
-This is useful if you are using a third-party library, since you might not know a value's exact type.
-However, it completely **disables all checks** performed by TypeScript:
-
-```ts
-let value: any = 4;
-console.log(value.toString()); // "4"
-
-// Will compile, but this error will occur at runtime:
-// TypeError: n.yeehaw is not a function
-console.log(value.yeehaw());
-```
-
-You should **not** use `any` unless there's a very good reason to, as it makes you lose one of the major benefits of using TypeScript.
-
-#### Type assertions
-
-Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any`.
-
-In those cases, you'll want to tell Typescript what is the type of the variable.
-
-That's called **Type assertion** and there are two ways to achieve it:
-
-```ts
-let value: any = 'foo';
-
-// "Angle-bracket" syntax
-let upper: string = (<string>value).toUpperCase();
-
-// "As" syntax, which is the recommanded syntax
-let length: number = (value as string).length;
-```
-
-Again, you should **not** have to use this in most of your TypeScript code.
 
 ### Union types
 
@@ -265,7 +207,7 @@ A union type describes a value that can be of **one of several types**:
 ```ts
 let numeral: number | string = 42;
 // OK
-numeral = 'forty-two';
+numeral = "forty-two";
 ```
 
 But it will still complain when you try to use other types:
@@ -280,9 +222,9 @@ This can be useful, for example, when creating arrays that initially contain one
 but that will also contain other types later:
 
 ```ts
-let numerals: (string | number)[] = [ 1, 2, 3 ];
+let numerals: (string | number)[] = [1, 2, 3];
 // OK
-numerals.push('forty-two');
+numerals.push("forty-two");
 ```
 
 #### Type guards
@@ -299,11 +241,11 @@ function lower(value: string | number): string {
 }
 ```
 
-You can use a **type guard** to *narrow* a value to a specific type:
+You can use a **type guard** to _narrow_ a value to a specific type:
 
 ```ts
 function lower(value: string | number): string {
-  if (typeof(value) == 'string') {
+  if (typeof value == "string") {
     // In this block, TypeScript knows that "value" is a string
     return value.toLowerCase();
   } else {
@@ -313,11 +255,80 @@ function lower(value: string | number): string {
   }
 }
 
-console.log(lower('HEY'));  // "hey"
-console.log(lower(43));     // "42"
+console.log(lower("HEY")); // "hey"
+console.log(lower(43)); // "42"
 ```
 
+### Any
 
+The `any` type allows you to opt out of type checking for some variables:
+
+```ts
+let value: any = true;
+// No errors, like in standard JavaScript
+value = 42;
+value = "Bob";
+```
+
+This could be useful when are using untyped third-party libraries or when you might not know a value's exact type.
+
+However, it completely **disables all checks** performed by TypeScript:
+
+```ts
+let value: any = 4;
+console.log(value.toString()); // "4"
+
+// Will compile, but this error will occur at runtime:
+// TypeError: n.yeehaw is not a function
+console.log(value.yeehaw());
+```
+
+> You should **not** use `any` unless there's a **very good reason** to (which is probably not the case),
+> as it makes you lose one of the major benefits of using TypeScript.
+
+### Unknown
+
+The `unknown` type is similar to `any` as it tells the compiler that you **don't know the actual type of a value**.
+
+It's a safer option than `any`, though, because TypeScript won't **allow you to do anything** with the value until
+you used a **type guard** to narrow its potential types.
+
+```ts
+const someValue: unknown = getValueFromSomewhere();
+
+someValue.toLowerCase();
+//        ^^^^^^^^^^ ERROR!
+//        Object is of unknown type
+
+if (typeof someValue === "string") {
+  // TypeScript is now sure that someValue is a String
+  someValue.toLowerCase();
+}
+```
+
+> Having to check for the actual type might seem like a downside, but it's actually the safer way to prevent run time errors.
+
+#### Type assertions
+
+Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any` or `unknown`.
+
+In those cases, you'll want to tell Typescript what is the type of the variable.
+
+That's called **Type assertion** and there are two ways to achieve it:
+
+```ts
+// Any typed value
+const value: any = "foo";
+
+const length: number = (value as string).length;
+
+// Unknown typed value
+const someValue: unknown = getValueFromSomewhere();
+
+const lowerCased: string = (someValue as string).toLowerCase();
+```
+
+Again, you should **not** have to use this in most of your TypeScript code.
 
 ### Enums
 
@@ -328,7 +339,7 @@ enum Direction {
   North,
   East,
   South,
-  West
+  West,
 }
 
 // Variables can use the enum as a type.
@@ -339,13 +350,11 @@ value = Direction.North;
 
 // Check whether a value is one of the enum's values.
 if (value === Direction.South) {
-  console.log('Going south');
+  console.log("Going south");
 } else {
-  console.log('Not going south'); // "Not going south"
+  console.log("Not going south"); // "Not going south"
 }
 ```
-
-
 
 ### Void
 
@@ -362,8 +371,6 @@ let foo: string = warnUser();
 //                Type 'void' is not assignable to type 'string'.
 ```
 
-
-
 ### Type aliases
 
 Type aliases create a **new name for a type**.
@@ -373,38 +380,35 @@ They can be used to "rename" primitives, unions, tuples, and any other types tha
 type GitHash = string;
 type StringOrNumber = string | number;
 
-let hash: GitHash = '9e91aa6c05f96251c20507f9068d177019af2742';
+let hash: GitHash = "9e91aa6c05f96251c20507f9068d177019af2742";
 
-let value: StringOrNumber = 'foo';
+let value: StringOrNumber = "foo";
 value = 42;
 ```
 
 Aliasing doesn’t actually create a new type—it creates a new name to refer to that type.
 It can be used as a form of documentation, e.g. to improve readability.
 
-
-
 ## Functions
 
 <!-- slide-front-matter class: center, middle -->
 
-How to *do* things.
-
-
+How to _do_ things.
 
 ### Mandatory parameters
 
 In TypeScript, every function parameter is assumed to be required by the function.
-You can pass `null` or `undefined`, but the compiler will check that you have provided the correct number of parameters.
+
+The compiler will check that you have provided the correct number of parameters.
 
 ```ts
 function buildName(firstName: string, lastName: string): string {
-    return firstName + " " + lastName;
+  return \`${firstName} ${lastName}`;
 }
 
 let result1 = buildName("Bob");
 //                      ^^^^^ ERROR!
-//                      Expected 2 arguments, but got 1.
+//                      No arguments for "lastName".
 
 let result2 = buildName("Bob", "Adams", "Sr.");
 //                      ^^^^^ ERROR!
@@ -412,13 +416,7 @@ let result2 = buildName("Bob", "Adams", "Sr.");
 
 let result3 = buildName("Bob", "Adams");
 console.log(result3); // "Bob Adams"
-
-// You can also give null or undefined:
-let result4 = buildName("Bob", null);
-console.log(result4); // "Bob null"
 ```
-
-
 
 ### Optional parameters
 
@@ -426,35 +424,31 @@ In JavaScript, every parameter is optional, and their value is `undefined` if no
 
 ```js
 function buildName(firstName, lastName) {
-  return [ firstName, lastName ].filter(value => value !== undefined).join(' ');
+  return [firstName, lastName].filter((value) => value !== undefined).join(" ");
 }
 
-console.log(buildName('John'));         // "John"
-console.log(buildName('John', 'Doe'));  // "John Doe"
+console.log(buildName("John")); // "John"
+console.log(buildName("John", "Doe")); // "John Doe"
 ```
 
 You can obtain the same result in TypeScript by adding an **interrogation mark** to the end of parameters you want to be optional:
 
 ```ts
 function buildName(firstName: string, lastName?: string): string {
-  return [ firstName, lastName ].filter(value => value !== undefined).join(' ');
+  return [firstName, lastName].filter((value) => value !== undefined).join(" ");
 }
 
-console.log(buildName('John'));         // "John"
-console.log(buildName('John', 'Doe'));  // "John Doe"
+console.log(buildName("John")); // "John"
+console.log(buildName("John", "Doe")); // "John Doe"
 ```
 
-Any optional parameter must **follow** required parameters.
-
-
+Any optional parameter must be declared **after** required parameters.
 
 ## Classes
 
 <!-- slide-front-matter class: center, middle -->
 
 Object-oriented TypeScript.
-
-
 
 ### Class types
 
@@ -482,8 +476,6 @@ let greeter = new Greeter('World');
 greeter.greet(); // "Hello World!"
 ```
 
-
-
 ### Accessibility modifiers
 
 The `private`, `protected` and `public` accessibility modifiers can be used in TypeScript classes to restrict access to fields or methods.
@@ -497,7 +489,7 @@ class Animal {
   }
 }
 
-new Animal('Cat').name; // "Cat"
+new Animal("Cat").name; // "Cat"
 ```
 
 The following class definition, with the `public` modifier added to the `name` field, is **equivalent** and behaves the same:
@@ -517,7 +509,6 @@ When a field or method is marked `private`, it cannot be accessed from outside o
 
 ```ts
 class Animal {
-
   private name: string;
 
   constructor(name: string) {
@@ -529,12 +520,12 @@ class Animal {
   }
 }
 
-new Animal('Cat').name;
+new Animal("Cat").name;
 //                ^^^^ ERROR!
 //                Property 'name' is private and
 //                only accessible within class 'Animal'.
 
-new Animal('Cat').getName();
+new Animal("Cat").getName();
 //                ^^^^^^^ ERROR!
 //                Property 'getName' is private and
 //                only accessible within class 'Animal'.
@@ -585,8 +576,8 @@ class Animal {
   }
 }
 
-let cat = new Animal('Cat');
-cat.name = 'Dog';
+let cat = new Animal("Cat");
+cat.name = "Dog";
 //  ^^^^ ERROR!
 //  Cannot assign to 'name' because it is a constant or a read-only property.
 ```
@@ -615,12 +606,9 @@ The following code is **equivalent** to the previous example:
 
 ```ts
 class Animal {
-  constructor(private name: string, readonly age: number) {
-  }
+  constructor(private name: string, readonly age: number) {}
 }
 ```
-
-
 
 ### Abstract classes
 
@@ -689,15 +677,11 @@ const animal = new Animal();
 //             Cannot create an instance of the abstract class 'Animal'.
 ```
 
-
-
 ## Interfaces
 
 <!-- slide-front-matter class: center, middle -->
 
 A powerful way of defining contracts within your code.
-
-
 
 ### Defining an interface
 
@@ -718,15 +702,15 @@ printLabel(value); // "Size 10 Object"
 
 TypeScript will check that when `printLabel` is called, its parameter has a `label` property of type `string`.
 
-Notice that the object in this example has *more properties*,
-but the compiler only checks that **at least** the ones required are present and match the required types.
+> Notice that the object in this example has _more properties_,
+> but the compiler only checks that **at least** the ones required are present and match the required types.
 
 #### Interface checks
 
 If you try to pass an object which does not match the interface, TypeScript will refuse to compile the code:
 
 ```ts
-let invalidValue = { size: 185, name: 'Bob' };
+let invalidValue = { size: 185, name: "Bob" };
 printLabel(invalidValue);
 //         ^^^^^^^^^^^^ ERROR!
 //         Argument of type '{ size: number; name: string; }'
@@ -742,8 +726,6 @@ printLabel(invalidValue);
 //         Type 'boolean' is not assignable to type 'string'.
 ```
 
-
-
 ### Optional properties
 
 Much like with function parameters, you can mark some properties of an interface as **optional** by adding an **interrogation mark** after the property name.
@@ -756,8 +738,8 @@ interface SquareConfig {
   width?: number;
 }
 
-function createSquare(config: SquareConfig): {color: string; area: number} {
-  const newSquare = {color: "white", area: 100};
+function createSquare(config: SquareConfig): { color: string; area: number } {
+  const newSquare = { color: "white", area: 100 };
   if (config.color) {
     newSquare.color = config.color;
   }
@@ -770,14 +752,13 @@ function createSquare(config: SquareConfig): {color: string; area: number} {
 let square = createSquare({ color: "black" }); // OK, the width is optional
 ```
 
-
-
 ### Interface functions
 
 An interface is also capable of describing that an object must have a specific function:
 
 ```ts
 interface Greeter {
+  type: string;
   greet(name: string): string;
 }
 
@@ -785,17 +766,17 @@ let value: Greeter;
 
 // OK, this object has a "greet" function.
 value = {
-  greet: (name: string) => \`Hi ${name}!`
+  type: 'Greeter',
+  greet: (name: string) => \`Hi ${name}!`,
 };
 
-console.log(value.greet('Bob')); // "Hi Bob!"
+console.log(value.greet("Bob")); // "Hi Bob!"
 
 // Not OK.
-value = { foo: 'bar' };
-//      ^^^^^^^^^^^^^^ ERROR!
-//      Type '{ foo: string; }' is not assignable to type 'Greeter'.
-//      Object literal may only specify known properties,
-//      and 'foo' does not exist in type 'Greeter'.
+value = { type: "bar" };
+//^^^ ERROR!
+// Property 'greet' is missing in type '{ type: string; }'
+// but required in type 'Greeter'.
 ```
 
 #### Classes implementing interfaces
@@ -829,8 +810,6 @@ class Dog implements Greeter {
 // Property 'greet' is missing in type 'Dog'.
 ```
 
-
-
 ### Extending interfaces
 
 Like classes, interfaces can **extend** each other.
@@ -848,20 +827,16 @@ interface Square extends Shape {
 let square: Square;
 
 square = {
-  color: 'blue',
-  sideLength: 10
+  color: "blue",
+  sideLength: 10,
 };
 ```
-
-
 
 ## Generics
 
 <!-- slide-front-matter class: center, middle -->
 
 Work on the data of today as well as the data of tomorrow.
-
-
 
 ### Generic functions
 
@@ -895,8 +870,8 @@ function logAndReturnValue(arg: `any`): `any` {
   return arg;
 }
 
-const n = logAndReturnValue(42);       // 42
-const s = logAndReturnValue('Hello');  // Hello
+const n = logAndReturnValue(42); // 42
+const s = logAndReturnValue("Hello"); // Hello
 
 console.log(s.toUpperCase());
 
@@ -933,8 +908,6 @@ This allows us to use the function's **input type** to describe its **output typ
 The function is now **generic**.
 It works over a range of types, **without losing the type information** of its return value.
 
-
-
 ### Generic type syntax
 
 You may name the **type variable** however you want.
@@ -956,8 +929,6 @@ function logAndReturnFirst`<T, U>`(arg1: `T`, arg2: `U`): `T` {
   return arg1;
 }
 ```
-
-
 
 ### Generic type argument inference
 
@@ -985,8 +956,6 @@ console.log(n.toUpperCase());
 ```
 
 However, in some cases it may improve the **readability** of your code to explicity specify the type.
-
-
 
 ### Generic classes & interfaces
 
@@ -1019,8 +988,6 @@ And on **interfaces**:
   logValueAndReturn(arg: `T`): `T`;
 }
 ```
-
-
 
 ### Generic constraints
 
@@ -1069,15 +1036,11 @@ logLengthAndReturn(42);
 // Argument of type '42' is not assignable to parameter of type 'WithLength'.
 ```
 
-
-
 ## Decorators
 
 <!-- slide-front-matter class: center, middle -->
 
 Modify existing classes.
-
-
 
 ### What is a decorator?
 
