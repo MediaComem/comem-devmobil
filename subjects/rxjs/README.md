@@ -412,7 +412,7 @@ The RxJS library provides you with utility to convert Promise-based logic to Obs
 
 **Promise to Observable**
 
-Use the `from(...)` function to create an `Observable` from a `Promise`:
+Use the [`from(...)`](https://rxjs-dev.firebaseapp.com/api/index/function/from) function to create an `Observable` from a `Promise`:
 
 ```js
 const promise = Promise.resolve("World");
@@ -422,10 +422,10 @@ const promise = Promise.resolve("World");
 
 **Observable to Promise**
 
-Use the `toPromise()` method of an `Observable` to create a `Promise` out of it:
+Use the [`firstValueFrom()`](https://rxjs-dev.firebaseapp.com/api/index/function/firstValueFrom) function to create a `Promise` out of an `Observable`:
 
 ```js
-const promise = someObserable$.toPromise();
+const promise = `firstValueFrom(someObserable$)`;
 promise.then(/* ... */);
 ```
 
