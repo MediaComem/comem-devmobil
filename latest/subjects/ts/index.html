@@ -3,7 +3,7 @@
   <head>
     <title>TypeScript (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/83216166380c02218847f6bb8a3def889dba4dc4/subjects/ts/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/c63d475274fbf95db94811bd552c8b5050cd4d43/subjects/ts/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -28,8 +28,6 @@ This material is part of the [mobile development course](https://github.com/Medi
 
 
 
-
-
 ---
 class: center, middle
 ## Types
@@ -39,8 +37,6 @@ class: center, middle
 
 
 Define interfaces between software components.
-
-
 
 ---
 ### Basic types
@@ -53,7 +49,7 @@ JavaScript variables are untyped:
 
 ```js
 // Statement Name  Value
-         let foo = 'bar';
+let foo = "bar";
 ```
 
 
@@ -64,7 +60,7 @@ In TypeScript, you can specifiy a type after the name and before the assignment:
 
 ```ts
 // Statement Name Type     Value
-         let foo: string = 'bar';
+let foo: string = "bar";
 ```
 
 
@@ -86,8 +82,6 @@ let names: string[] = [ 'Alice', 'Bob' ];
 ```
 
 
-
-
 ]
 ---
 ### Type checking
@@ -98,11 +92,11 @@ TypeScript will not compile code that attempts to use values of the wrong type:
 
 ```ts
 let value: number = 6;
-value = 'foo';
+value = "foo";
 //      ^^^^^ ERROR!
 //      Type '"foo"' is not assignable to type 'number'.
 
-let names: string[] = [ 'Alice', 'Bob' ];
+let names: string[] = ["Alice", "Bob"];
 names.push(42);
 //         ^^ ERROR!
 //         Argument of type '42' is not assignable to parameter of type 'string'.
@@ -115,10 +109,8 @@ value.yeehaw();
 
 In exchange for losing some of JavaScript's **flexibility**, you gain:
 
-* **Clarity:** explicit types help understand the code.
-* **Compile-time checking:** some errors can be identified when writing the code, rather than at runtime.
-
-
+- **Clarity:** explicit types help understand the code.
+- **Compile-time checking:** some errors can be identified when writing the code, rather than at runtime.
 
 ---
 ### Function parameter & return types
@@ -139,36 +131,35 @@ let fortyTwo: string = multiply(2, 21);
 //                     ^^^^^^^^^^^^^^^ ERROR!
 //                     Type 'number' is not assignable to type 'string'.
 
-let foo: number = multiply(2, 'bar');
+let foo: number = multiply(2, "bar");
 //                            ^^^^^ ERROR!
 //                            Argument of type '"bar"' is not assignable
 //                            to parameter of type 'number'.
 ```
-
-
 
 ---
 ### Function types
 
 .breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
 
-You can also define the **type of a function** itself:
+You can also define the **type of a function signature** itself:
 
 ```ts
+// Only accept a function with two number params and returning a number value
 let mathOperation: (a: number, b: number) => number;
 
 // Addition
-mathOperation = function(a: number, b: number): number {
+mathOperation = function (a: number, b: number): number {
   return a + b;
 };
 
 // Multiplication
-mathOperation = function(a: number, b: number): number {
+mathOperation = function (a: number, b: number): number {
   return a * b;
 };
 
 // Wrong types
-mathOperation = function(foo: string): number {
+mathOperation = function (foo: string): number {
   return foo.length;
 };
 //              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ERROR!
@@ -177,8 +168,6 @@ mathOperation = function(foo: string): number {
 // Types of parameters 'foo' and 'a' are incompatible.
 // Type 'number' is not assignable to type 'string'.
 ```
-
-
 
 ---
 ### Type inference
@@ -189,69 +178,16 @@ Even when you do not explicitly use types, TypeScript will attempt to **infer** 
 
 ```ts
 let done = false;
-done = 'YES';
+done = "YES";
 //     ^^^^^ ERROR!
 //     Type '"YES"' is not assignable to type 'boolean'.
 
-let values = [ 1, 2, 3 ];
-values.push('Bob');
+let values = [1, 2, 3];
+values.push("Bob");
 //          ^^^^^ ERROR!
 //          Argument of type '"Bob"' is not assignable
 //          to parameter of type 'number'.
 ```
-
-
-
----
-### Any
-
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
-
-The `any` type allows you to opt out of type checking for some variables:
-
-```ts
-let value: any = true;
-// No errors, like in standard JavaScript
-value = 42;
-value = 'Bob';
-```
-
-This is useful if you are using a third-party library, since you might not know a value's exact type.
-However, it completely **disables all checks** performed by TypeScript:
-
-```ts
-let value: any = 4;
-console.log(value.toString()); // "4"
-
-// Will compile, but this error will occur at runtime:
-// TypeError: n.yeehaw is not a function
-console.log(value.yeehaw());
-```
-
-You should **not** use `any` unless there's a very good reason to, as it makes you lose one of the major benefits of using TypeScript.
-
----
-#### Type assertions
-
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#9">Any</a>]
-
-Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any`.
-
-In those cases, you'll want to tell Typescript what is the type of the variable.
-
-That's called **Type assertion** and there are two ways to achieve it:
-
-```ts
-let value: any = 'foo';
-
-// "Angle-bracket" syntax
-let upper: string = (<string>value).toUpperCase();
-
-// "As" syntax, which is the recommanded syntax
-let length: number = (value as string).length;
-```
-
-Again, you should **not** have to use this in most of your TypeScript code.
 
 ---
 ### Union types
@@ -263,7 +199,7 @@ A union type describes a value that can be of **one of several types**:
 ```ts
 let numeral: number | string = 42;
 // OK
-numeral = 'forty-two';
+numeral = "forty-two";
 ```
 
 But it will still complain when you try to use other types:
@@ -278,15 +214,15 @@ This can be useful, for example, when creating arrays that initially contain one
 but that will also contain other types later:
 
 ```ts
-let numerals: (string | number)[] = [ 1, 2, 3 ];
+let numerals: (string | number)[] = [1, 2, 3];
 // OK
-numerals.push('forty-two');
+numerals.push("forty-two");
 ```
 
 ---
 #### Type guards
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#11">Union types</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#9">Union types</a>]
 
 Sometimes you will have a function parameter that can be of one type or another.
 TypeScript cannot know which type the value is if you do not check:
@@ -300,11 +236,11 @@ function lower(value: string | number): string {
 }
 ```
 
-You can use a **type guard** to *narrow* a value to a specific type:
+You can use a **type guard** to _narrow_ a value to a specific type:
 
 ```ts
 function lower(value: string | number): string {
-  if (typeof(value) == 'string') {
+  if (typeof value == "string") {
     // In this block, TypeScript knows that "value" is a string
     return value.toLowerCase();
   } else {
@@ -314,11 +250,89 @@ function lower(value: string | number): string {
   }
 }
 
-console.log(lower('HEY'));  // "hey"
-console.log(lower(43));     // "42"
+console.log(lower("HEY")); // "hey"
+console.log(lower(43)); // "42"
 ```
 
+---
+### Any
 
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
+
+The `any` type allows you to opt out of type checking for some variables:
+
+```ts
+let value: any = true;
+// No errors, like in standard JavaScript
+value = 42;
+value = "Bob";
+```
+
+This could be useful when are using untyped third-party libraries or when you might not know a value's exact type.
+
+However, it completely **disables all checks** performed by TypeScript:
+
+```ts
+let value: any = 4;
+console.log(value.toString()); // "4"
+
+// Will compile, but this error will occur at runtime:
+// TypeError: n.yeehaw is not a function
+console.log(value.yeehaw());
+```
+
+> You should **not** use `any` unless there's a **very good reason** to (which is probably not the case),
+> as it makes you lose one of the major benefits of using TypeScript.
+
+---
+### Unknown
+
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a>]
+
+The `unknown` type is similar to `any` as it tells the compiler that you **don't know the actual type of a value**.
+
+It's a safer option than `any`, though, because TypeScript won't **allow you to do anything** with the value until
+you used a **type guard** to narrow its potential types.
+
+```ts
+const someValue: unknown = getValueFromSomewhere();
+
+someValue.toLowerCase();
+//        ^^^^^^^^^^ ERROR!
+//        Object is of unknown type
+
+if (typeof someValue === "string") {
+  // TypeScript is now sure that someValue is a String
+  someValue.toLowerCase();
+}
+```
+
+> Having to check for the actual type might seem like a downside, but it's actually the safer way to prevent run time errors.
+
+---
+#### Type assertions
+
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#3">Types</a> > <a href="#12">Unknown</a>]
+
+Sometimes you will know what type a value is when TypeScript doesn't, typically with a variable of type `any` or `unknown`.
+
+In those cases, you'll want to tell Typescript what is the type of the variable.
+
+That's called **Type assertion** and there are two ways to achieve it:
+
+```ts
+// Any typed value
+const value: any = "foo";
+
+const length: number = (value as string).length;
+
+// Unknown typed value
+const someValue: unknown = getValueFromSomewhere();
+
+const lowerCased: string = (someValue as string).toLowerCase();
+```
+
+Again, you should **not** have to use this in most of your TypeScript code.
 
 ---
 ### Enums
@@ -332,7 +346,7 @@ enum Direction {
   North,
   East,
   South,
-  West
+  West,
 }
 
 // Variables can use the enum as a type.
@@ -343,13 +357,11 @@ value = Direction.North;
 
 // Check whether a value is one of the enum's values.
 if (value === Direction.South) {
-  console.log('Going south');
+  console.log("Going south");
 } else {
-  console.log('Not going south'); // "Not going south"
+  console.log("Not going south"); // "Not going south"
 }
 ```
-
-
 
 ---
 ### Void
@@ -369,8 +381,6 @@ let foo: string = warnUser();
 //                Type 'void' is not assignable to type 'string'.
 ```
 
-
-
 ---
 ### Type aliases
 
@@ -383,16 +393,14 @@ They can be used to "rename" primitives, unions, tuples, and any other types tha
 type GitHash = string;
 type StringOrNumber = string | number;
 
-let hash: GitHash = '9e91aa6c05f96251c20507f9068d177019af2742';
+let hash: GitHash = "9e91aa6c05f96251c20507f9068d177019af2742";
 
-let value: StringOrNumber = 'foo';
+let value: StringOrNumber = "foo";
 value = 42;
 ```
 
 Aliasing doesn’t actually create a new type—it creates a new name to refer to that type.
 It can be used as a form of documentation, e.g. to improve readability.
-
-
 
 ---
 class: center, middle
@@ -402,26 +410,25 @@ class: center, middle
 
 
 
-How to *do* things.
-
-
+How to _do_ things.
 
 ---
 ### Mandatory parameters
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#16">Functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#17">Functions</a>]
 
 In TypeScript, every function parameter is assumed to be required by the function.
-You can pass `null` or `undefined`, but the compiler will check that you have provided the correct number of parameters.
+
+The compiler will check that you have provided the correct number of parameters.
 
 ```ts
 function buildName(firstName: string, lastName: string): string {
-    return firstName + " " + lastName;
+  return \`${firstName} ${lastName}`;
 }
 
 let result1 = buildName("Bob");
 //                      ^^^^^ ERROR!
-//                      Expected 2 arguments, but got 1.
+//                      No arguments for "lastName".
 
 let result2 = buildName("Bob", "Adams", "Sr.");
 //                      ^^^^^ ERROR!
@@ -429,44 +436,36 @@ let result2 = buildName("Bob", "Adams", "Sr.");
 
 let result3 = buildName("Bob", "Adams");
 console.log(result3); // "Bob Adams"
-
-// You can also give null or undefined:
-let result4 = buildName("Bob", null);
-console.log(result4); // "Bob null"
 ```
-
-
 
 ---
 ### Optional parameters
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#16">Functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#17">Functions</a>]
 
 In JavaScript, every parameter is optional, and their value is `undefined` if not provided:
 
 ```js
 function buildName(firstName, lastName) {
-  return [ firstName, lastName ].filter(value => value !== undefined).join(' ');
+  return [firstName, lastName].filter((value) => value !== undefined).join(" ");
 }
 
-console.log(buildName('John'));         // "John"
-console.log(buildName('John', 'Doe'));  // "John Doe"
+console.log(buildName("John")); // "John"
+console.log(buildName("John", "Doe")); // "John Doe"
 ```
 
 You can obtain the same result in TypeScript by adding an **interrogation mark** to the end of parameters you want to be optional:
 
 ```ts
 function buildName(firstName: string, lastName?: string): string {
-  return [ firstName, lastName ].filter(value => value !== undefined).join(' ');
+  return [firstName, lastName].filter((value) => value !== undefined).join(" ");
 }
 
-console.log(buildName('John'));         // "John"
-console.log(buildName('John', 'Doe'));  // "John Doe"
+console.log(buildName("John")); // "John"
+console.log(buildName("John", "Doe")); // "John Doe"
 ```
 
-Any optional parameter must **follow** required parameters.
-
-
+Any optional parameter must be declared **after** required parameters.
 
 ---
 class: center, middle
@@ -478,12 +477,10 @@ class: center, middle
 
 Object-oriented TypeScript.
 
-
-
 ---
 ### Class types
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a>]
 
 TypeScript extends the JavaScript classes available since ECMAScript 6.
 You can use types in them as well:
@@ -509,12 +506,10 @@ let greeter = new Greeter('World');
 greeter.greet(); // "Hello World!"
 ```
 
-
-
 ---
 ### Accessibility modifiers
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a>]
 
 The `private`, `protected` and `public` accessibility modifiers can be used in TypeScript classes to restrict access to fields or methods.
 By default, a field or method is always `public`:
@@ -527,7 +522,7 @@ class Animal {
   }
 }
 
-new Animal('Cat').name; // "Cat"
+new Animal("Cat").name; // "Cat"
 ```
 
 The following class definition, with the `public` modifier added to the `name` field, is **equivalent** and behaves the same:
@@ -544,13 +539,12 @@ class Animal {
 ---
 #### Private
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#22">Accessibility modifiers</a>]
 
 When a field or method is marked `private`, it cannot be accessed from outside of its containing class:
 
 ```ts
 class Animal {
-
   private name: string;
 
   constructor(name: string) {
@@ -562,12 +556,12 @@ class Animal {
   }
 }
 
-new Animal('Cat').name;
+new Animal("Cat").name;
 //                ^^^^ ERROR!
 //                Property 'name' is private and
 //                only accessible within class 'Animal'.
 
-new Animal('Cat').getName();
+new Animal("Cat").getName();
 //                ^^^^^^^ ERROR!
 //                Property 'getName' is private and
 //                only accessible within class 'Animal'.
@@ -576,7 +570,7 @@ new Animal('Cat').getName();
 ---
 #### Protected
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#22">Accessibility modifiers</a>]
 
 A field or method marked `protected` behaves like one marked `private`,
 with the exception that it **can** be accessed from within a **sub-class**:
@@ -610,7 +604,7 @@ console.log(cat.name);
 ---
 #### Read-only
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#22">Accessibility modifiers</a>]
 
 The `readonly` modifier forces a field to be initialized at its declaration or in the constructor.
 It cannot be modified later:
@@ -624,8 +618,8 @@ class Animal {
   }
 }
 
-let cat = new Animal('Cat');
-cat.name = 'Dog';
+let cat = new Animal("Cat");
+cat.name = "Dog";
 //  ^^^^ ERROR!
 //  Cannot assign to 'name' because it is a constant or a read-only property.
 ```
@@ -633,7 +627,7 @@ cat.name = 'Dog';
 ---
 #### Parameter properties
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#21">Accessibility modifiers</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#22">Accessibility modifiers</a>]
 
 It is a common pattern to have a field with an accessibility modifier
 and to set the value of that field directly from a constructor parameter:
@@ -657,17 +651,14 @@ The following code is **equivalent** to the previous example:
 
 ```ts
 class Animal {
-  constructor(private name: string, readonly age: number) {
-  }
+  constructor(private name: string, readonly age: number) {}
 }
 ```
-
-
 
 ---
 ### Abstract classes
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a>]
 
 Abstract classes are base classes from which other classes may be derived.
 
@@ -696,7 +687,7 @@ cat.cry(); // "I sound like this: Meow"
 ---
 #### Abstract methods
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#26">Abstract classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#27">Abstract classes</a>]
 
 A non-abstract class extending an abstract class **must implement all its abstract methods**:
 
@@ -722,7 +713,7 @@ class Dog extends Animal {
 ---
 #### Abstract classes cannot be instantiated
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#19">Classes</a> > <a href="#26">Abstract classes</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#20">Classes</a> > <a href="#27">Abstract classes</a>]
 
 An abstract class **cannot be instantiated directly**:
 
@@ -740,8 +731,6 @@ const animal = new Animal();
 //             Cannot create an instance of the abstract class 'Animal'.
 ```
 
-
-
 ---
 class: center, middle
 ## Interfaces
@@ -752,12 +741,10 @@ class: center, middle
 
 A powerful way of defining contracts within your code.
 
-
-
 ---
 ### Defining an interface
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a>]
 
 Here's a simple example:
 
@@ -776,18 +763,18 @@ printLabel(value); // "Size 10 Object"
 
 TypeScript will check that when `printLabel` is called, its parameter has a `label` property of type `string`.
 
-Notice that the object in this example has *more properties*,
-but the compiler only checks that **at least** the ones required are present and match the required types.
+> Notice that the object in this example has _more properties_,
+> but the compiler only checks that **at least** the ones required are present and match the required types.
 
 ---
 #### Interface checks
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a> > <a href="#30">Defining an interface</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a> > <a href="#31">Defining an interface</a>]
 
 If you try to pass an object which does not match the interface, TypeScript will refuse to compile the code:
 
 ```ts
-let invalidValue = { size: 185, name: 'Bob' };
+let invalidValue = { size: 185, name: "Bob" };
 printLabel(invalidValue);
 //         ^^^^^^^^^^^^ ERROR!
 //         Argument of type '{ size: number; name: string; }'
@@ -803,12 +790,10 @@ printLabel(invalidValue);
 //         Type 'boolean' is not assignable to type 'string'.
 ```
 
-
-
 ---
 ### Optional properties
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a>]
 
 Much like with function parameters, you can mark some properties of an interface as **optional** by adding an **interrogation mark** after the property name.
 
@@ -820,8 +805,8 @@ interface SquareConfig {
   width?: number;
 }
 
-function createSquare(config: SquareConfig): {color: string; area: number} {
-  const newSquare = {color: "white", area: 100};
+function createSquare(config: SquareConfig): { color: string; area: number } {
+  const newSquare = { color: "white", area: 100 };
   if (config.color) {
     newSquare.color = config.color;
   }
@@ -834,17 +819,16 @@ function createSquare(config: SquareConfig): {color: string; area: number} {
 let square = createSquare({ color: "black" }); // OK, the width is optional
 ```
 
-
-
 ---
 ### Interface functions
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a>]
 
 An interface is also capable of describing that an object must have a specific function:
 
 ```ts
 interface Greeter {
+  type: string;
   greet(name: string): string;
 }
 
@@ -852,23 +836,23 @@ let value: Greeter;
 
 // OK, this object has a "greet" function.
 value = {
-  greet: (name: string) => \`Hi ${name}!`
+  type: 'Greeter',
+  greet: (name: string) => \`Hi ${name}!`,
 };
 
-console.log(value.greet('Bob')); // "Hi Bob!"
+console.log(value.greet("Bob")); // "Hi Bob!"
 
 // Not OK.
-value = { foo: 'bar' };
-//      ^^^^^^^^^^^^^^ ERROR!
-//      Type '{ foo: string; }' is not assignable to type 'Greeter'.
-//      Object literal may only specify known properties,
-//      and 'foo' does not exist in type 'Greeter'.
+value = { type: "bar" };
+//^^^ ERROR!
+// Property 'greet' is missing in type '{ type: string; }'
+// but required in type 'Greeter'.
 ```
 
 ---
 #### Classes implementing interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a> > <a href="#33">Interface functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a> > <a href="#34">Interface functions</a>]
 
 Classes which implement this interface **must** have a `greet` method:
 
@@ -899,12 +883,10 @@ class Dog implements Greeter {
 // Property 'greet' is missing in type 'Dog'.
 ```
 
-
-
 ---
 ### Extending interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#29">Interfaces</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#30">Interfaces</a>]
 
 Like classes, interfaces can **extend** each other.
 This allows you to copy the properties and functions of one interface into another:
@@ -921,12 +903,10 @@ interface Square extends Shape {
 let square: Square;
 
 square = {
-  color: 'blue',
-  sideLength: 10
+  color: "blue",
+  sideLength: 10,
 };
 ```
-
-
 
 ---
 class: center, middle
@@ -938,12 +918,10 @@ class: center, middle
 
 Work on the data of today as well as the data of tomorrow.
 
-
-
 ---
 ### Generic functions
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a>]
 
 Let's take a look at this logging function which logs the specified value and returns it:
 
@@ -968,7 +946,7 @@ because then TypeScript won't let us use properties or methods that should not b
 ---
 #### Pseudo-generic function with `any`
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#37">Generic functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a> > <a href="#38">Generic functions</a>]
 
 You could rewrite the function using the `any` type:
 
@@ -978,8 +956,8 @@ function logAndReturnValue(arg: `any`): `any` {
   return arg;
 }
 
-const n = logAndReturnValue(42);       // 42
-const s = logAndReturnValue('Hello');  // Hello
+const n = logAndReturnValue(42); // 42
+const s = logAndReturnValue("Hello"); // Hello
 
 console.log(s.toUpperCase());
 
@@ -994,7 +972,7 @@ but you **lose the information** about **what type of value** the function **ret
 ---
 #### Using generics in a function
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#37">Generic functions</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a> > <a href="#38">Generic functions</a>]
 
 Instead, we need a way of **capturing the type** of the argument in such a way that we can also use it to denote what is being returned:
 
@@ -1019,12 +997,10 @@ This allows us to use the function's **input type** to describe its **output typ
 The function is now **generic**.
 It works over a range of types, **without losing the type information** of its return value.
 
-
-
 ---
 ### Generic type syntax
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a>]
 
 You may name the **type variable** however you want.
 It's often named `T` when there is only one, but that's not mandatory:
@@ -1046,12 +1022,10 @@ function logAndReturnFirst`<T, U>`(arg1: `T`, arg2: `U`): `T` {
 }
 ```
 
-
-
 ---
 ### Generic type argument inference
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a>]
 
 You may have noticed that we specified the **input type** of the generic function **when calling it**:
 
@@ -1078,12 +1052,10 @@ console.log(n.toUpperCase());
 
 However, in some cases it may improve the **readability** of your code to explicity specify the type.
 
-
-
 ---
 ### Generic classes & interfaces
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a>]
 
 Generic type arguments can also be used on **classes**:
 
@@ -1115,12 +1087,10 @@ And on **interfaces**:
 }
 ```
 
-
-
 ---
 ### Generic constraints
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a>]
 
 What if we wanted to create a generic logging function that logs an object's **length**.
 It should work with **any type of object that has a length**, such as an **array** or **string**.
@@ -1140,7 +1110,7 @@ TypeScript will refuse to compile the function, because `T` could be **any type*
 ---
 #### Adding a generic type argument constraint
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#36">Generics</a> > <a href="#43">Generic constraints</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#37">Generics</a> > <a href="#44">Generic constraints</a>]
 
 By using the `extends` keyword, you can specify that a type argument **must match a constraint**.
 In this case, we require that the argument of type `T` must match an interface that requires a `length` property:
@@ -1170,8 +1140,6 @@ logLengthAndReturn(42);
 // Argument of type '42' is not assignable to parameter of type 'WithLength'.
 ```
 
-
-
 ---
 class: center, middle
 ## Decorators
@@ -1182,12 +1150,10 @@ class: center, middle
 
 Modify existing classes.
 
-
-
 ---
 ### What is a decorator?
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#46">Decorators</a>]
 
 Decorators are an experimental feature ([stage 2 proposal][js-decorators-proposal]) of JavaScript that is available in TypeScript.
 
@@ -1212,7 +1178,7 @@ In this example, we **decorate a class**
 ---
 ### Class decorator example
 
-.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#45">Decorators</a>]
+.breadcrumbs[<a href="#1">TypeScript</a> > <a href="#46">Decorators</a>]
 
 Class decorators can be used to apply **modifications to an existing class** and return the updated class.
 
