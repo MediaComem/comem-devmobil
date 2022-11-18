@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "courses-md": "^0.7.5",
-    "doctoc": "^2.1.0",
+    "doctoc": "^2.2.1",
     "lodash": "^4.17.21",
     "micromodal": "^0.4.2"
   }
