@@ -12,13 +12,13 @@ You will:
 
 ## What you will need
 
-- A Unix CLI, like Terminal (on Mac) or Git Bash (on Windows)
+- A Unix CLI, like Terminal on Mac or [Git Bash][git-for-windows] on Windows (or [WSL][install-wsl] for the motivated ones)
 - [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows] to install Git and Git Bash at the same time)
 - A free [GitHub][github] account
 - A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do)
 - [Node.js][node] 16+ (latest Gallium LTS version)
 - Latest [Ionic CLI][ionic-cli] 6+
-- An IDE or code editor of your choice (although I strongly recommend using [VS Code][vs-code])
+- An IDE or code editor of your choice (although [VS Code][vs-code] is strongly recommended)
 
 ## Plan
 
@@ -85,7 +85,7 @@ You will:
 - The app must follow Angular and Ionic best practices.
 - The app must use an approved API.
 - Asynchronous code must be correctly handled (e.g. callbacks, promises and/or observables).
-- The app must provide clear feedback to the user when errors are likely to occur:
+- The app must provide **clear feedback** (`console.error` calls are **NOT** clear feebacks...) to the user when errors are likely to occur:
   - When submitting a form (input might be invalid or the API call might fail).
   - When geolocating the user (it might fail).
 - Secrets (passwords & keys) **must not** be committed to the Git repository.
@@ -132,3 +132,4 @@ Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** t
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://comem-travel-log-api.herokuapp.com
 [vs-code]: https://code.visualstudio.com/
+[install-wsl]: https://learn.microsoft.com/fr-fr/windows/wsl/install

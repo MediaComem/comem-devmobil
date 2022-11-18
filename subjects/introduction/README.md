@@ -1,11 +1,11 @@
 # Introduction
 
-Learn about [Ionic][ionic], an open source framework to build hybrid mobile applications based on [Capacitor][capacitor] and [Angular][angular].
+Learn about [Ionic][ionic], an open source framework to build hybrid mobile applications based on [Capacitor][capacitor], and [Angular][angular].
 
 **You will need**
 
 - [Node.js][node] 16+
-- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+- [Edge][edge] or [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -34,13 +34,13 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **iOS version share**
 
-<img src='./images/ios-share-2021.png' class='w100' />
+<img src='./images/ios-share-2022.png' class='w100' />
 
 [source](https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/switzerland)
 
 **Android version share**
 
-<img src='./images/android-share-2021.png' class='w100' />
+<img src='./images/android-share-2022.png' class='w100' />
 
 [source](https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/switzerland)
 
@@ -48,25 +48,15 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 <!-- slide-column -->
 
-Write your app with HTML, CSS and JavaScript, **like a website**:
+Write your app with web technologies and languages (HTML, CSS and JavaScript), and embed it into a **native application** thanks to a native bridge (like Capacitor, more on that later).
 
-<img src='images/html-css-js.png' class='w100' />
+Since you are writing a **web app**, you can access **native web APIs** like the [Geolocation API][geolocation-api].
 
-<!-- slide-column 10 -->
-
-<p class='center' style='margin-top:150px;font-size:2em;'><i class='fa fa-arrow-right' aria-hidden='true'></i></p>
+But since you are using a native wrapper, you can also access **device-only hardware/features** like the **fingerprint scanner** or the **accelerometer**, and you can do it **through JavaScript**, though with the help of dedicated plugins.
 
 <!-- slide-column -->
 
-Embed it into a **native application**:
-
-<img src='images/native-app.png' class='w100' />
-
-<!-- slide-container -->
-
-Since you are writing a **web app**, you can access **web APIs** like the [Geolocation API][geolocation-api].
-
-But since you are using a native wrapper, you can also access **device hardware** like the **camera** or the **accelerometer**, and you can do it **in JavaScript**, with the help of dedicated plugins.
+<img src='images/hybrid-stack.png' class='w100' />
 
 ### Hybrid VS Native
 
@@ -133,20 +123,25 @@ Here's a list of other technologies and why they were not chosen for this course
 
 <!-- slide-container -->
 
-Ionic plugs together a JavaScript framework (**Angular, React, Vue, ...**), a library of **pre-made components** and the capabilities of the **Capacitor native bridge**.
+Ionic is actually two things:
 
-<div class='center' style="display: flex; align-items: center; justify-content: space-between;">
-  <img src='images/capacitor.png' height="150"/>
-  <img src='images/ng-js-ts-html.png' height="200"/>
+- A set of development tools (like the Ionic CLI) to help you create, manage, build and deploy your hybrid mobile application
+- A set of **pre-made components** for each of the main JavaScript frameworks (**Angular, React, Vue, ...**)
+
+<div class='center' style="display: flex; align-items: center; justify-content: space-around;">
+  <img src='images/capacitor.png' height="80"/>
+  <img src='images/angular.png' height="100"/>
+  <img src='images/react.png' height="100"/>
+  <img src='images/vue-logo.png' height="80"/>
 </div>
 
 > Please note that we will be using **Angular** as the underlying framework in this course.
 
 #### What can I do with Ionic?
 
-Ionic lets you build web apps that **look and behave like native apps** with HTML, CSS and a JavaScript or a supported framework.
+Ionic lets you build web apps that **look and behave (almost) like native apps** with HTML, CSS and JavaScript or a supported framework.
 
-The same application can be deployed on the web (as a PWA or not), Android or iOS, and will adope the plateform's visual look and feel
+The same application can be deployed on the web (as a PWA or not), Android or iOS, and will adopt the plateform's visual look and feel
 
 <!-- slide-column -->
 
@@ -180,7 +175,8 @@ Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template,
 ```bash
 $> cd /path/to/projects
 $> ionic start ionic-tabs-demo tabs --type=angular
-[All bunch of stuff going on... Just wait]
+
+[ --- All bunch of stuff going on... Just wait --- ]
 
 Your Ionic app is ready! Follow these next steps:
 
@@ -215,6 +211,25 @@ $> ionic start ionic-blank-demo blank
 
 You will find many Ionic app templates shared by the community in the [Ionic market][ionic-market].
 
+### App Creation Wizard
+
+<!-- slide-column -->
+
+If you prefer, you can simply type in `ionic start`, and agree to use the app creation wizard when prompted by the CLI:
+
+```bash
+$> ionic start
+*? Use the app creation wizard? (Y/n)
+```
+
+In which case your browser will open on a configuration page where you can define a bunch of things about yout app.
+
+> Not that using this creation method will **require** you to have an Ionic account or create one.
+
+<!-- slide-column -->
+
+<img src='./images/app-creation-wizard.png' class="w80"/>
+
 ## Basics of Ionic
 
 <!-- slide-front-matter class: center, middle -->
@@ -226,9 +241,9 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 <!-- slide-column 65 -->
 
 ```html
-<`ion-button`>Default</ion-button>
-<ion-button `color="secondary"`>
-  Secondary
+<`ion-button`>Default</`ion-button`>
+<ion-button `[disabled]="true"`>
+  Disabled
 </ion-button>
 ```
 
@@ -243,21 +258,20 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 ```html
 <`ion-card`>
   <`ion-card-header`>
-    <`ion-card-title`>Header</`ion-card-title`>
+    <`ion-card-title`>Title</`ion-card-title`>
     <`ion-card-subtitle`>Sub</`ion-card-subtitle`>
   </`ion-card-header`>
 
   <`ion-card-content`>
-    The British use the term "header",
-    but the American term "head-shot"
-    the English simply refuse to adopt.
+    Here's a small text description for the card
+    content. Nothing more, nothing less.
   </`ion-card-content`>
 </`ion-card`>
 ```
 
 <!-- slide-column -->
 
-<img src='images/ionic-card.png' />
+<img src='images/ion-card.png' />
 
 <!-- slide-container -->
 
@@ -265,53 +279,48 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 
 ```html
 <`ion-range`>
-  <`ion-icon` slot="start" name="remove"></`ion-icon`>
-  <`ion-icon` slot="end" name="add"></`ion-icon`>
+  <`ion-icon` slot="start" name="snow-outline"></`ion-icon`>
+  <`ion-icon` slot="end" name="sunny-outline"></`ion-icon`>
 </`ion-range`>
 ```
 
 <!-- slide-column -->
 
-<img src='images/ionic-range.png' />
+<img src='images/ion-range.png' />
 
 ### Component functionality
 
-Many of these components are actually [**Angular components**][angular-components].
-They not only look pretty, but they also bring **functionality**.
-
-For example, the [`ion-item-sliding`][ionic-sliding-list] component automatically enables you to slide in controls from the side as most mobile applications do:
-
-<!-- slide-column 65 -->
+Many of these components are actually **complex components**.
+They not only look pretty, but they also bring **functionality** ; for example, the [`ion-item-sliding`][ionic-sliding-list] component enables you to slide in controls:
 
 ```html
-<ion-item-options>
-  <ion-item-option color="primary">
-    <ion-icon name="text"></ion-icon>
-    Text
-  </ion-item-option>
-  <ion-item-option color="secondary">
-    <ion-icon name="call"></ion-icon>
-    Call
-  </ion-item-option>
-  <ion-item-option color="primary">
-    <ion-icon name="mail"></ion-icon>
-    Email
-  </ion-item-option>
-</ion-item-options>
+<ion-list>
+  <ion-item-sliding>
+    <ion-item>
+      <ion-label>Sliding Item with End Options</ion-label>
+    </ion-item>
+
+    <ion-item-options>
+      <ion-item-option>Favorite</ion-item-option>
+      <ion-item-option color="danger">Delete</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+  <!-- ... -->
+</ion-list>
 ```
 
-<!-- slide-column -->
-
-<img src='images/ionic-list-features.png' />
+<p class="center">
+  <img src='images/ion-sliding.png' class="w80" style="border: 1px solid lightgrey" />
+</p>
 
 ## Running apps on your mobile device
 
-Even if Ionic lets you develop and run your app on a browser, the final goal should be to build your app and run it on a actual mobile device.
+Even if Ionic allows you to develop and run your app **almost entirely on a browser**, the final goal should be to **build your app** and **run it on a actual mobile device**.
 
 How this can be achieved depends heavily on which mobile device and computer you actually have...
 
-- Want to test your app on **an iOS device**? You'll **need a Mac** for that...
-- Want to test your app on **an Android device**? Any computer will do
+- Want to test your app on **an iOS device**? You **must have a Mac** for that...
+- Want to test your app on **an Android device**? Any OS will do
 
 Whatever your setup, the Ionic documentation has dedicated walkthrough to set up your environment.
 
@@ -335,6 +344,7 @@ Whatever your setup, the Ionic documentation has dedicated walkthrough to set up
 [configure-cli-tools]: https://ionicframework.com/docs/installation/android#configuring-command-line-tools
 [cordova]: https://cordova.apache.org
 [capacitor-requirements]: https://capacitorjs.com/docs/getting-started/environment-setup
+[edge]: https://www.microsoft.com/en-us/edge
 [geolocation-api]: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation
 [ionic]: http://ionicframework.com
 [ionic-api-docs]: https://ionicframework.com/docs/api/

@@ -15,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/MediaComem/comem-devmobil/issues"
   },
-  "homepage": "https://github.com/MediaComem/comem-devmobil#readme",
+  "homepage": "https://mediacomem.github.io/comem-devmobil/latest",
   "scripts": {
     "build": "courses-md build",
     "deploy": "courses-md publish",
@@ -27,6 +27,6 @@
     "courses-md": "^0.7.5",
     "doctoc": "^2.2.1",
     "lodash": "^4.17.21",
-    "micromodal": "^0.4.2"
+    "micromodal": "^0.4.10"
   }
 }

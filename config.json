@@ -1,18 +1,17 @@
 {
-    "title": "Media Engineering Mobile Development",
-    "version": "2022-2023",
-    "repoUrl": "https://github.com/MediaComem/comem-devmobil",
-    "remark": {
-      "highlightLines": true,
-      "highlightSpans": true,
-      "countIncrementalSlides": false
-    },
-    "subjectScripts": [],
-    "publish": {
-      "gitUrl": "git@github.com:MediaComem/comem-devmobil.git",
-      "baseUrl": "https://mediacomem.github.io/comem-devmobil",
-      "branch": "gh-pages",
-      "version": "2022-2023"
-    }
+  "title": "Media Engineering Mobile Development",
+  "version": "2022-2023",
+  "repoUrl": "https://github.com/MediaComem/comem-devmobil",
+  "remark": {
+    "highlightLines": true,
+    "highlightSpans": true,
+    "countIncrementalSlides": false
+  },
+  "subjectScripts": [],
+  "publish": {
+    "gitUrl": "git@github.com:MediaComem/comem-devmobil.git",
+    "baseUrl": "https://mediacomem.github.io/comem-devmobil",
+    "branch": "gh-pages",
+    "version": "2022-2023"
   }
-  
+}
