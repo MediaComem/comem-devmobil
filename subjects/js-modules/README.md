@@ -132,7 +132,7 @@ Various module systems were created over the years to solve these issues:
 
   ```js
   define(["jquery"], function ($) {
-    return function myExample() {};
+      return function myExample() {};
   });
   ```
 
