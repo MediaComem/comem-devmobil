@@ -4,7 +4,7 @@
 
 ## Summary
 
-Get started with and understand the basics of [Angular][angular], the JavaScript front-end web application framework.
+Get started with and understand the basics of [Angular][angular], a JavaScript front-end web application framework.
 
 This tutorial is a condensed version of Angular's [Tour of Heroes][angular-tour-of-heroes] tutorial and some of its [Developer Guide][angular-guide],
 which you should both read to gain a deeper understanding of Angular.
@@ -13,7 +13,7 @@ which you should both read to gain a deeper understanding of Angular.
 
 **You will need**
 
-- [Google Chrome][chrome] (recommended, any browser with developer tools will do)
+- [Edge][edge] or [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 - [Visual Studio Code][vscode] (recommended, although any editor could do)
 
 **Recommended reading**
@@ -180,7 +180,7 @@ export `class AppModule` { }
 
 A module is a way to help organize related things (components, services, etc) together.
 
-> **Angular CLI**: Use `ng generate module <ModuleName>` to create a new module in its new directory
+> **Angular CLI**: Use `ng generate module <ModuleName>` to create a new module and its new directory
 
 #### Basic module definition
 
@@ -199,9 +199,8 @@ Take a look at the [`@NgModule`][angular-docs-ng-module] annotation:
 })
 ```
 
-- The **declarations** array is a list of components (also directives and pipes) which belong to this module.
-- The **imports** array is a list of other modules whose exported components should be available in this module.
-  It allows you to express a dependency on another module.
+- The **declarations** array is a list of components, directives and/or pipes that this module contains.
+- The **imports** array is a list of other modules required by this module. It allows you to express a dependency on another module.
 - The **providers** array is a list of service providers (more about that later).
 - **bootstrap** is the root component that Angular creates and inserts into `index.html`
 
@@ -1583,3 +1582,4 @@ Read the [documentation][angular-component-interaction] to learn more.
 [angular-2-series-components]: http://blog.ionic.io/angular-2-series-components/
 [understanding-angular-observables]: https://hackernoon.com/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3
 [vscode]: https://code.visualstudio.com/
+[edge]: https://www.microsoft.com/en-us/edge
