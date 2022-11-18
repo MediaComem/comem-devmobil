@@ -24,11 +24,7 @@ You will:
 
 - [Introduction](./subjects/introduction)
 
-- Going further with JavaScript
-
-  - [JavaScript: modules](./subjects/js-modules)
-  - [JavaScript: basic promises](./subjects/js-promises-basics)
-  - [Observables with Rxjs](./subjects/rxjs)
+- [Observables with Rxjs](./subjects/rxjs)
 
 - Ionic
 
@@ -53,6 +49,7 @@ You will:
   - [Intergrating Leaflet with Angular](./subjects/angular-leaflet)
 
 - Real-Time
+
   - [WebSocket](./subjects/websocket)
   - [WAMP](./subjects/wamp)
 
@@ -60,9 +57,17 @@ You will:
 
 - [Javascript: basics and more](./subjects/js)
 - [JavaScript: prototypes](./subjects/js-prototypes)
+- [JavaScript: modules](./subjects/js-modules)
+- [JavaScript: basic promises](./subjects/js-promises-basics)
 - [JavaScript: advanced promises](./subjects/js-promises)
 - [JavaScript: closures](./subjects/js-closures)
 - [Advanced Angular](./subjects/advanced-angular)
+
+## Useful links
+
+- [Travel Log API documentation][travel-log-api]
+- [Ionic setup][setup-project] ([complete starter project][starter-project])
+- [qimg API][qimg]
 
 ## Evaluation
 
@@ -108,12 +113,6 @@ Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** t
 - The list of group members.
 - The link to your source code repository on GitHub.
 - The link to your webcast, presentation page or user guide (if it's not in the repository).
-
-## Useful links
-
-- [Travel Log API documentation][travel-log-api]
-- [Ionic setup][setup-project] ([complete starter project][starter-project])
-- [qimg API][qimg]
 
 [angular]: https://angular.io
 [archioweb]: https://github.com/MediaComem/comem-archioweb
