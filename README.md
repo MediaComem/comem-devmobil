@@ -22,7 +22,7 @@ You will:
 
 ## Plan
 
-- [Introduction](https://mediacomem.github.io/comem-devmobil/2022-2023/subjects/introduction?home=MediaComem%2Fcomem-devmobil%23readme)
+- [Introduction](./subjects/introduction)
 
 - Going further with JavaScript
 
