@@ -51,7 +51,6 @@ You will:
 - Real-Time
 
   - [WebSocket](./subjects/websocket)
-  - [WAMP](./subjects/wamp)
 
 ## Optional subjects
 
