@@ -1108,12 +1108,10 @@ The API we are going to call returns JSON data that looks like this:
 
 ```json
 {
-  "type": "success",
-  "value": {
-    "categories": [],
-    "id": 1,
-    "joke": "Knock knock"
-  }
+  "icon_url" : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+  "id" : "wDuoHg3CSVSZM1AXzFdDuA",
+  "url" : "",
+  "value" : "Chuck Norris doesnt believe in religion, religion believes in Chuck Norris"
 }
 ```
 
@@ -1129,14 +1127,10 @@ Create a new file at `src/app/models/joke-response.ts` with the following conten
 
 ```ts
 export type JokeResponse = {
-  type: string;
-  value: JokeResponseValue;
-}
-
-export type JokeResponseValue = {
-  categories: string[];
-  id: number;
-  joke: string;
+  icon_url: string;
+  id: string;
+  url: string,
+  value: string;
 }
 ```
 
@@ -1153,7 +1147,7 @@ export class JokeService {
   // ...
   getJoke(): Observable<Joke> {
 *   return this.httpClient
-*     .get<JokeResponse>('https://api.icndb.com/jokes/random');
+*     .get<JokeResponse>('https://api.chucknorris.io/jokes/random');
   }
 }
 ```
@@ -1176,7 +1170,7 @@ Let's add a utility function at the bottom of the file in `src/app/services/joke
 ```ts
 function convertJokeResponseToJoke(response: JokeResponse): Joke {
   return {
-    text: response.value.joke,
+    text: response.value,
   };
 }
 ```
@@ -1193,7 +1187,7 @@ Let's use this new mapping function in the method that fetches the joke so that 
 // ...
   getJoke(): Observable<Joke> {
     return this.httpClient
-      .get<JokeResponse>('https://api.icndb.com/jokes/random')
+      .get<JokeResponse>('https://api.chucknorris.io/jokes/random')
 *     .pipe(map(convertJokeResponseToJoke));
   }
 ```
