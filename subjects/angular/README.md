@@ -1121,8 +1121,6 @@ This does not fit our `Joke` model, which only has a `text` property.
 
 Let's create a new `JokeResponse` model that we can use with this API.
 
-Since it's a nested structure, we'll need **2 classes**.
-
 Create a new file at `src/app/models/joke-response.ts` with the following content:
 
 ```ts
