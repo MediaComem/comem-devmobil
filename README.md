@@ -128,6 +128,6 @@ Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** t
 [qimg]: https://mediacomem.github.io/comem-qimg/
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
-[travel-log-api]: https://comem-travel-log-api.herokuapp.com
+[travel-log-api]: https://comem-travel-log-api.onrender.com/
 [vs-code]: https://code.visualstudio.com/
 [install-wsl]: https://learn.microsoft.com/fr-fr/windows/wsl/install
