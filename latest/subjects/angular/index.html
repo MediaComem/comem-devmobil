@@ -3,7 +3,7 @@
   <head>
     <title>Angular (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/ca902691c8a59d02f9613e700d5ddc8bd0868254/subjects/angular/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/c98bb94a019a575a5d63bb5b5a31c1a97fbe6ac6/subjects/angular/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -1209,12 +1209,10 @@ The API we are going to call returns JSON data that looks like this:
 
 ```json
 {
-  "type": "success",
-  "value": {
-    "categories": [],
-    "id": 1,
-    "joke": "Knock knock"
-  }
+  "icon_url" : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+  "id" : "wDuoHg3CSVSZM1AXzFdDuA",
+  "url" : "",
+  "value" : "Chuck Norris doesnt believe in religion, religion believes in Chuck Norris"
 }
 ```
 
@@ -1233,14 +1231,10 @@ Create a new file at `src/app/models/joke-response.ts` with the following conten
 
 ```ts
 export type JokeResponse = {
-  type: string;
-  value: JokeResponseValue;
-}
-
-export type JokeResponseValue = {
-  categories: string[];
-  id: number;
-  joke: string;
+  icon_url: string;
+  id: string;
+  url: string,
+  value: string;
 }
 ```
 
@@ -1260,7 +1254,7 @@ export class JokeService {
   // ...
   getJoke(): Observable<Joke> {
 *   return this.httpClient
-*     .get<JokeResponse>('https://api.icndb.com/jokes/random');
+*     .get<JokeResponse>('https://api.chucknorris.io/jokes/random');
   }
 }
 ```
@@ -1286,7 +1280,7 @@ Let's add a utility function at the bottom of the file in `src/app/services/joke
 ```ts
 function convertJokeResponseToJoke(response: JokeResponse): Joke {
   return {
-    text: response.value.joke,
+    text: response.value,
   };
 }
 ```
@@ -1306,7 +1300,7 @@ Let's use this new mapping function in the method that fetches the joke so that 
 // ...
   getJoke(): Observable<Joke> {
     return this.httpClient
-      .get<JokeResponse>('https://api.icndb.com/jokes/random')
+      .get<JokeResponse>('https://api.chucknorris.io/jokes/random')
 *     .pipe(map(convertJokeResponseToJoke));
   }
 ```
