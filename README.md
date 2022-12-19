@@ -64,6 +64,7 @@ You will:
 
 ## Useful links
 
+- [Travel Log API Repository][travel-log-repo]
 - [Travel Log API documentation][travel-log-api]
 - [Ionic setup][setup-project] ([complete starter project][starter-project])
 - [qimg API][qimg]
@@ -129,5 +130,6 @@ Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** t
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://comem-travel-log-api.onrender.com/
+[travel-log-repo]:https://github.com/MediaComem/comem-travel-log-api
 [vs-code]: https://code.visualstudio.com/
 [install-wsl]: https://learn.microsoft.com/fr-fr/windows/wsl/install
