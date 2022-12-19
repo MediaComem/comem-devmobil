@@ -1144,7 +1144,7 @@ We can now update `getJoke()` in `src/app/services/joke.service.ts` to make an a
 export class JokeService {
   // ...
   getJoke(): Observable<Joke> {
-*   return this.httpClient
+*   return this.http
 *     .get<JokeResponse>('https://api.chucknorris.io/jokes/random');
   }
 }
