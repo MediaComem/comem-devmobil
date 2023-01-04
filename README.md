@@ -126,7 +126,7 @@ Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** t
 [ionic-cli]: https://ionicframework.com/docs/cli
 [ionic-getting-started]: http://ionicframework.com/getting-started/
 [node]: https://nodejs.org/
-[qimg]: https://mediacomem.github.io/comem-qimg/
+[qimg]: https://qimg.onrender.com/doc
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://comem-travel-log-api.onrender.com/
