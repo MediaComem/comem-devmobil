@@ -3,11 +3,19 @@
   <head>
     <title>Leaflet with Angular (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/5a48087b32a8e892da44eaa381262d2581121eb2/subjects/angular-leaflet/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/2be693d4e72a9337f5ec518fe7cb6041e9d8a71c/subjects/angular-leaflet/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
+class: center, middle
 # Leaflet with Angular
+
+
+
+---
+## Summary
+
+.breadcrumbs[<a href="#1">Leaflet with Angular</a>]
 
 How to integrate Leaflet in your angular application
 
@@ -23,7 +31,10 @@ How to integrate Leaflet in your angular application
 
 
 
-# Leaflet
+---
+## Leaflet
+
+.breadcrumbs[<a href="#1">Leaflet with Angular</a>]
 
 There are many JavaScript map libraries, each with their own advantages.
 For this tutorial, we'll use [Leaflet][leaflet] as it's one of the most popular open source libraries.
@@ -43,9 +54,9 @@ $> npm install --save-dev @types/leaflet
 ```
 
 ---
-## Importing Leaflet styles
+### Importing Leaflet styles
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 For the map to display correctly, you need to add Leaflet CSS to your project.
 
@@ -63,9 +74,9 @@ To do so, open your `angular.json` file that should sit at the root of your proj
 ```
 
 ---
-## Importing Leaflet assets
+### Importing Leaflet assets
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 Along with the styles, you'll also need to import the Leaflet's assets (e.g. the marker icon).
 
@@ -89,9 +100,9 @@ Add the following object to the `projects.app.architect.build.options.assets` ar
 ```
 
 ---
-## Registering the Leaflet module with Angular
+### Registering the Leaflet module with Angular
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 To use the [ngx-leaflet][ngx-leaflet] library, you must add its `LeafletModule` to your application's module in `src/app/app.module.ts`:
 
@@ -122,9 +133,9 @@ export class ExamplePageModule {}
 ```
 
 ---
-## Displaying a map
+### Displaying a map
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 To display map, you need to define some basic map options.
 Here's how you could add them to a sample `ExamplePage` component:
@@ -154,9 +165,9 @@ export class ExamplePage {
 ```
 
 ---
-### Adding the map to the component's template
+#### Adding the map to the component's template
 
-.breadcrumbs[<a href="#2">Leaflet</a> > <a href="#6">Displaying a map</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a> > <a href="#7">Displaying a map</a>]
 
 To display the map in your page's template, you need to add the `leaflet` directive to a `<div>` on the page. You can pass the options to this map by binding an object to the `leafletOptions` directive:
 
@@ -189,9 +200,9 @@ You should now have a working Leaflet map!
 
 ]
 ---
-### Troubleshooting
+#### Troubleshooting
 
-.breadcrumbs[<a href="#2">Leaflet</a> > <a href="#6">Displaying a map</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a> > <a href="#7">Displaying a map</a>]
 
 If you do **not** have a working Leaflet map, but instead have some kind of broken map like the one below, then you'll need to add a little bit of code to fix this issue.
 
@@ -227,9 +238,9 @@ And in your page's template, trigger this new method with the `leafletMapReady` 
 
 ]
 ---
-## Markers
+### Markers
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 Adding markers to the map is not very hard.
 
@@ -254,9 +265,9 @@ export const defaultIcon: Icon<IconOptions> = icon({
 ```
 
 ---
-### Define
+#### Define
 
-.breadcrumbs[<a href="#2">Leaflet</a> > <a href="#9">Markers</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a> > <a href="#10">Markers</a>]
 
 Then, let's create some markers and add them to the component:
 
@@ -283,9 +294,9 @@ export class ExamplePage {
 ```
 
 ---
-### Adding the markers to the map
+#### Adding the markers to the map
 
-.breadcrumbs[<a href="#2">Leaflet</a> > <a href="#9">Markers</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a> > <a href="#10">Markers</a>]
 
 .grid-70[
 
@@ -310,9 +321,9 @@ Now all you need to do is bind the array of markers you just defined to the `lea
 
 ]
 ---
-### Adding a tooltip to a marker
+#### Adding a tooltip to a marker
 
-.breadcrumbs[<a href="#2">Leaflet</a> > <a href="#9">Markers</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a> > <a href="#10">Markers</a>]
 
 .grid-70[
 
@@ -343,9 +354,9 @@ this.mapMarkers = [
 
 ]
 ---
-## Getting a reference to the map
+### Getting a reference to the map
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 You might need to get direct access to the Leaflet [Map][leaflet-map] object to register events or whatever.
 The `leaflet` directive will emit a `leafletMapReady` event when it's done initializing the map.
@@ -379,9 +390,9 @@ export class ExamplePage {
 ```
 
 ---
-## Listening to map events
+### Listening to map events
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 You got a hold of the Leaflet [Map][leaflet-map] instance with the previous example,
 so you have access to [all its events][leaflet-map-events].
@@ -403,9 +414,9 @@ export class ExamplePage {
 ```
 
 ---
-## Resources
+### Resources
 
-.breadcrumbs[<a href="#2">Leaflet</a>]
+.breadcrumbs[<a href="#1">Leaflet with Angular</a> > <a href="#3">Leaflet</a>]
 
 **Documentation**
 
