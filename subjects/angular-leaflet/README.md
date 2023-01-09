@@ -1,5 +1,9 @@
 # Leaflet with Angular
 
+<!-- slide-front-matter class: center, middle -->
+
+## Summary
+
 How to integrate Leaflet in your angular application
 
 **You will need**
@@ -32,7 +36,7 @@ How to integrate Leaflet in your angular application
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# Leaflet
+## Leaflet
 
 There are many JavaScript map libraries, each with their own advantages.
 For this tutorial, we'll use [Leaflet][leaflet] as it's one of the most popular open source libraries.
@@ -51,7 +55,7 @@ you'll also need to install its [type definitions][definitely-typed]:
 $> npm install --save-dev @types/leaflet
 ```
 
-## Importing Leaflet styles
+### Importing Leaflet styles
 
 For the map to display correctly, you need to add Leaflet CSS to your project.
 
@@ -68,7 +72,7 @@ To do so, open your `angular.json` file that should sit at the root of your proj
 }
 ```
 
-## Importing Leaflet assets
+### Importing Leaflet assets
 
 Along with the styles, you'll also need to import the Leaflet's assets (e.g. the marker icon).
 
@@ -91,7 +95,7 @@ Add the following object to the `projects.app.architect.build.options.assets` ar
 }
 ```
 
-## Registering the Leaflet module with Angular
+### Registering the Leaflet module with Angular
 
 To use the [ngx-leaflet][ngx-leaflet] library, you must add its `LeafletModule` to your application's module in `src/app/app.module.ts`:
 
@@ -121,7 +125,7 @@ And also import it in the module that declares the page displaying your map:
 export class ExamplePageModule {}
 ```
 
-## Displaying a map
+### Displaying a map
 
 To display map, you need to define some basic map options.
 Here's how you could add them to a sample `ExamplePage` component:
@@ -150,7 +154,7 @@ export class ExamplePage {
 }
 ```
 
-### Adding the map to the component's template
+#### Adding the map to the component's template
 
 To display the map in your page's template, you need to add the `leaflet` directive to a `<div>` on the page. You can pass the options to this map by binding an object to the `leafletOptions` directive:
 
@@ -178,7 +182,7 @@ You should now have a working Leaflet map!
 
 <img src='images/leaflet-map.png' class='w100' />
 
-### Troubleshooting
+#### Troubleshooting
 
 If you do **not** have a working Leaflet map, but instead have some kind of broken map like the one below, then you'll need to add a little bit of code to fix this issue.
 
@@ -209,7 +213,7 @@ And in your page's template, trigger this new method with the `leafletMapReady` 
 ></div>
 ```
 
-## Markers
+### Markers
 
 Adding markers to the map is not very hard.
 
@@ -233,7 +237,7 @@ export const defaultIcon: Icon<IconOptions> = icon({
 });
 ```
 
-### Define
+#### Define
 
 Then, let's create some markers and add them to the component:
 
@@ -259,7 +263,7 @@ export class ExamplePage {
 }
 ```
 
-### Adding the markers to the map
+#### Adding the markers to the map
 
 <!-- slide-column -->
 
@@ -279,7 +283,7 @@ Now all you need to do is bind the array of markers you just defined to the `lea
 
 <img src='images/leaflet-map-markers.png' class='w100' />
 
-### Adding a tooltip to a marker
+#### Adding a tooltip to a marker
 
 <!-- slide-column -->
 
@@ -303,7 +307,7 @@ this.mapMarkers = [
 ];
 ```
 
-## Getting a reference to the map
+### Getting a reference to the map
 
 You might need to get direct access to the Leaflet [Map][leaflet-map] object to register events or whatever.
 The `leaflet` directive will emit a `leafletMapReady` event when it's done initializing the map.
@@ -336,7 +340,7 @@ export class ExamplePage {
 }
 ```
 
-## Listening to map events
+### Listening to map events
 
 You got a hold of the Leaflet [Map][leaflet-map] instance with the previous example,
 so you have access to [all its events][leaflet-map-events].
@@ -357,7 +361,7 @@ export class ExamplePage {
 }
 ```
 
-## Resources
+### Resources
 
 **Documentation**
 
