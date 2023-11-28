@@ -4,7 +4,7 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **You will need**
 
-- [Node.js][node] 16+
+- [Node.js][node] 20+
 - [Edge][edge] or [Google Chrome][chrome] (recommended, any browser with developer tools will do)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -22,6 +22,8 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 - [Demo](#demo)
   - [Install Ionic](#install-ionic)
   - [Starter templates](#starter-templates)
+  - [App Creation Wizard](#app-creation-wizard)
+  - [VS Code Extension](#vs-code-extension)
 - [Basics of Ionic](#basics-of-ionic)
   - [Components](#components)
   - [Component functionality](#component-functionality)
@@ -34,13 +36,13 @@ Learn about [Ionic][ionic], an open source framework to build hybrid mobile appl
 
 **iOS version share**
 
-<img src='./images/ios-share-2022.png' class='w100' />
+<img src='./images/ios-share-2023.png' class='w100' />
 
 [source](https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/switzerland)
 
 **Android version share**
 
-<img src='./images/android-share-2022.png' class='w100' />
+<img src='./images/android-share-2023.png' class='w100' />
 
 [source](https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/switzerland)
 
@@ -52,7 +54,7 @@ Write your app with web technologies and languages (HTML, CSS and JavaScript), a
 
 Since you are writing a **web app**, you can access **native web APIs** like the [Geolocation API][geolocation-api].
 
-But since you are using a native wrapper, you can also access **device-only hardware/features** like the **fingerprint scanner** or the **accelerometer**, and you can do it **through JavaScript**, though with the help of dedicated plugins.
+But since you are using a native wrapper, you can also access **device-only hardware/features** like the **fingerprint scanner** or the **accelerometer**, and you can do it **through JavaScript**, with the help of dedicated native plugins.
 
 <!-- slide-column -->
 
@@ -71,7 +73,7 @@ _[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%2
 **Pros**
 
 - Highest performances
-- No dependencies to third-parties (access all of the features offered by the native SDK)
+- Less dependencies (direct access to the native SDK features)
 
 **Cons**
 
@@ -89,7 +91,7 @@ _[Read](https://cdn2.hubspot.net/hubfs/3776657/Ionic%20eBook%20-%20Hybrid%20vs%2
 
 **Cons**
 
-- (Little) Less performant than native apps
+- (Little) Less performant than native apps (there's more layers)
 - Access to native device capabilities limited by plugins
 
 ### Capacitor
@@ -105,10 +107,10 @@ Capacitor is not the only system that allows developing hybrid (or hybrid-like) 
 
 Here's a list of other technologies and why they were not chosen for this course:
 
-- [Cordova](https://cordova.apache.org/) - The Ionic team developped Capacitor to replace Cordova
-- [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development
-- [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood and is relativaly new
-- [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React
+- [Cordova](https://cordova.apache.org/) - The Ionic team developped Capacitor to replace Cordova ;
+- [Microsoft Xamarin](https://dotnet.microsoft.com/apps/xamarin) - Uses .NET and C# for development ;
+- [Google Flutter](https://flutter.dev/) - Uses [Dart](https://dart.dev/) under the hood. Has gained a lot of traction over the last years ;
+- [Facebook React Native](https://facebook.github.io/react-native/) - Can only be used with React ;
 - And [others](https://medium.com/datadriveninvestor/hybrid-mobile-app-development-frameworks-for-2019-ac56b1e65f29)...
 
 ### What about Ionic?
@@ -125,12 +127,12 @@ Here's a list of other technologies and why they were not chosen for this course
 
 Ionic is actually two things:
 
-- A set of development tools (like the Ionic CLI) to help you create, manage, build and deploy your hybrid mobile application
+- A set of development tools (like the Ionic CLI, or the VS Code extension) to help you create, manage, build and deploy your hybrid mobile application
 - A set of **pre-made components** for each of the main JavaScript frameworks (**Angular, React, Vue, ...**)
 
 <div class='center' style="display: flex; align-items: center; justify-content: space-around;">
   <img src='images/capacitor.png' height="80"/>
-  <img src='images/angular.png' height="100"/>
+  <img src='images/angular_gradient.png' height="100"/>
   <img src='images/react.png' height="100"/>
   <img src='images/vue-logo.png' height="80"/>
 </div>
@@ -176,7 +178,7 @@ Let's generate an app called `ionic-tabs-demo` with the `tabs` starter template,
 $> cd /path/to/projects
 $> ionic start ionic-tabs-demo tabs --type=angular
 
-[ --- All bunch of stuff going on... Just wait --- ]
+[ --- A bunch of stuff going on... Just wait --- ]
 
 Your Ionic app is ready! Follow these next steps:
 
@@ -230,6 +232,17 @@ In which case your browser will open on a configuration page where you can defin
 
 <img src='./images/app-creation-wizard.png' class="w80"/>
 
+### VS Code Extension
+
+If you are using VS Code as your main code editor, you should install the [VS Code Ionic Extension][ionic-vs-code] to help you :
+
+- Manage your Ionic project
+- Add the platforms you want
+- Run your project
+- And many other utility features
+
+[<img src="./images/ionic-vs-code.png">][ionic-vs-code]
+
 ## Basics of Ionic
 
 <!-- slide-front-matter class: center, middle -->
@@ -258,8 +271,8 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 ```html
 <`ion-card`>
   <`ion-card-header`>
-    <`ion-card-title`>Title</`ion-card-title`>
-    <`ion-card-subtitle`>Sub</`ion-card-subtitle`>
+    <`ion-card-title`>Card Title</`ion-card-title`>
+    <`ion-card-subtitle`>Card Subtitle</`ion-card-subtitle`>
   </`ion-card-header`>
 
   <`ion-card-content`>
@@ -278,7 +291,7 @@ Ionic has many [UI components][ionic-components] you can use out of the box:
 <!-- slide-column 65 -->
 
 ```html
-<`ion-range`>
+<`ion-range` aria-label="Temperature">
   <`ion-icon` slot="start" name="snow-outline"></`ion-icon`>
   <`ion-icon` slot="end" name="sunny-outline"></`ion-icon`>
 </`ion-range`>
@@ -324,8 +337,12 @@ How this can be achieved depends heavily on which mobile device and computer you
 
 Whatever your setup, the Ionic documentation has dedicated walkthrough to set up your environment.
 
-- [iOS Development][ionic-ios-dev]
-- [Android Development][ionic-android-dev]
+- For iOS:
+  - [iOS Requirements][ionic-ios-requirements]
+  - [iOS Development Guide][ionic-ios-dev]
+- For Android:
+  - [Android Requirements][ionic-android-requirements]
+  - [Android Development Guide][ionic-android-dev]
 
 ## Resources
 
@@ -339,20 +356,23 @@ Whatever your setup, the Ionic documentation has dedicated walkthrough to set up
 [adoptopenjdk]: https://adoptopenjdk.net/index.html
 [angular]: https://angular.io
 [angular-components]: https://angular.io/guide/architecture#components
-[capacitor]: https://capacitorjs.com/
-[chrome]: https://www.google.com/chrome/
+[capacitor]: https://capacitorjs.com
+[chrome]: https://www.google.com/chrome
 [configure-cli-tools]: https://ionicframework.com/docs/installation/android#configuring-command-line-tools
 [cordova]: https://cordova.apache.org
 [capacitor-requirements]: https://capacitorjs.com/docs/getting-started/environment-setup
 [edge]: https://www.microsoft.com/en-us/edge
 [geolocation-api]: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation/Using_geolocation
 [ionic]: http://ionicframework.com
-[ionic-api-docs]: https://ionicframework.com/docs/api/
-[ionic-components]: https://ionicframework.com/docs/components/
-[ionic-dev-app]: https://ionicframework.com/docs/appflow/devapp/
-[ionic-docs]: https://ionicframework.com/docs/
-[ionic-market]: https://market.ionicframework.com/
+[ionic-api-docs]: https://ionicframework.com/docs/api
+[ionic-components]: https://ionicframework.com/docs/components
+[ionic-dev-app]: https://ionicframework.com/docs/appflow/devapp
+[ionic-docs]: https://ionicframework.com/docs
+[ionic-market]: https://market.ionicframework.com
 [ionic-sliding-list]: https://ionicframework.com/docs/api/item-sliding
-[node]: https://nodejs.org/en/
-[ionic-ios-dev]: https://ionicframework.com/docs/developing/ios
-[ionic-android-dev]: https://ionicframework.com/docs/developing/android
+[node]: https://nodejs.org/en
+[ionic-ios-dev]: https://capacitorjs.com/docs/ios
+[ionic-ios-requirements]: https://capacitorjs.com/docs/getting-started/environment-setup#ios-requirements
+[ionic-android-requirements]: https://capacitorjs.com/docs/getting-started/environment-setup#android-requirements
+[ionic-android-dev]: https://capacitorjs.com/docs/android
+[ionic-vs-code]: https://marketplace.visualstudio.com/items?itemName=ionic.ionic

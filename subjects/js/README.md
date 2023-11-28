@@ -67,18 +67,16 @@ and one of the three core technologies of the web.
 
 ## Setup
 
-To follow along the exemples in this subject, create a new folder, e.g. `js`, on you `dfa-course` project.
+To follow along the exemples in this subject, create a new folder, e.g. `js`, somewhere on your filesystem.
 
 Create two file in this new folder: `index.html` and `script.js`.
 
-Then add the following in the `index.html` file:
+Add the [minimum HTML markup][htmlshell] in the `index.html` file, then add a `<script>` tag inside the `<body>`, referencing your `script.js` file :
 
 ```html
-<head>
-  <script src="script.js"></script>
-</head>
+<script src="./script.js"></script>
 ```
-Start `live-server` and display your browser's console (since we won't need the webpage).
+Start [`live-server`][live-server] and display your browser's console (since we won't need the webpage).
 
 > Feel free to remove all code from `script.js` each time you want to try one of this subject's examples.
 
@@ -1085,6 +1083,8 @@ console.log(crew);
 - Complete list of native Array methods
   https://www.w3schools.com/jsref/jsref_obj_array.asp
 
+[live-server]: https://www.npmjs.com/package/live-server
+[htmlshell]: http://htmlshell.com
 [caniuse-es6]: https://caniuse.com/#search=es6
 [array-functions]: https://www.w3schools.com/jsref/jsref_obj_array.asp
 [babel]: http://babeljs.io

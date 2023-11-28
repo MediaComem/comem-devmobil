@@ -56,7 +56,7 @@ To follow along the examples of this subject, here is what you need to do:
 3. Include the **RxJS library** and the `script.js` file in `index.html` before the `&lt;/body>` tag:
   ```html
   <body>
-  * <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+  * <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.8.1/rxjs.umd.min.js"></script>
   * <script src="./script.js"></script>
   &lt;/body>
   ```
@@ -399,12 +399,12 @@ Observables (and reactive programming) are **another tool to work with async ope
 
 Observables have some **similarities** with [Promises][js-prom], but here's the **key differences**:
 
-| `Promises` | `Observables` |
-| --- | --- |
-| **Always** asynchronous | **Sometimes** asynchronous |
-| Executes **immediately** | Executes **only when subscribe to** |
+| `Promises`                  | `Observables`                                           |
+| --------------------------- | ------------------------------------------------------- |
+| **Always** asynchronous     | **Sometimes** asynchronous                              |
+| Executes **immediately**    | Executes **only when subscribe to**                     |
 | Resolve once with one value | Can emit different values periodically until completion |
-| - | `Operator`s ! |
+| -                           | `Operator`s !                                           |
 
 ### Convertion
 
@@ -428,6 +428,7 @@ Use the [`firstValueFrom()`](https://rxjs-dev.firebaseapp.com/api/index/function
 const promise = `firstValueFrom(someObserable$)`;
 promise.then(/* ... */);
 ```
+> Note that the resulting Promise will only resolve with the **first value** emitted by the underyling Observable.
 
 ## Resources
 
@@ -437,7 +438,7 @@ promise.then(/* ... */);
 
 [from-event]: https://rxjs-dev.firebaseapp.com/api/index/function/fromEvent
 [destructuring]: ../js/#38
-[htmlshell]: http://htmlshell.com/
+[htmlshell]: https://htmlshell.com
 [callback-hell]: https://miro.medium.com/max/1400/0*bO_JSfydCKFUnJ2d.png
 [js-prom]: ../js-promises
 [obs-decision]: https://rxjs-dev.firebaseapp.com/operator-decision-tree

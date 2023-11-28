@@ -12,13 +12,15 @@ You will:
 
 ## What you will need
 
-- A Unix CLI, like Terminal on Mac or [Git Bash][git-for-windows] on Windows (or [WSL][install-wsl] for the motivated ones)
-- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows] to install Git and Git Bash at the same time)
-- A free [GitHub][github] account
-- A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do)
-- [Node.js][node] 16+ (latest Gallium LTS version)
-- Latest [Ionic CLI][ionic-cli] 6+
-- An IDE or code editor of your choice (although [VS Code][vs-code] is strongly recommended)
+- A Unix CLI:
+  - On Mac, the Terminal will do fine ;
+  - On Windows, you should install [Git Bash][git-for-windows] (that comes with Git For Windows). You could also work with the [Windows Subsystem Linux (WSL)][install-wsl] but it requires more setup ;
+- [Git][git-downloads] (on Windows, download and install [Git for Windows][git-for-windows] to install Git and Git Bash at the same time) ;
+- A free [GitHub][github] account ;
+- A web browser (recommended are [Edge][edge] or [Chrome][chrome], but any browser with developer tools will do) ;
+- [Node.js][node] 20+ (latest Iron LTS version)
+- Latest [Ionic CLI][ionic-cli] 7+
+- An IDE or code editor of your choice (although [VS Code][vs-code] is **strongly** recommended)
 
 ## Plan
 
@@ -108,7 +110,7 @@ You can choose from the following options (one is enough):
 
 ### Delivery
 
-Each group must send an e-mail **no later than sunday 29/01/2023 at midnight** to [Mathias Oberson](mailto:mathias@squareservices.ch) and [Simon Pinkas](mailto:simon.pinkas@heig-vd.ch) with:
+Each group must send an e-mail **at a yet-to-be-defined date (probably at the end of january)** to [Mathias Oberson](mailto:mathias.obserson@heig-vd.ch) with:
 
 - The list of group members.
 - The link to your source code repository on GitHub.
