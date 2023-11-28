@@ -3,7 +3,7 @@
   <head>
     <title>JavaScript (Media Engineering Mobile Development)</title>
     <meta charset='utf-8'>
-    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/990cd9965c6a663d001875b7fc083b611045cb15/subjects/js/README.md&quot;}'>
+    <meta name='config' content='{&quot;basePath&quot;:&quot;../..&quot;,&quot;remark&quot;:{&quot;highlightLines&quot;:true,&quot;highlightSpans&quot;:true,&quot;countIncrementalSlides&quot;:false},&quot;subjectUrl&quot;:&quot;https://github.com/MediaComem/comem-devmobil/tree/6d63b4f482fb9684a4c4a1f68f306035a2c58f35/subjects/js/README.md&quot;}'>
   </head>
   <body>
     <textarea id='source'>
@@ -35,18 +35,16 @@ This material is part of the [mobile development course](https://github.com/Medi
 
 .breadcrumbs[<a href="#1">JavaScript</a>]
 
-To follow along the exemples in this subject, create a new folder, e.g. `js`, on you `dfa-course` project.
+To follow along the exemples in this subject, create a new folder, e.g. `js`, somewhere on your filesystem.
 
 Create two file in this new folder: `index.html` and `script.js`.
 
-Then add the following in the `index.html` file:
+Add the [minimum HTML markup][htmlshell] in the `index.html` file, then add a `<script>` tag inside the `<body>`, referencing your `script.js` file :
 
 ```html
-<head>
-  <script src="script.js"></script>
-</head>
+<script src="./script.js"></script>
 ```
-Start `live-server` and display your browser's console (since we won't need the webpage).
+Start [`live-server`][live-server] and display your browser's console (since we won't need the webpage).
 
 > Feel free to remove all code from `script.js` each time you want to try one of this subject's examples.
 
@@ -1218,6 +1216,8 @@ console.log(crew);
 - Complete list of native Array methods
   https://www.w3schools.com/jsref/jsref_obj_array.asp
 
+[live-server]: https://www.npmjs.com/package/live-server
+[htmlshell]: http://htmlshell.com
 [caniuse-es6]: https://caniuse.com/#search=es6
 [array-functions]: https://www.w3schools.com/jsref/jsref_obj_array.asp
 [babel]: http://babeljs.io
