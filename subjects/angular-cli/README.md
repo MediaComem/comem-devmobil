@@ -232,6 +232,6 @@ Don't hesitate to check it out.
 [ng-routing]: ../subjects/angular-routing/
 [ng-router]: https://angular.io/guide/router
 [ng-serve]: https://angular.io/cli/serve
-[ng-start]: https://mediacomem.github.io/comem-devmobil/latest/subjects/angular/?home=MediaComem%2Fcomem-devmobil%23readme
+[ng-start]: https://mediacomem.github.io/comem-devmobil/latest/subjects/angular-standalone/?home=MediaComem%2Fcomem-devmobil%23readme
 [ng-update]: https://angular.io/cli/update
 [node]: https://nodejs.org

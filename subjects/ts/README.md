@@ -6,7 +6,7 @@
 
 Learn the basics of [TypeScript][typescript], a typed superset of JavaScript that compiles to plain JavaScript.
 
-TypeScript is also the language recommended by the Angular team to develop [Angular][angular] applications
+TypeScript is also the language used by the Angular team to develop [Angular][angular] applications
 (but it can be used with any framework or library).
 
 This tutorial is a summary of some of the [TypeScript Handbook][typescript-handbook]'s chapters.
@@ -307,7 +307,7 @@ if (typeof someValue === "string") {
 }
 ```
 
-> Having to check for the actual type might seem like a downside, but it's actually the safer way to prevent run time errors.
+> Having to check for the actual type might seem like a downside, but it's actually the safest way to prevent run time errors.
 
 #### Type assertions
 
@@ -531,6 +531,8 @@ new Animal("Cat").getName();
 //                Property 'getName' is private and
 //                only accessible within class 'Animal'.
 ```
+
+> Note that you can also use [JS private property][js-private] **instead** of the `private` accessibility modifier.
 
 #### Protected
 
@@ -1088,3 +1090,4 @@ In this example, the decorator defines that `GreetComponent` is used with the `<
 [typescript]: https://www.typescriptlang.org
 [typescript-enums]: https://www.typescriptlang.org/docs/handbook/enums.html
 [typescript-handbook]: https://www.typescriptlang.org/docs/handbook/basic-types.html
+[js-private]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_properties

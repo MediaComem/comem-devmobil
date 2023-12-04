@@ -31,7 +31,7 @@ You will:
 - Ionic
 
   - [TypeScript](./subjects/ts)
-  - [Angular](./subjects/angular)
+  - [Angular (Standalone)](./subjects/angular-standalone)
   - [Ionic navigation with Angular](./subjects/ionic-angular)
 
 - App Development
@@ -42,6 +42,7 @@ You will:
 ## Complementary subjects
 
 - [JavaScript: classes](./subjects/js-classes)
+- [Angular (NgModules)](./subjects/angular-modules)
 - [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
 - Extras
