@@ -551,61 +551,6 @@ it does not care about DOM manipulation or rendering concerns.
 
 <img src='images/two-way-data-binding.png' width='100%' />
 
-### Template syntax
-
-Binding and interpolating values is not the only thing that we can do in a component's template.
-
-When we need to add or remove part of our component's template based on a certain condition, we can use the `@if` and `@else`  to do so.
-
-When we need to render the same part of a template several times bases on a collection, we can use the `@for` directive to do so.
-
-#### `@if`! or `@else`...
-
-You'll often need to add or remove a part of your HTML structure based on the value of a property or a specific condition.
-
-The `@if` syntax is here to do this exact thing. In our little exemple, if we want to hide the `p` displaying the greeting while its value is _falsy_, we could update our template like this:
-
-```html
-<input type="text" name="greeting" id="greeting" [(ngModel)]="greeting" />
-*@if (greeting) {
-  <p>{{ hello(greeting) }}</p>
-*}
-```
-Now, if `greeting` does not evaluates to `true`, the content inside the `@if` block is not present on the DOM.
-
-We could define some HTML to display when the `greeting` value is _falsy_ and hide when its _truthy_. Let's do this by using the `@else` syntax:
-
-```html
-@if (greeting) {
-  <p>{{ hello(greeting) }}</p>
-} `@else {`
-*  <p>Type some value in the above input</p>
-*{
-```
-#### `@for` the king ! ⚔️
-
-If you have a collection of data, like an array or an object that you'd like to display on your template, you can use the `@for` syntax to define the part of your template that should be repeated for each element in the collection.
-
-Let's say we want to display a list of names. Add this collection to the `AppComponent`:
-
-```ts
-// Imports
-
-@Component({ /* ... */ })
-export class AppComponent {
-  // ...
-  knights = [
-    'Arthur',
-    'Leodagan',
-    'Perceval',
-    'Karadoc'
-  ]
-  // ...
-}
-```
-
-##### Hall of fame
-
 ## Directives
 
 Just as **Components** can be seen as **custom HTML tags** that display and behave as defined by their template and class,
@@ -641,53 +586,72 @@ It is added back to the page as soon as `greeting` has a _truthy_ value.
 
 An **attribute** directive changes the **appearance or behavior of the DOM element** to which it is attached.
 
-Let's say we want to programmatically add or remove classes to our `<h1>` tag in our template.
+Let's say we want to programmatically toggle some classes to our `<h1>` tag in our template: one that italize it, and another that toggle the fact that it can be hovered.
 
-First, open the `src/app/app.component.ts` to add a new property to the component's class called, for example, `titleClasses`:
+Let's add those CSS classes in our `app.component.css`:
+
+```css
+.italic { font-style: italic; }
+.hoverable { cursor: pointer; }
+```
+
+Now, we need a way to track which one is active or not. Let's do so with two boolean properties in our component's class un `src/app/app.component.ts`:
 
 ```ts
 export class AppComponent {
   // Previous properties
-* titleClasses: { [ name: string ]: boolean };
-
-  constructor() {
-    // ...
-*   this.titleClasses = {
-*     italic: true,
-*     hoverable: true
-*   };
-  }
+*  italicTitle = false;
+*  hoverableTitle = false;
   // ...
 }
 ```
 
 #### Define and bind the classes
 
-We need to declare those two classes in our component's style. Open the `app.component.scss` file and add them there:
+We can now use the `ngClass` directive on our `<h1>` tag to tell Angular **when each class should be active or inactive**.
 
-```scss
-.italic { font-style: italic; }
-.hoverable { cursor: pointer; }
-```
+The `ngClass` directive accepts **an object argument**. Each of this object property is named exactly after the CSS class we want to apply _(add quotes if necessary)_ and has a **boolean value**.
 
-Now, we can use Angular's `ngClass` attribute directive to bind the `titleClasses` oject to our `<h1>` title:
+When the boolean value is `true`, the class is applied ; when the value is `false`, the class is removed.
 
 ```html
-<h1
-  `[ngClass]="titleClasses"`
-  [title]="titleComment"
-  (click)="onTitleClicked($event)">
+<h1 `[ngClass]="{italic: italicTitle, hoverable: hoverableTitle}"`>
   Welcome to {{ title }}!
 </h1>
 ```
+> Since our component has two boolean properties, we can reference them in the `ngClass` argument. Those two properties have a value of `false`. Thus the two CSS classes are currently not applied.
 
-> For each `titleClasses`'s property whose value is `true`, `ngClass` will add its name to the element as a CSS class of the same name.
+#### Dynamic changing
 
-> You can try changing the `titleClasses` properties value or add your own to see how that reflects to the element's classes.
+To actually toggle those classes, let's add some interaction in our page in the form of two buttons, each of which will toggle one of the CSS classes:
+
+Add the following snippet right after the `<h1>` tag:
+
+```html
+<div>
+  <button `(click)="italicTitle = !italicTitle"`>
+    Italic : {{ italicTitle }}
+  </button>
+  <button `(click)="hoverableTitle = !hoverableTitle"`>
+    Hoverable : {{ hoverableTitle }}
+  </button>
+</div>
+```
+Notice how each button has a `(click)` callback that reassign one of the boolean properties values each time it is triggerred.
+
+When **a property changes its value**, the `ngClass` directive sees this change, and **reapply the CSS classes** accordingly.
+
+> You can now click on the button to dynamically add or remove each CSS class.
 
 ### Common directives
 
 These common directives are provided by Angular out of the box:
+
+**Structural directives**
+
+- [`ngFor`][angular-docs-ng-for] - Instantiates a template **once per item** from an iterable.
+- [`ngIf`][angular-docs-ng-if] - **Conditionally includes** a template based on the value of an expression.
+- [`ngSwitch`][angular-docs-ng-switch] - Adds/removes DOM sub-trees when the nest match expressions matches the **switch** expression.
 
 **Attribute directives**
 
@@ -719,12 +683,7 @@ Open the `src/app/app.component.ts` file and add a new `progress` property:
 ```ts
 export class AppComponent {
   // Previous properties
-* progress: number;
-
-  constructor() {
-    // ...
-*   this.progress = 0.45;
-  }
+* progress = 0.45;
   // ...
 }
 ```
@@ -775,7 +734,119 @@ Here's few usage examples for [`DatePipe`][angular-docs-date-pipe]:
 <p>The time is {{ dateValue | date:'shortTime' }}</p>
 ```
 
-Read [more about pipes][angular-pipes] in the developer guide.
+## Modules
+
+Modules are a great way to **organize an application** and extend it with capabilities from external libraries.
+
+Many internal or external librairies are `NgModules` that **export** some `Components`, `Pipes` or `Directives` for you to use them in your own code.
+
+In a Standalone Angular application, they are mainly used to create **blocks of functionnality**, grouping together other classes that focus on **a similar business need**.
+
+You could have a module that group together all things related to user management, another grouping all things related to backend API interaction, and so on.
+
+> Using Angular modules in your application is **entirely optional**. They are a tool at your disposal to improve and simplify the architecture of an application.
+
+> You will encounter them when developping so you need to know what they do.
+
+### Anatomy of a module
+
+As are many of Angular's structure, a module is a class annotated with the `@NgModule` decorator, which accept an metadata objects, with the following notable properties:
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { CustomerDashboardComponent } from './customer-dashboard/customer-dashboard.component';
+
+@NgModule({
+  `imports`: [ CommonModule ],
+  `declarations`: [ CustomerDashboardComponent ],
+  `exports`: [ CustomerDashboardComponent ]
+})
+export class CustomerDashboardModule { }
+```
+
+- `imports`: A list of other `NgModules` or standalone `Component`s **required by this module features** ;
+- `declarations`: A list of `Component`s, `Directive`s or `Pipe`s that **belong to this module** ;
+- `exports`: A list of `Component`s, `Directive`s or `Pipe`s that **this module exports to other** `Component`s or `NgModule`s
+
+### Shared Module
+
+If you start building many standalone components, and you notice that, for many of them, you add in their `imports` array the same list of classes, like this:
+
+```ts
+// Necessary imports
+
+@Component({
+  // ...
+  imports: [`CommonModule`, `FormsModule`, LoaderComponent, `ButtonComponent`],
+  // ...
+})
+export class ComponentA {}
+```
+
+```ts
+// Necessary imports
+
+@Component({
+  // ...
+  imports: [`CommonModule`, `FormsModule`, `ButtonComponent`, GeolocationModule],
+  // ...
+})
+export class ComponentB {}
+```
+<!-- slide-column 100 -->
+
+..you might want to consider grouping those imports into a **Shared Module**.
+
+#### Sharing is caring
+
+This Shared Module will import, then re-export, all those shared classes, so that your components can import only the module.
+
+```ts
+// Necessary imports
+
+@NgModule({
+  imports: [`CommonModule, FormsModule, LoaderComponent, ButtonComponent`],
+  exports: [`CommonModule, FormsModule, LoaderComponent, ButtonComponent`]
+})
+export class SharedModule {}
+```
+
+<!-- slide-column 50 -->
+
+```ts
+// Necessary imports
+
+@Component({
+  // ...
+  imports: [
+    `SharedModule`,
+    LoaderComponent
+  ],
+  // ...
+})
+export class ComponentA {}
+```
+<!-- slide-column 50 -->
+
+```ts
+// Necessary imports
+
+@Component({
+  // ...
+  imports: [
+    `SharedModule`,
+    GeolocationModule
+  ],
+  // ...
+})
+export class ComponentB {}
+```
+<!-- slide-column 100 -->
+
+> With this technique, your code will be more concise and streamlined.
+
+> [Read more about Shared Module][angular-shared-module].
 
 ## Models
 
@@ -785,7 +856,7 @@ It's a good practice to create **types, interfaces or classes** to define the st
 
 Let's start with a very simple one.
 
-Create a new file at `src/app/models/joke.ts` with the following content:
+Create a new file at `src/app/jokes/joke.type.ts` with the following content:
 
 ```ts
 export type Joke = {
@@ -801,13 +872,9 @@ Let's add some jokes to our component in `src/app/app.component.ts`:
 
 ```ts
 // Other imports...
-`import { Joke } from './models/joke';`
+`import { Joke } from './jokes/joke.type';`
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
+@Component({ /* ... */})
 export class AppComponent {
   // ...previous properties
   `jokes: Joke[];` // The jokes property is an array of only Joke-like objects
@@ -872,9 +939,9 @@ Why?
 they should focus on **presenting data** and **delegate data access** to specialized classes.
 **Services** are here to fill that role.
 
-  > This helps your components remain as simple as possible while services handle your business logic.
+  > This helps your components remain as simple as possible while services handle your business logic and shared state.
 
-- **Services** can be used by multiples Components, Directives, Pipes, etc, which helps in repeating the same logic.
+- **Services** can be used by multiples Components, Directives, Pipes, etc, which helps in repeating the same logic or using a shared state.
 
 
 > **Angular CLI**: Use `ng generate service <ServiceName>` to create all the files for a new service
@@ -883,16 +950,14 @@ they should focus on **presenting data** and **delegate data access** to special
 
 Once again, a service is simply a JavaScript class, annotated with the [`@Injectable`][angular-docs-injectable] decorator (more about that later).
 
-Create a new `src/app/services/joke.service.ts` file with the following content:
+Create a new `src/app/jokes/joke.service.ts` file with the following content:
 
 ```ts
 import { Injectable } from '@angular/core';
-`import { Joke } from '../models/joke';`
+`import { Joke } from '../jokes/joke.type';`
 
 @Injectable({ providedIn: 'root' })
 export class JokeService {
-  constructor() { }
-
 * getJoke(): Joke {
 *   return { text: 'Knock knock' };
 * }
@@ -906,19 +971,36 @@ You may have notice the `providedIn: 'root'` property in the `@Injectable` param
 
 This particular settings indicates that **the service is provided by the root of your application**, which means that it is accessible to all your `Components`/`Directives`/`Pipes`.
 
-> You might encouter `Services` that do not have this setting in their `@Injectable` decorator (i.e. when using external libraries). If this is the case, you must manually **provide** them in a module's `providers` array:
+> You might encouter `Services` that do not have this setting in their `@Injectable` decorator (i.e. when using external libraries). If this is the case, you must manually **provide** them in a component or module's `providers` array:
 
-   ```ts
-   // Other imports...
-   import { SomeService } from "./some/directory";
+<!-- slide-column -->
+```ts
+// Other imports...
+import { SomeService }
+  from "./some/directory";
 
-   @NgModule({
-     // ...
-     providers: [`SomeService`],
-     // ...
-   })
-   export class SomeModule {}
-   ```
+@Component({
+  // ...
+  providers: [`SomeService`],
+  // ...
+})
+export class SomeComponent {}
+```
+
+<!-- slide-column -->
+```ts
+// Other imports...
+import { SomeService }
+  from "./some/directory";
+
+@NgModule({
+  // ...
+  providers: [`SomeService`],
+  // ...
+})
+export class SomeModule {}
+```
+
 
 ### Injecting the joke service
 
@@ -930,7 +1012,7 @@ While you're at it, also create a **method to add a joke**:
 
 ```ts
 // Other imports...
-*import { JokeService } from './services/joke.service';
+*import { JokeService } from './jokes/joke.service';
 
 export class AppComponent {
   // ...
@@ -1033,7 +1115,7 @@ function Gas(lead) {
 
 ## Observable data
 
-Our current `getJoke()` method has a **synchronous** signature; implying that data is returned right away:
+Our current `getJoke()` method has an **synchronous** signature; implying that data is returned right away:
 
 ```ts
 const joke = jokeService.getJoke();
@@ -1044,13 +1126,13 @@ This will **not** work when fetching jokes from a **remote server**, which is in
 The `getJoke()` method must be modified to not immediately return a joke, but to have an asynchronous signature instead.
 It could take a **callback** or return a [**Promise**][js-promise].
 
-Since Angular uses the [RxJS][rxjs] library internally when handling HTTP requests, our service method should return an `OBservable` of a `Joke`.
+Since Angular uses the [RxJS][rxjs] library internally when handling HTTP requests, our service method should return an `Observable` of a `Joke`.
 
 > To learn more about `Observables` and the `RxJS` library, see [the corresponding subject][rxjs-subject].
 
 ### Making `getJoke()` observable
 
-For now, let's modify the signature of our `getJoke()` method in `JokeService` in `src/app/services/joke.service.ts` to return an `Observable` of a `Joke`, without actually making an HTTP call yet:
+For now, let's modify the signature of our `getJoke()` method in `JokeService` in `src/app/jokes/joke.service.ts` to return an `Observable` of a `Joke`, without actually making an HTTP call yet:
 
 ```ts
 // Other imports...
@@ -1065,9 +1147,11 @@ export class JokeService {
 }
 ```
 
-> Note the `<>` in `Observable<Joke>`. This is syntax used by TypeScript to specify a type when using a generic type. Here, it says that not only the method returns an `Observable`, but its emitted values will be instances of `Joke`.
+> Note the `<>` in `Observable<Joke>`. This is syntax used by TypeScript to specify a type when using a [generic type](../ts/#37).
 
-`of` allows us to create an `Observable` which will simply emit the specified values (here, the `Joke`), then complete.
+> Here, it indicates not only that the method returns an `Observable`, but that it emits specifically `Joke` values.
+
+`of` allows us to create an `Observable` that will simply emit the specified values (here, one `Joke`), then complete.
 
 ### Subscribing to an Observable
 
@@ -1101,23 +1185,22 @@ We now have our **asynchronous** implementation:
 Time to actually fetch some jokes from the internet!
 
 We'll need Angular's [`HttpClient`][angular-docs-http-client] to do so.
-It is part of `HttpClientModule`, so we need to import that into our own application module, `AppModule`, in `src/app/app.module.ts`:
+
+This is a `Service` that is provided by Angular's `HttpClientModule`. Since we will need this service to be available in all our `Component`s and other `Service`s, we must update our `app.config.ts` file:
 
 ```ts
-// Other imports...
-*import { HttpClientModule } from '@angular/common/http';
+import { /* Other imports */, importProvidersFrom } from '@angular/core';
+/* Other imports */
+import { HttpClientModule } from '@angular/common/http';
 
-@NgModule({
-  // ...
-  imports: [
-    BrowserModule,
-    FormsModule,
-    `HttpClientModule`
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideRouter(routes),
+*   importProvidersFrom(HttpClientModule)
   ],
-  // ...
-})
-export class AppModule { }
+};
 ```
+> `importProvidersFrom(...)` will collect all the things provided by its parameters and re-provide them globally.
 
 ### Injecting `HttpClient`
 
@@ -1125,7 +1208,7 @@ Earlier we annotated `JokeService` with the [`@Injectable`][angular-docs-injecta
 This not only makes it available to the **injector** for creation,
 but also allows it to **have dependencies of its own**.
 
-Now that `HttpClientModule` is available, you can inject `HttpClient` into `JokeService` in `src/app/services/joke.service.ts`, by adding it to the constructor parameters:
+Now that `HttpClient` is available through `HttpClientModule`, you can inject `HttpClient` into `JokeService` in `src/app/jokes/joke.service.ts`, by adding it to the constructor parameters:
 
 ```ts
 // Other imports...
@@ -1157,7 +1240,7 @@ This does not fit our `Joke` model, which only has a `text` property.
 
 Let's create a new `JokeResponse` model that we can use with this API.
 
-Create a new file at `src/app/models/joke-response.ts` with the following content:
+Create a new file at `src/app/jokes/joke-response.type.ts` and define a `type` that matches the structure of the API response:
 
 ```ts
 export type JokeResponse = {
@@ -1170,11 +1253,11 @@ export type JokeResponse = {
 
 ### Making a GET call
 
-We can now update `getJoke()` in `src/app/services/joke.service.ts` to make an actual HTTP call:
+We can now update `getJoke()` in `src/app/jokes/joke.service.ts` to make an actual HTTP call:
 
 ```ts
 // Other imports...
-*import { JokeResponse } from '../models/joke-response';
+*import { JokeResponse } from '../jokes/joke-response.type';
 
 @Injectable()
 export class JokeService {
@@ -1186,11 +1269,12 @@ export class JokeService {
 }
 ```
 
-As you can see by the use of the `<>`, we also specified that the [`HttpClient`][angular-docs-http-client]'s `get` method is supposed to receive data matching the `JokeResponse` model after the call completes. This helps TypeScript understand our code better.
+> Using generics, we also specified that the [`HttpClient`][angular-docs-http-client]'s `get` method is supposed to receive data matching the `JokeResponse` model after the call completes. This helps TypeScript understand our code better.
+
 But we're still left with one problem: we need an Observable of `Joke` objects, and have one of `JokeResponse` objects instead:
 
 ```
-ERROR in src/app/services/joke.service.ts(15,5): error TS2322:
+ERROR in src/app/jokes/joke.service.ts(15,5): error TS2322:
   Type 'Observable<JokeResponse>' is not assignable to type 'Observable<Joke>'.
   Type 'JokeResponse' is not assignable to type 'Joke'.
   Property 'text' is missing in type 'JokeResponse'.
@@ -1199,7 +1283,7 @@ ERROR in src/app/services/joke.service.ts(15,5): error TS2322:
 ### Transforming data
 
 We need to be able to transform a `JokeResponse` object into a `Joke`.
-Let's add a utility function at the bottom of the file in `src/app/services/joke.service.ts`:
+Let's add a utility function at the bottom of the file in `src/app/jokes/joke.service.ts`:
 
 ```ts
 function convertJokeResponseToJoke(response: JokeResponse): Joke {
@@ -1230,19 +1314,27 @@ Let's use this new mapping function in the method that fetches the joke so that 
 ### Reacting to errors in observable streams
 
 An observable stream may emit an **error**.
-You can be notified of that error by passing a second callback function to `subscribe` in `AppComponent` in `src/app/app.component.ts`:
+
+You can be notified of that error when subscribing to an `Observable`. Instead of passing a single callback, **pass an object** with at least one property between `next`, `error` and `complete`.
+
+Let's do so in `AppComponent` in `src/app/app.component.ts`:
 
 ```ts
 addJoke() {
-  this.jokeService.getJoke().subscribe(joke => {
-    this.jokes.push(joke);
-  }`, err => {`
-    `console.warn('Could not get new joke', err);`
-  `}`);
+  this.jokeService.getJoke().subscribe({
+    next: joke => this.jokes.push(joke),
+    error: err => console.warn('Could not get new joke', err)
+    // ^^^ In a real application, you should display an error on the screen.
+  });
 }
 ```
+- `next`: the function to execute when an event is emitted. You'll get the event as its parameter ;
+- `error`: the function to execute when an error occurs. You'll get the error as its parameter ;
+- `complete`: the function to execute when the `Observable` complets. You'll get no parameter.
 
-You can produce an error by changing the URL in `JokeService`in `src/app/services/joke.service.ts`,
+### Make'em fail!
+
+You can produce an error by changing the URL in `JokeService`in `src/app/jokes/joke.service.ts`,
 so that the call fails.
 
 ```ts
@@ -1255,7 +1347,6 @@ getJoke(): Observable<Joke> {
 
 You can then change it back to the correct URL.
 
-> In a real application, you should display an error on the screen.
 
 ## Component interaction
 
@@ -1280,7 +1371,7 @@ it's good practice to **isolate each part into a component**:
 
 ### Adding votes to the model
 
-Update the `Joke` model in `src/app/models/joke.ts` to have a `votes` property:
+Update the `Joke` model in `src/app/jokes/joke.type.ts` to have a `votes` property:
 
 ```ts
 export type Joke = {
@@ -1298,7 +1389,7 @@ this.jokes = [
 ];
 ```
 
-You also need to update the `convertJokeResponseToJoke` function in `src/app/services/joke.service.ts`:
+You also need to update the `convertJokeResponseToJoke` function in `src/app/jokes/joke.service.ts`:
 
 ```ts
 function convertJokeResponseToJoke(response: JokeResponse): Joke {
@@ -1314,33 +1405,52 @@ function convertJokeResponseToJoke(response: JokeResponse): Joke {
 Let's generate a **new component**, `JokeComponent`, whose responsibility will be to properly display a `Joke` object in the page, and provide a button to vote for the joke:
 
 ```ts
-$> npm run ng generate component components/joke --skip-tests
+$> npx ng generate component joke/joke --skip-tests
 ```
 
-This will create a component in the `src/app/components/joke` directory,
+This will create a component in the `src/app/jokes/joke` directory,
 with its own TypeScript definition, HTML template and CSS styles.
 
-#### The `JokeComponent`
-
-Let's add an optional `joke` property to the new component in `src/app/components/joke/joke.component.ts`:
+Noice that the `Component` in `src/app/jokes/joke/joke.component.ts` as an empty `imports` array. We will use the `NgIf` directive in its template, we thus need to add the `CommonModule` there:
 
 ```ts
-// Other imports...
-*import { Joke } from 'src/app/models/joke';
+// Other imports
+*import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-joke',
+  standalone: true,
+  imports: [ `CommonModule` ],
   templateUrl: './joke.component.html',
-  styleUrls: ['./joke.component.css']
+  styleUrl: './joke.component.css'
 })
-export class JokeComponent implements OnInit {
+export class JokeComponent {
+}
+```
+
+#### The `JokeComponent`
+
+Let's add an optional `joke` property to the new component in `src/app/jokes/joke/joke.component.ts`:
+
+```ts
+// Other imports...
+*import { Joke } from 'src/app/jokes/joke.type';
+
+@Component({
+  selector: 'app-joke',
+  standalone: true,
+  imports: [],
+  templateUrl: './joke.component.html',
+  styleUrl: './joke.component.css'
+})
+export class JokeComponent {
 * joke?: Joke;
   // ...
 }
 ```
 > Remember that a property defined with a `?` can be `undefined`.
 
-And update the component's template in `src/app/components/joke/joke.component.html` to display the joke's text (if there is a joke to display):
+And update the component's template in `src/app/jokes/joke/joke.component.html` to display the joke's text (if there is a joke to display):
 
 ```html
 <div *ngIf="joke">{{ joke.text }}</div>
@@ -1350,7 +1460,7 @@ And update the component's template in `src/app/components/joke/joke.component.h
 
 As you can see in our component's class, its `selector` has been set to `app-joke`.
 
-This means that we can include our component in another component's template by adding a `<app-joke>` tag.
+This means that we can include our component in another component's template by adding an `<app-joke>` tag.
 
 Let's do so in `src/app/app.component.html`:
 
@@ -1363,21 +1473,21 @@ Let's do so in `src/app/app.component.html`:
 ```
 We can now see on our app page that we have two elements in our list, but that they are empty.
 
-Indeed, we told our `JokeComponent` to display the `joke.text` property in its template, but we didn't actually provide it any `joke` to get the `text` from...
+Indeed, we told our `JokeComponent` to display the `joke.text` property in its template, but we didn't actually **gave** it any `joke` to get the `text` from...
 
 ### Passing data from parent to child with input binding
 
-We want the joke to be provided to the `JokeComponent` as an **input**.
+We want the joke to be passed to the `JokeComponent` as an **input**.
 
 Annotating a component's property with the [`@Input`][angular-docs-input] decorator marks it as an **input property**.
-You can do this in `src/app/components/joke/joke.component.ts`:
+You can do this in `src/app/jokes/joke/joke.component.ts`:
 
 ```ts
 // Other imports...
-import { Component, `Input`, OnInit } from '@angular/core';
+import { Component, `Input` } from '@angular/core';
 
 // ...
-export class JokeComponent implements OnInit {
+export class JokeComponent {
   `@Input()` joke?: Joke;
   // ...
 }
@@ -1397,7 +1507,7 @@ Now, update the main component's template in `src/app/app.component.html` so tha
 
 Now that `JokeComponent` is working, we can use it to **handle the logic related to one joke**, like voting.
 
-Add a `vote()` method to `JokeComponent` in `src/app/components/joke/joke.component.ts`:
+Add a `vote()` method to `JokeComponent` in `src/app/jokes/joke/joke.component.ts`:
 
 ```ts
 vote() {
@@ -1407,7 +1517,7 @@ vote() {
 }
 ```
 
-Add these 2 lines to the component's template in `src/app/components/joke/joke.component.html`:
+Add these 2 lines to the component's template in `src/app/jokes/joke/joke.component.html` to display the number of votes and add a button to vote for the joke:
 
 ```html
 <div *ngIf="joke">
@@ -1454,14 +1564,14 @@ The vote button is in the child component's template, so `AppComponent` can't pu
 Instead, we need our `JokeComponent` to have an **output** that its parent can listen to.
 
 Annotating a component's property with the [`@Output`][angular-docs-output] decorator marks it as an **output property**.
-It must be an [`EventEmitter`][angular-docs-event-emitter] (or an Observable).
-Let's add one to `JokeComponent` in `src/app/components/joke/joke.component.ts` now:
+It must be an [`EventEmitter`][angular-docs-event-emitter] (or an `Observable`).
+Let's add one to `JokeComponent` in `src/app/jokes/joke/joke.component.ts` now:
 
 ```ts
-import { Component, `EventEmitter`, Input, OnInit, `Output` } from '@angular/core';
+import { Component, `EventEmitter`, Input, `Output` } from '@angular/core';
 
 // ...
-export class JokeComponent implements OnInit {
+export class JokeComponent {
   // ...
 * @Output() voted: EventEmitter<Joke>;
 
@@ -1552,9 +1662,10 @@ Read the [documentation][angular-component-interaction] to learn more.
 - [Understanding, creating and subscribing to observables in Angular][understanding-angular-observables]
 - [The Introduction to Reactive Programming You've Been Missing][intro-to-reactive-programming]
 
-[angular]: https://angular.io
-[angular-guide]: https://angular.io/guide/architecture
+[angular]: https://angular.dev
+[angular-guide]: https://angular.dev/essentials
 [angular-tour-of-heroes]: https://angular.io/tutorial
+[angular-docs-pipes]: https://angular.dev/guide/pipes#built-in-pipes
 [chrome]: https://www.google.com/chrome/
 [js]: ../js/
 [js-modules]: ../js-modules/
@@ -1566,28 +1677,28 @@ Read the [documentation][angular-component-interaction] to learn more.
 [web-components]: https://developer.mozilla.org/en-US/docs/Web/Web_Components
 [ts]: https://www.typescriptlang.org
 [chrome-dev]: https://developers.google.com/web/tools/chrome-devtools/console/
-[angular-docs-ng-module]: https://angular.io/api/core/NgModule
-[angular-docs-component]: https://angular.io/api/core/Component
-[angular-component-styles]: https://angular.io/guide/component-styles
+[angular-docs-ng-module]: https://angular.dev/api/core/NgModule
+[angular-docs-component]: https://angular.dev/api/core/Component
+[angular-component-styles]: https://angular.dev/guide/components/styling
 [dom-event]: https://developer.mozilla.org/en-US/docs/Web/API/Event
-[angular-docs-ng-for]: https://angular.io/api/common/NgForOf
-[angular-docs-ng-if]: https://angular.io/api/common/NgIf
-[angular-docs-ng-switch]: https://angular.io/api/common/NgSwitch
-[angular-structural-directives]: https://angular.io/guide/structural-directives
+[angular-docs-ng-for]: https://angular.dev/api/common/NgForOf
+[angular-docs-ng-if]: https://angular.dev/api/common/NgIf
+[angular-docs-ng-switch]: https://angular.dev/api/common/NgSwitch
+[angular-structural-directives]: https://angular.dev/guide/structural-directives
 [advanced-angular-subject]: ../advanced-angular
-[angular-docs-ng-class]: https://angular.io/api/common/NgClass
-[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
-[angular-docs-ng-plural]: https://angular.io/api/common/NgPlural
-[angular-docs-ng-style]: https://angular.io/api/common/NgStyle
-[angular-docs-currency-pipe]: https://angular.io/api/common/CurrencyPipe
-[angular-docs-date-pipe]: https://angular.io/api/common/DatePipe
-[angular-docs-decimal-pipe]: https://angular.io/api/common/DecimalPipe
-[angular-docs-lowercase-pipe]: https://angular.io/api/common/LowerCasePipe
-[angular-docs-percent-pipe]: https://angular.io/api/common/PercentPipe
-[angular-docs-titlecase-pipe]: https://angular.io/api/common/TitleCasePipe
-[angular-docs-uppercase-pipe]: https://angular.io/api/common/UpperCasePipe
-[angular-pipes]: https://angular.io/guide/pipes
-[angular-docs-injectable]: https://angular.io/api/core/Injectable
+[angular-docs-ng-class]: https://angular.dev/api/common/NgClass
+[angular-docs-ng-model]: https://angular.dev/api/forms/NgModel
+[angular-docs-ng-plural]: https://angular.dev/api/common/NgPlural
+[angular-docs-ng-style]: https://angular.dev/api/common/NgStyle
+[angular-docs-currency-pipe]: https://angular.dev/api/common/CurrencyPipe
+[angular-docs-date-pipe]: https://angular.dev/api/common/DatePipe
+[angular-docs-decimal-pipe]: https://angular.dev/api/common/DecimalPipe
+[angular-docs-lowercase-pipe]: https://angular.dev/api/common/LowerCasePipe
+[angular-docs-percent-pipe]: https://angular.dev/api/common/PercentPipe
+[angular-docs-titlecase-pipe]: https://angular.dev/api/common/TitleCasePipe
+[angular-docs-uppercase-pipe]: https://angular.dev/api/common/UpperCasePipe
+[angular-pipes]: https://angular.dev/guide/pipes
+[angular-docs-injectable]: https://angular.dev/api/core/Injectable
 [di]: https://en.wikipedia.org/wiki/Dependency_injection
 [ioc]: https://en.wikipedia.org/wiki/Inversion_of_control
 [js-promise]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
@@ -1611,3 +1722,4 @@ Read the [documentation][angular-component-interaction] to learn more.
 [understanding-angular-observables]: https://hackernoon.com/understanding-creating-and-subscribing-to-observables-in-angular-426dbf0b04a3
 [vscode]: https://code.visualstudio.com/
 [edge]: https://www.microsoft.com/en-us/edge
+[angular-shared-module]: https://angular.dev/guide/ngmodules/sharing
