@@ -42,7 +42,6 @@ You will:
 ## Complementary subjects
 
 - [JavaScript: classes](./subjects/js-classes)
-- [Angular (NgModules)](./subjects/angular-modules)
 - [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
 - Extras
