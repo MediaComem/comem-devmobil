@@ -129,8 +129,7 @@ Each group must send an e-mail **at a yet-to-be-defined date (probably at the en
 [node]: https://nodejs.org/
 [qimg]: https://qimg.onrender.com/doc
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
-[starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
 [travel-log-api]: https://demo-travel-log-api.onrender.com/
-[travel-log-repo]:https://github.com/MediaComem/comem-travel-log-api
+[travel-log-repo]:https://github.com/Tazaf/comem-travel-log-api
 [vs-code]: https://code.visualstudio.com/
 [install-wsl]: https://learn.microsoft.com/fr-fr/windows/wsl/install
