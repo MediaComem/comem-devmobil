@@ -105,7 +105,6 @@ But Angular **overrides** these and provide its own implementation.
 This allows you to add **more complex validations and interaction**.
 
 
-
 ### Creating a form
 
 Let's add a very simple greeting form to our app:
@@ -126,10 +125,10 @@ Open the `home.page.html` file, and replace the `<ion-content>` tags and everyth
 </ion-content>
 ```
 
-Add a `greeting` property to the `HomePage` component in the `home.page.ts` file:
+Add a `greeting` property to the `HomePage` component in the `home.page.ts` file, and add Angular's `FormsModule` to its `imports` array:
 
 ```ts
-@Component({ /* ... */ })
+@Component({ /* ... */, imports: [ FormsModule ] })
 export class HomePage {
 
   `greeting: string;`
@@ -373,6 +372,7 @@ import { notInValidator } from './validators';
 
 @Directive({
   selector: "[notIn]",
+  standalone: true,
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -382,7 +382,7 @@ import { notInValidator } from './validators';
   ]
 })
 export class NotInValidatorDirective implements Validator {
-  @Input() notIn: string[];
+  @Input({ required: true }) notIn: string[] = [];
 
   validate(control: AbstractControl): ValidationErrors | null {
     return notInValidator(this.notIn)(control);
@@ -392,7 +392,7 @@ export class NotInValidatorDirective implements Validator {
 
 #### Using a custom validator
 
-You must register the new directive in the `declarations` array of the module that needs to use this directive, in our case, it's the `home.module.ts`:
+You must imports the new directive in the `imports` array of the component that needs to use this directive, in our case, it's the `home.page.ts`:
 
 > In a real life scenario, and in your application, you should instead create a `SharedModule` that will declare and export all shared directives and components throughout your application (see [this tutorial][angular-shared-module], in French)
 
@@ -400,11 +400,10 @@ You must register the new directive in the `declarations` array of the module th
 // Other imports...
 *import { NotInValidatorDirective } from '../not-in.directive';
 
-@NgModule({
-  imports: [/* ... */],
-  declarations: [HomePage, `NotInValidatorDirective`]
+@Component({
+  imports: [/* ... */, `NotInValidatorDirective`],
 })
-export class HomePageModule {}
+export class HomePage {}
 ```
 
 You can then finally use it in the template:
@@ -471,28 +470,17 @@ That way, Angular will wait for the Promise to be resolved or for the Observable
 
 The form we have seen so far is a [**template-driven form**][angular-template-driven-form].
 In contrast, **reactive forms** are an Angular technique for creating forms in a **reactive programming** style.
-They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]. Let's add it to our `HomePageModule`'s `imports` array:
+They are provided by a separate module, the [`ReactiveFormsModule`][angular-docs-reactive-forms-module]. Let's add it to our `HomePage`'s `imports` array:
 
 ```ts
 // Other imports
 import { FormsModule, `ReactiveFormsModule` } from '@angular/forms';
 
-@NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ]),
-    `ReactiveFormsModule`
-  ],
+@Component({
+  imports: [ /* ... */, `ReactiveFormsModule` ],
   // ...
 })
-export class HomePageModule {}
+export class HomePage {}
 ```
 
 
@@ -507,11 +495,7 @@ Replace all the content of `home.page.ts` with the following:
 import { Component } from '@angular/core';
 import { `FormBuilder, FormGroup` } from '@angular/forms';
 
-@Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss']
-})
+@Component({ /* ... */ })
 export class HomePage {
   greeting: string;
   displayedGreeting: string;
@@ -681,31 +665,31 @@ You may even use both in the same application.
   * [Reactive Forms][angular-reactive-forms]
 - [Angular API reference][angular-api]
 
-[angular]: https://angular.io
-[angular-api]: https://angular.io/api
+[angular]: https://angular.dev
+[angular-api]: https://angular.dev/api
 [angular-cli-subject]: ../angular-cli
-[angular-custom-validators]: https://angular.io/guide/form-validation#custom-validators
-[angular-docs-async-validator-fn]: https://angular.io/api/forms/AsyncValidatorFn
-[angular-docs-email-validator]: https://angular.io/api/forms/EmailValidator
-[angular-docs-max-length-validator]: https://angular.io/api/forms/MaxLengthValidator
-[angular-docs-min-length-validator]: https://angular.io/api/forms/MinLengthValidator
-[angular-docs-max-validator]: https://angular.io/api/forms/Validators#max
-[angular-docs-min-validator]: https://angular.io/api/forms/Validators#min
-[angular-docs-ng-form]: https://angular.io/api/forms/NgForm
-[angular-docs-ng-model]: https://angular.io/api/forms/NgModel
-[angular-docs-pattern-validator]: https://angular.io/api/forms/PatternValidator
-[angular-docs-reactive-forms-module]: https://angular.io/api/forms/ReactiveFormsModule
-[angular-docs-required-validator]: https://angular.io/api/forms/RequiredValidator
-[angular-docs-validator-fn]: https://angular.io/api/forms/ValidatorFn
-[angular-form-control-status-classes]: https://angular.io/guide/form-validation#control-status-css-classes
-[angular-forms]: https://angular.io/guide/forms
+[angular-custom-validators]: https://angular.dev/guide/forms/form-validation#defining-custom-validators
+[angular-docs-async-validator-fn]: https://angular.dev/api/forms/AsyncValidatorFn
+[angular-docs-email-validator]: https://angular.dev/api/forms/EmailValidator
+[angular-docs-max-length-validator]: https://angular.dev/api/forms/MaxLengthValidator
+[angular-docs-min-length-validator]: https://angular.dev/api/forms/MinLengthValidator
+[angular-docs-max-validator]: https://angular.dev/api/forms/Validators#max
+[angular-docs-min-validator]: https://angular.dev/api/forms/Validators#min
+[angular-docs-ng-form]: https://angular.dev/api/forms/NgForm
+[angular-docs-ng-model]: https://angular.dev/api/forms/NgModel
+[angular-docs-pattern-validator]: https://angular.dev/api/forms/PatternValidator
+[angular-docs-reactive-forms-module]: https://angular.dev/api/forms/ReactiveFormsModule
+[angular-docs-required-validator]: https://angular.dev/api/forms/RequiredValidator
+[angular-docs-validator-fn]: https://angular.dev/api/forms/ValidatorFn
+[angular-form-control-status-classes]: https://angular.dev/guide/forms/form-validation#control-status-css-classes
+[angular-forms]: https://angular.dev/guide/forms
 [angular-forms-subject]: ../angular-forms
-[angular-guide]: https://angular.io/guide/architecture
+[angular-guide]: https://angular.dev/essentials
 [angular-subject]: ../angular/
-[angular-template-driven-form]: https://angular.io/guide/forms
-[angular-template-reference-variable]: https://angular.io/guide/template-syntax#ref-vars
+[angular-template-driven-form]: https://angular.dev/guide/forms/template-driven-forms
+[angular-template-reference-variable]: https://angular.dev/guide/templates/reference-variables
 [angular-tour-of-heroes]: https://angular.io/tutorial
-[angular-reactive-forms]: https://angular.io/guide/reactive-forms
+[angular-reactive-forms]: https://angular.dev/guide/forms/reactive-forms
 [angular-shared-module]: https://guide-angular.wishtack.io/angular/project-structure-and-modules/shared-module
 [blur-event]: https://developer.mozilla.org/en-US/docs/Web/Events/blur
 [chrome]: https://www.google.com/chrome/
