@@ -206,8 +206,8 @@ You will find the `<app-root>` tag:
 
 ```html
 <body>
-  `<app-root></app-root>`
-&lt;/body&gt;
+  `<app-root></app-root>` &lt;/body&gt;
+</body>
 ```
 
 #### Standalone Component
@@ -223,6 +223,7 @@ The `standalone` property of the `@Component` decorator indicates that this comp
   styleUrl: './app.component.css'
 })
 ```
+
 This property should be there with a value of `true` for all your components, wether they've been created manually or with the help of the CLI.
 
 #### Component requirements
@@ -238,8 +239,8 @@ The `import` property of the `@Component` decorator tells Angular what other com
   styleUrl: './app.component.css'
 })
 ```
-You will need to update this `imports` array while building your components when needed.
 
+You will need to update this `imports` array while building your components when needed.
 
 #### Component template
 
@@ -330,7 +331,7 @@ Add a new `titleComment` property to the component in `src/app/app.component.ts`
 ```ts
 export class AppComponent {
   title = "angular-starter";
-  titleComment = 'This is awesome!';
+  titleComment = "This is awesome!";
 }
 ```
 
@@ -339,7 +340,7 @@ Angular's bracket syntax (`[...]`) allows you to use the **value of a component'
 You can do this in `src/app/app.component.html`:
 
 ```html
-<h1 `[title]="titleComment"`>Welcome to {{ title }}!</h1>
+<h1 `[title]="titleComment" `>Welcome to {{ title }}!</h1>
 ```
 
 ##### To bind, or not to bind
@@ -359,15 +360,17 @@ Below, the `titleComment` property **value is interpolated** with the `{{ ... }}
 ```html
 <h1 title="`{{ titleComment }}`">Welcome to {{ title }}!</h1>
 ```
+
 <hr>
 
 > Here, we made a **mistake**.
 > We neither bound the attribute, nor used interpolation in its value,
 > so the value of the attribute will be the string `"titleComment"`,
 > not the value of the corresponding variable:
-  ```html
-  <h1 title="titleComment">Welcome to {{ title }}!</h1>
-  ```
+
+```html
+<h1 title="titleComment">Welcome to {{ title }}!</h1>
+```
 
 ##### When to use which?
 
@@ -381,6 +384,7 @@ If you want to use a component's property value as **the exact value of an eleme
 ```html
 <h1 [title]="titleComment">...</h1>
 ```
+
 > The **value** of `title` will always be **exactly** the value of `titleComment` and will have the **same type**.
 
 <hr>
@@ -390,6 +394,7 @@ If you want to use a component's property **as part of the string value** of an 
 ```html
 <h1 title="Custom Title: {{ titleComment }}">...</h1>
 ```
+
 > The **actual value** of `title` will always be "Custom Title:" plus **the string representation** of `titleComment`'s value.
 
 #### Binding to events
@@ -442,6 +447,7 @@ To make this work, pass the special `$event` value as an argument to your functi
   Welcome to {{ title }}!
 </h1>
 ```
+
 > Note that you **must** use exactly `$event` as the argument's value
 
 #### Interpolation with functions
@@ -510,6 +516,7 @@ You will most likely get this error:
 NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
 src/app/app.component.html:3:49
 ```
+
 This means that Angular does not recognize the `ngModel` property on the `input`.
 This is because `[(ngModel)]` is provided by the optional `FormsModule`, which you have to _opt in_ to use.
 
@@ -597,8 +604,12 @@ Let's say we want to programmatically toggle some classes to our `<h1>` tag in o
 Let's add those CSS classes in our `app.component.css`:
 
 ```css
-.italic { font-style: italic; }
-.hoverable { cursor: pointer; }
+.italic {
+  font-style: italic;
+}
+.hoverable {
+  cursor: pointer;
+}
 ```
 
 Now, we need a way to track which one is active or not. Let's do so with two boolean properties in our component's class un `src/app/app.component.ts`:
@@ -621,10 +632,11 @@ The `ngClass` directive accepts **an object argument**. Each of this object prop
 When the boolean value is `true`, the class is applied ; when the value is `false`, the class is removed.
 
 ```html
-<h1 `[ngClass]="{italic: italicTitle, hoverable: hoverableTitle}"`>
+<h1 `[ngClass]="{italic: italicTitle, hoverable: hoverableTitle}" `>
   Welcome to {{ title }}!
 </h1>
 ```
+
 > Since our component has two boolean properties, we can reference them in the `ngClass` argument. Those two properties have a value of `false`. Thus the two CSS classes are currently not applied.
 
 #### Dynamic changing
@@ -635,14 +647,15 @@ Add the following snippet right after the `<h1>` tag:
 
 ```html
 <div>
-  <button `(click)="italicTitle = !italicTitle"`>
+  <button `(click)="italicTitle = !italicTitle" `>
     Italic : {{ italicTitle }}
   </button>
-  <button `(click)="hoverableTitle = !hoverableTitle"`>
+  <button `(click)="hoverableTitle = !hoverableTitle" `>
     Hoverable : {{ hoverableTitle }}
   </button>
 </div>
 ```
+
 Notice how each button has a `(click)` callback that reassign one of the boolean properties values each time it is triggerred.
 
 When **a property changes its value**, the `ngClass` directive sees this change, and **reapply the CSS classes** accordingly.
@@ -795,11 +808,17 @@ export class ComponentA {}
 
 @Component({
   // ...
-  imports: [`CommonModule`, `FormsModule`, `ButtonComponent`, GeolocationModule],
+  imports: [
+    `CommonModule`,
+    `FormsModule`,
+    `ButtonComponent`,
+    GeolocationModule,
+  ],
   // ...
 })
 export class ComponentB {}
 ```
+
 <!-- slide-column 100 -->
 
 ..you might want to consider grouping those imports into a **Shared Module**.
@@ -813,7 +832,7 @@ This Shared Module will import, then re-export, all those shared classes, so tha
 
 @NgModule({
   imports: [`CommonModule, FormsModule, LoaderComponent, ButtonComponent`],
-  exports: [`CommonModule, FormsModule, LoaderComponent, ButtonComponent`]
+  exports: [`CommonModule, FormsModule, LoaderComponent, ButtonComponent`],
 })
 export class SharedModule {}
 ```
@@ -825,14 +844,12 @@ export class SharedModule {}
 
 @Component({
   // ...
-  imports: [
-    `SharedModule`,
-    LoaderComponent
-  ],
+  imports: [`SharedModule`, LoaderComponent],
   // ...
 })
 export class ComponentA {}
 ```
+
 <!-- slide-column 50 -->
 
 ```ts
@@ -840,14 +857,12 @@ export class ComponentA {}
 
 @Component({
   // ...
-  imports: [
-    `SharedModule`,
-    GeolocationModule
-  ],
+  imports: [`SharedModule`, GeolocationModule],
   // ...
 })
 export class ComponentB {}
 ```
+
 <!-- slide-column 100 -->
 
 > With this technique, your code will be more concise and streamlined.
@@ -927,10 +942,9 @@ It will say "1 jokes" instead of "1 joke".
 The [`ngPlural`][angular-docs-ng-plural] directive comes to the rescue:
 
 ```html
-<h2 `[ngPlural]="jokes.length"`>
-  {{ jokes.length }}
-* <ng-template ngPluralCase="=1">joke</ng-template>
-* <ng-template ngPluralCase="other">jokes</ng-template>
+<h2 `[ngPlural]="jokes.length" `>
+  {{ jokes.length }} * <ng-template ngPluralCase="=1">joke</ng-template> *
+  <ng-template ngPluralCase="other">jokes</ng-template>
 </h2>
 ```
 
@@ -941,14 +955,14 @@ Let's do something more interesting: fetch those jokes from the internet rather 
 To do it "The Angular Way", we'll encapsulate that functionality into a **Service**.
 
 Why?
+
 - **Components** should not try to do too much;
-they should focus on **presenting data** and **delegate data access** to specialized classes.
-**Services** are here to fill that role.
+  they should focus on **presenting data** and **delegate data access** to specialized classes.
+  **Services** are here to fill that role.
 
   > This helps your components remain as simple as possible while services handle your business logic and shared state.
 
 - **Services** can be used by multiples Components, Directives, Pipes, etc, which helps in repeating the same logic or using a shared state.
-
 
 > **Angular CLI**: Use `ng generate service <ServiceName>` to create all the files for a new service
 
@@ -969,6 +983,7 @@ export class JokeService {
 * }
 }
 ```
+
 > For now, the service only returns a single hard-coded `Joke`. We will actually fetch them from the web later on.
 
 ### Providing the joke service
@@ -980,10 +995,10 @@ This particular settings indicates that **the service is provided by the root of
 > You might encouter `Services` that do not have this setting in their `@Injectable` decorator (i.e. when using external libraries). If this is the case, you must manually **provide** them in a component or module's `providers` array:
 
 <!-- slide-column -->
+
 ```ts
 // Other imports...
-import { SomeService }
-  from "./some/directory";
+import { SomeService } from "./some/directory";
 
 @Component({
   // ...
@@ -994,10 +1009,10 @@ export class SomeComponent {}
 ```
 
 <!-- slide-column -->
+
 ```ts
 // Other imports...
-import { SomeService }
-  from "./some/directory";
+import { SomeService } from "./some/directory";
 
 @NgModule({
   // ...
@@ -1006,7 +1021,6 @@ import { SomeService }
 })
 export class SomeModule {}
 ```
-
 
 ### Injecting the joke service
 
@@ -1061,15 +1075,15 @@ constructor(`private jokeService: JokeService`) {
 
 > As a reminder, in TypeScript this is equivalent to:
 
-  ```ts
-  export class AppComponent {
-    `jokeService: JokeService;`
+```ts
+export class AppComponent {
+  `jokeService: JokeService;`
 
-    constructor(`jokeService: JokeService`) {
-      `this.jokeService = jokeService;`
-    }
+  constructor(`jokeService: JokeService`) {
+    `this.jokeService = jokeService;`
   }
-  ```
+}
+```
 
 You **never instantiated the service with `new`**, so where is the instance coming from?
 
@@ -1190,22 +1204,20 @@ We now have our **asynchronous** implementation:
 
 Time to actually fetch some jokes from the internet!
 
-We'll need Angular's [`HttpClient`][angular-docs-http-client] to do so.
-
-This is a `Service` that is provided by Angular's `HttpClientModule`. Since we will need this service to be available in all our `Component`s and other `Service`s, we must update our `app.config.ts` file:
+We'll need Angular's [`HttpClient`][angular-docs-http-client] to do so, and we can get it by updating our application's config in `app.config.ts`:
 
 ```ts
-import { /* Other imports */, importProvidersFrom } from '@angular/core';
+import { /* Other imports */, provideHttpClient } from '@angular/core';
 /* Other imports */
-import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-*   importProvidersFrom(HttpClientModule)
+*   provideHttpClient()
   ],
 };
 ```
+
 > `importProvidersFrom(...)` will collect all the things provided by its parameters and re-provide them globally.
 
 ### Injecting `HttpClient`
@@ -1233,10 +1245,10 @@ The API we are going to call returns JSON data that looks like this:
 
 ```json
 {
-  "icon_url" : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
-  "id" : "wDuoHg3CSVSZM1AXzFdDuA",
-  "url" : "",
-  "value" : "Chuck Norris doesnt believe in religion, religion believes in Chuck Norris"
+  "icon_url": "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+  "id": "wDuoHg3CSVSZM1AXzFdDuA",
+  "url": "",
+  "value": "Chuck Norris doesnt believe in religion, religion believes in Chuck Norris"
 }
 ```
 
@@ -1252,9 +1264,9 @@ Create a new file at `src/app/jokes/joke-response.type.ts` and define a `type` t
 export type JokeResponse = {
   icon_url: string;
   id: string;
-  url: string,
+  url: string;
   value: string;
-}
+};
 ```
 
 ### Making a GET call
@@ -1298,6 +1310,7 @@ function convertJokeResponseToJoke(response: JokeResponse): Joke {
   };
 }
 ```
+
 Effectively, this function allows mapping a `JokeResponse` to a `Joke`.
 
 ### Transforming Observable streams
@@ -1315,6 +1328,7 @@ Let's use this new mapping function in the method that fetches the joke so that 
 *     .pipe(map(convertJokeResponseToJoke));
   }
 ```
+
 > If you forgot or don't know how this `map` operator works, check out the [RxJS subject][rxjs-subject-map]
 
 ### Reacting to errors in observable streams
@@ -1334,6 +1348,7 @@ addJoke() {
   });
 }
 ```
+
 - `next`: the function to execute when an event is emitted. You'll get the event as its parameter ;
 - `error`: the function to execute when an error occurs. You'll get the error as its parameter ;
 - `complete`: the function to execute when the `Observable` complets. You'll get no parameter.
@@ -1352,7 +1367,6 @@ getJoke(): Observable<Joke> {
 ```
 
 You can then change it back to the correct URL.
-
 
 ## Component interaction
 
@@ -1454,6 +1468,7 @@ export class JokeComponent {
   // ...
 }
 ```
+
 > Remember that a property defined with a `?` can be `undefined`.
 
 And update the component's template in `src/app/jokes/joke/joke.component.html` to display the joke's text (if there is a joke to display):
@@ -1472,11 +1487,10 @@ Let's do so in `src/app/app.component.html`:
 
 ```html
 <ul>
-  <li *ngFor="let joke of jokes">
-*   <app-joke></app-joke>
-  </li>
+  <li *ngFor="let joke of jokes">* <app-joke></app-joke></li>
 </ul>
 ```
+
 We can now see on our app page that we have two elements in our list, but that they are empty.
 
 Indeed, we told our `JokeComponent` to display the `joke.text` property in its template, but we didn't actually **gave** it any `joke` to get the `text` from...
@@ -1504,7 +1518,7 @@ Now, update the main component's template in `src/app/app.component.html` so tha
 ```html
 <ul>
   <li *ngFor="let joke of jokes">
-    <app-joke `[joke]="joke"`></app-joke>
+    <app-joke `[joke]="joke" `></app-joke>
   </li>
 </ul>
 ```
@@ -1527,9 +1541,8 @@ Add these 2 lines to the component's template in `src/app/jokes/joke/joke.compon
 
 ```html
 <div *ngIf="joke">
-  {{ joke.text }}
-* ({{ joke.votes }} votes)
-* <button type="button" (click)="vote()">+1</button>
+  {{ joke.text }} * ({{ joke.votes }} votes) *
+  <button type="button" (click)="vote()">+1</button>
 </div>
 ```
 

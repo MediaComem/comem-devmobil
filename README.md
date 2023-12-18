@@ -37,11 +37,10 @@ You will:
 - App Development
 
   - Mockups
-  - [Live setup][setup-project] (Tailored for the Travel Log subject, but it can help you kickstart your own app)
+  - [Live setup][setup-project] (Tailored for the Travel Log subject with Angular, but it can help you kickstart your own app)
 
 ## Complementary subjects
 
-- [JavaScript: classes](./subjects/js-classes)
 - [Angular Forms With Ionic](./subjects/angular-forms-ionic)
 
 - Extras
@@ -58,6 +57,7 @@ You will:
 
 - [Javascript: basics and more](./subjects/js)
 - [JavaScript: prototypes](./subjects/js-prototypes)
+- [JavaScript: classes](./subjects/js-classes)
 - [JavaScript: modules](./subjects/js-modules)
 - [JavaScript: basic promises](./subjects/js-promises-basics)
 - [JavaScript: advanced promises](./subjects/js-promises)
@@ -68,7 +68,6 @@ You will:
 
 - [Travel Log API Repository][travel-log-repo]
 - [Travel Log API documentation][travel-log-api]
-- [Ionic setup][setup-project] ([complete starter project][starter-project])
 - [qimg API][qimg]
 
 ## Evaluation
@@ -131,7 +130,7 @@ Each group must send an e-mail **at a yet-to-be-defined date (probably at the en
 [qimg]: https://qimg.onrender.com/doc
 [setup-project]: https://github.com/MediaComem/comem-travel-log-ionic-setup
 [starter-project]: https://github.com/MediaComem/comem-travel-log-ionic-starter
-[travel-log-api]: https://comem-travel-log-api.onrender.com/
+[travel-log-api]: https://demo-travel-log-api.onrender.com/
 [travel-log-repo]:https://github.com/MediaComem/comem-travel-log-api
 [vs-code]: https://code.visualstudio.com/
 [install-wsl]: https://learn.microsoft.com/fr-fr/windows/wsl/install
