@@ -27,7 +27,7 @@ export const environment = {
   production: false,
   apiUrl: "<your-api-url>",
   // TODO: add the qimg URL and secret token to the configuration
-  qimgUrl: "https://qimg.onrender.com/api",
+  qimgUrl: "https://comem-qimg.onrender.com/api",
   qimgSecret: "<change-with-your-token>",
 };
 ```
@@ -210,4 +210,4 @@ Update the component's template and make sure you have:
 <img *ngIf="picture" [src]="picture.url" />
 ```
 
-[qimg]: https://qimg.onrender.com/doc
+[qimg]: https://comem-qimg.onrender.com/doc
